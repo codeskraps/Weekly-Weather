@@ -1,20 +1,16 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("dagger.hilt.android.plugin")
 }
 
 android {
-    namespace = "com.example.weather"
+    namespace = "com.trifork.feature.weather"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.arklan.weather"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -56,8 +52,6 @@ android {
 
 dependencies {
     implementation(project(mapOf("path" to ":feature:common")))
-    implementation(project(mapOf("path" to ":feature:geocoding")))
-    implementation(project(mapOf("path" to ":feature:weather")))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -71,10 +65,20 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
+    implementation(libs.kotlinx.collections.immutable)
+
     //Dagger - Hilt
     implementation(libs.hilt.android)
     implementation(libs.androidx.constraintlayout)
     ksp(libs.hilt.android.compiler)
+
+    // Location Services
+    implementation(libs.android.play.services.location)
+
+    // Retrofit
+    implementation(libs.retrofit.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+
 
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)

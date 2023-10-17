@@ -15,3 +15,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "weather"
 include(":app")
+include(":feature:common")
+include(":feature:weather")
+include(":feature:geocoding")

@@ -14,6 +14,9 @@ espresso = "3.5.1"
 coroutines = "1.7.3"
 room = "2.5.2"
 material = "1.5.3"
+org-jetbrains-kotlin-android = "1.9.10"
+appcompat = "1.6.1"
+com-google-android-material-material = "1.10.0"
 
 
 [libraries]
@@ -47,6 +50,10 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version = "2.1.4" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "com-google-android-material-material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+com-android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }

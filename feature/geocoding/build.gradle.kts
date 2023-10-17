@@ -1,20 +1,16 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("dagger.hilt.android.plugin")
 }
 
 android {
-    namespace = "com.example.weather"
+    namespace = "com.trifork.feature.geocoding"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.arklan.weather"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -56,8 +52,6 @@ android {
 
 dependencies {
     implementation(project(mapOf("path" to ":feature:common")))
-    implementation(project(mapOf("path" to ":feature:geocoding")))
-    implementation(project(mapOf("path" to ":feature:weather")))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -76,12 +70,16 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     ksp(libs.hilt.android.compiler)
 
+    // Retrofit
+    implementation(libs.retrofit.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+
+    // Room
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    ksp(libs.room.compiler)
+
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.10.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation(libs.coroutines.test)
 }

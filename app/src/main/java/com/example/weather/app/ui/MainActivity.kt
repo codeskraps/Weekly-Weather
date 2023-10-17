@@ -9,13 +9,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.weather.app.navigation.Screen
 import com.example.weather.app.ui.theme.WeatherTheme
-import com.example.weather.feature.geocoding.presentation.GeocodingViewModel
-import com.example.weather.feature.geocoding.presentation.components.GeocodingScreen
-import com.example.weather.feature.weather.domain.model.WeatherLocation
-import com.example.weather.feature.weather.presentation.WeatherViewModel
-import com.example.weather.feature.weather.presentation.components.WeatherScreen
+import com.trifork.feature.common.navigation.Screen
+import com.trifork.feature.geocoding.presentation.GeocodingViewModel
+import com.trifork.feature.geocoding.presentation.components.GeocodingScreen
+import com.trifork.feature.weather.domain.model.WeatherLocation
+import com.trifork.feature.weather.presentation.WeatherViewModel
+import com.trifork.feature.weather.presentation.components.WeatherScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,7 +51,11 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         val viewModel by viewModels<WeatherViewModel>()
-                        WeatherScreen(navController, viewModel, geoLocation)
+                        WeatherScreen(
+                            navController,
+                            viewModel,
+                            geoLocation
+                        )
                     }
                     composable(Screen.Geocoding.route) {
                         val viewModel by viewModels<GeocodingViewModel>()

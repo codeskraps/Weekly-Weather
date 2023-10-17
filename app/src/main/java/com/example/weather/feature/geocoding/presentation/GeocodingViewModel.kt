@@ -48,7 +48,9 @@ class GeocodingViewModel @Inject constructor(
             when (val result = geocodingRepository.getCachedGeoLocation()) {
                 is Resource.Success -> {
                     if ((result.data?.size ?: 0) > 0) {
-                        state.handleEvent(GeoEvent.Loaded(result.data!!.sortedBy { it.name }))
+                        val cachedGeoLocations = result.data!!.sortedBy { it.name }
+                        state.handleEvent(GeoEvent.Loaded(cachedGeoLocations))
+
                     } else {
                         state.handleEvent(GeoEvent.Error("No results"))
                     }

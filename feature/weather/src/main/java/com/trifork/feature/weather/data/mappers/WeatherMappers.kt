@@ -16,10 +16,10 @@ import java.time.format.DateTimeFormatter
 
 private data class IndexWeatherData(
     val index: Int,
-    val data: com.trifork.feature.weather.domain.model.WeatherData
+    val data: WeatherData
 )
 
-fun WeatherDataDto.toWeatherDataMap(sunData: com.trifork.feature.weather.domain.model.SunData): ImmutableMap<Int, ImmutableList<com.trifork.feature.weather.domain.model.WeatherData>> {
+fun WeatherDataDto.toWeatherDataMap(sunData: SunData): ImmutableMap<Int, ImmutableList<WeatherData>> {
     return time.mapIndexed { index, time ->
         val localDateTime = LocalDateTime.parse(time, DateTimeFormatter.ISO_DATE_TIME)
         val weatherCode = weatherCodes[index]
@@ -31,13 +31,13 @@ fun WeatherDataDto.toWeatherDataMap(sunData: com.trifork.feature.weather.domain.
 
         IndexWeatherData(
             index = index,
-            data = com.trifork.feature.weather.domain.model.WeatherData(
+            data = WeatherData(
                 time = localDateTime,
                 temperatureCelsius = temperature,
                 pressure = pressures[index],
                 windSpeed = windSpeeds[index],
                 humidity = humidities[index],
-                weatherType = com.trifork.feature.weather.domain.model.WeatherType.fromWMO(
+                weatherType = WeatherType.fromWMO(
                     weatherCode,
                     isDay,
                     isFreezing
@@ -61,21 +61,21 @@ private fun isFreezing(temperature: Double): Boolean {
     return temperature < 0
 }
 
-private fun SunDataDto.sunData(): com.trifork.feature.weather.domain.model.SunData {
-    return com.trifork.feature.weather.domain.model.SunData(
+private fun SunDataDto.sunData(): SunData {
+    return SunData(
         sunrise = sunrise.map { LocalDateTime.parse(it, DateTimeFormatter.ISO_DATE_TIME) },
         sunset = sunset.map { LocalDateTime.parse(it, DateTimeFormatter.ISO_DATE_TIME) },
     )
 }
 
-fun WeatherDto.toWeatherInfo(): com.trifork.feature.weather.domain.model.WeatherInfo {
+fun WeatherDto.toWeatherInfo(): WeatherInfo {
     val weatherDataMap = weatherData.toWeatherDataMap(sunData.sunData())
     val now = LocalDateTime.now()
     val currentWeatherData = weatherDataMap[0]?.find {
         val hour = if (now.minute < 30) now.hour else now.hour + 1
         it.time.hour == hour
     }
-    return com.trifork.feature.weather.domain.model.WeatherInfo(
+    return WeatherInfo(
         geoLocation = "",
         weatherDataPerDay = weatherDataMap,
         currentWeatherData = currentWeatherData

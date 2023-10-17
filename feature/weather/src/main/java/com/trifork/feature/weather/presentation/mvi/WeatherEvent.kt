@@ -1,9 +1,12 @@
 package com.trifork.feature.weather.presentation.mvi
 
+import com.trifork.feature.weather.domain.model.WeatherInfo
+import com.trifork.feature.weather.domain.model.WeatherLocation
+
 sealed interface WeatherEvent {
-    data class LoadWeatherInfo(val geoLocation: com.trifork.feature.weather.domain.model.WeatherLocation) :
+    data class LoadWeatherInfo(val geoLocation: WeatherLocation) :
         WeatherEvent
-    data class UpdateHourlyInfo(val weatherInfo: com.trifork.feature.weather.domain.model.WeatherInfo) :
+    data class UpdateHourlyInfo(val weatherInfo: WeatherInfo) :
         WeatherEvent
     data class Error(val message: String) : WeatherEvent
 }

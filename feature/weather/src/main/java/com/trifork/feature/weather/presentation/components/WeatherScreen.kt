@@ -39,13 +39,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.trifork.feature.common.navigation.Screen
+import com.trifork.feature.weather.domain.model.WeatherLocation
+import com.trifork.feature.weather.presentation.WeatherViewModel
+import com.trifork.feature.weather.presentation.mvi.WeatherEvent
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun WeatherScreen(
     navController: NavController,
-    viewModel: com.trifork.feature.weather.presentation.WeatherViewModel,
-    geoLocation: com.trifork.feature.weather.domain.model.WeatherLocation
+    viewModel: WeatherViewModel,
+    geoLocation: WeatherLocation
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -53,14 +56,14 @@ fun WeatherScreen(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { map ->
         if (map.values.filter { it }.size > 1) {
-            viewModel.state.handleEvent(com.trifork.feature.weather.presentation.mvi.WeatherEvent.LoadWeatherInfo(geoLocation))
+            viewModel.state.handleEvent(WeatherEvent.LoadWeatherInfo(geoLocation))
         }
     }
 
     val isLoading = state.isLoading
     val pullRefreshState = rememberPullRefreshState(isLoading, {
         viewModel.state.handleEvent(
-            com.trifork.feature.weather.presentation.mvi.WeatherEvent.LoadWeatherInfo(
+            WeatherEvent.LoadWeatherInfo(
                 geoLocation
             )
         )
@@ -97,7 +100,7 @@ fun WeatherScreen(
                 actions = {
                     IconButton(onClick = {
                         viewModel.state.handleEvent(
-                            com.trifork.feature.weather.presentation.mvi.WeatherEvent.LoadWeatherInfo(com.trifork.feature.weather.domain.model.WeatherLocation())
+                            WeatherEvent.LoadWeatherInfo(WeatherLocation())
                         )
                     }) {
                         Icon(

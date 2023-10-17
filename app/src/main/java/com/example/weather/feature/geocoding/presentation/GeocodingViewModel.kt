@@ -29,9 +29,6 @@ class GeocodingViewModel @Inject constructor(
     private val _action = MutableSharedFlow<GeoAction>()
     val action = _action.asSharedFlow()
 
-
-    private val cachedGeoLocations = mutableListOf<GeoLocation>()
-
     private fun reduceState(
         currentState: GeoState,
         event: GeoEvent
@@ -50,10 +47,8 @@ class GeocodingViewModel @Inject constructor(
         viewModelScope.launch(dispatcherProvider.io) {
             when (val result = geocodingRepository.getCachedGeoLocation()) {
                 is Resource.Success -> {
-                    cachedGeoLocations.clear()
                     if ((result.data?.size ?: 0) > 0) {
-                        cachedGeoLocations.addAll(result.data!!)
-                        state.handleEvent(GeoEvent.Loaded(cachedGeoLocations))
+                        state.handleEvent(GeoEvent.Loaded(result.data!!.sortedBy { it.name }))
                     } else {
                         state.handleEvent(GeoEvent.Error("No results"))
                     }
@@ -70,6 +65,20 @@ class GeocodingViewModel @Inject constructor(
             error = null,
             geoLocations = emptyList()
         )
+    }
+
+    private suspend fun loadCache(): List<GeoLocation> {
+        return when (val result = geocodingRepository.getCachedGeoLocation()) {
+            is Resource.Success -> {
+                if ((result.data?.size ?: 0) > 0) {
+                    result.data!!
+                } else {
+                    emptyList()
+                }
+            }
+
+            is Resource.Error -> emptyList()
+        }
     }
 
     private fun geoLocationsLoaded(
@@ -89,13 +98,11 @@ class GeocodingViewModel @Inject constructor(
                 is Resource.Success -> {
                     if ((result.data?.size ?: 0) > 0) {
                         state.handleEvent(GeoEvent.Loaded(result.data!!.map { mapped ->
-                            val found =
-                                cachedGeoLocations.firstOrNull { it.longitude == mapped.longitude && it.latitude == mapped.latitude }
-                            if (found != null) {
-                                mapped.copy(cached = true)
-                            } else {
-                                mapped.copy(cached = false)
+                            val cachedGeoLocations = loadCache()
+                            val found = cachedGeoLocations.firstOrNull {
+                                it.longitude == mapped.longitude && it.latitude == mapped.latitude
                             }
+                            mapped.copy(cached = found != null)
                         }))
                     } else {
                         state.handleEvent(GeoEvent.Error("No results"))
@@ -119,7 +126,6 @@ class GeocodingViewModel @Inject constructor(
             val geoLocations = state.value.geoLocations
             when (geocodingRepository.saveCacheGeoLocation(geoLocation)) {
                 is Resource.Success -> {
-                    cachedGeoLocations.add(geoLocation)
                     state.handleEvent(GeoEvent.Loaded(geoLocations.map {
                         if (geoLocation.latitude == it.latitude && geoLocation.longitude == it.longitude) {
                             it.copy(cached = true)
@@ -139,7 +145,6 @@ class GeocodingViewModel @Inject constructor(
         viewModelScope.launch(dispatcherProvider.io) {
             when (geocodingRepository.deleteCacheGeoLocation(geoLocation)) {
                 is Resource.Success -> {
-                    cachedGeoLocations.remove(geoLocation)
                     val geoLocations = state.value.geoLocations
                     state.handleEvent(GeoEvent.Loaded(geoLocations.minus(geoLocation)))
                 }

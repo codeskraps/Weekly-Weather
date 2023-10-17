@@ -18,7 +18,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.trifork.feature.weather.domain.model.WeatherData
 import com.trifork.feature.weather.domain.model.WeatherInfo
+import com.trifork.feature.weather.presentation.WeatherViewModel
 import com.trifork.feature.weather.presentation.mvi.WeatherEvent
 import kotlinx.collections.immutable.ImmutableList
 import java.time.LocalDateTime
@@ -27,8 +29,8 @@ import java.util.Locale
 @Composable
 fun WeatherForecast(
     weatherInfo: WeatherInfo,
-    perDay: ImmutableList<com.trifork.feature.weather.domain.model.WeatherData>,
-    viewModel: com.trifork.feature.weather.presentation.WeatherViewModel,
+    perDay: ImmutableList<WeatherData>,
+    viewModel: WeatherViewModel,
     modifier: Modifier = Modifier,
 ) {
     Column(

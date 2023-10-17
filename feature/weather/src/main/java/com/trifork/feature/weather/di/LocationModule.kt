@@ -1,5 +1,6 @@
 package com.trifork.feature.weather.di
 
+import com.trifork.feature.weather.data.location.DefaultLocationTracker
 import com.trifork.feature.weather.domain.location.LocationTracker
 import dagger.Binds
 import dagger.Module
@@ -12,6 +13,6 @@ abstract class LocationModule {
 
     @Binds
     abstract fun bindsLocationTracker(
-        defaultLocationTracker: com.trifork.feature.weather.data.location.DefaultLocationTracker
+        defaultLocationTracker: DefaultLocationTracker
     ): LocationTracker
 }

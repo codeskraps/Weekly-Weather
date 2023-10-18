@@ -17,6 +17,7 @@ material = "1.5.3"
 org-jetbrains-kotlin-android = "1.9.10"
 appcompat = "1.6.1"
 com-google-android-material-material = "1.10.0"
+ksp = "1.9.0-1.0.12"
 
 
 [libraries]
@@ -57,3 +58,6 @@ material = { group = "com.google.android.material", name = "material", version.r
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 com-android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+com-google-dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+dagger-hilt = { id = "dagger.hilt.android.plugin", version.ref = "hilt"}

@@ -78,6 +78,6 @@ fun WeatherDto.toWeatherInfo(): WeatherInfo {
     return WeatherInfo(
         geoLocation = "",
         weatherDataPerDay = weatherDataMap,
-        currentWeatherData = currentWeatherData
+        currentWeatherData = currentWeatherData,
     )
 }

@@ -34,6 +34,7 @@ class WeatherViewModel @Inject constructor(
         return when (event) {
             is WeatherEvent.LoadWeatherInfo -> loadWeatherInfo(currentState, event.geoLocation)
             is WeatherEvent.UpdateHourlyInfo -> updateHourlyInfo(currentState, event.weatherInfo)
+            is WeatherEvent.Refresh -> onRefresh(currentState)
             is WeatherEvent.Error -> handleError(currentState, event.message)
         }
     }
@@ -62,7 +63,9 @@ class WeatherViewModel @Inject constructor(
                         state.handleEvent(
                             WeatherEvent.UpdateHourlyInfo(
                                 result.data!!.copy(
-                                    geoLocation = intLocation.name
+                                    geoLocation = intLocation.name,
+                                    latitude = intLocation.lat,
+                                    longitude = intLocation.long
                                 )
                             )
                         )
@@ -91,6 +94,38 @@ class WeatherViewModel @Inject constructor(
             isLoading = false,
             error = null,
             weatherInfo = weatherInfo
+        )
+    }
+
+    private fun onRefresh(currentState: WeatherState): WeatherState {
+        viewModelScope.launch(dispatcherProvider.io) {
+            currentState.weatherInfo?.let { intLocation ->
+                when (val result =
+                    weatherRepository.getWeatherData(intLocation.latitude, intLocation.longitude)) {
+                    is Resource.Success -> {
+                        state.handleEvent(
+                            WeatherEvent.UpdateHourlyInfo(
+                                result.data!!.copy(
+                                    geoLocation = intLocation.geoLocation,
+                                    latitude = intLocation.latitude,
+                                    longitude = intLocation.longitude
+                                )
+                            )
+                        )
+                    }
+
+                    is Resource.Error -> {
+                        state.handleEvent(WeatherEvent.Error("Check Internet"))
+                    }
+                }
+            } ?: kotlin.run {
+                state.handleEvent(WeatherEvent.Error("Check GPS"))
+            }
+        }
+        return currentState.copy(
+            isLoading = false,
+            error = null,
+            weatherInfo = currentState.weatherInfo
         )
     }
 

@@ -16,6 +16,8 @@ import com.trifork.feature.geocoding.presentation.components.GeocodingScreen
 import com.trifork.feature.weather.domain.model.WeatherLocation
 import com.trifork.feature.weather.presentation.WeatherViewModel
 import com.trifork.feature.weather.presentation.components.WeatherScreen
+import com.trifork.feature.weather.presentation.mvi.WeatherEvent
+import com.trifork.feature.weather.presentation.mvi.WeatherState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,24 +39,33 @@ class MainActivity : ComponentActivity() {
                             navArgument("long") { type = NavType.FloatType }
                         )
                     ) { backStackEntry ->
-                        val name = backStackEntry.arguments?.getString("name")
-                        val lat = backStackEntry.arguments?.getFloat("lat")
-                        val long = backStackEntry.arguments?.getFloat("long")
 
-                        val geoLocation = if (name.isNullOrBlank()) {
-                            WeatherLocation()
-                        } else {
-                            WeatherLocation(
-                                name = name,
-                                lat = lat!!.toDouble(),
-                                long = long!!.toDouble()
-                            )
-                        }
+
+                        val geoLocation = backStackEntry.arguments?.let {
+                            val name = it.getString("name") ?: ""
+                            val lat = it.getFloat("lat").toDouble()
+                            val long = it.getFloat("long").toDouble()
+
+                            it.remove("name")
+                            it.remove("lat")
+                            it.remove("long")
+
+                            if (name.isNotBlank() && lat != .0 && long != .0) {
+                                WeatherLocation(
+                                    name = name,
+                                    lat = lat,
+                                    long = long
+                                )
+                            } else WeatherLocation()
+                        } ?: WeatherLocation()
+
                         val viewModel by viewModels<WeatherViewModel>()
+
+                        viewModel.state.handleEvent(WeatherEvent.LoadWeatherInfo(geoLocation))
+
                         WeatherScreen(
                             navController,
-                            viewModel,
-                            geoLocation
+                            viewModel
                         )
                     }
                     composable(Screen.Geocoding.route) {

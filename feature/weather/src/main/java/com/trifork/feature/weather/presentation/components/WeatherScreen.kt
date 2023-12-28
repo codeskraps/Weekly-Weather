@@ -47,8 +47,7 @@ import com.trifork.feature.weather.presentation.mvi.WeatherEvent
 @Composable
 fun WeatherScreen(
     navController: NavController,
-    viewModel: WeatherViewModel,
-    geoLocation: WeatherLocation
+    viewModel: WeatherViewModel
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -56,17 +55,13 @@ fun WeatherScreen(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { map ->
         if (map.values.filter { it }.size > 1) {
-            viewModel.state.handleEvent(WeatherEvent.LoadWeatherInfo(geoLocation))
+            viewModel.state.handleEvent(WeatherEvent.Refresh)
         }
     }
 
     val isLoading = state.isLoading
     val pullRefreshState = rememberPullRefreshState(isLoading, {
-        viewModel.state.handleEvent(
-            WeatherEvent.LoadWeatherInfo(
-                geoLocation
-            )
-        )
+        viewModel.state.handleEvent(WeatherEvent.Refresh)
     })
 
 

@@ -2,7 +2,6 @@ package com.trifork.feature.geocoding.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-
 import com.trifork.feature.common.dispatcher.DispatcherProvider
 import com.trifork.feature.common.mvi.StateReducerFlow
 import com.trifork.feature.common.util.Resource
@@ -12,8 +11,8 @@ import com.trifork.feature.geocoding.presentation.mvi.GeoAction
 import com.trifork.feature.geocoding.presentation.mvi.GeoEvent
 import com.trifork.feature.geocoding.presentation.mvi.GeoState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,8 +26,8 @@ class GeocodingViewModel @Inject constructor(
         initialState = GeoState.initial,
         reduceState = ::reduceState,
     )
-    private val _action = MutableSharedFlow<GeoAction>()
-    val action = _action.asSharedFlow()
+    private val _action = Channel<GeoAction>()
+    val action = _action.receiveAsFlow()
 
     private fun reduceState(
         currentState: GeoState,
@@ -59,7 +58,7 @@ class GeocodingViewModel @Inject constructor(
 
                 is Resource.Error -> {
                     state.handleEvent(GeoEvent.Error("No results"))
-                    _action.emit(GeoAction.ShowToast("Issue loading cache!!!"))
+                    _action.send(GeoAction.ShowToast("Issue loading cache!!!"))
                 }
             }
         }
@@ -137,7 +136,7 @@ class GeocodingViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    _action.emit(GeoAction.ShowToast("Issue saving!!!"))
+                    _action.send(GeoAction.ShowToast("Issue saving!!!"))
                 }
             }
         }
@@ -153,7 +152,7 @@ class GeocodingViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    _action.emit(GeoAction.ShowToast("Issue deleting!!!"))
+                    _action.send(GeoAction.ShowToast("Issue deleting!!!"))
                 }
             }
         }

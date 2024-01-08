@@ -1,5 +1,6 @@
 package com.trifork.feature.weather.data.mappers
 
+import com.trifork.feature.common.domain.model.GeoLocation
 import com.trifork.feature.weather.data.remote.SunDataDto
 import com.trifork.feature.weather.data.remote.WeatherDataDto
 import com.trifork.feature.weather.data.remote.WeatherDto
@@ -79,5 +80,15 @@ fun WeatherDto.toWeatherInfo(): WeatherInfo {
         geoLocation = "",
         weatherDataPerDay = weatherDataMap,
         currentWeatherData = currentWeatherData,
+    )
+}
+
+fun WeatherInfo.toGeoLocation(): GeoLocation {
+    return GeoLocation(
+        name = geoLocation,
+        latitude = latitude,
+        longitude = longitude,
+        country = "",
+        admin1 = ""
     )
 }

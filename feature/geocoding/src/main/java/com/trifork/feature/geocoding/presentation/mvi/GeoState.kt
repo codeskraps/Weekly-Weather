@@ -1,6 +1,7 @@
 package com.trifork.feature.geocoding.presentation.mvi
 
-import com.trifork.feature.geocoding.domain.model.GeoLocation
+import com.trifork.feature.common.domain.model.GeoLocation
+
 
 data class GeoState(
     val geoLocations: List<GeoLocation>,

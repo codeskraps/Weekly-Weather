@@ -30,7 +30,7 @@ import java.util.Locale
 fun WeatherForecast(
     weatherInfo: WeatherInfo,
     perDay: ImmutableList<WeatherData>,
-    viewModel: WeatherViewModel,
+    handleEvent: (WeatherEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -50,7 +50,7 @@ fun WeatherForecast(
             Text(
                 text = "${today.dayOfMonth} ${
                     today.month.toString().lowercase(Locale.getDefault())
-                }",
+                }, ${today.dayOfWeek}",
                 modifier = Modifier.align(Alignment.Bottom),
                 fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.primary
@@ -72,7 +72,7 @@ fun WeatherForecast(
                         .height(100.dp)
                         .padding(horizontal = 16.dp)
                         .clickable {
-                            viewModel.state.handleEvent(
+                            handleEvent(
                                 WeatherEvent.UpdateHourlyInfo(
                                     WeatherInfo(
                                         geoLocation = weatherInfo.geoLocation,

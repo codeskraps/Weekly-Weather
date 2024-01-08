@@ -58,7 +58,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.android.compose.material)
+    implementation(libs.android.compose.material3)
     implementation(platform("androidx.compose:compose-bom:2023.10.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
@@ -73,11 +73,6 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit.retrofit)
     implementation(libs.retrofit.converter.moshi)
-
-    // Room
-    implementation(libs.room.runtime)
-    annotationProcessor(libs.room.compiler)
-    ksp(libs.room.compiler)
 
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)

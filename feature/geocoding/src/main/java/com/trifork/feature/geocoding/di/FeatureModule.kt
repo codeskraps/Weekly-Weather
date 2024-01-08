@@ -1,8 +1,5 @@
 package com.trifork.feature.geocoding.di
 
-import android.app.Application
-import androidx.room.Room
-import com.trifork.feature.geocoding.data.local.GeocodingDB
 import com.trifork.feature.geocoding.data.remote.GeocodingApi
 import dagger.Module
 import dagger.Provides
@@ -23,15 +20,5 @@ object FeatureModule {
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
             .create()
-    }
-
-    @Provides
-    fun providesGeocodingDB(
-        application: Application
-    ): GeocodingDB {
-        return Room.databaseBuilder(
-            application,
-            GeocodingDB::class.java, "database-name"
-        ).build()
     }
 }

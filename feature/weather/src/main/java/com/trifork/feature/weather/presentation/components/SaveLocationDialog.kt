@@ -18,6 +18,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.trifork.feature.weather.data.mappers.toWeatherLocation
 import com.trifork.feature.weather.domain.model.WeatherInfo
 import com.trifork.feature.weather.presentation.mvi.WeatherEvent
 
@@ -46,7 +47,7 @@ fun SaveLocationDialog(
                         Spacer(modifier = Modifier.height(10.dp))
                         OutlinedTextField(
                             value = nameLocation,
-                            onValueChange = { nameLocation = it.trim() })
+                            onValueChange = { nameLocation = it })
                     }
                 },
                 confirmButton = {
@@ -55,7 +56,7 @@ fun SaveLocationDialog(
                             containerColor = MaterialTheme.colorScheme.primary
                         ),
                         onClick = {
-                            handleEvent(WeatherEvent.Save(weatherInfo.copy(geoLocation = nameLocation)))
+                            handleEvent(WeatherEvent.Save(weatherInfo.copy(geoLocation = nameLocation).toWeatherLocation()))
                             onDismissRequest()
                         }
                     ) {
@@ -75,7 +76,8 @@ fun SaveLocationDialog(
                 }
             )
         } else {
-            handleEvent(WeatherEvent.Save(weatherInfo))
+            handleEvent(WeatherEvent.Save(weatherInfo.toWeatherLocation()))
+            onDismissRequest()
         }
     }
 }

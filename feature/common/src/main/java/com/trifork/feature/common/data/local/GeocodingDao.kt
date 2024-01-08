@@ -14,8 +14,8 @@ interface GeocodingDao {
     @Upsert
     fun insert(geoLocationEntity: GeoLocationEntity)
 
-    @Query("DELETE FROM GeoLocationEntity WHERE name = :name")
-    fun delete(name: String)
+    @Query("DELETE FROM GeoLocationEntity WHERE latitude = :latitude AND longitude = :longitude")
+    fun delete(latitude: Double, longitude: Double)
 
     @Query("SELECT * FROM GeoLocationEntity WHERE latitude=:latitude AND longitude=:longitude")
     fun getByLocation(latitude: Double, longitude: Double): List<GeoLocationEntity>

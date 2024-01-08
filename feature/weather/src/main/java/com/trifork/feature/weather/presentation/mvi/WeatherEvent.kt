@@ -12,9 +12,9 @@ sealed interface WeatherEvent {
 
     data class Error(val message: String) : WeatherEvent
     data object About : WeatherEvent
-    data class CheckCache(val weatherInfo: WeatherInfo) : WeatherEvent
+    data class CheckCache(val weatherLocation: WeatherLocation) : WeatherEvent
     data class IsCache(val isCached: Boolean) : WeatherEvent
     data object Resume : WeatherEvent
-    data class Save(val weatherInfo: WeatherInfo) : WeatherEvent
-    data class Delete(val weatherInfo: WeatherInfo) : WeatherEvent
+    data class Save(val weatherLocation: WeatherLocation) : WeatherEvent
+    data class Delete(val weatherLocation: WeatherLocation) : WeatherEvent
 }

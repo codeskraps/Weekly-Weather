@@ -8,6 +8,7 @@ import com.trifork.feature.common.domain.repository.LocalGeocodingRepository
 import com.trifork.feature.common.mvi.StateReducerViewModel
 import com.trifork.feature.common.util.Resource
 import com.trifork.feature.weather.data.mappers.toGeoLocation
+import com.trifork.feature.weather.data.mappers.toWeatherLocation
 import com.trifork.feature.weather.domain.location.LocationTracker
 import com.trifork.feature.weather.domain.model.WeatherInfo
 import com.trifork.feature.weather.domain.model.WeatherLocation
@@ -41,11 +42,11 @@ class WeatherViewModel @Inject constructor(
             is WeatherEvent.Refresh -> onRefresh(currentState)
             is WeatherEvent.Error -> handleError(currentState, event.message)
             is WeatherEvent.About -> currentState
-            is WeatherEvent.CheckCache -> onCheckCached(currentState, event.weatherInfo)
+            is WeatherEvent.CheckCache -> onCheckCached(currentState, event.weatherLocation)
             is WeatherEvent.IsCache -> onIsCached(currentState, event.isCached)
             is WeatherEvent.Resume -> onResume(currentState)
-            is WeatherEvent.Save -> onSave(currentState, event.weatherInfo)
-            is WeatherEvent.Delete -> onDelete(currentState, event.weatherInfo)
+            is WeatherEvent.Save -> onSave(currentState, event.weatherLocation)
+            is WeatherEvent.Delete -> onDelete(currentState, event.weatherLocation)
         }
     }
 
@@ -77,7 +78,7 @@ class WeatherViewModel @Inject constructor(
                         )
 
                         state.handleEvent(WeatherEvent.UpdateHourlyInfo(weatherInfo))
-                        state.handleEvent(WeatherEvent.CheckCache(weatherInfo))
+                        state.handleEvent(WeatherEvent.CheckCache(weatherInfo.toWeatherLocation()))
                     }
 
                     is Resource.Error -> {
@@ -119,7 +120,7 @@ class WeatherViewModel @Inject constructor(
                         )
 
                         state.handleEvent(WeatherEvent.UpdateHourlyInfo(weatherInfo))
-                        state.handleEvent(WeatherEvent.CheckCache(weatherInfo))
+                        state.handleEvent(WeatherEvent.CheckCache(weatherInfo.toWeatherLocation()))
                     }
 
                     is Resource.Error -> {
@@ -135,10 +136,13 @@ class WeatherViewModel @Inject constructor(
         )
     }
 
-    private fun onCheckCached(currentState: WeatherState, weatherInfo: WeatherInfo): WeatherState {
+    private fun onCheckCached(
+        currentState: WeatherState,
+        weatherLocation: WeatherLocation
+    ): WeatherState {
         viewModelScope.launch(dispatcherProvider.io) {
             val result =
-                localGeocodingRepository.isCached(weatherInfo.latitude, weatherInfo.longitude)
+                localGeocodingRepository.isCached(weatherLocation.lat, weatherLocation.long)
             when (result) {
                 is Resource.Error -> state.handleEvent(WeatherEvent.IsCache(false))
                 is Resource.Success -> state.handleEvent(WeatherEvent.IsCache(result.data))
@@ -170,14 +174,26 @@ class WeatherViewModel @Inject constructor(
         return currentState
     }
 
-    private fun onSave(currentState: WeatherState, weatherInfo: WeatherInfo): WeatherState {
+    private fun onSave(currentState: WeatherState, weatherLocation: WeatherLocation): WeatherState {
         viewModelScope.launch(dispatcherProvider.io) {
-            if (weatherInfo.geoLocation.isBlank()) {
+            if (weatherLocation.name.isBlank()) {
                 actionChannel.send(WeatherAction.Toast("Location can't be blank !!!"))
             } else {
+                var name = weatherLocation.name.trim()
+
+                if (name.endsWith(",")) {
+                    name = name.substring(0, name.lastIndexOf(","))
+                }
+
                 when (val result =
-                    localGeocodingRepository.saveCacheGeoLocation(weatherInfo.toGeoLocation())) {
-                    is Resource.Success -> state.handleEvent(WeatherEvent.CheckCache(weatherInfo))
+                    localGeocodingRepository.saveCacheGeoLocation(
+                        weatherLocation.copy(name = name).toGeoLocation()
+                    )) {
+                    is Resource.Success -> {
+                        state.handleEvent(WeatherEvent.LoadWeatherInfo(weatherLocation))
+                        state.handleEvent(WeatherEvent.CheckCache(weatherLocation))
+                    }
+
                     is Resource.Error -> actionChannel.send(WeatherAction.Toast(result.message))
                 }
             }
@@ -185,11 +201,14 @@ class WeatherViewModel @Inject constructor(
         return currentState
     }
 
-    private fun onDelete(currentState: WeatherState, weatherInfo: WeatherInfo): WeatherState {
+    private fun onDelete(
+        currentState: WeatherState,
+        weatherLocation: WeatherLocation
+    ): WeatherState {
         viewModelScope.launch(dispatcherProvider.io) {
             when (val result =
-                localGeocodingRepository.deleteCacheGeoLocation(weatherInfo.toGeoLocation())) {
-                is Resource.Success -> state.handleEvent(WeatherEvent.CheckCache(weatherInfo))
+                localGeocodingRepository.deleteCacheGeoLocation(weatherLocation.toGeoLocation())) {
+                is Resource.Success -> state.handleEvent(WeatherEvent.CheckCache(weatherLocation))
                 is Resource.Error -> actionChannel.send(WeatherAction.Toast(result.message))
             }
         }

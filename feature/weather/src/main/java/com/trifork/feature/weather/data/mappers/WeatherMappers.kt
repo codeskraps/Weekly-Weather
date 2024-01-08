@@ -7,6 +7,7 @@ import com.trifork.feature.weather.data.remote.WeatherDto
 import com.trifork.feature.weather.domain.model.SunData
 import com.trifork.feature.weather.domain.model.WeatherData
 import com.trifork.feature.weather.domain.model.WeatherInfo
+import com.trifork.feature.weather.domain.model.WeatherLocation
 import com.trifork.feature.weather.domain.model.WeatherType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap
@@ -83,12 +84,20 @@ fun WeatherDto.toWeatherInfo(): WeatherInfo {
     )
 }
 
-fun WeatherInfo.toGeoLocation(): GeoLocation {
-    return GeoLocation(
+fun WeatherInfo.toWeatherLocation(): WeatherLocation {
+    return WeatherLocation(
         name = geoLocation,
-        latitude = latitude,
-        longitude = longitude,
+        lat = latitude,
+        long = longitude
+    )
+}
+
+fun WeatherLocation.toGeoLocation(): GeoLocation {
+    return GeoLocation(
+        name = name,
+        latitude = lat,
+        longitude = long,
         country = "",
-        admin1 = ""
+        admin1 = null
     )
 }

@@ -36,7 +36,7 @@ class LocalGeocodingRepositoryImpl @Inject constructor(
 
     override suspend fun deleteCacheGeoLocation(geoLocation: GeoLocation): Resource<Unit> {
         return try {
-            geocodingDB.geocodingDao().delete(geoLocation.name)
+            geocodingDB.geocodingDao().delete(geoLocation.latitude, geoLocation.longitude)
             Resource.Success(Unit)
         } catch (e: Exception) {
             e.printStackTrace()

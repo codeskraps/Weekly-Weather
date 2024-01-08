@@ -70,8 +70,8 @@ fun GeocodingScreen(
         onPauseOrDispose { }
     }
 
-    ObserveAsEvents(flow = action){onAction->
-        when(onAction){
+    ObserveAsEvents(flow = action) { onAction ->
+        when (onAction) {
             is GeoAction.ShowToast -> {
                 Toast.makeText(
                     context,
@@ -154,7 +154,6 @@ fun GeocodingScreen(
                         )
                     } else {
                         LazyColumn {
-
                             itemsIndexed(state.geoLocations) { index, geoLocation ->
                                 Row(
                                     modifier = Modifier
@@ -162,7 +161,7 @@ fun GeocodingScreen(
                                         .clickable {
                                             navController.navigate(
                                                 Screen.Weather.createRoute(
-                                                    "${geoLocation.name}, ${geoLocation.country}",
+                                                    geoLocation.displayName(),
                                                     geoLocation.latitude,
                                                     geoLocation.longitude
                                                 )
@@ -175,7 +174,7 @@ fun GeocodingScreen(
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
                                     Text(
-                                        text = "${geoLocation.name}, ${geoLocation.country}",
+                                        text = geoLocation.displayName(),
                                         modifier = Modifier
                                             .align(CenterVertically)
                                             .padding(start = 16.dp, top = 15.dp, bottom = 15.dp)

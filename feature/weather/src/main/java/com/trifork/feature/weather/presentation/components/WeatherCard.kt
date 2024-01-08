@@ -57,7 +57,7 @@ fun WeatherCardPreview() {
 
 @Composable
 fun WeatherCard(
-    data: com.trifork.feature.weather.domain.model.WeatherData,
+    data: WeatherData,
     backgroundColor: Color,
     modifier: Modifier = Modifier
 ) {

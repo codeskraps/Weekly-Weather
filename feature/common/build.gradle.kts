@@ -61,6 +61,11 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     ksp(libs.hilt.android.compiler)
 
+    // Room
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    ksp(libs.room.compiler)
+
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.espresso.core)

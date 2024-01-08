@@ -30,8 +30,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,39 +48,38 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.navigation.NavController
+import com.trifork.feature.common.components.ObserveAsEvents
 import com.trifork.feature.common.navigation.Screen
-import com.trifork.feature.geocoding.presentation.GeocodingViewModel
 import com.trifork.feature.geocoding.presentation.mvi.GeoAction
 import com.trifork.feature.geocoding.presentation.mvi.GeoEvent
+import com.trifork.feature.geocoding.presentation.mvi.GeoState
+import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun GeocodingScreen(
     navController: NavController,
-    viewModel: GeocodingViewModel
+    state: GeoState,
+    handleEvent: (GeoEvent) -> Unit,
+    action: Flow<GeoAction>
 ) {
     val context = LocalContext.current
-    val state by viewModel.state.collectAsState()
 
     LifecycleResumeEffect {
-        viewModel.state.handleEvent(GeoEvent.LoadCache)
+        handleEvent(GeoEvent.LoadCache)
         onPauseOrDispose { }
     }
 
-    LaunchedEffect(viewModel.action) {
-        viewModel
-            .action
-            .collect { geoAction ->
-                when (geoAction) {
-                    is GeoAction.ShowToast -> {
-                        Toast.makeText(
-                            context,
-                            geoAction.message,
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                    }
-                }
+    ObserveAsEvents(flow = action){onAction->
+        when(onAction){
+            is GeoAction.ShowToast -> {
+                Toast.makeText(
+                    context,
+                    onAction.message,
+                    Toast.LENGTH_SHORT,
+                ).show()
             }
+        }
     }
 
     Scaffold(
@@ -130,7 +127,7 @@ fun GeocodingScreen(
                         onSearch = {
                             keyboardController?.hide()
                             focusManager.clearFocus()
-                            viewModel.state.handleEvent(GeoEvent.Search(text))
+                            handleEvent(GeoEvent.Search(text))
                         }
                     )
                 )
@@ -142,7 +139,7 @@ fun GeocodingScreen(
                         )
                     } else if (state.error != null) {
                         Text(
-                            text = state.error ?: "",
+                            text = state.error,
                             color = MaterialTheme.colorScheme.error,
                             textAlign = TextAlign.Center,
                             modifier = Modifier.align(Alignment.Center)
@@ -192,7 +189,7 @@ fun GeocodingScreen(
                                             .align(CenterVertically)
                                             .padding(end = 16.dp)
                                             .clickable {
-                                                viewModel.state.handleEvent(
+                                                handleEvent(
                                                     if (geoLocation.cached) {
                                                         GeoEvent.Delete(geoLocation)
                                                     } else {

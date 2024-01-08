@@ -1,6 +1,6 @@
 package com.trifork.feature.geocoding.presentation.mvi
 
-import com.trifork.feature.geocoding.domain.model.GeoLocation
+import com.trifork.feature.common.domain.model.GeoLocation
 
 sealed interface GeoEvent {
     data class Search(val query: String) : GeoEvent

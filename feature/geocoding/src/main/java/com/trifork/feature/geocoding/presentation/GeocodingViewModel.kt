@@ -1,54 +1,48 @@
 package com.trifork.feature.geocoding.presentation
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trifork.feature.common.dispatcher.DispatcherProvider
-import com.trifork.feature.common.mvi.StateReducerFlow
+import com.trifork.feature.common.domain.model.GeoLocation
+import com.trifork.feature.common.domain.repository.LocalGeocodingRepository
+import com.trifork.feature.common.mvi.StateReducerViewModel
 import com.trifork.feature.common.util.Resource
-import com.trifork.feature.geocoding.domain.model.GeoLocation
 import com.trifork.feature.geocoding.domain.repository.GeocodingRepository
 import com.trifork.feature.geocoding.presentation.mvi.GeoAction
 import com.trifork.feature.geocoding.presentation.mvi.GeoEvent
 import com.trifork.feature.geocoding.presentation.mvi.GeoState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class GeocodingViewModel @Inject constructor(
+    private val localGeocodingRepository: LocalGeocodingRepository,
     private val geocodingRepository: GeocodingRepository,
     private val dispatcherProvider: DispatcherProvider
-) : ViewModel() {
+) : StateReducerViewModel<GeoState, GeoEvent, GeoAction>() {
 
-    val state = StateReducerFlow(
-        initialState = GeoState.initial,
-        reduceState = ::reduceState,
-    )
-    private val _action = Channel<GeoAction>()
-    val action = _action.receiveAsFlow()
+    override fun initState(): GeoState = GeoState.initial
 
-    private fun reduceState(
+    override fun reduceState(
         currentState: GeoState,
         event: GeoEvent
     ): GeoState {
         return when (event) {
-            is GeoEvent.Search -> searchGeoLocation(currentState, event.query)
-            is GeoEvent.Delete -> deleteGeoLocation(currentState, event.geoLocation)
-            is GeoEvent.Save -> saveGeoLocation(currentState, event.geoLocation)
-            is GeoEvent.Loaded -> geoLocationsLoaded(currentState, event.geoLocations)
-            is GeoEvent.Error -> handleError(currentState, event.message)
-            is GeoEvent.LoadCache -> loadCache(currentState)
+            is GeoEvent.Search -> onSearchGeoLocation(currentState, event.query)
+            is GeoEvent.Delete -> onDeleteGeoLocation(currentState, event.geoLocation)
+            is GeoEvent.Save -> onSaveGeoLocation(currentState, event.geoLocation)
+            is GeoEvent.Loaded -> onGeoLocationsLoaded(currentState, event.geoLocations)
+            is GeoEvent.Error -> onHandleError(currentState, event.message)
+            is GeoEvent.LoadCache -> onLoadCache(currentState)
         }
     }
 
-    private fun loadCache(currentState: GeoState): GeoState {
+    private fun onLoadCache(currentState: GeoState): GeoState {
         viewModelScope.launch(dispatcherProvider.io) {
-            when (val result = geocodingRepository.getCachedGeoLocation()) {
+            when (val result = localGeocodingRepository.getCachedGeoLocation()) {
                 is Resource.Success -> {
-                    if ((result.data?.size ?: 0) > 0) {
-                        val cachedGeoLocations = result.data!!.sortedBy { it.name }
+                    if (result.data.isNotEmpty()) {
+                        val cachedGeoLocations = result.data.sortedBy { it.name }
                         state.handleEvent(GeoEvent.Loaded(cachedGeoLocations))
 
                     } else {
@@ -58,7 +52,7 @@ class GeocodingViewModel @Inject constructor(
 
                 is Resource.Error -> {
                     state.handleEvent(GeoEvent.Error("No results"))
-                    _action.send(GeoAction.ShowToast("Issue loading cache!!!"))
+                    actionChannel.send(GeoAction.ShowToast("Issue loading cache!!!"))
                 }
             }
         }
@@ -70,11 +64,9 @@ class GeocodingViewModel @Inject constructor(
     }
 
     private suspend fun loadCache(): List<GeoLocation> {
-        return when (val result = geocodingRepository.getCachedGeoLocation()) {
+        return when (val result = localGeocodingRepository.getCachedGeoLocation()) {
             is Resource.Success -> {
-                if ((result.data?.size ?: 0) > 0) {
-                    result.data!!
-                } else {
+                result.data.ifEmpty {
                     emptyList()
                 }
             }
@@ -83,7 +75,7 @@ class GeocodingViewModel @Inject constructor(
         }
     }
 
-    private fun geoLocationsLoaded(
+    private fun onGeoLocationsLoaded(
         currentState: GeoState,
         geoLocations: List<GeoLocation>
     ): GeoState {
@@ -94,12 +86,12 @@ class GeocodingViewModel @Inject constructor(
         )
     }
 
-    private fun searchGeoLocation(currentState: GeoState, query: String): GeoState {
+    private fun onSearchGeoLocation(currentState: GeoState, query: String): GeoState {
         viewModelScope.launch(dispatcherProvider.io) {
             when (val result = geocodingRepository.getGeoLocation(query)) {
                 is Resource.Success -> {
-                    if ((result.data?.size ?: 0) > 0) {
-                        state.handleEvent(GeoEvent.Loaded(result.data!!.map { mapped ->
+                    if (result.data.isNotEmpty()) {
+                        state.handleEvent(GeoEvent.Loaded(result.data.map { mapped ->
                             val cachedGeoLocations = loadCache()
                             val found = cachedGeoLocations.firstOrNull {
                                 it.longitude == mapped.longitude && it.latitude == mapped.latitude
@@ -112,7 +104,7 @@ class GeocodingViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    state.handleEvent(GeoEvent.Error(result.message!!))
+                    state.handleEvent(GeoEvent.Error(result.message))
                 }
             }
         }
@@ -123,10 +115,10 @@ class GeocodingViewModel @Inject constructor(
         )
     }
 
-    private fun saveGeoLocation(currentState: GeoState, geoLocation: GeoLocation): GeoState {
+    private fun onSaveGeoLocation(currentState: GeoState, geoLocation: GeoLocation): GeoState {
         viewModelScope.launch(dispatcherProvider.io) {
             val geoLocations = state.value.geoLocations
-            when (geocodingRepository.saveCacheGeoLocation(geoLocation)) {
+            when (localGeocodingRepository.saveCacheGeoLocation(geoLocation)) {
                 is Resource.Success -> {
                     state.handleEvent(GeoEvent.Loaded(geoLocations.map {
                         if (geoLocation.latitude == it.latitude && geoLocation.longitude == it.longitude) {
@@ -136,30 +128,30 @@ class GeocodingViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    _action.send(GeoAction.ShowToast("Issue saving!!!"))
+                    actionChannel.send(GeoAction.ShowToast("Issue saving!!!"))
                 }
             }
         }
         return currentState
     }
 
-    private fun deleteGeoLocation(currentState: GeoState, geoLocation: GeoLocation): GeoState {
+    private fun onDeleteGeoLocation(currentState: GeoState, geoLocation: GeoLocation): GeoState {
         viewModelScope.launch(dispatcherProvider.io) {
-            when (geocodingRepository.deleteCacheGeoLocation(geoLocation)) {
+            when (localGeocodingRepository.deleteCacheGeoLocation(geoLocation)) {
                 is Resource.Success -> {
                     val geoLocations = state.value.geoLocations
                     state.handleEvent(GeoEvent.Loaded(geoLocations.minus(geoLocation)))
                 }
 
                 is Resource.Error -> {
-                    _action.send(GeoAction.ShowToast("Issue deleting!!!"))
+                    actionChannel.send(GeoAction.ShowToast("Issue deleting!!!"))
                 }
             }
         }
         return currentState
     }
 
-    private fun handleError(currentState: GeoState, message: String): GeoState {
+    private fun onHandleError(currentState: GeoState, message: String): GeoState {
         return currentState.copy(
             isLoading = false,
             error = message,

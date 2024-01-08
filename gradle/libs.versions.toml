@@ -5,6 +5,7 @@ compose = "1.8.2"
 immutable = "0.3.6"
 location = "21.0.1"
 hilt = "2.48.1"
+hilt-navigation = "1.1.0"
 navigationCompose = "2.7.6"
 lyfecyleCompose = "2.7.0-rc02"
 retrofit = "2.9.0"
@@ -14,6 +15,7 @@ espresso = "3.5.1"
 coroutines = "1.7.3"
 room = "2.6.1"
 material = "1.5.4"
+material3 = "1.1.2"
 org-jetbrains-kotlin-android = "1.9.10"
 appcompat = "1.6.1"
 com-google-android-material-material = "1.11.0"
@@ -27,6 +29,7 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lyfecyleCompose" }
 android-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "material" }
+android-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "immutable" }
 
@@ -36,6 +39,7 @@ android-play-services-location = { group = "com.google.android.gms", name = "pla
 hilt-android-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation" }
 
 # Retrofit
 retrofit-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
@@ -60,4 +64,4 @@ com-android-library = { id = "com.android.library", version.ref = "androidGradle
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
 com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 com-google-dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-dagger-hilt = { id = "dagger.hilt.android.plugin", version.ref = "hilt"}
+dagger-hilt = { id = "dagger.hilt.android.plugin", version.ref = "hilt" }

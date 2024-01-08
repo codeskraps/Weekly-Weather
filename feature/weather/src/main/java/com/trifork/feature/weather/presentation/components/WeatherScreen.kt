@@ -1,9 +1,11 @@
 package com.trifork.feature.weather.presentation.components
 
 import android.Manifest
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,12 +16,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -31,37 +38,66 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.LifecycleEventEffect
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.navigation.NavController
+import com.trifork.feature.common.components.ObserveAsEvents
 import com.trifork.feature.common.navigation.Screen
 import com.trifork.feature.weather.domain.model.WeatherLocation
-import com.trifork.feature.weather.presentation.WeatherViewModel
+import com.trifork.feature.weather.presentation.mvi.WeatherAction
 import com.trifork.feature.weather.presentation.mvi.WeatherEvent
+import com.trifork.feature.weather.presentation.mvi.WeatherState
+import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun WeatherScreen(
     navController: NavController,
-    viewModel: WeatherViewModel
+    state: WeatherState,
+    handleEvent: (WeatherEvent) -> Unit,
+    action: Flow<WeatherAction>
 ) {
-    val state by viewModel.state.collectAsState()
+
+    var menuExpanded by remember {
+        mutableStateOf(false)
+    }
+    var showDialog by remember {
+        mutableStateOf(false)
+    }
 
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { map ->
         if (map.values.filter { it }.size > 1) {
-            viewModel.state.handleEvent(WeatherEvent.Refresh)
+            handleEvent(WeatherEvent.Refresh)
+        }
+    }
+
+    LifecycleResumeEffect(Unit) {
+        handleEvent(WeatherEvent.Resume)
+        onPauseOrDispose {}
+    }
+
+    val context = LocalContext.current
+    ObserveAsEvents(flow = action) { onAction ->
+        when (onAction) {
+            is WeatherAction.Toast -> Toast.makeText(context, onAction.message, Toast.LENGTH_LONG)
+                .show()
         }
     }
 
     val isLoading = state.isLoading
     val pullRefreshState = rememberPullRefreshState(isLoading, {
-        viewModel.state.handleEvent(WeatherEvent.Refresh)
+        handleEvent(WeatherEvent.Refresh)
     })
 
 
@@ -94,16 +130,51 @@ fun WeatherScreen(
                 },
                 actions = {
                     IconButton(onClick = {
-                        viewModel.state.handleEvent(
+                        if (state.cached && state.weatherInfo != null) {
+                            handleEvent(WeatherEvent.Delete(state.weatherInfo))
+                        } else {
+                            showDialog = true
+                        }
+                    }) {
+                        Icon(
+                            imageVector = if (state.cached) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                            tint = if (state.cached) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.outline,
+                            contentDescription = "Cached"
+                        )
+                    }
+                    IconButton(onClick = {
+                        handleEvent(
                             WeatherEvent.LoadWeatherInfo(WeatherLocation())
                         )
                     }) {
                         Icon(
                             imageVector = Icons.Filled.LocationOn,
                             tint = MaterialTheme.colorScheme.primary,
-                            contentDescription = "Refresh"
+                            contentDescription = "Current Location"
                         )
                     }
+                    /*
+                    IconButton(onClick = { menuExpanded = true }) {
+                        Icon(
+                            imageVector = Icons.Default.MoreVert,
+                            tint = MaterialTheme.colorScheme.primary,
+                            contentDescription = "Menu"
+                        )
+                    }
+                    DropdownMenu(
+                        modifier = Modifier.background(MaterialTheme.colorScheme.background),
+                        expanded = menuExpanded,
+                        onDismissRequest = { menuExpanded = false })
+                    {
+                        DropdownMenuItem(
+                            onClick = { showDialog = true },
+                            text = { Text(text = "Save Location") }
+                        )
+                        DropdownMenuItem(
+                            onClick = { /*TODO*/ },
+                            text = { Text(text = "About") }
+                        )
+                    }*/
                 },
             )
         },
@@ -132,9 +203,9 @@ fun WeatherScreen(
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center)
                 )
-            } else if (state.error != null) {
+            } else if (state.error != null || state.weatherInfo == null) {
                 Text(
-                    text = state.error ?: "",
+                    text = state.error ?: "No Location Set !!!",
                     color = MaterialTheme.colorScheme.error,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.align(Alignment.Center)
@@ -148,7 +219,7 @@ fun WeatherScreen(
                         LazyColumn {
                             item {
                                 WeatherCard(
-                                    data = state.weatherInfo!!.currentWeatherData!!,
+                                    data = state.weatherInfo.currentWeatherData!!,
                                     backgroundColor = MaterialTheme.colorScheme.primaryContainer
                                 )
                             }
@@ -167,17 +238,27 @@ fun WeatherScreen(
                             .background(MaterialTheme.colorScheme.background)
                     ) {
                         item {
-                            state.weatherInfo!!.weatherDataPerDay.forEach { perDay ->
+                            state.weatherInfo.weatherDataPerDay.forEach { perDay ->
                                 Spacer(modifier = Modifier.height(16.dp))
                                 WeatherForecast(
-                                    state.weatherInfo!!,
+                                    state.weatherInfo,
                                     perDay.value,
-                                    viewModel
+                                    handleEvent
                                 )
                             }
                             Spacer(modifier = Modifier.height(16.dp))
                         }
                     }
+                }
+            }
+
+            state.weatherInfo?.let {
+                SaveLocationDialog(
+                    weatherInfo = state.weatherInfo,
+                    showDialog = showDialog,
+                    handleEvent = handleEvent
+                ) {
+                    showDialog = false
                 }
             }
         }

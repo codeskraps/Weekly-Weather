@@ -10,11 +10,11 @@ Save a GPS weather location with a custom name.
 
 App translated into 37 languages.
 
-![screenshot_one][screenshot_one]{width=250px}
-![screenshot_two][screenshot_two]{width=250px}
-![screenshot_three][screenshot_three]{width=250px}
-![screenshot_four][screenshot_four]{width=250px}
-![screenshot_five][screenshot_five]{width=250px}
+![screenshot_one][screenshot_one]
+![screenshot_two][screenshot_two]
+![screenshot_three][screenshot_three]
+![screenshot_four][screenshot_four]
+![screenshot_five][screenshot_five]
 
 [screenshot_one]: store_assets/Screenshot_20240109_145100.png
 [screenshot_two]: store_assets/Screenshot_20240109_145124.png
@@ -24,9 +24,3 @@ App translated into 37 languages.
 
 Weather data API -> https://open-meteo.com/
 Open Sourced -> https://github.com/codeskraps/Weekly-Weather
-
-<style type="text/css">
-    img {
-        width: 250px;
-    }
-</style>

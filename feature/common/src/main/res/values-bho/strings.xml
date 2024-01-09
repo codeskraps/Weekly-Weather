@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">अनजान गलती हो गेला।</string>
+    <string name="unknown">अनजान</string>
+
+    <string name="current_location">वर्तमान स्थान</string>
+    <string name="save_current_location">वर्तमान स्थान बचावें</string>
+    <string name="set_name_current_location">वर्तमान स्थान के लिए नाम निर्धारित करें:</string>
+    <string name="save">बचावें</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="error">त्रुटि</string>
+    <string name="loading">लोड हो रहा है…</string>
+    <string name="cached">कैश हुआ</string>
+    <string name="search">खोजें</string>
+    <string name="no_location_set">कोई स्थान सेट नहीं किया गया!!!</string>
+    <string name="location_can_not_be_blank">"स्थान खाली नहीं हो सकता !!!"</string>
+    <string name="back">वापस</string>
+    <string name="search_locations">स्थानों की खोज</string>
+    <string name="issue_loading_cache">कैश लोड करने में समस्या !!!</string>
+    <string name="issue_saving">बचाने में समस्या !!!</string>
+    <string name="issue_deleting">हटाने में समस्या !!!</string>
+    <string name="check_internet_connection">इंटरनेट कनेक्शन चेक करें !!!</string>
+    <string name="check_gps">GPS सेटिंग चेक करें !!!</string>
+    <string name="no_results">कोई परिणाम नहीं मिला !!!</string>
+
+    <string name="clear_sky">साफ आसमान</string>
+    <string name="frost">मौसमी</string>
+    <string name="mainly_clear">मुख्य रूप से स्पष्ट</string>
+    <string name="partly_cloudy">कुछ धुंधला</string>
+    <string name="overcast">बादलदार</string>
+    <string name="foggy">कोहरा</string>
+    <string name="depositing_rime_fog">राइम कोहरा जमाता है</string>
+    <string name="light_drizzle">हल्की बौछार</string>
+    <string name="moderate_drizzle">मध्यम बौछार</string>
+    <string name="dense_drizzle">घना बौछार</string>
+    <string name="slight_freezing_drizzle">हल्का जमने वाली बौछार</string>
+    <string name="dense_freezing_drizzle">घना जमने वाली बौछार</string>
+    <string name="slight_rain">हल्की बारिश</string>
+    <string name="rainy">बारिश</string>
+    <string name="heavy_rain">भारी बारिश</string>
+    <string name="heavy_freezing_rain">भारी जमने वाली बारिश</string>
+    <string name="slight_snow_fall">हल्की हिमपात</string>
+    <string name="moderate_snow_fall">मध्यम हिमपात</string>
+    <string name="heavy_snow_fall">भारी हिमपात</string>
+    <string name="snow_grains">हिम दाने</string>
+    <string name="slight_rain_showers">हल्की बारिश की झड़ी</string>
+    <string name="moderate_rain_showers">मध्यम बारिश की झड़ी</string>
+    <string name="violent_rain_showers">क्रूर बारिश की झड़ी</string>
+    <string name="light_snow_showers">हल्की हिमपात की झड़ी</string>
+    <string name="heavy_snow_showers">भारी हिमपात की झड़ी</string>
+    <string name="moderate_thunderstorm">मध्यम बिजली चमक</string>
+    <string name="thunderstorm_with_slight_hail">हल्के बर्फ के साथ बिजली चमक</string>
+    <string name="thunderstorm_with_heavy_rain">भारी बारिश के साथ बिजली चमक</string>
+
+    <string name="january">जनवरी</string>
+    <string name="february">फरवरी</string>
+    <string name="march">मार्च</string>
+    <string name="april">अप्रैल</string>
+    <string name="may">मई</string>
+    <string name="june">जून</string>
+    <string name="july">जुलाई</string>
+    <string name="august">अगस्त</string>
+    <string name="september">सितंबर</string>
+    <string name="october">अक्टूबर</string>
+    <string name="november">नवंबर</string>
+    <string name="december">दिसंबर</string>
+
+    <string name="monday">सोमवार</string>
+    <string name="tuesday">मंगलवार</string>
+    <string name="wednesday">बुधवार</string>
+    <string name="thursday">गुरुवार</string>
+    <string name="friday">शुक्रवार</string>
+    <string name="saturday">शनिवार</string>
+    <string name="sunday">रविवार</string>
+</resources>

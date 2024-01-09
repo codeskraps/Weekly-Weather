@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">Došlo k neznámé chybě.</string>
+    <string name="unknown">Neznámé</string>
+
+    <string name="current_location">Aktuální poloha</string>
+    <string name="save_current_location">Uložit aktuální polohu</string>
+    <string name="set_name_current_location">Nastavit název pro aktuální polohu:</string>
+    <string name="save">Uložit</string>
+    <string name="cancel">Zrušit</string>
+    <string name="error">Chyba</string>
+    <string name="loading">Načítání…</string>
+    <string name="cached">V mezipaměti</string>
+    <string name="search">Hledat</string>
+    <string name="no_location_set">Není nastavena žádná poloha !!!</string>
+    <string name="location_can_not_be_blank">Poloha nemůže být prázdná !!!</string>
+    <string name="back">Zpět</string>
+    <string name="search_locations">Hledat polohy</string>
+    <string name="issue_loading_cache">Problém s načítáním mezipaměti !!!</string>
+    <string name="issue_saving">Problém s ukládáním !!!</string>
+    <string name="issue_deleting">Problém s mazáním !!!</string>
+    <string name="check_internet_connection">Zkontrolujte připojení k internetu !!!</string>
+    <string name="check_gps">Zkontrolujte nastavení GPS !!!</string>
+    <string name="no_results">Žádné výsledky !!!</string>
+
+    <string name="clear_sky">Jasno</string>
+    <string name="frost">Mrazík</string>
+    <string name="mainly_clear">Převážně jasno</string>
+    <string name="partly_cloudy">Částečně zataženo</string>
+    <string name="overcast">Zataženo</string>
+    <string name="foggy">Mlhavo</string>
+    <string name="depositing_rime_fog">Vločkovitá mlha</string>
+    <string name="light_drizzle">Jemný mrholení</string>
+    <string name="moderate_drizzle">Střední mrholení</string>
+    <string name="dense_drizzle">Husté mrholení</string>
+    <string name="slight_freezing_drizzle">Jemné mrznoucí mrholení</string>
+    <string name="dense_freezing_drizzle">Husté mrznoucí mrholení</string>
+    <string name="slight_rain">Slabý déšť</string>
+    <string name="rainy">Déšť</string>
+    <string name="heavy_rain">Hustý déšť</string>
+    <string name="heavy_freezing_rain">Silný mrznoucí déšť</string>
+    <string name="slight_snow_fall">Slabý sněžení</string>
+    <string name="moderate_snow_fall">Střední sněžení</string>
+    <string name="heavy_snow_fall">Husté sněžení</string>
+    <string name="snow_grains">Sněhové vločky</string>
+    <string name="slight_rain_showers">Slabé přeháňky deště</string>
+    <string name="moderate_rain_showers">Střední přeháňky deště</string>
+    <string name="violent_rain_showers">Prudké přeháňky deště</string>
+    <string name="light_snow_showers">Lehké přeháňky sněhu</string>
+    <string name="heavy_snow_showers">Husté přeháňky sněhu</string>
+    <string name="moderate_thunderstorm">Střední bouřka</string>
+    <string name="thunderstorm_with_slight_hail">Bouřka s jemným kroupáním</string>
+    <string name="thunderstorm_with_heavy_rain">Bouřka s prudkým deštěm</string>
+
+    <string name="january">Leden</string>
+    <string name="february">Únor</string>
+    <string name="march">Březen</string>
+    <string name="april">Duben</string>
+    <string name="may">Květen</string>
+    <string name="june">Červen</string>
+    <string name="july">Červenec</string>
+    <string name="august">Srpen</string>
+    <string name="september">Září</string>
+    <string name="october">Říjen</string>
+    <string name="november">Listopad</string>
+    <string name="december">Prosinec</string>
+
+    <string name="monday">Pondělí</string>
+    <string name="tuesday">Úterý</string>
+    <string name="wednesday">Středa</string>
+    <string name="thursday">Čtvrtek</string>
+    <string name="friday">Pátek</string>
+    <string name="saturday">Sobota</string>
+    <string name="sunday">Neděle</string>
+</resources>

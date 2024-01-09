@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">En ukjent feil har oppstått.</string>
+    <string name="unknown">Ukjent</string>
+
+    <string name="current_location">Nåværende posisjon</string>
+    <string name="save_current_location">Lagre nåværende posisjon</string>
+    <string name="set_name_current_location">Sett navn på nåværende posisjon:</string>
+    <string name="save">Lagre</string>
+    <string name="cancel">Avbryt</string>
+    <string name="error">Feil</string>
+    <string name="loading">Laster …</string>
+    <string name="cached">Midlertidig lagret</string>
+    <string name="search">Søk</string>
+    <string name="no_location_set">Ingen posisjon er satt !!!</string>
+    <string name="location_can_not_be_blank">"Posisjonen kan ikke være tom !!!"</string>
+    <string name="back">Tilbake</string>
+    <string name="search_locations">Søk etter posisjoner</string>
+    <string name="issue_loading_cache">Problem med å laste inn mellomlager!!!</string>
+    <string name="issue_saving">Problem med lagring !!!</string>
+    <string name="issue_deleting">Problem med sletting !!!</string>
+    <string name="check_internet_connection">Sjekk internettforbindelsen !!!</string>
+    <string name="check_gps">Sjekk GPS-innstillingene !!!</string>
+    <string name="no_results">Ingen resultater !!!</string>
+
+    <string name="clear_sky">Klart himmel</string>
+    <string name="frost">Frost</string>
+    <string name="mainly_clear">Hovedsakelig klart</string>
+    <string name="partly_cloudy">Delvis skyet</string>
+    <string name="overcast">Overskyet</string>
+    <string name="foggy">Tåkete</string>
+    <string name="depositing_rime_fog">Tåke med rimdannelse</string>
+    <string name="light_drizzle">Lett yr</string>
+    <string name="moderate_drizzle">Moderat yr</string>
+    <string name="dense_drizzle">Tett yr</string>
+    <string name="slight_freezing_drizzle">Lett isende yr</string>
+    <string name="dense_freezing_drizzle">Tett isende yr</string>
+    <string name="slight_rain">Lett regn</string>
+    <string name="rainy">Regn</string>
+    <string name="heavy_rain">Kraftig regn</string>
+    <string name="heavy_freezing_rain">Kraftig isende regn</string>
+    <string name="slight_snow_fall">Lett snøfall</string>
+    <string name="moderate_snow_fall">Moderat snøfall</string>
+    <string name="heavy_snow_fall">Kraftig snøfall</string>
+    <string name="snow_grains">Snøkorn</string>
+    <string name="slight_rain_showers">Lette regnbyger</string>
+    <string name="moderate_rain_showers">Moderate regnbyger</string>
+    <string name="violent_rain_showers">Kraftige regnbyger</string>
+    <string name="light_snow_showers">Lette snøbyger</string>
+    <string name="heavy_snow_showers">Kraftige snøbyger</string>
+    <string name="moderate_thunderstorm">Moderat tordenstorm</string>
+    <string name="thunderstorm_with_slight_hail">Tordenstorm med lett hagl</string>
+    <string name="thunderstorm_with_heavy_rain">Tordenstorm med kraftig regn</string>
+
+    <string name="january">Januar</string>
+    <string name="february">Februar</string>
+    <string name="march">Mars</string>
+    <string name="april">April</string>
+    <string name="may">Mai</string>
+    <string name="june">Juni</string>
+    <string name="july">Juli</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">Oktober</string>
+    <string name="november">November</string>
+    <string name="december">Desember</string>
+
+    <string name="monday">Mandag</string>
+    <string name="tuesday">Tirsdag</string>
+    <string name="wednesday">Onsdag</string>
+    <string name="thursday">Torsdag</string>
+    <string name="friday">Fredag</string>
+    <string name="saturday">Lørdag</string>
+    <string name="sunday">Søndag</string>
+</resources>

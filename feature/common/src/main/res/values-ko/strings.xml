@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">알 수 없는 오류가 발생했습니다.</string>
+    <string name="unknown">알 수 없음</string>
+
+    <string name="current_location">현재 위치</string>
+    <string name="save_current_location">현재 위치 저장</string>
+    <string name="set_name_current_location">현재 위치에 이름 설정:</string>
+    <string name="save">저장</string>
+    <string name="cancel">취소</string>
+    <string name="error">오류</string>
+    <string name="loading">로드 중…</string>
+    <string name="cached">캐시됨</string>
+    <string name="search">검색</string>
+    <string name="no_location_set">위치가 설정되지 않았습니다!!!</string>
+    <string name="location_can_not_be_blank">위치를 비워 둘 수 없습니다!!!</string>
+    <string name="back">뒤로</string>
+    <string name="search_locations">위치 검색</string>
+    <string name="issue_loading_cache">캐시 로드 문제 발생!!!</string>
+    <string name="issue_saving">저장 문제 발생!!!</string>
+    <string name="issue_deleting">삭제 문제 발생!!!</string>
+    <string name="check_internet_connection">인터넷 연결을 확인하세요!!!</string>
+    <string name="check_gps">GPS 설정을 확인하세요!!!</string>
+    <string name="no_results">결과 없음!!!</string>
+
+    <string name="clear_sky">맑음</string>
+    <string name="frost">서리</string>
+    <string name="mainly_clear">대체로 맑음</string>
+    <string name="partly_cloudy">구름 조금</string>
+    <string name="overcast">흐림</string>
+    <string name="foggy">안개</string>
+    <string name="depositing_rime_fog">결빙 안개</string>
+    <string name="light_drizzle">가벼운 이슬비</string>
+    <string name="moderate_drizzle">중간 이슬비</string>
+    <string name="dense_drizzle">짙은 이슬비</string>
+    <string name="slight_freezing_drizzle">약간의 결빙 이슬비</string>
+    <string name="dense_freezing_drizzle">짙은 결빙 이슬비</string>
+    <string name="slight_rain">약간의 비</string>
+    <string name="rainy">비</string>
+    <string name="heavy_rain">폭우</string>
+    <string name="heavy_freezing_rain">강한 결빙 비</string>
+    <string name="slight_snow_fall">약간의 눈</string>
+    <string name="moderate_snow_fall">중간 눈</string>
+    <string name="heavy_snow_fall">많은 눈</string>
+    <string name="snow_grains">눈송이</string>
+    <string name="slight_rain_showers">약한 소나기</string>
+    <string name="moderate_rain_showers">중간 소나기</string>
+    <string name="violent_rain_showers">강한 소나기</string>
+    <string name="light_snow_showers">가벼운 눈 소나기</string>
+    <string name="heavy_snow_showers">많은 눈 소나기</string>
+    <string name="moderate_thunderstorm">중간 천둥번개</string>
+    <string name="thunderstorm_with_slight_hail">약한 우박을 동반한 천둥번개</string>
+    <string name="thunderstorm_with_heavy_rain">강한 비를 동반한 천둥번개</string>
+
+    <string name="january">1월</string>
+    <string name="february">2월</string>
+    <string name="march">3월</string>
+    <string name="april">4월</string>
+    <string name="may">5월</string>
+    <string name="june">6월</string>
+    <string name="july">7월</string>
+    <string name="august">8월</string>
+    <string name="september">9월</string>
+    <string name="october">10월</string>
+    <string name="november">11월</string>
+    <string name="december">12월</string>
+
+    <string name="monday">월요일</string>
+    <string name="tuesday">화요일</string>
+    <string name="wednesday">수요일</string>
+    <string name="thursday">목요일</string>
+    <string name="friday">금요일</string>
+    <string name="saturday">토요일</string>
+    <string name="sunday">일요일</string>
+</resources>

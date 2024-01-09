@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.trifork.feature.common.dispatcher.DispatcherProvider
 import com.trifork.feature.common.domain.model.GeoLocation
 import com.trifork.feature.common.domain.repository.LocalGeocodingRepository
+import com.trifork.feature.common.domain.repository.LocalResourceRepository
 import com.trifork.feature.common.mvi.StateReducerViewModel
 import com.trifork.feature.common.util.Resource
 import com.trifork.feature.geocoding.domain.repository.GeocodingRepository
@@ -18,6 +19,7 @@ import javax.inject.Inject
 class GeocodingViewModel @Inject constructor(
     private val localGeocodingRepository: LocalGeocodingRepository,
     private val geocodingRepository: GeocodingRepository,
+    private val localResources: LocalResourceRepository,
     private val dispatcherProvider: DispatcherProvider
 ) : StateReducerViewModel<GeoState, GeoEvent, GeoAction>() {
 
@@ -46,13 +48,13 @@ class GeocodingViewModel @Inject constructor(
                         state.handleEvent(GeoEvent.Loaded(cachedGeoLocations))
 
                     } else {
-                        state.handleEvent(GeoEvent.Error("No results"))
+                        state.handleEvent(GeoEvent.Error(localResources.getNoResultString()))
                     }
                 }
 
                 is Resource.Error -> {
-                    state.handleEvent(GeoEvent.Error("No results"))
-                    actionChannel.send(GeoAction.ShowToast("Issue loading cache!!!"))
+                    state.handleEvent(GeoEvent.Error(localResources.getNoResultString()))
+                    actionChannel.send(GeoAction.ShowToast(localResources.getIssueLoadingCache()))
                 }
             }
         }
@@ -99,7 +101,7 @@ class GeocodingViewModel @Inject constructor(
                             mapped.copy(cached = found != null)
                         }))
                     } else {
-                        state.handleEvent(GeoEvent.Error("No results"))
+                        state.handleEvent(GeoEvent.Error(localResources.getNoResultString()))
                     }
                 }
 
@@ -128,7 +130,7 @@ class GeocodingViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    actionChannel.send(GeoAction.ShowToast("Issue saving!!!"))
+                    actionChannel.send(GeoAction.ShowToast(localResources.getIssueSaving()))
                 }
             }
         }
@@ -144,7 +146,7 @@ class GeocodingViewModel @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    actionChannel.send(GeoAction.ShowToast("Issue deleting!!!"))
+                    actionChannel.send(GeoAction.ShowToast(localResources.getIssueDeleting()))
                 }
             }
         }

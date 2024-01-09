@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">A apărut o eroare necunoscută.</string>
+    <string name="unknown">Necunoscut</string>
+
+    <string name="current_location">Locația curentă</string>
+    <string name="save_current_location">Salvează locația curentă</string>
+    <string name="set_name_current_location">Setează un nume pentru locația curentă:</string>
+    <string name="save">Salvează</string>
+    <string name="cancel">Anulează</string>
+    <string name="error">Eroare</string>
+    <string name="loading">Se încarcă…</string>
+    <string name="cached">Memorat în cache</string>
+    <string name="search">Căutare</string>
+    <string name="no_location_set">Nicio locație setată !!!</string>
+    <string name="location_can_not_be_blank">"Locația nu poate fi goală !!!"</string>
+    <string name="back">Înapoi</string>
+    <string name="search_locations">Caută locații</string>
+    <string name="issue_loading_cache">Problemă la încărcarea cache-ului !!!</string>
+    <string name="issue_saving">Problemă la salvare !!!</string>
+    <string name="issue_deleting">Problemă la ștergere !!!</string>
+    <string name="check_internet_connection">Verifică conexiunea la internet !!!</string>
+    <string name="check_gps">Verifică setările GPS !!!</string>
+    <string name="no_results">Fără rezultate !!!</string>
+
+    <string name="clear_sky">Cer senin</string>
+    <string name="frost">Gheață</string>
+    <string name="mainly_clear">În principal senin</string>
+    <string name="partly_cloudy">Parțial înnorat</string>
+    <string name="overcast">Înnorat</string>
+    <string name="foggy">Cețos</string>
+    <string name="depositing_rime_fog">Ceată cu depunere de chiciură</string>
+    <string name="light_drizzle">Burniță ușoară</string>
+    <string name="moderate_drizzle">Burniță moderată</string>
+    <string name="dense_drizzle">Burniță densă</string>
+    <string name="slight_freezing_drizzle">Burniță ușoară cu îngheț</string>
+    <string name="dense_freezing_drizzle">Burniță densă cu îngheț</string>
+    <string name="slight_rain">Ploaie ușoară</string>
+    <string name="rainy">Ploios</string>
+    <string name="heavy_rain">Ploaie torențială</string>
+    <string name="heavy_freezing_rain">Ploaie torențială cu îngheț</string>
+    <string name="slight_snow_fall">Zăpadă ușoară</string>
+    <string name="moderate_snow_fall">Zăpadă moderată</string>
+    <string name="heavy_snow_fall">Zăpadă abundentă</string>
+    <string name="snow_grains">Granule de zăpadă</string>
+    <string name="slight_rain_showers">Averse ușoare</string>
+    <string name="moderate_rain_showers">Averse moderate</string>
+    <string name="violent_rain_showers">Averse violente</string>
+    <string name="light_snow_showers">Ninsori ușoare</string>
+    <string name="heavy_snow_showers">Ninsori abundente</string>
+    <string name="moderate_thunderstorm">Furtună moderată</string>
+    <string name="thunderstorm_with_slight_hail">Furtună cu grindină ușoară</string>
+    <string name="thunderstorm_with_heavy_rain">Furtună cu ploaie torențială</string>
+
+    <string name="january">Ianuarie</string>
+    <string name="february">Februarie</string>
+    <string name="march">Martie</string>
+    <string name="april">Aprilie</string>
+    <string name="may">Mai</string>
+    <string name="june">Iunie</string>
+    <string name="july">Iulie</string>
+    <string name="august">August</string>
+    <string name="september">Septembrie</string>
+    <string name="october">Octombrie</string>
+    <string name="november">Noiembrie</string>
+    <string name="december">Decembrie</string>
+
+    <string name="monday">Luni</string>
+    <string name="tuesday">Marți</string>
+    <string name="wednesday">Miercuri</string>
+    <string name="thursday">Joi</string>
+    <string name="friday">Vineri</string>
+    <string name="saturday">Sâmbătă</string>
+    <string name="sunday">Duminică</string>
+</resources>

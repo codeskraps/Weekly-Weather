@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">Παρουσιάστηκε άγνωστο σφάλμα.</string>
+    <string name="unknown">Άγνωστο</string>
+
+    <string name="current_location">Τρέχουσα τοποθεσία</string>
+    <string name="save_current_location">Αποθήκευση τρέχουσας τοποθεσίας</string>
+    <string name="set_name_current_location">Ορισμός ονόματος για την τρέχουσα τοποθεσία:</string>
+    <string name="save">Αποθήκευση</string>
+    <string name="cancel">Ακύρωση</string>
+    <string name="error">Σφάλμα</string>
+    <string name="loading">Φόρτωση…</string>
+    <string name="cached">Κρυφή μνήμη</string>
+    <string name="search">Αναζήτηση</string>
+    <string name="no_location_set">Δεν έχει οριστεί τοποθεσία !!!</string>
+    <string name="location_can_not_be_blank">"Η τοποθεσία δεν μπορεί να είναι κενή !!!"</string>
+    <string name="back">Πίσω</string>
+    <string name="search_locations">Αναζήτηση τοποθεσιών</string>
+    <string name="issue_loading_cache">Πρόβλημα φόρτωσης μνήμης cache !!!</string>
+    <string name="issue_saving">Πρόβλημα αποθήκευσης !!!</string>
+    <string name="issue_deleting">Πρόβλημα διαγραφής !!!</string>
+    <string name="check_internet_connection">Ελέγξτε τη σύνδεση στο internet !!!</string>
+    <string name="check_gps">Ελέγξτε τις ρυθμίσεις GPS !!!</string>
+    <string name="no_results">Χωρίς αποτελέσματα !!!</string>
+
+    <string name="clear_sky">Καθαρός ουρανός</string>
+    <string name="frost">Παγετός</string>
+    <string name="mainly_clear">Κυρίως αίθριος</string>
+    <string name="partly_cloudy">Μερικώς συννεφιασμένος</string>
+    <string name="overcast">Αρκετά συννεφιασμένος</string>
+    <string name="foggy">Ομίχλη</string>
+    <string name="depositing_rime_fog">Κατάθεση παγετού στην ομίχλη</string>
+    <string name="light_drizzle">Ασθενής ψιλή βροχή</string>
+    <string name="moderate_drizzle">Μέτρια ψιλή βροχή</string>
+    <string name="dense_drizzle">Πυκνή ψιλή βροχή</string>
+    <string name="slight_freezing_drizzle">Ασθενής παγετού ψιλή βροχή</string>
+    <string name="dense_freezing_drizzle">Πυκνή παγετού ψιλή βροχή</string>
+    <string name="slight_rain">Ασθενής βροχή</string>
+    <string name="rainy">Βροχερός</string>
+    <string name="heavy_rain">Καταρρακτώδης βροχή</string>
+    <string name="heavy_freezing_rain">Καταρρακτώδης παγετού βροχή</string>
+    <string name="slight_snow_fall">Ασθενής χιονόπτωση</string>
+    <string name="moderate_snow_fall">Μέτρια χιονόπτωση</string>
+    <string name="heavy_snow_fall">Καταρρακτώδης χιονόπτωση</string>
+    <string name="snow_grains">Κόκκοι χιονιού</string>
+    <string name="slight_rain_showers">Ασθενείς βροχοπτώσεις</string>
+    <string name="moderate_rain_showers">Μέτριες βροχοπτώσεις</string>
+    <string name="violent_rain_showers">Ισχυρές βροχοπτώσεις</string>
+    <string name="light_snow_showers">Ασθενείς χιονοπτώσεις</string>
+    <string name="heavy_snow_showers">Ισχυρές χιονοπτώσεις</string>
+    <string name="moderate_thunderstorm">Μέτρια καταιγίδα</string>
+    <string name="thunderstorm_with_slight_hail">Καταιγίδα με ασθενή χαλάζι</string>
+    <string name="thunderstorm_with_heavy_rain">Καταιγίδα με έντονη βροχή</string>
+
+    <string name="january">Ιανουάριος</string>
+    <string name="february">Φεβρουάριος</string>
+    <string name="march">Μάρτιος</string>
+    <string name="april">Απρίλιος</string>
+    <string name="may">Μάιος</string>
+    <string name="june">Ιούνιος</string>
+    <string name="july">Ιούλιος</string>
+    <string name="august">Αύγουστος</string>
+    <string name="september">Σεπτέμβριος</string>
+    <string name="october">Οκτώβριος</string>
+    <string name="november">Νοέμβριος</string>
+    <string name="december">Δεκέμβριος</string>
+
+    <string name="monday">Δευτέρα</string>
+    <string name="tuesday">Τρίτη</string>
+    <string name="wednesday">Τετάρτη</string>
+    <string name="thursday">Πέμπτη</string>
+    <string name="friday">Παρασκευή</string>
+    <string name="saturday">Σάββατο</string>
+    <string name="sunday">Κυριακή</string>
+</resources>

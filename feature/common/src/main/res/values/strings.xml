@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">An unknown error occurred.</string>
+    <string name="unknown">Unknown</string>
+
+    <string name="current_location">Current Location</string>
+    <string name="save_current_location">Save Current Location</string>
+    <string name="set_name_current_location">Set a name for the current location:</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="error">Error</string>
+    <string name="loading">Loading …</string>
+    <string name="cached">Cached</string>
+    <string name="search">Search</string>
+    <string name="no_location_set">No Location Set !!!</string>
+    <string name="location_can_not_be_blank">"Location can't be blank !!!"</string>
+    <string name="back">Back</string>
+    <string name="search_locations">Search Locations</string>
+    <string name="issue_loading_cache">Issue loading cache!!!</string>
+    <string name="issue_saving">Issue Saving !!!</string>
+    <string name="issue_deleting">Issue Deleting !!!</string>
+    <string name="check_internet_connection">Check Internet Connection !!!</string>
+    <string name="check_gps">Check GPS Setting !!!</string>
+    <string name="no_results">No Results !!!</string>
+
+    <string name="clear_sky">Clear sky</string>
+    <string name="frost">Frost</string>
+    <string name="mainly_clear">Mainly clear</string>
+    <string name="partly_cloudy">Partly cloudy</string>
+    <string name="overcast">Overcast</string>
+    <string name="foggy">Foggy</string>
+    <string name="depositing_rime_fog">Depositing rime fog</string>
+    <string name="light_drizzle">Light drizzle</string>
+    <string name="moderate_drizzle">Moderate drizzle</string>
+    <string name="dense_drizzle">Dense drizzle</string>
+    <string name="slight_freezing_drizzle">Slight freezing drizzle</string>
+    <string name="dense_freezing_drizzle">Dense freezing drizzle</string>
+    <string name="slight_rain">Slight rain</string>
+    <string name="rainy">Rainy</string>
+    <string name="heavy_rain">Heavy rain</string>
+    <string name="heavy_freezing_rain">Heavy freezing rain</string>
+    <string name="slight_snow_fall">Slight snow fall</string>
+    <string name="moderate_snow_fall">Moderate snow fall</string>
+    <string name="heavy_snow_fall">Heavy snow fall</string>
+    <string name="snow_grains">Snow grains</string>
+    <string name="slight_rain_showers">Slight rain showers</string>
+    <string name="moderate_rain_showers">Moderate rain showers</string>
+    <string name="violent_rain_showers">Violent rain showers</string>
+    <string name="light_snow_showers">Light snow showers</string>
+    <string name="heavy_snow_showers">Heavy snow showers</string>
+    <string name="moderate_thunderstorm">Moderate thunderstorm</string>
+    <string name="thunderstorm_with_slight_hail">Thunderstorm with slight hail</string>
+    <string name="thunderstorm_with_heavy_rain">Thunderstorm with heavy hail</string>
+
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">Si è verificato un errore sconosciuto.</string>
+    <string name="unknown">Sconosciuto</string>
+
+    <string name="current_location">Posizione Attuale</string>
+    <string name="save_current_location">Salva Posizione Attuale</string>
+    <string name="set_name_current_location">Imposta un nome per la posizione attuale:</string>
+    <string name="save">Salva</string>
+    <string name="cancel">Annulla</string>
+    <string name="error">Errore</string>
+    <string name="loading">Caricamento…</string>
+    <string name="cached">Archiviato</string>
+    <string name="search">Cerca</string>
+    <string name="no_location_set">Nessuna posizione impostata !!!</string>
+    <string name="location_can_not_be_blank">La posizione non può essere vuota !!!</string>
+    <string name="back">Indietro</string>
+    <string name="search_locations">Cerca Posizioni</string>
+    <string name="issue_loading_cache">Problema nel caricamento della cache !!!</string>
+    <string name="issue_saving">Problema nel salvataggio !!!</string>
+    <string name="issue_deleting">Problema nell\'eliminazione !!!</string>
+    <string name="check_internet_connection">Controlla la connessione Internet !!!</string>
+    <string name="check_gps">Controlla le impostazioni GPS !!!</string>
+    <string name="no_results">Nessun risultato !!!</string>
+
+    <string name="clear_sky">Cielo sereno</string>
+    <string name="frost">Brina</string>
+    <string name="mainly_clear">Principalmente sereno</string>
+    <string name="partly_cloudy">Parzialmente nuvoloso</string>
+    <string name="overcast">Nuvoloso</string>
+    <string name="foggy">Nebbioso</string>
+    <string name="depositing_rime_fog">Nebbia con brina</string>
+    <string name="light_drizzle">Pioviggine leggera</string>
+    <string name="moderate_drizzle">Pioviggine moderata</string>
+    <string name="dense_drizzle">Pioviggine intensa</string>
+    <string name="slight_freezing_drizzle">Pioviggine leggera che gela</string>
+    <string name="dense_freezing_drizzle">Pioviggine intensa che gela</string>
+    <string name="slight_rain">Pioggia leggera</string>
+    <string name="rainy">Piovoso</string>
+    <string name="heavy_rain">Pioggia intensa</string>
+    <string name="heavy_freezing_rain">Pioggia intensa che gela</string>
+    <string name="slight_snow_fall">Leggera nevicata</string>
+    <string name="moderate_snow_fall">Nevicata moderata</string>
+    <string name="heavy_snow_fall">Nevicata intensa</string>
+    <string name="snow_grains">Granuli di neve</string>
+    <string name="slight_rain_showers">Leggeri rovesci di pioggia</string>
+    <string name="moderate_rain_showers">Rovesci di pioggia moderati</string>
+    <string name="violent_rain_showers">Rovesci di pioggia violenti</string>
+    <string name="light_snow_showers">Leggeri rovesci di neve</string>
+    <string name="heavy_snow_showers">Rovesci di neve intensi</string>
+    <string name="moderate_thunderstorm">Temporale moderato</string>
+    <string name="thunderstorm_with_slight_hail">Temporale con leggera grandine</string>
+    <string name="thunderstorm_with_heavy_rain">Temporale con forte pioggia</string>
+
+    <string name="january">Gennaio</string>
+    <string name="february">Febbraio</string>
+    <string name="march">Marzo</string>
+    <string name="april">Aprile</string>
+    <string name="may">Maggio</string>
+    <string name="june">Giugno</string>
+    <string name="july">Luglio</string>
+    <string name="august">Agosto</string>
+    <string name="september">Settembre</string>
+    <string name="october">Ottobre</string>
+    <string name="november">Novembre</string>
+    <string name="december">Dicembre</string>
+
+    <string name="monday">Lunedì</string>
+    <string name="tuesday">Martedì</string>
+    <string name="wednesday">Mercoledì</string>
+    <string name="thursday">Giovedì</string>
+    <string name="friday">Venerdì</string>
+    <string name="saturday">Sabato</string>
+    <string name="sunday">Domenica</string>
+</resources>

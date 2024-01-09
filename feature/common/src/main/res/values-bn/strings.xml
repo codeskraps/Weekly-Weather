@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">অজানা একটি ত্রুটি ঘটেছে।</string>
+    <string name="unknown">অজানা</string>
+
+    <string name="current_location">বর্তমান অবস্থান</string>
+    <string name="save_current_location">বর্তমান অবস্থান সংরক্ষণ করুন</string>
+    <string name="set_name_current_location">বর্তমান অবস্থানের জন্য একটি নাম নির্ধারণ করুন:</string>
+    <string name="save">সংরক্ষণ</string>
+    <string name="cancel">বাতিল</string>
+    <string name="error">ত্রুটি</string>
+    <string name="loading">লোড হচ্ছে…</string>
+    <string name="cached">ক্যাশ করা হয়েছে</string>
+    <string name="search">অনুসন্ধান</string>
+    <string name="no_location_set">কোনো অবস্থান নির্ধারণ করা হয়নি !!!</string>
+    <string name="location_can_not_be_blank">অবস্থান ফাঁকা রাখা যাবে না !!!</string>
+    <string name="back">পিছনে</string>
+    <string name="search_locations">অবস্থান অনুসন্ধান করুন</string>
+    <string name="issue_loading_cache">ক্যাশ লোড করার সমস্যা !!!</string>
+    <string name="issue_saving">সংরক্ষণে সমস্যা !!!</string>
+    <string name="issue_deleting">মুছার সমস্যা !!!</string>
+    <string name="check_internet_connection">ইন্টারনেট সংযোগ পরীক্ষা করুন !!!</string>
+    <string name="check_gps">GPS সেটিংস পরীক্ষা করুন !!!</string>
+    <string name="no_results">কোনো ফলাফল নেই !!!</string>
+
+    <string name="clear_sky">পরিষ্কার আকাশ</string>
+    <string name="frost">তুষার</string>
+    <string name="mainly_clear">মূলত পরিষ্কার</string>
+    <string name="partly_cloudy">অংশত: মেঘলা</string>
+    <string name="overcast">আবৃত</string>
+    <string name="foggy">কুৎসার</string>
+    <string name="depositing_rime_fog">থানা পরিচ্ছন্ন করা ফগ</string>
+    <string name="light_drizzle">হালকা জলপানি</string>
+    <string name="moderate_drizzle">মাঝারি জলপানি</string>
+    <string name="dense_drizzle">ঘন জলপানি</string>
+    <string name="slight_freezing_drizzle">সামান্য শীতল জলপানি</string>
+    <string name="dense_freezing_drizzle">ঘন শীতল জলপানি</string>
+    <string name="slight_rain">সামান্য বৃষ্টি</string>
+    <string name="rainy">বৃষ্টিপাত</string>
+    <string name="heavy_rain">ভারী বৃষ্টি</string>
+    <string name="heavy_freezing_rain">ভারী শীতল বৃষ্টি</string>
+    <string name="slight_snow_fall">সামান্য তুষারপাত</string>
+    <string name="moderate_snow_fall">মাঝারি তুষারপাত</string>
+    <string name="heavy_snow_fall">ভারী তুষারপাত</string>
+    <string name="snow_grains">তুষারের দানা</string>
+    <string name="slight_rain_showers">সামান্য বৃষ্টি প্রবাহ</string>
+    <string name="moderate_rain_showers">মাঝারি বৃষ্টি প্রবাহ</string>
+    <string name="violent_rain_showers">হিংস্র বৃষ্টি প্রবাহ</string>
+    <string name="light_snow_showers">হালকা তুষার প্রবাহ</string>
+    <string name="heavy_snow_showers">ভারী তুষার প্রবাহ</string>
+    <string name="moderate_thunderstorm">মাঝারি বজ্রপাত</string>
+    <string name="thunderstorm_with_slight_hail">সামান্য হিম সহ বজ্রপাত</string>
+    <string name="thunderstorm_with_heavy_rain">ভারী বৃষ্টিসহ বজ্রপাত</string>
+
+    <string name="january">জানুয়ারি</string>
+    <string name="february">ফেব্রুয়ারি</string>
+    <string name="march">মার্চ</string>
+    <string name="april">এপ্রিল</string>
+    <string name="may">মে</string>
+    <string name="june">জুন</string>
+    <string name="july">জুলাই</string>
+    <string name="august">অগাস্ট</string>
+    <string name="september">সেপ্টেম্বর</string>
+    <string name="october">অক্টোবর</string>
+    <string name="november">নভেম্বর</string>
+    <string name="december">ডিসেম্বর</string>
+
+    <string name="monday">সোমবার</string>
+    <string name="tuesday">মঙ্গলবার</string>
+    <string name="wednesday">বুধবার</string>
+    <string name="thursday">বৃহস্পতিবার</string>
+    <string name="friday">শুক্রবার</string>
+    <string name="saturday">শনিবার</string>
+    <string name="sunday">রবিবার</string>
+</resources>

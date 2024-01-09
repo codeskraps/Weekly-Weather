@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">Wystąpił nieznany błąd.</string>
+    <string name="unknown">Nieznane</string>
+
+    <string name="current_location">Aktualna lokalizacja</string>
+    <string name="save_current_location">Zapisz aktualną lokalizację</string>
+    <string name="set_name_current_location">Ustaw nazwę dla aktualnej lokalizacji:</string>
+    <string name="save">Zapisz</string>
+    <string name="cancel">Anuluj</string>
+    <string name="error">Błąd</string>
+    <string name="loading">Ładowanie…</string>
+    <string name="cached">Zachowane w pamięci podręcznej</string>
+    <string name="search">Szukaj</string>
+    <string name="no_location_set">Nie ustawiono lokalizacji!!!</string>
+    <string name="location_can_not_be_blank">Lokalizacja nie może być pusta!!!</string>
+    <string name="back">Powrót</string>
+    <string name="search_locations">Wyszukaj lokalizacje</string>
+    <string name="issue_loading_cache">Problem z wczytywaniem pamięci podręcznej!!!</string>
+    <string name="issue_saving">Problem z zapisywaniem!!!</string>
+    <string name="issue_deleting">Problem z usuwaniem!!!</string>
+    <string name="check_internet_connection">Sprawdź połączenie internetowe!!!</string>
+    <string name="check_gps">Sprawdź ustawienia GPS!!!</string>
+    <string name="no_results">Brak wyników!!!</string>
+
+    <string name="clear_sky">Czyste niebo</string>
+    <string name="frost">Mroźno</string>
+    <string name="mainly_clear">Głównie czyste niebo</string>
+    <string name="partly_cloudy">Częściowo pochmurnie</string>
+    <string name="overcast">Pochmurnie</string>
+    <string name="foggy">Mglisto</string>
+    <string name="depositing_rime_fog">Mgła z szadzią</string>
+    <string name="light_drizzle">Lekka mżawka</string>
+    <string name="moderate_drizzle">Umiarkowana mżawka</string>
+    <string name="dense_drizzle">Gęsta mżawka</string>
+    <string name="slight_freezing_drizzle">Lekka marznąca mżawka</string>
+    <string name="dense_freezing_drizzle">Gęsta marznąca mżawka</string>
+    <string name="slight_rain">Lekki deszcz</string>
+    <string name="rainy">Deszczowo</string>
+    <string name="heavy_rain">Intensywny deszcz</string>
+    <string name="heavy_freezing_rain">Intensywny marznący deszcz</string>
+    <string name="slight_snow_fall">Lekki opad śniegu</string>
+    <string name="moderate_snow_fall">Umiarkowany opad śniegu</string>
+    <string name="heavy_snow_fall">Intensywny opad śniegu</string>
+    <string name="snow_grains">Kruszki śniegu</string>
+    <string name="slight_rain_showers">Lekkie opady deszczu</string>
+    <string name="moderate_rain_showers">Umiarkowane opady deszczu</string>
+    <string name="violent_rain_showers">Gwałtowne opady deszczu</string>
+    <string name="light_snow_showers">Lekkie opady śniegu</string>
+    <string name="heavy_snow_showers">Intensywne opady śniegu</string>
+    <string name="moderate_thunderstorm">Umiarkowana burza</string>
+    <string name="thunderstorm_with_slight_hail">Burza z lekkim gradem</string>
+    <string name="thunderstorm_with_heavy_rain">Burza z intensywnym deszczem</string>
+
+    <string name="january">Styczeń</string>
+    <string name="february">Luty</string>
+    <string name="march">Marzec</string>
+    <string name="april">Kwiecień</string>
+    <string name="may">Maj</string>
+    <string name="june">Czerwiec</string>
+    <string name="july">Lipiec</string>
+    <string name="august">Sierpień</string>
+    <string name="september">Wrzesień</string>
+    <string name="october">Październik</string>
+    <string name="november">Listopad</string>
+    <string name="december">Grudzień</string>
+
+    <string name="monday">Poniedziałek</string>
+    <string name="tuesday">Wtorek</string>
+    <string name="wednesday">Środa</string>
+    <string name="thursday">Czwartek</string>
+    <string name="friday">Piątek</string>
+    <string name="saturday">Sobota</string>
+    <string name="sunday">Niedziela</string>
+</resources>

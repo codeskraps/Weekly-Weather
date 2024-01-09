@@ -16,8 +16,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.trifork.feature.common.util.MonthString
+import com.trifork.feature.common.util.WeekString
 import com.trifork.feature.weather.domain.model.WeatherData
 import com.trifork.feature.weather.domain.model.WeatherInfo
 import com.trifork.feature.weather.presentation.WeatherViewModel
@@ -33,6 +36,8 @@ fun WeatherForecast(
     handleEvent: (WeatherEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val resource = LocalContext.current.resources
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -48,9 +53,13 @@ fun WeatherForecast(
             horizontalArrangement = Arrangement.Start
         ) {
             Text(
-                text = "${today.dayOfMonth} ${
-                    today.month.toString().lowercase(Locale.getDefault())
-                }, ${today.dayOfWeek}",
+                text = "${
+                    resource.getString(
+                        WeekString.parse(
+                            today.dayOfWeek.value
+                        )
+                    )
+                } ${today.dayOfMonth}",
                 modifier = Modifier.align(Alignment.Bottom),
                 fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.primary

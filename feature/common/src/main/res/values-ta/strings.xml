@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">அறியப்படாத பிழை ஏற்பட்டுள்ளது.</string>
+    <string name="unknown">அறியப்படவில்லை</string>
+
+    <string name="current_location">தற்போதைய இருப்பு</string>
+    <string name="save_current_location">தற்போதைய இருப்பை சேமி செய்யுங்கள்</string>
+    <string name="set_name_current_location">தற்போதைய இருப்புக்கு ஒரு பெயரை அமைக்கவும்:</string>
+    <string name="save">சேமி</string>
+    <string name="cancel">ரத்து செய்</string>
+    <string name="error">பிழை</string>
+    <string name="loading">ஏற்றுகின்றது…</string>
+    <string name="cached">கேச் செய்யப்பட்டது</string>
+    <string name="search">தேடு</string>
+    <string name="no_location_set">இடம் அமைக்கப்படவில்லை!!!</string>
+    <string name="location_can_not_be_blank">"இடம் காலிக்கு விட்டு விட முடியாது!!!"</string>
+    <string name="back">பின்</string>
+    <string name="search_locations">இருப்பின் தேடு</string>
+    <string name="issue_loading_cache">கேச் ஏற்றுகின்றதில் சிக்கல் ஏற்பட்டுள்ளது!!!</string>
+    <string name="issue_saving">சேமிக்கு சிக்கல் ஏற்பட்டுள்ளது!!!</string>
+    <string name="issue_deleting">நீக்குவதில் சிக்கல் ஏற்பட்டுள்ளது!!!</string>
+    <string name="check_internet_connection">இணைய இணைப்பை சரிபார்க்கவும்!!!</string>
+    <string name="check_gps">GPS அமைப்பை சரிபார்க்கவும்!!!</string>
+    <string name="no_results">முடிவுகள் இல்லை!!!</string>
+
+    <string name="clear_sky">தோள்கள் இல்லாமல்</string>
+    <string name="frost">பனி</string>
+    <string name="mainly_clear">முதலில் தோள்கள் இல்லாமல்</string>
+    <string name="partly_cloudy">கொஞ்சம் மேகம்</string>
+    <string name="overcast">மேகம்</string>
+    <string name="foggy">மூடுதல்</string>
+    <string name="depositing_rime_fog">மேட்டு மூடுதல்</string>
+    <string name="light_drizzle">இலைக்குடி மழை</string>
+    <string name="moderate_drizzle">இடியாத இலைக்குடி மழை</string>
+    <string name="dense_drizzle">இடிமன்ற இலைக்குடி மழை</string>
+    <string name="slight_freezing_drizzle">இலைக்குடி உடற்காயம் சில்லை</string>
+    <string name="dense_freezing_drizzle">இடிமன்ற உடற்காயம் சில்லை</string>
+    <string name="slight_rain">இலைக்குடி</string>
+    <string name="rainy">மழையான</string>
+    <string name="heavy_rain">கனமான மழை</string>
+    <string name="heavy_freezing_rain">கனமான உடற்காயம் மழை</string>
+    <string name="slight_snow_fall">இலைக்குடி பனி பெறுதல்</string>
+    <string name="moderate_snow_fall">இடியாத பனி பெறுதல்</string>
+    <string name="heavy_snow_fall">கனமான பனி பெறுதல்</string>
+    <string name="snow_grains">பனி குண்டுகள்</string>
+    <string name="slight_rain_showers">இலைக்குடி மழை கரைகள்</string>
+    <string name="moderate_rain_showers">இடியாத மழை கரைகள்</string>
+    <string name="violent_rain_showers">கனமான மழை கரைகள்</string>
+    <string name="light_snow_showers">இலைக்குடி பனி கரைகள்</string>
+    <string name="heavy_snow_showers">கனமான பனி கரைகள்</string>
+    <string name="moderate_thunderstorm">இடியாத மின்னணு புயல்</string>
+    <string name="thunderstorm_with_slight_hail">இலைக்குடி பனி மின்னணு புயல்</string>
+    <string name="thunderstorm_with_heavy_rain">கனமான மழை மின்னணு புயல்</string>
+
+    <string name="january">ஜனவரி</string>
+    <string name="february">பிப்ரவரி</string>
+    <string name="march">மார்ச்</string>
+    <string name="april">ஏப்ரல்</string>
+    <string name="may">மே</string>
+    <string name="june">ஜூன்</string>
+    <string name="july">ஜூலை</string>
+    <string name="august">ஆகஸ்ட்</string>
+    <string name="september">செப்டம்பர்</string>
+    <string name="october">அக்டோபர்</string>
+    <string name="november">நவம்பர்</string>
+    <string name="december">டிசம்பர்</string>
+
+    <string name="monday">திங்கள்</string>
+    <string name="tuesday">செவ்வாய்</string>
+    <string name="wednesday">புதன்</string>
+    <string name="thursday">வியாழன்</string>
+    <string name="friday">வெள்ளி</string>
+    <string name="saturday">சனி</string>
+    <string name="sunday">ஞாயிறு</string>
+</resources>

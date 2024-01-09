@@ -1,16 +1,17 @@
 package com.trifork.feature.common.data.repository
 
-import android.util.Log
 import com.trifork.feature.common.data.local.GeocodingDB
 import com.trifork.feature.common.data.mappers.toGeoLocationEntity
 import com.trifork.feature.common.data.mappers.toGeocoding
 import com.trifork.feature.common.domain.model.GeoLocation
 import com.trifork.feature.common.domain.repository.LocalGeocodingRepository
+import com.trifork.feature.common.domain.repository.LocalResourceRepository
 import com.trifork.feature.common.util.Resource
 import javax.inject.Inject
 
 class LocalGeocodingRepositoryImpl @Inject constructor(
-    private val geocodingDB: GeocodingDB
+    private val geocodingDB: GeocodingDB,
+    private val localResource: LocalResourceRepository
 ) : LocalGeocodingRepository {
 
     override suspend fun getCachedGeoLocation(): Resource<List<GeoLocation>> {
@@ -20,7 +21,7 @@ class LocalGeocodingRepositoryImpl @Inject constructor(
             )
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Error(e.message ?: "An unknown error occurred.")
+            Resource.Error(e.message ?: localResource.getUnknownErrorString())
         }
     }
 
@@ -30,7 +31,7 @@ class LocalGeocodingRepositoryImpl @Inject constructor(
             Resource.Success(Unit)
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Error(e.message ?: "An unknown error occurred.")
+            Resource.Error(e.message ?: localResource.getUnknownErrorString())
         }
     }
 
@@ -40,7 +41,7 @@ class LocalGeocodingRepositoryImpl @Inject constructor(
             Resource.Success(Unit)
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Error(e.message ?: "An unknown error occurred.")
+            Resource.Error(e.message ?: localResource.getUnknownErrorString())
         }
     }
 
@@ -51,7 +52,7 @@ class LocalGeocodingRepositoryImpl @Inject constructor(
             )
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Error(e.message ?: "An unknown error occurred.")
+            Resource.Error(e.message ?: localResource.getUnknownErrorString())
         }
     }
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">发生未知错误。</string>
+    <string name="unknown">未知</string>
+
+    <string name="current_location">当前位置</string>
+    <string name="save_current_location">保存当前位置</string>
+    <string name="set_name_current_location">为当前位置设置名称：</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="error">错误</string>
+    <string name="loading">加载中…</string>
+    <string name="cached">已缓存</string>
+    <string name="search">搜索</string>
+    <string name="no_location_set">尚未设置位置！</string>
+    <string name="location_can_not_be_blank">位置不能为空！</string>
+    <string name="back">返回</string>
+    <string name="search_locations">搜索位置</string>
+    <string name="issue_loading_cache">加载缓存时出现问题！</string>
+    <string name="issue_saving">保存时出现问题！</string>
+    <string name="issue_deleting">删除时出现问题！</string>
+    <string name="check_internet_connection">检查网络连接！</string>
+    <string name="check_gps">检查GPS设置！</string>
+    <string name="no_results">无结果！</string>
+
+    <string name="clear_sky">晴朗</string>
+    <string name="frost">霜</string>
+    <string name="mainly_clear">大部分晴朗</string>
+    <string name="partly_cloudy">部分多云</string>
+    <string name="overcast">阴天</string>
+    <string name="foggy">多雾</string>
+    <string name="depositing_rime_fog">冻雾</string>
+    <string name="light_drizzle">小雨</string>
+    <string name="moderate_drizzle">中雨</string>
+    <string name="dense_drizzle">大雨</string>
+    <string name="slight_freezing_drizzle">轻微冻雨</string>
+    <string name="dense_freezing_drizzle">大雾凇</string>
+    <string name="slight_rain">小雨</string>
+    <string name="rainy">下雨</string>
+    <string name="heavy_rain">大雨</string>
+    <string name="heavy_freezing_rain">大冻雨</string>
+    <string name="slight_snow_fall">小雪</string>
+    <string name="moderate_snow_fall">中雪</string>
+    <string name="heavy_snow_fall">大雪</string>
+    <string name="snow_grains">雪粒</string>
+    <string name="slight_rain_showers">小阵雨</string>
+    <string name="moderate_rain_showers">中阵雨</string>
+    <string name="violent_rain_showers">大阵雨</string>
+    <string name="light_snow_showers">小阵雪</string>
+    <string name="heavy_snow_showers">大阵雪</string>
+    <string name="moderate_thunderstorm">中雷雨</string>
+    <string name="thunderstorm_with_slight_hail">小冰雹的雷雨</string>
+    <string name="thunderstorm_with_heavy_rain">大雷雨</string>
+
+    <string name="january">一月</string>
+    <string name="february">二月</string>
+    <string name="march">三月</string>
+    <string name="april">四月</string>
+    <string name="may">五月</string>
+    <string name="june">六月</string>
+    <string name="july">七月</string>
+    <string name="august">八月</string>
+    <string name="september">九月</string>
+    <string name="october">十月</string>
+    <string name="november">十一月</string>
+    <string name="december">十二月</string>
+
+    <string name="monday">星期一</string>
+    <string name="tuesday">星期二</string>
+    <string name="wednesday">星期三</string>
+    <string name="thursday">星期四</string>
+    <string name="friday">星期五</string>
+    <string name="saturday">星期六</string>
+    <string name="sunday">星期日</string>
+</resources>

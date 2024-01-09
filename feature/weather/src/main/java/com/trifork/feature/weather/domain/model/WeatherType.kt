@@ -1,209 +1,210 @@
 package com.trifork.feature.weather.domain.model
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import com.trifork.feature.weather.R
 
 sealed class WeatherType(
-    val weatherDesc: String,
+    @StringRes val weatherDescRes: Int,
     @DrawableRes val iconRes: Int
 ) {
     data object ClearSkyDay : WeatherType(
-        weatherDesc = "Clear sky",
+        weatherDescRes = com.trifork.feature.common.R.string.clear_sky,
         iconRes = R.drawable.ic_clear_day
     )
 
     data object ClearSkyNight : WeatherType(
-        weatherDesc = "Clear sky",
+        weatherDescRes = com.trifork.feature.common.R.string.clear_sky,
         iconRes = R.drawable.ic_clear_night
     )
 
     data object FrostDay : WeatherType(
-        weatherDesc = "Frost",
+        weatherDescRes = com.trifork.feature.common.R.string.frost,
         iconRes = R.drawable.ic_frost_day
     )
 
     data object FrostNight : WeatherType(
-        weatherDesc = "Frost",
+        weatherDescRes = com.trifork.feature.common.R.string.frost,
         iconRes = R.drawable.ic_frost_night
     )
 
     data object MainlyClearDay : WeatherType(
-        weatherDesc = "Mainly clear",
+        weatherDescRes = com.trifork.feature.common.R.string.mainly_clear,
         iconRes = R.drawable.ic_mainly_clear_day
     )
 
     data object MainlyClearNight : WeatherType(
-        weatherDesc = "Mainly clear",
+        weatherDescRes = com.trifork.feature.common.R.string.mainly_clear,
         iconRes = R.drawable.ic_mainly_clear_night
     )
 
     data object PartlyCloudyDay : WeatherType(
-        weatherDesc = "Partly cloudy",
+        weatherDescRes = com.trifork.feature.common.R.string.partly_cloudy,
         iconRes = R.drawable.ic_partly_cloudy_day
     )
 
     data object PartlyCloudyNight : WeatherType(
-        weatherDesc = "Partly cloudy",
+        weatherDescRes = com.trifork.feature.common.R.string.partly_cloudy,
         iconRes = R.drawable.ic_partly_cloudy_night
     )
 
     data object Overcast : WeatherType(
-        weatherDesc = "Overcast",
+        weatherDescRes = com.trifork.feature.common.R.string.overcast,
         iconRes = R.drawable.ic_overcast
     )
 
     data object FoggyDay : WeatherType(
-        weatherDesc = "Foggy",
+        weatherDescRes = com.trifork.feature.common.R.string.foggy,
         iconRes = R.drawable.ic_fog_day
     )
 
     data object FoggyNight : WeatherType(
-        weatherDesc = "Foggy",
+        weatherDescRes = com.trifork.feature.common.R.string.foggy,
         iconRes = R.drawable.ic_fog_night
     )
 
     data object DepositingRimeFog : WeatherType(
-        weatherDesc = "Depositing rime fog",
+        weatherDescRes = com.trifork.feature.common.R.string.depositing_rime_fog,
         iconRes = R.drawable.ic_foggy
     )
 
     data object LightDrizzleDay : WeatherType(
-        weatherDesc = "Light drizzle",
+        weatherDescRes = com.trifork.feature.common.R.string.light_drizzle,
         iconRes = R.drawable.ic_light_drizzel_day
     )
 
     data object LightDrizzleNight : WeatherType(
-        weatherDesc = "Light drizzle",
+        weatherDescRes = com.trifork.feature.common.R.string.light_drizzle,
         iconRes = R.drawable.ic_light_drizzel_night
     )
 
     data object ModerateDrizzleDay : WeatherType(
-        weatherDesc = "Moderate drizzle",
+        weatherDescRes = com.trifork.feature.common.R.string.moderate_drizzle,
         iconRes = R.drawable.ic_moderate_drizzel_day
     )
 
     data object ModerateDrizzleNight : WeatherType(
-        weatherDesc = "Moderate drizzle",
+        weatherDescRes = com.trifork.feature.common.R.string.moderate_drizzle,
         iconRes = R.drawable.ic_moderate_drizzel_night
     )
 
     data object DenseDrizzleDay : WeatherType(
-        weatherDesc = "Dense drizzle",
+        weatherDescRes = com.trifork.feature.common.R.string.dense_drizzle,
         iconRes = R.drawable.ic_dense_drizzel_day
     )
 
     data object DenseDrizzleNight : WeatherType(
-        weatherDesc = "Dense drizzle",
+        weatherDescRes = com.trifork.feature.common.R.string.dense_drizzle,
         iconRes = R.drawable.ic_dense_drizzel_night
     )
 
     data object LightFreezingDrizzle : WeatherType(
-        weatherDesc = "Slight freezing drizzle",
+        weatherDescRes = com.trifork.feature.common.R.string.slight_freezing_drizzle,
         iconRes = R.drawable.ic_snow_rain
     )
 
     data object DenseFreezingDrizzle : WeatherType(
-        weatherDesc = "Dense freezing drizzle",
+        weatherDescRes = com.trifork.feature.common.R.string.dense_freezing_drizzle,
         iconRes = R.drawable.ic_snow_rain
     )
 
     data object SlightRain : WeatherType(
-        weatherDesc = "Slight rain",
+        weatherDescRes = com.trifork.feature.common.R.string.slight_rain,
         iconRes = R.drawable.ic_light_rain
     )
 
     data object ModerateRain : WeatherType(
-        weatherDesc = "Rainy",
+        weatherDescRes = com.trifork.feature.common.R.string.rainy,
         iconRes = R.drawable.ic_moderate_rain
     )
 
     data object HeavyRain : WeatherType(
-        weatherDesc = "Heavy rain",
+        weatherDescRes = com.trifork.feature.common.R.string.heavy_rain,
         iconRes = R.drawable.ic_heavy_rain
     )
 
     data object HeavyFreezingRain : WeatherType(
-        weatherDesc = "Heavy freezing rain",
+        weatherDescRes = com.trifork.feature.common.R.string.heavy_freezing_rain,
         iconRes = R.drawable.ic_rain_sleet
     )
 
     data object SlightSnowFallDay : WeatherType(
-        weatherDesc = "Slight snow fall",
+        weatherDescRes = com.trifork.feature.common.R.string.slight_snow_fall,
         iconRes = R.drawable.ic_light_snow_day
     )
 
     data object SlightSnowFallNight : WeatherType(
-        weatherDesc = "Slight snow fall",
+        weatherDescRes = com.trifork.feature.common.R.string.slight_snow_fall,
         iconRes = R.drawable.ic_light_drizzel_night
     )
 
     data object ModerateSnowFallDay : WeatherType(
-        weatherDesc = "Moderate snow fall",
+        weatherDescRes = com.trifork.feature.common.R.string.moderate_snow_fall,
         iconRes = R.drawable.ic_moderate_snow_day
     )
 
     data object ModerateSnowFallNight : WeatherType(
-        weatherDesc = "Moderate snow fall",
+        weatherDescRes = com.trifork.feature.common.R.string.moderate_snow_fall,
         iconRes = R.drawable.ic_moderate_snow_night
     )
 
     data object HeavySnowFallDay : WeatherType(
-        weatherDesc = "Heavy snow fall",
+        weatherDescRes = com.trifork.feature.common.R.string.heavy_snow_fall,
         iconRes = R.drawable.ic_heavy_snow_day
     )
 
     data object HeavySnowFallNight : WeatherType(
-        weatherDesc = "Heavy snow fall",
+        weatherDescRes = com.trifork.feature.common.R.string.heavy_snow_fall,
         iconRes = R.drawable.ic_heavy_snow_night
     )
 
     data object SnowGrains : WeatherType(
-        weatherDesc = "Snow grains",
+        weatherDescRes = com.trifork.feature.common.R.string.snow_grains,
         iconRes = R.drawable.ic_heavy_snow
     )
 
     data object SlightRainShowers : WeatherType(
-        weatherDesc = "Slight rain showers",
+        weatherDescRes = com.trifork.feature.common.R.string.slight_rain_showers,
         iconRes = R.drawable.ic_light_rain
     )
 
     data object ModerateRainShowers : WeatherType(
-        weatherDesc = "Moderate rain showers",
+        weatherDescRes = com.trifork.feature.common.R.string.moderate_rain_showers,
         iconRes = R.drawable.ic_moderate_rain
     )
 
     data object ViolentRainShowers : WeatherType(
-        weatherDesc = "Violent rain showers",
+        weatherDescRes = com.trifork.feature.common.R.string.violent_rain_showers,
         iconRes = R.drawable.ic_heavy_rain
     )
 
     data object SlightSnowShowers : WeatherType(
-        weatherDesc = "Light snow showers",
+        weatherDescRes = com.trifork.feature.common.R.string.light_snow_showers,
         iconRes = R.drawable.ic_light_snow
     )
 
     data object HeavySnowShowers : WeatherType(
-        weatherDesc = "Heavy snow showers",
+        weatherDescRes = com.trifork.feature.common.R.string.heavy_snow_showers,
         iconRes = R.drawable.ic_heavy_snow
     )
 
     data object ModerateThunderstormDay : WeatherType(
-        weatherDesc = "Moderate thunderstorm",
+        weatherDescRes = com.trifork.feature.common.R.string.moderate_thunderstorm,
         iconRes = R.drawable.ic_thunderstorm_day
     )
 
     data object ModerateThunderstormNight : WeatherType(
-        weatherDesc = "Moderate thunderstorm",
+        weatherDescRes = com.trifork.feature.common.R.string.moderate_thunderstorm,
         iconRes = R.drawable.ic_thunderstorm_night
     )
 
     data object SlightHailThunderstorm : WeatherType(
-        weatherDesc = "Thunderstorm with slight hail",
+        weatherDescRes = com.trifork.feature.common.R.string.thunderstorm_with_slight_hail,
         iconRes = R.drawable.ic_thunderstorm
     )
 
     data object HeavyHailThunderstorm : WeatherType(
-        weatherDesc = "Thunderstorm with heavy hail",
+        weatherDescRes = com.trifork.feature.common.R.string.thunderstorm_with_heavy_rain,
         iconRes = R.drawable.ic_heavy_thunderstorm
     )
 

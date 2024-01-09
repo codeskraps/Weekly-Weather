@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">Er is een onbekende fout opgetreden.</string>
+    <string name="unknown">Onbekend</string>
+
+    <string name="current_location">Huidige locatie</string>
+    <string name="save_current_location">Huidige locatie opslaan</string>
+    <string name="set_name_current_location">Stel een naam in voor de huidige locatie:</string>
+    <string name="save">Opslaan</string>
+    <string name="cancel">Annuleren</string>
+    <string name="error">Fout</string>
+    <string name="loading">Laden…</string>
+    <string name="cached">In cache</string>
+    <string name="search">Zoeken</string>
+    <string name="no_location_set">Geen locatie ingesteld !!!</string>
+    <string name="location_can_not_be_blank">Locatie kan niet leeg zijn !!!</string>
+    <string name="back">Terug</string>
+    <string name="search_locations">Locaties zoeken</string>
+    <string name="issue_loading_cache">Probleem bij laden van cache !!!</string>
+    <string name="issue_saving">Probleem bij opslaan !!!</string>
+    <string name="issue_deleting">Probleem bij verwijderen !!!</string>
+    <string name="check_internet_connection">Controleer internetverbinding !!!</string>
+    <string name="check_gps">Controleer GPS-instellingen !!!</string>
+    <string name="no_results">Geen resultaten !!!</string>
+
+    <string name="clear_sky">Heldere hemel</string>
+    <string name="frost">Vorst</string>
+    <string name="mainly_clear">Voornamelijk helder</string>
+    <string name="partly_cloudy">Gedeeltelijk bewolkt</string>
+    <string name="overcast">Bewolkt</string>
+    <string name="foggy">Mistig</string>
+    <string name="depositing_rime_fog">Rijm mist</string>
+    <string name="light_drizzle">Lichte motregen</string>
+    <string name="moderate_drizzle">Matige motregen</string>
+    <string name="dense_drizzle">Dichte motregen</string>
+    <string name="slight_freezing_drizzle">Lichte ijzel</string>
+    <string name="dense_freezing_drizzle">Dichte ijzel</string>
+    <string name="slight_rain">Lichte regen</string>
+    <string name="rainy">Regenachtig</string>
+    <string name="heavy_rain">Zware regen</string>
+    <string name="heavy_freezing_rain">Zware ijzelregen</string>
+    <string name="slight_snow_fall">Lichte sneeuwval</string>
+    <string name="moderate_snow_fall">Matige sneeuwval</string>
+    <string name="heavy_snow_fall">Zware sneeuwval</string>
+    <string name="snow_grains">Sneeuwkorrels</string>
+    <string name="slight_rain_showers">Lichte regenbuien</string>
+    <string name="moderate_rain_showers">Matige regenbuien</string>
+    <string name="violent_rain_showers">Hevige regenbuien</string>
+    <string name="light_snow_showers">Lichte sneeuwbuien</string>
+    <string name="heavy_snow_showers">Zware sneeuwbuien</string>
+    <string name="moderate_thunderstorm">Matig onweer</string>
+    <string name="thunderstorm_with_slight_hail">Onweer met lichte hagel</string>
+    <string name="thunderstorm_with_heavy_rain">Onweer met zware regen</string>
+
+    <string name="january">Januari</string>
+    <string name="february">Februari</string>
+    <string name="march">Maart</string>
+    <string name="april">April</string>
+    <string name="may">Mei</string>
+    <string name="june">Juni</string>
+    <string name="july">Juli</string>
+    <string name="august">Augustus</string>
+    <string name="september">September</string>
+    <string name="october">Oktober</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+
+    <string name="monday">Maandag</string>
+    <string name="tuesday">Dinsdag</string>
+    <string name="wednesday">Woensdag</string>
+    <string name="thursday">Donderdag</string>
+    <string name="friday">Vrijdag</string>
+    <string name="saturday">Zaterdag</string>
+    <string name="sunday">Zondag</string>
+</resources>

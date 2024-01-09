@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">ایک نامعلوم خرابی واقع ہوئی ہے۔</string>
+    <string name="unknown">نامعلوم</string>
+
+    <string name="current_location">موجودہ مقام</string>
+    <string name="save_current_location">موجودہ مقام محفوظ کریں</string>
+    <string name="set_name_current_location">موجودہ مقام کے لئے ایک نام ترتیب دیں:</string>
+    <string name="save">محفوظ کریں</string>
+    <string name="cancel">منسوخ کریں</string>
+    <string name="error">خرابی</string>
+    <string name="loading">لوڈ ہو رہا ہے…</string>
+    <string name="cached">کیش میں</string>
+    <string name="search">تلاش کریں</string>
+    <string name="no_location_set">کوئی مقام مرتب نہیں کیا گیا !!!</string>
+    <string name="location_can_not_be_blank">مقام خالی نہیں ہو سکتا !!!</string>
+    <string name="back">پیچھے</string>
+    <string name="search_locations">مقامات تلاش کریں</string>
+    <string name="issue_loading_cache">کیش لوڈ کرنے میں مسئلہ !!!</string>
+    <string name="issue_saving">محفوظ کرنے میں مسئلہ !!!</string>
+    <string name="issue_deleting">حذف کرنے میں مسئلہ !!!</string>
+    <string name="check_internet_connection">انٹرنیٹ کنکشن چیک کریں !!!</string>
+    <string name="check_gps">GPS ترتیبات چیک کریں !!!</string>
+    <string name="no_results">کوئی نتائج نہیں ملے !!!</string>
+
+    <string name="clear_sky">صاف آسمان</string>
+    <string name="frost">برف جمانا</string>
+    <string name="mainly_clear">عمدہ طور پر صاف</string>
+    <string name="partly_cloudy">جزوی طور پر بادلوں والا</string>
+    <string name="overcast">بادلوں والا</string>
+    <string name="foggy">دھندلا</string>
+    <string name="depositing_rime_fog">ٹپکانے والا ژالہ دھند</string>
+    <string name="light_drizzle">ہلکی بوندا باندی</string>
+    <string name="moderate_drizzle">درمیانہ بوندا باندی</string>
+    <string name="dense_drizzle">گھنے بوندا باندی</string>
+    <string name="slight_freezing_drizzle">ہلکی جمانے والی بوندا باندی</string>
+    <string name="dense_freezing_drizzle">گھنی جمانے والی بوندا باندی</string>
+    <string name="slight_rain">ہلکی بارش</string>
+    <string name="rainy">بارشیں</string>
+    <string name="heavy_rain">زیادہ بارش</string>
+    <string name="heavy_freezing_rain">زیادہ جمانے والی بارش</string>
+    <string name="slight_snow_fall">ہلکی برفباری</string>
+    <string name="moderate_snow_fall">درمیانی برفباری</string>
+    <string name="heavy_snow_fall">زیادہ برفباری</string>
+    <string name="snow_grains">برف کے دانے</string>
+    <string name="slight_rain_showers">ہلکی بارشیں</string>
+    <string name="moderate_rain_showers">درمیانی بارشیں</string>
+    <string name="violent_rain_showers">شدید بارشیں</string>
+    <string name="light_snow_showers">ہلکی برفباری</string>
+    <string name="heavy_snow_showers">زیادہ برفباری</string>
+    <string name="moderate_thunderstorm">درمیانی طوفان</string>
+    <string name="thunderstorm_with_slight_hail">ہلکی برفباری والی طوفان</string>
+    <string name="thunderstorm_with_heavy_rain">زیادہ بارش والی طوفان</string>
+
+    <string name="january">جنوری</string>
+    <string name="february">فروری</string>
+    <string name="march">مارچ</string>
+    <string name="april">اپریل</string>
+    <string name="may">مئی</string>
+    <string name="june">جون</string>
+    <string name="july">جولائی</string>
+    <string name="august">اگست</string>
+    <string name="september">ستمبر</string>
+    <string name="october">اکتوبر</string>
+    <string name="november">نومبر</string>
+    <string name="december">دسمبر</string>
+
+    <string name="monday">پیر</string>
+    <string name="tuesday">منگل</string>
+    <string name="wednesday">بدھ</string>
+    <string name="thursday">جمعرات</string>
+    <string name="friday">جمعہ</string>
+    <string name="saturday">ہفتہ</string>
+    <string name="sunday">اتوار</string>
+</resources>

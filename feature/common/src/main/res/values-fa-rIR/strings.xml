@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">خطای ناشناخته رخ داده است.</string>
+    <string name="unknown">نامعلوم</string>
+
+    <string name="current_location">مکان فعلی</string>
+    <string name="save_current_location">ذخیره مکان فعلی</string>
+    <string name="set_name_current_location">نامی برای مکان فعلی تنظیم کنید:</string>
+    <string name="save">ذخیره</string>
+    <string name="cancel">لغو</string>
+    <string name="error">خطا</string>
+    <string name="loading">در حال بارگذاری…</string>
+    <string name="cached">ذخیره شده</string>
+    <string name="search">جستجو</string>
+    <string name="no_location_set">مکانی تنظیم نشده است !!!</string>
+    <string name="location_can_not_be_blank">"مکان نمی‌تواند خالی باشد !!!"</string>
+    <string name="back">بازگشت</string>
+    <string name="search_locations">جستجوی مکان‌ها</string>
+    <string name="issue_loading_cache">مشکل در بارگیری حافظه موقت !!!</string>
+    <string name="issue_saving">مشکل در ذخیره !!!</string>
+    <string name="issue_deleting">مشکل در حذف !!!</string>
+    <string name="check_internet_connection">بررسی اتصال اینترنت !!!</string>
+    <string name="check_gps">بررسی تنظیمات GPS !!!</string>
+    <string name="no_results">بدون نتیجه !!!</string>
+
+    <string name="clear_sky">آسمان صاف</string>
+    <string name="frost">شب برفی</string>
+    <string name="mainly_clear">عمدتاً صاف</string>
+    <string name="partly_cloudy">تا حدودی ابری</string>
+    <string name="overcast">ابری</string>
+    <string name="foggy">مه آلود</string>
+    <string name="depositing_rime_fog">مه برفی</string>
+    <string name="light_drizzle">نم نم بارانی</string>
+    <string name="moderate_drizzle">باران نم نمی متوسط</string>
+    <string name="dense_drizzle">باران نم نمی غلیظ</string>
+    <string name="slight_freezing_drizzle">باران نم نمی خفیف یخبندان</string>
+    <string name="dense_freezing_drizzle">باران نم نمی غلیظ یخبندان</string>
+    <string name="slight_rain">باران خفیف</string>
+    <string name="rainy">بارانی</string>
+    <string name="heavy_rain">باران سنگین</string>
+    <string name="heavy_freezing_rain">باران یخبندان سنگین</string>
+    <string name="slight_snow_fall">بارش برف خفیف</string>
+    <string name="moderate_snow_fall">بارش برف متوسط</string>
+    <string name="heavy_snow_fall">بارش برف سنگین</string>
+    <string name="snow_grains">ذرات برف</string>
+    <string name="slight_rain_showers">رگبار بارانی خفیف</string>
+    <string name="moderate_rain_showers">رگبار بارانی متوسط</string>
+    <string name="violent_rain_showers">رگبار بارانی شدید</string>
+    <string name="light_snow_showers">رگبار برفی خفیف</string>
+    <string name="heavy_snow_showers">رگبار برفی سنگین</string>
+    <string name="moderate_thunderstorm">طوفان معتدل</string>
+    <string name="thunderstorm_with_slight_hail">طوفان با تگرگ آسمانی</string>
+    <string name="thunderstorm_with_heavy_rain">طوفان با باران سنگین</string>
+
+    <string name="january">ژانویه</string>
+    <string name="february">فوریه</string>
+    <string name="march">مارس</string>
+    <string name="april">آوریل</string>
+    <string name="may">مه</string>
+    <string name="june">ژوئن</string>
+    <string name="july">جولای</string>
+    <string name="august">اوت</string>
+    <string name="september">سپتامبر</string>
+    <string name="october">اکتبر</string>
+    <string name="november">نوامبر</string>
+    <string name="december">دسامبر</string>
+
+    <string name="monday">دوشنبه</string>
+    <string name="tuesday">سه‌شنبه</string>
+    <string name="wednesday">چهارشنبه</string>
+    <string name="thursday">پنج‌شنبه</string>
+    <string name="friday">جمعه</string>
+    <string name="saturday">شنبه</string>
+    <string name="sunday">یکشنبه</string>
+</resources>

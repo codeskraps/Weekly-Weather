@@ -47,6 +47,7 @@ import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.navigation.NavController
 import com.trifork.feature.common.components.ObserveAsEvents
 import com.trifork.feature.common.navigation.Screen
+import com.trifork.feature.common.R
 import com.trifork.feature.weather.data.mappers.toWeatherLocation
 import com.trifork.feature.weather.domain.model.WeatherLocation
 import com.trifork.feature.weather.presentation.mvi.WeatherAction
@@ -106,6 +107,8 @@ fun WeatherScreen(
         )
     }
 
+    val resources = LocalContext.current.resources
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -116,9 +119,9 @@ fun WeatherScreen(
                 title = {
                     Text(
                         if (state.error != null) {
-                            "Error"
+                            resources.getString(R.string.error)
                         } else if (state.isLoading) {
-                            "Loading ..."
+                            resources.getString(R.string.loading)
                         } else {
                             state.weatherInfo?.geoLocation ?: ""
                         }
@@ -135,7 +138,7 @@ fun WeatherScreen(
                         Icon(
                             imageVector = if (state.cached) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                             tint = if (state.cached) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.outline,
-                            contentDescription = "Cached"
+                            contentDescription = resources.getString(R.string.cached)
                         )
                     }
                     IconButton(onClick = {
@@ -146,7 +149,7 @@ fun WeatherScreen(
                         Icon(
                             imageVector = Icons.Filled.LocationOn,
                             tint = MaterialTheme.colorScheme.primary,
-                            contentDescription = "Current Location"
+                            contentDescription = resources.getString(R.string.current_location)
                         )
                     }
                     /*
@@ -183,7 +186,7 @@ fun WeatherScreen(
                     Icon(
                         Icons.Default.Search,
                         tint = MaterialTheme.colorScheme.primary,
-                        contentDescription = "Search"
+                        contentDescription = resources.getString(R.string.search)
                     )
                 }
             }
@@ -201,7 +204,7 @@ fun WeatherScreen(
                 )
             } else if (state.error != null || state.weatherInfo == null) {
                 Text(
-                    text = state.error ?: "No Location Set !!!",
+                    text = state.error ?: resources.getString(R.string.no_location_set),
                     color = MaterialTheme.colorScheme.error,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.align(Alignment.Center)

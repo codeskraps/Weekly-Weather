@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">حدث خطأ غير معروف.</string>
+    <string name="unknown">غير معروف</string>
+
+    <string name="current_location">الموقع الحالي</string>
+    <string name="save_current_location">حفظ الموقع الحالي</string>
+    <string name="set_name_current_location">تحديد اسم للموقع الحالي:</string>
+    <string name="save">حفظ</string>
+    <string name="cancel">إلغاء</string>
+    <string name="error">خطأ</string>
+    <string name="loading">جارٍ التحميل…</string>
+    <string name="cached">مخزن مؤقتاً</string>
+    <string name="search">بحث</string>
+    <string name="no_location_set">لم يتم تعيين أي موقع !!!</string>
+    <string name="location_can_not_be_blank">"لا يمكن أن يكون الموقع فارغًا !!!"</string>
+    <string name="back">عودة</string>
+    <string name="search_locations">البحث عن مواقع</string>
+    <string name="issue_loading_cache">مشكلة في تحميل الذاكرة المؤقتة !!!</string>
+    <string name="issue_saving">مشكلة في الحفظ !!!</string>
+    <string name="issue_deleting">مشكلة في الحذف !!!</string>
+    <string name="check_internet_connection">تحقق من اتصال الإنترنت !!!</string>
+    <string name="check_gps">تحقق من إعدادات ال GPS !!!</string>
+    <string name="no_results">لا توجد نتائج !!!</string>
+
+    <string name="clear_sky">سماء صافية</string>
+    <string name="frost">صقيع</string>
+    <string name="mainly_clear">صافٍ بشكل أساسي</string>
+    <string name="partly_cloudy">جزئياً غائم</string>
+    <string name="overcast">غائم</string>
+    <string name="foggy">ضبابي</string>
+    <string name="depositing_rime_fog">ضباب تكوين الصقيع</string>
+    <string name="light_drizzle">رذاذ خفيف</string>
+    <string name="moderate_drizzle">رذاذ معتدل</string>
+    <string name="dense_drizzle">رذاذ كثيف</string>
+    <string name="slight_freezing_drizzle">رذاذ تجمد طفيف</string>
+    <string name="dense_freezing_drizzle">رذاذ تجمد كثيف</string>
+    <string name="slight_rain">أمطار خفيفة</string>
+    <string name="rainy">ممطر</string>
+    <string name="heavy_rain">أمطار غزيرة</string>
+    <string name="heavy_freezing_rain">أمطار تجمد غزيرة</string>
+    <string name="slight_snow_fall">تساقط ثلج خفيف</string>
+    <string name="moderate_snow_fall">تساقط ثلج معتدل</string>
+    <string name="heavy_snow_fall">تساقط ثلج غزير</string>
+    <string name="snow_grains">بلورات ثلجية</string>
+    <string name="slight_rain_showers">زخات أمطار خفيفة</string>
+    <string name="moderate_rain_showers">زخات أمطار معتدلة</string>
+    <string name="violent_rain_showers">زخات أمطار عنيفة</string>
+    <string name="light_snow_showers">زخات ثلوج خفيفة</string>
+    <string name="heavy_snow_showers">زخات ثلوج غزيرة</string>
+    <string name="moderate_thunderstorm">عاصفة رعدية معتدلة</string>
+    <string name="thunderstorm_with_slight_hail">عاصفة رعدية مع برد خفيف</string>
+    <string name="thunderstorm_with_heavy_rain">عاصفة رعدية مع أمطار غزيرة</string>
+
+    <string name="january">يناير</string>
+    <string name="february">فبراير</string>
+    <string name="march">مارس</string>
+    <string name="april">إبريل</string>
+    <string name="may">مايو</string>
+    <string name="june">يونيو</string>
+    <string name="july">يوليو</string>
+    <string name="august">أغسطس</string>
+    <string name="september">سبتمبر</string>
+    <string name="october">أكتوبر</string>
+    <string name="november">نوفمبر</string>
+    <string name="december">ديسمبر</string>
+
+    <string name="monday">الاثنين</string>
+    <string name="tuesday">الثلاثاء</string>
+    <string name="wednesday">الأربعاء</string>
+    <string name="thursday">الخميس</string>
+    <string name="friday">الجمعة</string>
+    <string name="saturday">السبت</string>
+    <string name="sunday">الأحد</string>
+</resources>

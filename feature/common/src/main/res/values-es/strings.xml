@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">Ha ocurrido un error desconocido.</string>
+    <string name="unknown">Desconocido</string>
+
+    <string name="current_location">Ubicación Actual</string>
+    <string name="save_current_location">Guardar Ubicación Actual</string>
+    <string name="set_name_current_location">Establecer un nombre para la ubicación actual:</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="error">Error</string>
+    <string name="loading">Cargando …</string>
+    <string name="cached">En caché</string>
+    <string name="search">Buscar</string>
+    <string name="no_location_set">¡No se ha establecido ninguna ubicación!</string>
+    <string name="location_can_not_be_blank">¡La ubicación no puede estar en blanco!</string>
+    <string name="back">Volver</string>
+    <string name="search_locations">Buscar Ubicaciones</string>
+    <string name="issue_loading_cache">¡Problema al cargar la caché!</string>
+    <string name="issue_saving">¡Problema al guardar!</string>
+    <string name="issue_deleting">¡Problema al eliminar!</string>
+    <string name="check_internet_connection">¡Verifique la conexión a Internet!</string>
+    <string name="check_gps">¡Verifique la configuración del GPS!</string>
+    <string name="no_results">¡Sin resultados!</string>
+
+    <string name="clear_sky">Cielo Despejado</string>
+    <string name="frost">Escarcha</string>
+    <string name="mainly_clear">Mayormente Despejado</string>
+    <string name="partly_cloudy">Parcialmente Nublado</string>
+    <string name="overcast">Nublado</string>
+    <string name="foggy">Con Niebla</string>
+    <string name="depositing_rime_fog">Niebla con Rima Depositable</string>
+    <string name="light_drizzle">Llovizna Ligera</string>
+    <string name="moderate_drizzle">Llovizna Moderada</string>
+    <string name="dense_drizzle">Llovizna Espesa</string>
+    <string name="slight_freezing_drizzle">Llovizna Ligera con Congelación</string>
+    <string name="dense_freezing_drizzle">Llovizna Espesa con Congelación</string>
+    <string name="slight_rain">Lluvia Ligera</string>
+    <string name="rainy">Lluvioso</string>
+    <string name="heavy_rain">Lluvia Intensa</string>
+    <string name="heavy_freezing_rain">Lluvia Intensa con Congelación</string>
+    <string name="slight_snow_fall">Nieve Ligera</string>
+    <string name="moderate_snow_fall">Nieve Moderada</string>
+    <string name="heavy_snow_fall">Nieve Intensa</string>
+    <string name="snow_grains">Granizo</string>
+    <string name="slight_rain_showers">Lluvias Ligeras</string>
+    <string name="moderate_rain_showers">Lluvias Moderadas</string>
+    <string name="violent_rain_showers">Lluvias Violentas</string>
+    <string name="light_snow_showers">Nevadas Ligeras</string>
+    <string name="heavy_snow_showers">Nevadas Intensas</string>
+    <string name="moderate_thunderstorm">Tormenta Moderada</string>
+    <string name="thunderstorm_with_slight_hail">Tormenta con Granizo Ligero</string>
+    <string name="thunderstorm_with_heavy_rain">Tormenta con Lluvia Intensa</string>
+
+    <string name="january">Enero</string>
+    <string name="february">Febrero</string>
+    <string name="march">Marzo</string>
+    <string name="april">Abril</string>
+    <string name="may">Mayo</string>
+    <string name="june">Junio</string>
+    <string name="july">Julio</string>
+    <string name="august">Agosto</string>
+    <string name="september">Septiembre</string>
+    <string name="october">Octubre</string>
+    <string name="november">Noviembre</string>
+    <string name="december">Diciembre</string>
+
+    <string name="monday">Lunes</string>
+    <string name="tuesday">Martes</string>
+    <string name="wednesday">Miércoles</string>
+    <string name="thursday">Jueves</string>
+    <string name="friday">Viernes</string>
+    <string name="saturday">Sábado</string>
+    <string name="sunday">Domingo</string>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">Произошла неизвестная ошибка.</string>
+    <string name="unknown">Неизвестно</string>
+
+    <string name="current_location">Текущее местоположение</string>
+    <string name="save_current_location">Сохранить текущее местоположение</string>
+    <string name="set_name_current_location">Введите имя для текущего местоположения:</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="error">Ошибка</string>
+    <string name="loading">Загрузка…</string>
+    <string name="cached">В кэше</string>
+    <string name="search">Поиск</string>
+    <string name="no_location_set">Местоположение не установлено !!!</string>
+    <string name="location_can_not_be_blank">Местоположение не может быть пустым !!!</string>
+    <string name="back">Назад</string>
+    <string name="search_locations">Поиск местоположений</string>
+    <string name="issue_loading_cache">Проблема при загрузке кэша !!!</string>
+    <string name="issue_saving">Проблема при сохранении !!!</string>
+    <string name="issue_deleting">Проблема при удалении !!!</string>
+    <string name="check_internet_connection">Проверьте интернет-соединение !!!</string>
+    <string name="check_gps">Проверьте настройки GPS !!!</string>
+    <string name="no_results">Нет результатов !!!</string>
+
+    <string name="clear_sky">Ясное небо</string>
+    <string name="frost">Мороз</string>
+    <string name="mainly_clear">В основном ясно</string>
+    <string name="partly_cloudy">Частичная облачность</string>
+    <string name="overcast">Пасмурно</string>
+    <string name="foggy">Туманно</string>
+    <string name="depositing_rime_fog">Инейный туман</string>
+    <string name="light_drizzle">Легкая морось</string>
+    <string name="moderate_drizzle">Умеренная морось</string>
+    <string name="dense_drizzle">Плотная морось</string>
+    <string name="slight_freezing_drizzle">Легкая замерзающая морось</string>
+    <string name="dense_freezing_drizzle">Плотная замерзающая морось</string>
+    <string name="slight_rain">Легкий дождь</string>
+    <string name="rainy">Дождливо</string>
+    <string name="heavy_rain">Сильный дождь</string>
+    <string name="heavy_freezing_rain">Сильный ледяной дождь</string>
+    <string name="slight_snow_fall">Легкий снегопад</string>
+    <string name="moderate_snow_fall">Умеренный снегопад</string>
+    <string name="heavy_snow_fall">Сильный снегопад</string>
+    <string name="snow_grains">Снежные зерна</string>
+    <string name="slight_rain_showers">Легкий дождь</string>
+    <string name="moderate_rain_showers">Умеренный дождь</string>
+    <string name="violent_rain_showers">Сильный дождь</string>
+    <string name="light_snow_showers">Легкий снег</string>
+    <string name="heavy_snow_showers">Сильный снег</string>
+    <string name="moderate_thunderstorm">Умеренная гроза</string>
+    <string name="thunderstorm_with_slight_hail">Гроза с небольшим градом</string>
+    <string name="thunderstorm_with_heavy_rain">Гроза с сильным дождем</string>
+
+    <string name="january">Январь</string>
+    <string name="february">Февраль</string>
+    <string name="march">Март</string>
+    <string name="april">Апрель</string>
+    <string name="may">Май</string>
+    <string name="june">Июнь</string>
+    <string name="july">Июль</string>
+    <string name="august">Август</string>
+    <string name="september">Сентябрь</string>
+    <string name="october">Октябрь</string>
+    <string name="november">Ноябрь</string>
+    <string name="december">Декабрь</string>
+
+    <string name="monday">Понедельник</string>
+    <string name="tuesday">Вторник</string>
+    <string name="wednesday">Среда</string>
+    <string name="thursday">Четверг</string>
+    <string name="friday">Пятница</string>
+    <string name="saturday">Суббота</string>
+    <string name="sunday">Воскресенье</string>
+</resources>

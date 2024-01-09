@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">Une erreur inconnue s\'est produite.</string>
+    <string name="unknown">Inconnu</string>
+
+    <string name="current_location">Emplacement actuel</string>
+    <string name="save_current_location">Enregistrer l\'emplacement actuel</string>
+    <string name="set_name_current_location">Définir un nom pour l\'emplacement actuel:</string>
+    <string name="save">Enregistrer</string>
+    <string name="cancel">Annuler</string>
+    <string name="error">Erreur</string>
+    <string name="loading">Chargement …</string>
+    <string name="cached">Mis en cache</string>
+    <string name="search">Rechercher</string>
+    <string name="no_location_set">Aucun emplacement défini !!!</string>
+    <string name="location_can_not_be_blank">L\'emplacement ne peut pas être vide !!!</string>
+    <string name="back">Retour</string>
+    <string name="search_locations">Rechercher des emplacements</string>
+    <string name="issue_loading_cache">Problème de chargement du cache !!!</string>
+    <string name="issue_saving">Problème de sauvegarde !!!</string>
+    <string name="issue_deleting">Problème de suppression !!!</string>
+    <string name="check_internet_connection">Vérifiez la connexion Internet !!!</string>
+    <string name="check_gps">Vérifiez les paramètres GPS !!!</string>
+    <string name="no_results">Aucun résultat !!!</string>
+
+    <string name="clear_sky">Ciel dégagé</string>
+    <string name="frost">Gel</string>
+    <string name="mainly_clear">Principalement dégagé</string>
+    <string name="partly_cloudy">Partiellement nuageux</string>
+    <string name="overcast">Couvert</string>
+    <string name="foggy">Brumeux</string>
+    <string name="depositing_rime_fog">Brouillard givrant</string>
+    <string name="light_drizzle">Légère bruine</string>
+    <string name="moderate_drizzle">Bruine modérée</string>
+    <string name="dense_drizzle">Bruine dense</string>
+    <string name="slight_freezing_drizzle">Légère bruine verglaçante</string>
+    <string name="dense_freezing_drizzle">Bruine verglaçante dense</string>
+    <string name="slight_rain">Légère pluie</string>
+    <string name="rainy">Pluvieux</string>
+    <string name="heavy_rain">Pluie forte</string>
+    <string name="heavy_freezing_rain">Pluie verglaçante forte</string>
+    <string name="slight_snow_fall">Légère chute de neige</string>
+    <string name="moderate_snow_fall">Chute de neige modérée</string>
+    <string name="heavy_snow_fall">Fortes chutes de neige</string>
+    <string name="snow_grains">Grains de neige</string>
+    <string name="slight_rain_showers">Légères averses de pluie</string>
+    <string name="moderate_rain_showers">Averses de pluie modérées</string>
+    <string name="violent_rain_showers">Averses de pluie violentes</string>
+    <string name="light_snow_showers">Légères averses de neige</string>
+    <string name="heavy_snow_showers">Averses de neige importantes</string>
+    <string name="moderate_thunderstorm">Orage modéré</string>
+    <string name="thunderstorm_with_slight_hail">Orage avec grêle légère</string>
+    <string name="thunderstorm_with_heavy_rain">Orage avec fortes pluies</string>
+
+    <string name="january">Janvier</string>
+    <string name="february">Février</string>
+    <string name="march">Mars</string>
+    <string name="april">Avril</string>
+    <string name="may">Mai</string>
+    <string name="june">Juin</string>
+    <string name="july">Juillet</string>
+    <string name="august">Août</string>
+    <string name="september">Septembre</string>
+    <string name="october">Octobre</string>
+    <string name="november">Novembre</string>
+    <string name="december">Décembre</string>
+
+    <string name="monday">Lundi</string>
+    <string name="tuesday">Mardi</string>
+    <string name="wednesday">Mercredi</string>
+    <string name="thursday">Jeudi</string>
+    <string name="friday">Vendredi</string>
+    <string name="saturday">Samedi</string>
+    <string name="sunday">Dimanche</string>
+</resources>

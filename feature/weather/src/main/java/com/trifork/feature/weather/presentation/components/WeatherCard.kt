@@ -19,12 +19,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.trifork.feature.common.util.MonthString
 import com.trifork.feature.weather.R
 import com.trifork.feature.weather.domain.model.WeatherData
 import com.trifork.feature.weather.domain.model.WeatherType
@@ -61,6 +63,7 @@ fun WeatherCard(
     backgroundColor: Color,
     modifier: Modifier = Modifier
 ) {
+    val resources = LocalContext.current.resources
     Card(
         colors = CardDefaults.cardColors(
             containerColor = backgroundColor
@@ -75,7 +78,7 @@ fun WeatherCard(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "${data.time.dayOfMonth} ${data.time.month.toString().lowercase()} ${
+                text = "${data.time.dayOfMonth} ${resources.getString(MonthString.parse(data.time.monthValue))} ${
                     data.time.format(
                         DateTimeFormatter.ofPattern("HH:mm")
                     )
@@ -97,7 +100,7 @@ fun WeatherCard(
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = data.weatherType.weatherDesc,
+                text = resources.getString(data.weatherType.weatherDescRes),
                 fontSize = 20.sp,
                 color = MaterialTheme.colorScheme.primary
             )

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">Óþekkt villa kom upp.</string>
+    <string name="unknown">Óþekkt</string>
+
+    <string name="current_location">Núverandi Staðsetning</string>
+    <string name="save_current_location">Vista Núverandi Staðsetningu</string>
+    <string name="set_name_current_location">Setja nafn á núverandi staðsetningu:</string>
+    <string name="save">Vista</string>
+    <string name="cancel">Hætta við</string>
+    <string name="error">Villa</string>
+    <string name="loading">Hleð…</string>
+    <string name="cached">Í Skyndiminni</string>
+    <string name="search">Leita</string>
+    <string name="no_location_set">Engin Staðsetning Skilgreind !!!</string>
+    <string name="location_can_not_be_blank">Staðsetning má ekki vera tóm !!!</string>
+    <string name="back">Aftur</string>
+    <string name="search_locations">Leita Staðsetninga</string>
+    <string name="issue_loading_cache">Vandamál við að hlaða skyndiminni !!!</string>
+    <string name="issue_saving">Vandamál við að vista !!!</string>
+    <string name="issue_deleting">Vandamál við að eyða !!!</string>
+    <string name="check_internet_connection">Athugaðu net tengingu !!!</string>
+    <string name="check_gps">Athugaðu GPS stillingar !!!</string>
+    <string name="no_results">Engir Niðurstöður !!!</string>
+
+    <string name="clear_sky">Heiðskýjað</string>
+    <string name="frost">Frost</string>
+    <string name="mainly_clear">Aðallega heiðskýjað</string>
+    <string name="partly_cloudy">Að hluta skýjað</string>
+    <string name="overcast">Skúrulagt</string>
+    <string name="foggy">Mistur</string>
+    <string name="depositing_rime_fog">Þoka með ísþaki</string>
+    <string name="light_drizzle">Létt skúrir</string>
+    <string name="moderate_drizzle">Miðlungs skúrir</string>
+    <string name="dense_drizzle">Þéttir skúrir</string>
+    <string name="slight_freezing_drizzle">Létt frysti skúrir</string>
+    <string name="dense_freezing_drizzle">Þétt frysti skúrir</string>
+    <string name="slight_rain">Létt rigning</string>
+    <string name="rainy">Rigning</string>
+    <string name="heavy_rain">Þyngd rigning</string>
+    <string name="heavy_freezing_rain">Þyngd frysti rigning</string>
+    <string name="slight_snow_fall">Létt snjór</string>
+    <string name="moderate_snow_fall">Miðlungs snjór</string>
+    <string name="heavy_snow_fall">Þyngd snjór</string>
+    <string name="snow_grains">Snjókorn</string>
+    <string name="slight_rain_showers">Létt rigningarskúrir</string>
+    <string name="moderate_rain_showers">Miðlungs rigningarskúrir</string>
+    <string name="violent_rain_showers">Hröð rigningarskúrir</string>
+    <string name="light_snow_showers">Létt snjóskúrir</string>
+    <string name="heavy_snow_showers">Þyngd snjóskúrir</string>
+    <string name="moderate_thunderstorm">Miðlungs þrumuveður</string>
+    <string name="thunderstorm_with_slight_hail">Þrumuveður með léttu hagl</string>
+    <string name="thunderstorm_with_heavy_rain">Þrumuveður með þungri rigningu</string>
+
+    <string name="january">Janúar</string>
+    <string name="february">Febrúar</string>
+    <string name="march">Mars</string>
+    <string name="april">Apríl</string>
+    <string name="may">Maí</string>
+    <string name="june">Júní</string>
+    <string name="july">Júlí</string>
+    <string name="august">Ágúst</string>
+    <string name="september">September</string>
+    <string name="october">Október</string>
+    <string name="november">Nóvember</string>
+    <string name="december">Desember</string>
+
+    <string name="monday">Mánudagur</string>
+    <string name="tuesday">Þriðjudagur</string>
+    <string name="wednesday">Miðvikudagur</string>
+    <string name="thursday">Fimmtudagur</string>
+    <string name="friday">Föstudagur</string>
+    <string name="saturday">Laugardagur</string>
+    <string name="sunday">Sunnudagur</string>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">Tapahtui tuntematon virhe.</string>
+    <string name="unknown">Tuntematon</string>
+
+    <string name="current_location">Nykyinen sijainti</string>
+    <string name="save_current_location">Tallenna nykyinen sijainti</string>
+    <string name="set_name_current_location">Aseta nimi nykyiselle sijainnille:</string>
+    <string name="save">Tallenna</string>
+    <string name="cancel">Peruuta</string>
+    <string name="error">Virhe</string>
+    <string name="loading">Ladataan…</string>
+    <string name="cached">Välimuistissa</string>
+    <string name="search">Etsi</string>
+    <string name="no_location_set">Sijaintia ei asetettu !!!</string>
+    <string name="location_can_not_be_blank">Sijainti ei voi olla tyhjä !!!</string>
+    <string name="back">Takaisin</string>
+    <string name="search_locations">Etsi sijainteja</string>
+    <string name="issue_loading_cache">Ongelma välimuistin latauksessa !!!</string>
+    <string name="issue_saving">Ongelma tallennuksessa !!!</string>
+    <string name="issue_deleting">Ongelma poistossa !!!</string>
+    <string name="check_internet_connection">Tarkista internet-yhteys !!!</string>
+    <string name="check_gps">Tarkista GPS-asetus !!!</string>
+    <string name="no_results">Ei tuloksia !!!</string>
+
+    <string name="clear_sky">Selkeää taivasta</string>
+    <string name="frost">Halla</string>
+    <string name="mainly_clear">Pääosin selkeää</string>
+    <string name="partly_cloudy">Osittain pilvistä</string>
+    <string name="overcast">Pilvinen</string>
+    <string name="foggy">Sumuinen</string>
+    <string name="depositing_rime_fog">Jääsumua</string>
+    <string name="light_drizzle">Kevyttä tihkua</string>
+    <string name="moderate_drizzle">Kohtalaista tihkua</string>
+    <string name="dense_drizzle">Tiheää tihkua</string>
+    <string name="slight_freezing_drizzle">Hentoa jäätävää tihkua</string>
+    <string name="dense_freezing_drizzle">Tiheää jäätävää tihkua</string>
+    <string name="slight_rain">Hentoa sadetta</string>
+    <string name="rainy">Sateista</string>
+    <string name="heavy_rain">Rankkaa sadetta</string>
+    <string name="heavy_freezing_rain">Voimakasta jäätävää sadetta</string>
+    <string name="slight_snow_fall">Hentoa lumisadetta</string>
+    <string name="moderate_snow_fall">Kohtalaista lumisadetta</string>
+    <string name="heavy_snow_fall">Runsaasti lumisadetta</string>
+    <string name="snow_grains">Lumirakeita</string>
+    <string name="slight_rain_showers">Hentoja sadekuuroja</string>
+    <string name="moderate_rain_showers">Kohtalaisia sadekuuroja</string>
+    <string name="violent_rain_showers">Voimakkaita sadekuuroja</string>
+    <string name="light_snow_showers">Hentoja lumikuuroja</string>
+    <string name="heavy_snow_showers">Runsaasti lumikuuroja</string>
+    <string name="moderate_thunderstorm">Kohtalainen ukonilma</string>
+    <string name="thunderstorm_with_slight_hail">Ukkoskuuroja ja heikkoa rakeilmaa</string>
+    <string name="thunderstorm_with_heavy_rain">Ukkoskuuroja ja rankkaa sadetta</string>
+
+    <string name="january">Tammikuu</string>
+    <string name="february">Helmikuu</string>
+    <string name="march">Maaliskuu</string>
+    <string name="april">Huhtikuu</string>
+    <string name="may">Toukokuu</string>
+    <string name="june">Kesäkuu</string>
+    <string name="july">Heinäkuu</string>
+    <string name="august">Elokuu</string>
+    <string name="september">Syyskuu</string>
+    <string name="october">Lokakuu</string>
+    <string name="november">Marraskuu</string>
+    <string name="december">Joulukuu</string>
+
+    <string name="monday">Maanantai</string>
+    <string name="tuesday">Tiistai</string>
+    <string name="wednesday">Keskiviikko</string>
+    <string name="thursday">Torstai</string>
+    <string name="friday">Perjantai</string>
+    <string name="saturday">Lauantai</string>
+    <string name="sunday">Sunnuntai</string>
+</resources>

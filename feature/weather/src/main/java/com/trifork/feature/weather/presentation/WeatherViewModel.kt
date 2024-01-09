@@ -1,10 +1,10 @@
 package com.trifork.feature.weather.presentation
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.trifork.feature.common.dispatcher.DispatcherProvider
 import com.trifork.feature.common.domain.repository.LocalGeocodingRepository
+import com.trifork.feature.common.domain.repository.LocalResourceRepository
 import com.trifork.feature.common.mvi.StateReducerViewModel
 import com.trifork.feature.common.util.Resource
 import com.trifork.feature.weather.data.mappers.toGeoLocation
@@ -25,17 +25,26 @@ class WeatherViewModel @Inject constructor(
     private val localGeocodingRepository: LocalGeocodingRepository,
     private val weatherRepository: WeatherRepository,
     private val locationTracker: LocationTracker,
+    private val localResource: LocalResourceRepository,
     private val dispatcherProvider: DispatcherProvider,
     private val savedStateHandle: SavedStateHandle
 ) : StateReducerViewModel<WeatherState, WeatherEvent, WeatherAction>() {
 
     override fun initState(): WeatherState = WeatherState.initial
 
+    private var currentLocationString: String = ""
+
+    init {
+        viewModelScope.launch(dispatcherProvider.io) {
+            currentLocationString = localResource.getCurrentLocationString()
+        }
+    }
+
     override fun reduceState(
         currentState: WeatherState,
         event: WeatherEvent
     ): WeatherState {
-        Log.v("WeatherViewModel", "event: $event, state: ${state.value.weatherInfo?.geoLocation}")
+        //Log.v("WeatherViewModel", "event: $event, state: ${state.value.weatherInfo?.geoLocation}")
         return when (event) {
             is WeatherEvent.LoadWeatherInfo -> onLoadWeatherInfo(currentState, event.geoLocation)
             is WeatherEvent.UpdateHourlyInfo -> onUpdateHourlyInfo(currentState, event.weatherInfo)
@@ -58,7 +67,7 @@ class WeatherViewModel @Inject constructor(
             val location = if (geoLocation.lat == .0 || geoLocation.long == .0) {
                 locationTracker.getCurrentLocation()?.let {
                     WeatherLocation(
-                        "Current Location",
+                        localResource.getCurrentLocationString(),
                         it.latitude,
                         it.longitude
                     )
@@ -82,11 +91,11 @@ class WeatherViewModel @Inject constructor(
                     }
 
                     is Resource.Error -> {
-                        state.handleEvent(WeatherEvent.Error("Check Internet"))
+                        state.handleEvent(WeatherEvent.Error(localResource.getCheckInternetString()))
                     }
                 }
             } ?: kotlin.run {
-                state.handleEvent(WeatherEvent.Error("Check GPS"))
+                state.handleEvent(WeatherEvent.Error(localResource.getCheckGPSString()))
             }
         }
         return currentState.copy(
@@ -124,7 +133,7 @@ class WeatherViewModel @Inject constructor(
                     }
 
                     is Resource.Error -> {
-                        state.handleEvent(WeatherEvent.Error("Check Internet"))
+                        state.handleEvent(WeatherEvent.Error(localResource.getCheckInternetString()))
                     }
                 }
             }
@@ -157,7 +166,8 @@ class WeatherViewModel @Inject constructor(
 
     private fun onResume(currentState: WeatherState): WeatherState {
         try {
-            val name: String = savedStateHandle.get<String>("name") ?: "Current Location"
+            val name: String =
+                savedStateHandle.get<String>("name") ?: currentLocationString
             val lat: String = savedStateHandle.get<String>("lat") ?: ".0"
             val long: String = savedStateHandle.get<String>("long") ?: ".0"
 
@@ -177,7 +187,7 @@ class WeatherViewModel @Inject constructor(
     private fun onSave(currentState: WeatherState, weatherLocation: WeatherLocation): WeatherState {
         viewModelScope.launch(dispatcherProvider.io) {
             if (weatherLocation.name.isBlank()) {
-                actionChannel.send(WeatherAction.Toast("Location can't be blank !!!"))
+                actionChannel.send(WeatherAction.Toast(localResource.getLocationCanNotBeBlankString()))
             } else {
                 var name = weatherLocation.name.trim()
 

@@ -1,5 +1,6 @@
 package com.trifork.feature.weather.data.repository
 
+import com.trifork.feature.common.domain.repository.LocalResourceRepository
 import com.trifork.feature.common.util.Resource
 import com.trifork.feature.weather.data.mappers.toWeatherInfo
 import com.trifork.feature.weather.data.remote.WeatherApi
@@ -8,7 +9,8 @@ import com.trifork.feature.weather.domain.repository.WeatherRepository
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
-    private val api: WeatherApi
+    private val api: WeatherApi,
+    private val localResource: LocalResourceRepository
 ) : WeatherRepository {
     override suspend fun getWeatherData(lat: Double, long: Double): Resource<WeatherInfo> {
         return try {
@@ -20,7 +22,7 @@ class WeatherRepositoryImpl @Inject constructor(
             )
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Error(e.message ?: "An unknown error occurred.")
+            Resource.Error(e.message ?: localResource.getUnknownErrorString())
         }
     }
 }

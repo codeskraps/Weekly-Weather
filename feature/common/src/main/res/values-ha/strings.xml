@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_error">An kuma an fara ya kamata.</string>
+    <string name="unknown">Babu bayanai</string>
+
+    <string name="current_location">Adireshin yanzu</string>
+    <string name="save_current_location">Ajiye adireshin yanzu</string>
+    <string name="set_name_current_location">Shirya suna ga adireshin yanzu:</string>
+    <string name="save">Ajiye</string>
+    <string name="cancel">Tsaya</string>
+    <string name="error">Cikakken bayani</string>
+    <string name="loading">Aikin yana loda…</string>
+    <string name="cached">Cacheloaded</string>
+    <string name="search">Bincike</string>
+    <string name="no_location_set">Babu adireshin da aka shiryar da!!!</string>
+    <string name="location_can_not_be_blank">Adireshin ba zai iya dawo ba!!!</string>
+    <string name="back">Baya</string>
+    <string name="search_locations">Bincike Adiresu</string>
+    <string name="issue_loading_cache">Ayya loda cache!!!</string>
+    <string name="issue_saving">Ayya Ajiye !!!</string>
+    <string name="issue_deleting">Ayya Iya turo!!!</string>
+    <string name="check_internet_connection">Dubawa Tsari akan Internet !!!</string>
+    <string name="check_gps">Dubawa Tsari akan GPS !!!</string>
+    <string name="no_results">Babu Tsarin!!!</string>
+
+    <string name="clear_sky">Saman kai</string>
+    <string name="frost">Rawa</string>
+    <string name="mainly_clear">Duk a cikin kai</string>
+    <string name="partly_cloudy">Kai na yamma</string>
+    <string name="overcast">Zuhura</string>
+    <string name="foggy">Kama</string>
+    <string name="depositing_rime_fog">Kama da farji</string>
+    <string name="light_drizzle">Kama mai zafi</string>
+    <string name="moderate_drizzle">Kama mai tsawo</string>
+    <string name="dense_drizzle">Kama mai dariya</string>
+    <string name="slight_freezing_drizzle">Kama mai fasa fama da dariya</string>
+    <string name="dense_freezing_drizzle">Kama mai dariya mai dariya</string>
+    <string name="slight_rain">Kama mai yarjejeniyar</string>
+    <string name="rainy">Yarjejeniya</string>
+    <string name="heavy_rain">Tsauro</string>
+    <string name="heavy_freezing_rain">Tsauro da dariya mai dariya</string>
+    <string name="slight_snow_fall">Kama mai jan kunne</string>
+    <string name="moderate_snow_fall">Kama mai jan kunne mai kunne</string>
+    <string name="heavy_snow_fall">Kama mai jan kunne mai tsawo</string>
+    <string name="snow_grains">Kama na kunne</string>
+    <string name="slight_rain_showers">Kama mai yarjejeniyar</string>
+    <string name="moderate_rain_showers">Kama mai yarjejeniyar mai tsawo</string>
+    <string name="violent_rain_showers">Kama mai yarjejeniyar mai gashi</string>
+    <string name="light_snow_showers">Kama mai jan kunne</string>
+    <string name="heavy_snow_showers">Kama mai jan kunne mai tsawo</string>
+    <string name="moderate_thunderstorm">Kama mai tsawo na fashin fashin</string>
+    <string name="thunderstorm_with_slight_hail">Fashin fashin da fashin</string>
+    <string name="thunderstorm_with_heavy_rain">Fashin fashin da tsauro</string>
+
+    <string name="january">Janairu</string>
+    <string name="february">Faburairu</string>
+    <string name="march">Maris</string>
+    <string name="april">Afirilu</string>
+    <string name="may">Mayu</string>
+    <string name="june">Yuni</string>
+    <string name="july">Yuli</string>
+    <string name="august">Agusta</string>
+    <string name="september">Satumba</string>
+    <string name="october">Oktoba</string>
+    <string name="november">Nuwamba</string>
+    <string name="december">Disamba</string>
+
+    <string name="monday">Litinin</string>
+    <string name="tuesday">Talata</string>
+    <string name="wednesday">Laraba</string>
+    <string name="thursday">Alhamis</string>
+    <string name="friday">Jumma\'a</string>
+    <string name="saturday">Asabar</string>
+    <string name="sunday">Lahadi</string>
+</resources>

@@ -50,6 +50,7 @@ import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.navigation.NavController
 import com.trifork.feature.common.components.ObserveAsEvents
 import com.trifork.feature.common.navigation.Screen
+import com.trifork.feature.common.R
 import com.trifork.feature.geocoding.presentation.mvi.GeoAction
 import com.trifork.feature.geocoding.presentation.mvi.GeoEvent
 import com.trifork.feature.geocoding.presentation.mvi.GeoState
@@ -64,6 +65,7 @@ fun GeocodingScreen(
     action: Flow<GeoAction>
 ) {
     val context = LocalContext.current
+    val resources = context.resources
 
     LifecycleResumeEffect {
         handleEvent(GeoEvent.LoadCache)
@@ -90,13 +92,13 @@ fun GeocodingScreen(
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
                 title = {
-                    Text("Search")
+                    Text(resources.getString(R.string.search))
                 },
                 navigationIcon = {
                     Icon(
                         Icons.Default.ArrowBack,
                         tint = MaterialTheme.colorScheme.primary,
-                        contentDescription = "Back",
+                        contentDescription = resources.getString(R.string.back),
                         modifier = Modifier.clickable { navController.navigateUp() },
                     )
                 }
@@ -121,7 +123,7 @@ fun GeocodingScreen(
                         .padding(16.dp),
                     value = text,
                     onValueChange = { text = it },
-                    label = { Text("Search Locations") },
+                    label = { Text(resources.getString(R.string.search_locations)) },
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                     keyboardActions = KeyboardActions(
                         onSearch = {
@@ -146,7 +148,7 @@ fun GeocodingScreen(
                         )
                     } else if (state.geoLocations.isEmpty()) {
                         Text(
-                            text = "Search Locations",
+                            text = resources.getString(R.string.search_locations),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Center,
@@ -183,7 +185,7 @@ fun GeocodingScreen(
                                     Icon(
                                         imageVector = if (geoLocation.cached) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                                         tint = if (geoLocation.cached) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.outline,
-                                        contentDescription = "Cached",
+                                        contentDescription = resources.getString(R.string.cached),
                                         modifier = Modifier
                                             .align(CenterVertically)
                                             .padding(end = 16.dp)

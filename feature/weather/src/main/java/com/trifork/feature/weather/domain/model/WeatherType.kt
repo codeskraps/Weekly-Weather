@@ -135,7 +135,7 @@ sealed class WeatherType(
 
     data object SlightSnowFallNight : WeatherType(
         weatherDescRes = com.trifork.feature.common.R.string.slight_snow_fall,
-        iconRes = R.drawable.ic_light_drizzel_night
+        iconRes = R.drawable.ic_light_snow_night
     )
 
     data object ModerateSnowFallDay : WeatherType(

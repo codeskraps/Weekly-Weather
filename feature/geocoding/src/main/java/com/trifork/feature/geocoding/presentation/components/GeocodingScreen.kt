@@ -111,7 +111,6 @@ fun GeocodingScreen(
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            var text by remember { mutableStateOf("") }
             val keyboardController = LocalSoftwareKeyboardController.current
             val focusManager = LocalFocusManager.current
 
@@ -121,15 +120,15 @@ fun GeocodingScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp),
-                    value = text,
-                    onValueChange = { text = it },
+                    value = state.query,
+                    onValueChange = { handleEvent(GeoEvent.Search(it)) },
                     label = { Text(resources.getString(R.string.search_locations)) },
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                     keyboardActions = KeyboardActions(
                         onSearch = {
                             keyboardController?.hide()
                             focusManager.clearFocus()
-                            handleEvent(GeoEvent.Search(text))
+                            //handleEvent(GeoEvent.Search(state.query))
                         }
                     )
                 )

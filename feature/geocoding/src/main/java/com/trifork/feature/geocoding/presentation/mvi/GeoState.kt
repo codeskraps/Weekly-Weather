@@ -6,12 +6,14 @@ import com.trifork.feature.common.domain.model.GeoLocation
 data class GeoState(
     val geoLocations: List<GeoLocation>,
     val error: String?,
+    val query: String,
     val isLoading: Boolean
 ) {
     companion object {
         val initial = GeoState(
             geoLocations = emptyList(),
             error = null,
+            query = "",
             isLoading = true
         )
     }

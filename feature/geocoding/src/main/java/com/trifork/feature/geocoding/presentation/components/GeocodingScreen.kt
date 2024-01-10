@@ -30,10 +30,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -47,10 +43,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
-import androidx.navigation.NavController
+import com.trifork.feature.common.R
 import com.trifork.feature.common.components.ObserveAsEvents
 import com.trifork.feature.common.navigation.Screen
-import com.trifork.feature.common.R
 import com.trifork.feature.geocoding.presentation.mvi.GeoAction
 import com.trifork.feature.geocoding.presentation.mvi.GeoEvent
 import com.trifork.feature.geocoding.presentation.mvi.GeoState
@@ -59,10 +54,11 @@ import kotlinx.coroutines.flow.Flow
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun GeocodingScreen(
-    navController: NavController,
     state: GeoState,
     handleEvent: (GeoEvent) -> Unit,
-    action: Flow<GeoAction>
+    action: Flow<GeoAction>,
+    navUp: () -> Unit,
+    navRoute: (String) -> Unit
 ) {
     val context = LocalContext.current
     val resources = context.resources
@@ -75,11 +71,7 @@ fun GeocodingScreen(
     ObserveAsEvents(flow = action) { onAction ->
         when (onAction) {
             is GeoAction.ShowToast -> {
-                Toast.makeText(
-                    context,
-                    onAction.message,
-                    Toast.LENGTH_SHORT,
-                ).show()
+                Toast.makeText(context, onAction.message, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -99,7 +91,7 @@ fun GeocodingScreen(
                         Icons.Default.ArrowBack,
                         tint = MaterialTheme.colorScheme.primary,
                         contentDescription = resources.getString(R.string.back),
-                        modifier = Modifier.clickable { navController.navigateUp() },
+                        modifier = Modifier.clickable { navUp() },
                     )
                 }
             )
@@ -160,17 +152,13 @@ fun GeocodingScreen(
                                     modifier = Modifier
                                         .fillMaxSize()
                                         .clickable {
-                                            navController.navigate(
+                                            navRoute(
                                                 Screen.Weather.createRoute(
                                                     geoLocation.displayName(),
                                                     geoLocation.latitude,
                                                     geoLocation.longitude
                                                 )
-                                            ) {
-                                                popUpTo(navController.graph.id) {
-                                                    inclusive = true
-                                                }
-                                            }
+                                            )
                                         },
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {

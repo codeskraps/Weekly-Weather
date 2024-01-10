@@ -58,10 +58,10 @@ import kotlinx.coroutines.flow.Flow
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun WeatherScreen(
-    navController: NavController,
     state: WeatherState,
     handleEvent: (WeatherEvent) -> Unit,
-    action: Flow<WeatherAction>
+    action: Flow<WeatherAction>,
+    navRoute: (String) -> Unit
 ) {
 
     var menuExpanded by remember {
@@ -87,8 +87,9 @@ fun WeatherScreen(
     val context = LocalContext.current
     ObserveAsEvents(flow = action) { onAction ->
         when (onAction) {
-            is WeatherAction.Toast -> Toast.makeText(context, onAction.message, Toast.LENGTH_LONG)
-                .show()
+            is WeatherAction.Toast -> {
+                Toast.makeText(context, onAction.message, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -182,7 +183,7 @@ fun WeatherScreen(
                 FloatingActionButton(
                     shape = CircleShape,
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    onClick = { navController.navigate(Screen.Geocoding.route) }) {
+                    onClick = { navRoute(Screen.Geocoding.route) }) {
                     Icon(
                         Icons.Default.Search,
                         tint = MaterialTheme.colorScheme.primary,

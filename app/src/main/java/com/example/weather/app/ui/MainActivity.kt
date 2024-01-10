@@ -43,22 +43,27 @@ class MainActivity : ComponentActivity() {
                         val state by viewModel.state.collectAsStateWithLifecycle()
 
                         WeatherScreen(
-                            navController = navController,
                             state = state,
                             handleEvent = viewModel.state::handleEvent,
                             action = viewModel.action
-                        )
+                        ) { route ->
+                            navController.navigate(route)
+                        }
                     }
                     composable(Screen.Geocoding.route) {
                         val viewModel = hiltViewModel<GeocodingViewModel>()
                         val state by viewModel.state.collectAsStateWithLifecycle()
 
                         GeocodingScreen(
-                            navController = navController,
                             state = state,
                             handleEvent = viewModel.state::handleEvent,
-                            action = viewModel.action
-                        )
+                            action = viewModel.action,
+                            navUp = { navController.navigateUp() }
+                        ) { route ->
+                            navController.navigate(route) {
+                                popUpTo(navController.graph.id) { inclusive = true }
+                            }
+                        }
                     }
                 }
             }

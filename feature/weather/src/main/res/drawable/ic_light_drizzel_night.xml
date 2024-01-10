@@ -28,27 +28,9 @@
       android:strokeColor="#fff"/>
     <path
         android:fillColor="#00000000"
-        android:pathData="M28,32.5L28,37.5"
-        android:strokeWidth="1.2"
-        android:strokeColor="#57a0ee"
-        android:strokeLineCap="round" />
-    <path
-        android:fillColor="#00000000"
-        android:pathData="M29.768,33.232L26.232,36.768"
-        android:strokeWidth="1"
-        android:strokeColor="#57a0ee"
-        android:strokeLineCap="round" />
-    <path
-        android:fillColor="#00000000"
-        android:pathData="M30.5,35L25.5,35"
-        android:strokeWidth="1"
-        android:strokeColor="#57a0ee"
-        android:strokeLineCap="round" />
-    <path
-        android:fillColor="#00000000"
-        android:pathData="M29.768,36.768L26.232,33.232"
-        android:strokeWidth="1"
-        android:strokeColor="#57a0ee"
+        android:pathData="M26.918,32.944L25.529,40.822"
+        android:strokeWidth="2"
+        android:strokeColor="#91c0f8"
         android:strokeLineCap="round" />
   </group>
 </vector>

@@ -1,6 +1,8 @@
 package com.trifork.feature.weather.presentation.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -57,6 +59,7 @@ fun WeatherCardPreview() {
     )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WeatherCard(
     data: WeatherData,
@@ -102,7 +105,9 @@ fun WeatherCard(
             Text(
                 text = resources.getString(data.weatherType.weatherDescRes),
                 fontSize = 20.sp,
-                color = MaterialTheme.colorScheme.primary
+                maxLines = 1,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.basicMarquee()
             )
             Spacer(modifier = Modifier.height(10.dp))
             Row(

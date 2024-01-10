@@ -3,19 +3,19 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
     namespace = "com.example.weather"
-    compileSdk = 34
+    compileSdk = ConfigData.compileSdk
 
     defaultConfig {
         applicationId = "com.arklan.weather"
-        minSdk = 26
-        targetSdk = 34
-        versionCode = 4
-        versionName = "1.3"
+        minSdk = ConfigData.minSdk
+        targetSdk = ConfigData.targetSdk
+        versionCode = 5
+        versionName = "1.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -33,17 +33,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = ConfigData.javaVersion
+        targetCompatibility = ConfigData.javaVersion
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = ConfigData.javaTarget
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+        kotlinCompilerExtensionVersion = ConfigData.kotlinCompiler
     }
     packaging {
         resources {
@@ -66,23 +66,23 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.android.compose.material3)
-    implementation(platform("androidx.compose:compose-bom:2023.10.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.graphics)
+    implementation(libs.androidx.compose.tooling.preview)
 
     //Dagger - Hilt
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.android.compiler)
 
+    implementation(libs.coroutines.test)
     testImplementation(libs.junit.junit)
+    androidTestImplementation(composeBom)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.10.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation(libs.coroutines.test)
+    androidTestImplementation(libs.androidx.compose.test.junit4)
+    debugImplementation(libs.androidx.compose.tooling)
+    debugImplementation(libs.androidx.compose.test.manifest)
 }

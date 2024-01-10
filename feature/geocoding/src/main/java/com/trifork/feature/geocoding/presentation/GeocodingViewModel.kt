@@ -12,6 +12,8 @@ import com.trifork.feature.geocoding.presentation.mvi.GeoAction
 import com.trifork.feature.geocoding.presentation.mvi.GeoEvent
 import com.trifork.feature.geocoding.presentation.mvi.GeoState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,6 +26,8 @@ class GeocodingViewModel @Inject constructor(
 ) : StateReducerViewModel<GeoState, GeoEvent, GeoAction>() {
 
     override fun initState(): GeoState = GeoState.initial
+
+    private var searchJob: Job? = null
 
     override fun reduceState(
         currentState: GeoState,
@@ -89,7 +93,10 @@ class GeocodingViewModel @Inject constructor(
     }
 
     private fun onSearchGeoLocation(currentState: GeoState, query: String): GeoState {
-        viewModelScope.launch(dispatcherProvider.io) {
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch(dispatcherProvider.io) {
+            delay(500L)
+
             when (val result = geocodingRepository.getGeoLocation(query)) {
                 is Resource.Success -> {
                     if (result.data.isNotEmpty()) {
@@ -110,9 +117,11 @@ class GeocodingViewModel @Inject constructor(
                 }
             }
         }
+
         return currentState.copy(
             isLoading = true,
             error = null,
+            query = query,
             geoLocations = emptyList()
         )
     }

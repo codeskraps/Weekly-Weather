@@ -1,17 +1,17 @@
-
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.com.google.devtools.ksp)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
     namespace = "com.trifork.feature.common"
-    compileSdk = 34
+    compileSdk = ConfigData.compileSdk
 
     defaultConfig {
-        minSdk = 26
+        minSdk = ConfigData.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -26,17 +26,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = ConfigData.javaVersion
+        targetCompatibility = ConfigData.javaVersion
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = ConfigData.javaTarget
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+        kotlinCompilerExtensionVersion = ConfigData.kotlinCompiler
     }
     packaging {
         resources {
@@ -58,7 +58,6 @@ dependencies {
 
     //Dagger - Hilt
     implementation(libs.hilt.android)
-    implementation(libs.androidx.constraintlayout)
     ksp(libs.hilt.android.compiler)
 
     // Room

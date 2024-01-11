@@ -24,3 +24,4 @@ App translated into 37 languages.
 
 Weather data API -> https://open-meteo.com/
 Open Sourced -> https://github.com/codeskraps/Weekly-Weather
+Assets -> https://github.com/Makin-Things/weather-icons

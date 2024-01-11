@@ -3,6 +3,8 @@ package com.example.weather.app.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -31,12 +33,36 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(navController = navController, startDestination = Screen.Weather.route) {
                     composable(
-                        Screen.Weather.route,
+                        route = Screen.Weather.route,
                         arguments = listOf(
                             navArgument("name") { type = NavType.StringType },
                             navArgument("lat") { type = NavType.StringType },
                             navArgument("long") { type = NavType.StringType }
-                        )
+                        ),
+                        enterTransition = {
+                            slideIntoContainer(
+                                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
+                                animationSpec = tween(700)
+                            )
+                        },
+                        exitTransition = {
+                            slideOutOfContainer(
+                                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
+                                animationSpec = tween(700)
+                            )
+                        },
+                        popEnterTransition = {
+                            slideIntoContainer(
+                                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
+                                animationSpec = tween(700)
+                            )
+                        },
+                        popExitTransition = {
+                            slideOutOfContainer(
+                                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
+                                animationSpec = tween(700)
+                            )
+                        }
                     ) {
 
                         val viewModel = hiltViewModel<WeatherViewModel>()
@@ -50,7 +76,33 @@ class MainActivity : ComponentActivity() {
                             navController.navigate(route)
                         }
                     }
-                    composable(Screen.Geocoding.route) {
+                    composable(
+                        route = Screen.Geocoding.route,
+                        enterTransition = {
+                            slideIntoContainer(
+                                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
+                                animationSpec = tween(700)
+                            )
+                        },
+                        exitTransition = {
+                            slideOutOfContainer(
+                                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
+                                animationSpec = tween(700)
+                            )
+                        },
+                        popEnterTransition = {
+                            slideIntoContainer(
+                                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
+                                animationSpec = tween(700)
+                            )
+                        },
+                        popExitTransition = {
+                            slideOutOfContainer(
+                                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
+                                animationSpec = tween(700)
+                            )
+                        }
+                    ) {
                         val viewModel = hiltViewModel<GeocodingViewModel>()
                         val state by viewModel.state.collectAsStateWithLifecycle()
 

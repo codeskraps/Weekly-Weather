@@ -44,10 +44,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
-import androidx.navigation.NavController
+import com.trifork.feature.common.R
 import com.trifork.feature.common.components.ObserveAsEvents
 import com.trifork.feature.common.navigation.Screen
-import com.trifork.feature.common.R
 import com.trifork.feature.weather.data.mappers.toWeatherLocation
 import com.trifork.feature.weather.domain.model.WeatherLocation
 import com.trifork.feature.weather.presentation.mvi.WeatherAction
@@ -212,7 +211,8 @@ fun WeatherScreen(
                 )
             } else {
                 Column(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
                 ) {
                     Box(Modifier.pullRefresh(pullRefreshState)) {
 

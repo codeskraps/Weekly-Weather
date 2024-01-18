@@ -66,6 +66,13 @@ class WeatherViewModel @Inject constructor(
         viewModelScope.launch(dispatcherProvider.io) {
             val location = if (geoLocation.lat == .0 || geoLocation.long == .0) {
                 locationTracker.getCurrentLocation()?.let {
+
+                    savedStateHandle.run {
+                        remove<String>("name")
+                        remove<String>("lat")
+                        remove<String>("long")
+                    }
+
                     WeatherLocation(
                         localResource.getCurrentLocationString(),
                         it.latitude,

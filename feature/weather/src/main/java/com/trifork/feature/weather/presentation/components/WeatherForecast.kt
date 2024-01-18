@@ -1,6 +1,9 @@
 package com.trifork.feature.weather.presentation.components
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,23 +14,32 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.trifork.feature.common.util.MonthString
 import com.trifork.feature.common.util.WeekString
 import com.trifork.feature.weather.domain.model.WeatherData
 import com.trifork.feature.weather.domain.model.WeatherInfo
-import com.trifork.feature.weather.presentation.WeatherViewModel
 import com.trifork.feature.weather.presentation.mvi.WeatherEvent
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
-import java.util.Locale
 
 @Composable
 fun WeatherForecast(
@@ -73,7 +85,13 @@ fun WeatherForecast(
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
-        LazyRow(content = {
+
+        val listState = rememberLazyListState()
+        val density = LocalDensity.current
+
+        LazyRow(
+            state = listState
+        ) {
             items(perDay.filter { it.time.plusHours(1) > LocalDateTime.now() }) { weatherData ->
                 HourlyWeatherDisplay(
                     weatherData = weatherData,
@@ -93,6 +111,20 @@ fun WeatherForecast(
                         }
                 )
             }
-        })
+        }
+
+        if (perDay[0].time.dayOfMonth != LocalDateTime.now().dayOfMonth) {
+            LaunchedEffect(key1 = perDay) {
+                launch {
+                    delay(500)
+                    val componentWidth = with(density) { (40.dp.roundToPx() + 32.dp.roundToPx()).toFloat() }
+                    listState.animateScrollBy(
+                        value = componentWidth * 11,
+                        animationSpec = tween(3000, easing = FastOutSlowInEasing)
+                    )
+                    listState.animateScrollToItem(10)
+                }
+            }
+        }
     }
 }

@@ -216,12 +216,14 @@ fun WeatherScreen(
                 ) {
                     Box(Modifier.pullRefresh(pullRefreshState)) {
 
-                        LazyColumn {
-                            item {
-                                WeatherCard(
-                                    data = state.weatherInfo.currentWeatherData!!,
-                                    backgroundColor = MaterialTheme.colorScheme.primaryContainer
-                                )
+                        state.weatherInfo.currentWeatherData?.let {
+                            LazyColumn {
+                                item {
+                                    WeatherCard(
+                                        data = it,
+                                        backgroundColor = MaterialTheme.colorScheme.primaryContainer
+                                    )
+                                }
                             }
                         }
 

@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Pariksa Koneksian Internet !!!</string>
     <string name="check_gps">Pariksa Setelan GPS !!!</string>
     <string name="no_results">Ora Ana Hasil !!!</string>
+    <string name="map_location">Panggonan Peta</string>
+    <string name="add">Tambah</string>
+
 
     <string name="clear_sky">Langit Saré</string>
     <string name="frost">Rosit</string>

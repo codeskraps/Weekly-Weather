@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.trifork.feature.weather"
+    namespace = "com.codeskraps.feature.weather"
     compileSdk = ConfigData.compileSdk
 
     defaultConfig {
@@ -53,6 +53,8 @@ android {
 
 dependencies {
     implementation(project(mapOf("path" to ":feature:common")))
+    implementation(project(mapOf("path" to ":core:location")))
+    implementation(project(mapOf("path" to ":core:local")))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -75,13 +77,9 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
-    // Location Services
-    implementation(libs.android.play.services.location)
-
     // Retrofit
     implementation(libs.retrofit.retrofit)
     implementation(libs.retrofit.converter.moshi)
-
 
     implementation(libs.coroutines.test)
     testImplementation(libs.junit.junit)

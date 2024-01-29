@@ -22,6 +22,9 @@
     <string name="check_internet_connection">इंटरनेट कनेक्शन तपासा !!!</string>
     <string name="check_gps">GPS सेटिंग्ज तपासा !!!</string>
     <string name="no_results">कोणतेही परिणाम नाही !!!</string>
+    <string name="map_location">नकाशा स्थान</string>
+    <string name="add">जोडा</string>
+
 
     <string name="clear_sky">स्पष्ट आकाश</string>
     <string name="frost">गार झालं</string>

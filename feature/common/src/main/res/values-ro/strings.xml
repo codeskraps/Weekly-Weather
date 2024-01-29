@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Verifică conexiunea la internet !!!</string>
     <string name="check_gps">Verifică setările GPS !!!</string>
     <string name="no_results">Fără rezultate !!!</string>
+    <string name="map_location">Locație pe hartă</string>
+    <string name="add">Adaugă</string>
+
 
     <string name="clear_sky">Cer senin</string>
     <string name="frost">Gheață</string>

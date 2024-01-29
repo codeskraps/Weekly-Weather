@@ -22,6 +22,9 @@
     <string name="check_internet_connection">انٹرنیٹ کنکشن چیک کریں !!!</string>
     <string name="check_gps">GPS ترتیبات چیک کریں !!!</string>
     <string name="no_results">کوئی نتائج نہیں ملے !!!</string>
+    <string name="map_location">نقشہ مقام</string>
+    <string name="add">شامل کریں</string>
+
 
     <string name="clear_sky">صاف آسمان</string>
     <string name="frost">برف جمانا</string>

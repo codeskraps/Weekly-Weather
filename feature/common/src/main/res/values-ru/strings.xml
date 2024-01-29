@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Проверьте интернет-соединение !!!</string>
     <string name="check_gps">Проверьте настройки GPS !!!</string>
     <string name="no_results">Нет результатов !!!</string>
+    <string name="map_location">Местоположение на карте</string>
+    <string name="add">Добавить</string>
+
 
     <string name="clear_sky">Ясное небо</string>
     <string name="frost">Мороз</string>

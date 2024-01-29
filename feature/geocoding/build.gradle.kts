@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.trifork.feature.geocoding"
+    namespace = "com.codeskraps.feature.geocoding"
     compileSdk = ConfigData.compileSdk
 
     defaultConfig {
@@ -53,6 +53,7 @@ android {
 
 dependencies {
     implementation(project(mapOf("path" to ":feature:common")))
+    implementation(project(mapOf("path" to ":core:local")))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

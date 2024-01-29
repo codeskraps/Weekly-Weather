@@ -21,6 +21,9 @@
     <string name="issue_deleting">Problema ao deletar !!!</string>
     <string name="check_internet_connection">Verifique a conexão com a internet !!!</string>
     <string name="check_gps">Verifique as configurações do GPS !!!</string>
+    <string name="map_location">Localização no Mapa</string>
+    <string name="add">Adicionar</string>
+
 
     <string name="no_results">Sem resultados!!!</string>
     <string name="clear_sky">Céu limpo</string>

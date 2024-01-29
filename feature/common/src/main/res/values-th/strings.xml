@@ -22,6 +22,9 @@
     <string name="check_internet_connection">ตรวจสอบการเชื่อมต่ออินเทอร์เน็ต !!!</string>
     <string name="check_gps">ตรวจสอบการตั้งค่า GPS !!!</string>
     <string name="no_results">ไม่มีผลลัพธ์ !!!</string>
+    <string name="map_location">ตำแหน่งบนแผนที่</string>
+    <string name="add">เพิ่ม</string>
+
 
     <string name="clear_sky">ฟ้าใส</string>
     <string name="frost">ความเยือกแข็ง</string>

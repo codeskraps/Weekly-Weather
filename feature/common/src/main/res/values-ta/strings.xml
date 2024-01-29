@@ -22,6 +22,9 @@
     <string name="check_internet_connection">இணைய இணைப்பை சரிபார்க்கவும்!!!</string>
     <string name="check_gps">GPS அமைப்பை சரிபார்க்கவும்!!!</string>
     <string name="no_results">முடிவுகள் இல்லை!!!</string>
+    <string name="map_location">வரைபடத்தில் இருப்போம்</string>
+    <string name="add">சேர்க்க</string>
+
 
     <string name="clear_sky">தோள்கள் இல்லாமல்</string>
     <string name="frost">பனி</string>

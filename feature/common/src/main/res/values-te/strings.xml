@@ -22,6 +22,9 @@
     <string name="check_internet_connection">ఇంటర్నెట్ కనెక్షన్ తనిఖీ చేయండి !!!</string>
     <string name="check_gps">GPS సెట్టింగ్లను తనిఖీ చేయండి !!!</string>
     <string name="no_results">ఎటువంటి ఫలితం లేదు !!!</string>
+    <string name="map_location">మ్యాప్ స్థానం</string>
+    <string name="add">జోడించు</string>
+
 
     <string name="clear_sky">స్పష్ట ఆకాశం</string>
     <string name="frost">మంచు పడినందుకు</string>

@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Tarkista internet-yhteys !!!</string>
     <string name="check_gps">Tarkista GPS-asetus !!!</string>
     <string name="no_results">Ei tuloksia !!!</string>
+    <string name="map_location">Karttalokero</string>
+    <string name="add">Lisää</string>
+
 
     <string name="clear_sky">Selkeää taivasta</string>
     <string name="frost">Halla</string>

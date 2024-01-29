@@ -22,6 +22,9 @@
     <string name="check_internet_connection">بررسی اتصال اینترنت !!!</string>
     <string name="check_gps">بررسی تنظیمات GPS !!!</string>
     <string name="no_results">بدون نتیجه !!!</string>
+    <string name="map_location">موقعیت نقشه</string>
+    <string name="add">افزودن</string>
+
 
     <string name="clear_sky">آسمان صاف</string>
     <string name="frost">شب برفی</string>

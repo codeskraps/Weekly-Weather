@@ -8,5 +8,5 @@ object ConfigData {
     val javaVersion = JavaVersion.VERSION_17
     const val javaTarget = "17"
 
-    const val kotlinCompiler = "1.5.7"
+    const val kotlinCompiler = "1.5.8"
 }

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.codeskraps.location"
+    namespace = "com.codeskraps.core.location"
     compileSdk = ConfigData.compileSdk
 
     defaultConfig {

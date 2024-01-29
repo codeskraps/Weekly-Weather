@@ -15,7 +15,7 @@ import com.codeskraps.feature.weather.domain.repository.WeatherRepository
 import com.codeskraps.feature.weather.presentation.mvi.WeatherAction
 import com.codeskraps.feature.weather.presentation.mvi.WeatherEvent
 import com.codeskraps.feature.weather.presentation.mvi.WeatherState
-import com.codeskraps.location.domain.LocationTracker
+import com.codeskraps.core.location.domain.LocationTracker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -11,7 +11,7 @@ class GeocodingRepositoryImpl @Inject constructor(
     private val api: GeocodingApi,
 ) : GeocodingRepository {
 
-    override suspend fun getGeoLocation(query: String): Resource<List<com.codeskraps.core.local.domain.model.GeoLocation>> {
+    override suspend fun getGeoLocation(query: String): Resource<List<GeoLocation>> {
         return try {
             if (query.length < 3) throw Exception("Not enough length")
             val data = api.getGeoLocation(query.trim())

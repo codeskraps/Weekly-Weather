@@ -7,7 +7,7 @@ import com.codeskraps.core.local.domain.repository.LocalResourceRepository
 import com.codeskraps.feature.common.dispatcher.DispatcherProvider
 import com.codeskraps.feature.common.mvi.StateReducerViewModel
 import com.codeskraps.feature.common.util.Resource
-import com.codeskraps.location.domain.LocationTracker
+import com.codeskraps.core.location.domain.LocationTracker
 import com.codeskraps.maps.presentation.mvi.MapAction
 import com.codeskraps.maps.presentation.mvi.MapEvent
 import com.codeskraps.maps.presentation.mvi.MapState

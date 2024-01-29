@@ -2,6 +2,7 @@ package com.codeskraps.maps.presentation.components
 
 import android.content.res.Resources
 import android.graphics.Bitmap
+import androidx.activity.compose.BackHandler
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Box
@@ -64,6 +65,10 @@ fun MapScreen(
     LifecycleResumeEffect(Unit) {
         handleEvent(MapEvent.Resume)
         onPauseOrDispose {}
+    }
+
+    BackHandler {
+        navRoute(Screen.Weather.route)
     }
 
     Scaffold(

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.weather"
+    namespace = "com.codeskraps.weather"
     compileSdk = ConfigData.compileSdk
 
     defaultConfig {
@@ -59,6 +59,7 @@ dependencies {
     implementation(project(mapOf("path" to ":feature:common")))
     implementation(project(mapOf("path" to ":feature:geocoding")))
     implementation(project(mapOf("path" to ":feature:weather")))
+    implementation(project(mapOf("path" to ":feature:maps")))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

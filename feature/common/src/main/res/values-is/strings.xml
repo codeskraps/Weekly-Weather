@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Athugaðu net tengingu !!!</string>
     <string name="check_gps">Athugaðu GPS stillingar !!!</string>
     <string name="no_results">Engir Niðurstöður !!!</string>
+    <string name="map_location">Staðsetning á korti</string>
+    <string name="add">Bæta við</string>
+
 
     <string name="clear_sky">Heiðskýjað</string>
     <string name="frost">Frost</string>

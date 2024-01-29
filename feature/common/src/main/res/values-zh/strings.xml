@@ -22,6 +22,9 @@
     <string name="check_internet_connection">检查网络连接！</string>
     <string name="check_gps">检查GPS设置！</string>
     <string name="no_results">无结果！</string>
+    <string name="map_location">地图位置</string>
+    <string name="add">添加</string>
+
 
     <string name="clear_sky">晴朗</string>
     <string name="frost">霜</string>

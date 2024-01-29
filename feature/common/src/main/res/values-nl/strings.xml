@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Controleer internetverbinding !!!</string>
     <string name="check_gps">Controleer GPS-instellingen !!!</string>
     <string name="no_results">Geen resultaten !!!</string>
+    <string name="map_location">Kaartlocatie</string>
+    <string name="add">Toevoegen</string>
+
 
     <string name="clear_sky">Heldere hemel</string>
     <string name="frost">Vorst</string>

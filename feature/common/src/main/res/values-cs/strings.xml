@@ -22,6 +22,8 @@
     <string name="check_internet_connection">Zkontrolujte připojení k internetu !!!</string>
     <string name="check_gps">Zkontrolujte nastavení GPS !!!</string>
     <string name="no_results">Žádné výsledky !!!</string>
+    <string name="map_location">Poloha na mapě</string>
+    <string name="add">Přidat</string>
 
     <string name="clear_sky">Jasno</string>
     <string name="frost">Mrazík</string>

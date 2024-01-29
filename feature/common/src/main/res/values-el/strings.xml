@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Ελέγξτε τη σύνδεση στο internet !!!</string>
     <string name="check_gps">Ελέγξτε τις ρυθμίσεις GPS !!!</string>
     <string name="no_results">Χωρίς αποτελέσματα !!!</string>
+    <string name="map_location">Τοποθεσία Χάρτη</string>
+    <string name="add">Προσθήκη</string>
+
 
     <string name="clear_sky">Καθαρός ουρανός</string>
     <string name="frost">Παγετός</string>

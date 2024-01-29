@@ -23,6 +23,9 @@ appcompat = "1.6.1"
 com-google-android-material-material = "1.11.0"
 ksp = "1.9.21-1.0.16"
 animationGraphicsAndroid = "1.5.4"
+play-services-maps = "18.2.0"
+maps-compose = "4.3.0"
+secretsGradlePlugin = "2.0.1"
 
 
 [libraries]
@@ -59,6 +62,9 @@ retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "play-services-maps" }
+maps-compose = { group = "com.google.maps.android", name = "maps-compose", version.ref = "maps-compose" }
+
 # Test
 junit-junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junittest" }
@@ -74,3 +80,4 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
 com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }

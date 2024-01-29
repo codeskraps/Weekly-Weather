@@ -22,6 +22,8 @@
     <string name="check_internet_connection">Comprova la connexió a internet !!!</string>
     <string name="check_gps">Comprova la configuració del GPS !!!</string>
     <string name="no_results">Sense resultats !!!</string>
+    <string name="map_location">Ubicació al mapa</string>
+    <string name="add">Afegir</string>
 
     <string name="clear_sky">Cel clar</string>
     <string name="frost">Gelada</string>

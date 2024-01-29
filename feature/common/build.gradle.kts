@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.trifork.feature.common"
+    namespace = "com.codeskraps.feature.common"
     compileSdk = ConfigData.compileSdk
 
     defaultConfig {
@@ -59,11 +59,6 @@ dependencies {
     //Dagger - Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
-
-    // Room
-    implementation(libs.room.runtime)
-    annotationProcessor(libs.room.compiler)
-    ksp(libs.room.compiler)
 
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Vérifiez la connexion Internet !!!</string>
     <string name="check_gps">Vérifiez les paramètres GPS !!!</string>
     <string name="no_results">Aucun résultat !!!</string>
+    <string name="map_location">Emplacement sur la carte</string>
+    <string name="add">Ajouter</string>
+
 
     <string name="clear_sky">Ciel dégagé</string>
     <string name="frost">Gel</string>

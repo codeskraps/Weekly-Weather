@@ -22,6 +22,8 @@
     <string name="check_internet_connection">تحقق من اتصال الإنترنت !!!</string>
     <string name="check_gps">تحقق من إعدادات ال GPS !!!</string>
     <string name="no_results">لا توجد نتائج !!!</string>
+    <string name="map_location">موقع الخريطة</string>
+    <string name="add">إضافة</string>
 
     <string name="clear_sky">سماء صافية</string>
     <string name="frost">صقيع</string>

@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Suriin ang Internet Connection !!!</string>
     <string name="check_gps">Suriin ang GPS Setting !!!</string>
     <string name="no_results">Walang Resulta !!!</string>
+    <string name="map_location">Lokasyon sa Mapa</string>
+    <string name="add">Idagdag</string>
+
 
     <string name="clear_sky">Malinaw na Langit</string>
     <string name="frost">Frost</string>

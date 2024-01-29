@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Konexioa egiaztatu !!!</string>
     <string name="check_gps">GPS ezarpenak egiaztatu !!!</string>
     <string name="no_results">Emaitzarik ez !!!</string>
+    <string name="map_location">Maparen Kokapena</string>
+    <string name="add">Gehitu</string>
+
 
     <string name="clear_sky">Zeru garbia</string>
     <string name="frost">Izoztua</string>

@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Kiểm tra kết nối internet !!!</string>
     <string name="check_gps">Kiểm tra cài đặt GPS !!!</string>
     <string name="no_results">Không có kết quả !!!</string>
+    <string name="map_location">Vị trí trên bản đồ</string>
+    <string name="add">Thêm</string>
+
 
     <string name="clear_sky">Trời quang đãng</string>
     <string name="frost">Sương giá</string>

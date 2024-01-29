@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Controlla la connessione Internet !!!</string>
     <string name="check_gps">Controlla le impostazioni GPS !!!</string>
     <string name="no_results">Nessun risultato !!!</string>
+    <string name="map_location">Posizione sulla mappa</string>
+    <string name="add">Aggiungi</string>
+
 
     <string name="clear_sky">Cielo sereno</string>
     <string name="frost">Brina</string>

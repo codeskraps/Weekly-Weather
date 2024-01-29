@@ -22,6 +22,9 @@
     <string name="check_internet_connection">ইন্টারনেট সংযোগ পরীক্ষা করুন !!!</string>
     <string name="check_gps">GPS সেটিংস পরীক্ষা করুন !!!</string>
     <string name="no_results">কোনো ফলাফল নেই !!!</string>
+    <string name="map_location">মানচিত্রের অবস্থান</string>
+    <string name="add">যোগ করুন</string>
+
 
     <string name="clear_sky">পরিষ্কার আকাশ</string>
     <string name="frost">তুষার</string>

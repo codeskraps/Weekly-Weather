@@ -22,6 +22,9 @@
     <string name="check_internet_connection">Dubawa Tsari akan Internet !!!</string>
     <string name="check_gps">Dubawa Tsari akan GPS !!!</string>
     <string name="no_results">Babu Tsarin!!!</string>
+    <string name="map_location">Lokacin ƙasa</string>
+    <string name="add">Ƙara</string>
+
 
     <string name="clear_sky">Saman kai</string>
     <string name="frost">Rawa</string>

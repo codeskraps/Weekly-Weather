@@ -63,9 +63,6 @@ fun WeatherScreen(
     navRoute: (String) -> Unit
 ) {
 
-    var menuExpanded by remember {
-        mutableStateOf(false)
-    }
     var showDialog by remember {
         mutableStateOf(false)
     }
@@ -152,28 +149,6 @@ fun WeatherScreen(
                             contentDescription = resources.getString(R.string.current_location)
                         )
                     }
-                    /*
-                    IconButton(onClick = { menuExpanded = true }) {
-                        Icon(
-                            imageVector = Icons.Default.MoreVert,
-                            tint = MaterialTheme.colorScheme.primary,
-                            contentDescription = "Menu"
-                        )
-                    }
-                    DropdownMenu(
-                        modifier = Modifier.background(MaterialTheme.colorScheme.background),
-                        expanded = menuExpanded,
-                        onDismissRequest = { menuExpanded = false })
-                    {
-                        DropdownMenuItem(
-                            onClick = { showDialog = true },
-                            text = { Text(text = "Save Location") }
-                        )
-                        DropdownMenuItem(
-                            onClick = { /*TODO*/ },
-                            text = { Text(text = "About") }
-                        )
-                    }*/
                 },
             )
         },

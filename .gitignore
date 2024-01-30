@@ -11,6 +11,7 @@
 /builsSrc/build
 .DS_Store
 /build
+/buildSrc
 /captures
 /app/release/*.aab
 /app/release/*.apk

@@ -1,0 +1,1 @@
+/Users/colosseum/AndroidStudioProjects/weather/buildSrc/build/classes/kotlin/main/ConfigData.class

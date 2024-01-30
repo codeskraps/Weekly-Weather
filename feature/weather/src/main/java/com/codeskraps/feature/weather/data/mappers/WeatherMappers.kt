@@ -92,8 +92,8 @@ fun WeatherInfo.toWeatherLocation(): WeatherLocation {
     )
 }
 
-fun WeatherLocation.toGeoLocation(): com.codeskraps.core.local.domain.model.GeoLocation {
-    return com.codeskraps.core.local.domain.model.GeoLocation(
+fun WeatherLocation.toGeoLocation(): GeoLocation {
+    return GeoLocation(
         name = name,
         latitude = lat,
         longitude = long,

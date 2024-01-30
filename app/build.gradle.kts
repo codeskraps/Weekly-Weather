@@ -1,3 +1,5 @@
+import com.codeskraps.weather.ConfigData
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.android.application)
@@ -28,14 +30,14 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = ConfigData.isMinifyRelease
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
         debug {
-            isMinifyEnabled = false
+            isMinifyEnabled = ConfigData.isMinifyDebug
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-DEBUG"
         }

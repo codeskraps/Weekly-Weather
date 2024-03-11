@@ -1,4 +1,4 @@
-package com.codeskraps.core.local.data.db
+package com.codeskraps.core.local.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

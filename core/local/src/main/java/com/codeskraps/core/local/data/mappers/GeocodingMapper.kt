@@ -1,6 +1,6 @@
 package com.codeskraps.core.local.data.mappers
 
-import com.codeskraps.core.local.data.db.GeoLocationEntity
+import com.codeskraps.core.local.data.model.GeoLocationEntity
 import com.codeskraps.core.local.domain.model.GeoLocation
 import kotlin.random.Random
 

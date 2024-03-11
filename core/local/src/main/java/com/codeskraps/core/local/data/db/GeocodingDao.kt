@@ -3,6 +3,7 @@ package com.codeskraps.core.local.data.db
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
+import com.codeskraps.core.local.data.model.GeoLocationEntity
 
 @Dao
 interface GeocodingDao {

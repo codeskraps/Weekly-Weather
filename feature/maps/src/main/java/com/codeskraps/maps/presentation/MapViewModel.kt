@@ -22,8 +22,7 @@ class MapViewModel @Inject constructor(
     private val localGeocodingRepository: LocalGeocodingRepository,
     private val localResources: LocalResourceRepository,
     private val dispatcherProvider: DispatcherProvider,
-) : StateReducerViewModel<MapState, MapEvent, MapAction>() {
-    override fun initState(): MapState = MapState.initial
+) : StateReducerViewModel<MapState, MapEvent, MapAction>(MapState.initial) {
 
     override fun reduceState(currentState: MapState, event: MapEvent): MapState {
         return when (event) {

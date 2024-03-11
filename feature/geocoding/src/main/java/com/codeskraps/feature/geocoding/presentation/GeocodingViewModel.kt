@@ -23,9 +23,7 @@ class GeocodingViewModel @Inject constructor(
     private val geocodingRepository: GeocodingRepository,
     private val localResources: LocalResourceRepository,
     private val dispatcherProvider: DispatcherProvider
-) : StateReducerViewModel<GeoState, GeoEvent, GeoAction>() {
-
-    override fun initState(): GeoState = GeoState.initial
+) : StateReducerViewModel<GeoState, GeoEvent, GeoAction>(GeoState.initial) {
 
     private var searchJob: Job? = null
 

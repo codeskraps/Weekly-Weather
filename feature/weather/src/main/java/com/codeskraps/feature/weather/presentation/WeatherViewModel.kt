@@ -28,9 +28,8 @@ class WeatherViewModel @Inject constructor(
     private val localResource: LocalResourceRepository,
     private val dispatcherProvider: DispatcherProvider,
     private val savedStateHandle: SavedStateHandle
-) : StateReducerViewModel<WeatherState, WeatherEvent, WeatherAction>() {
+) : StateReducerViewModel<WeatherState, WeatherEvent, WeatherAction>(WeatherState.initial) {
 
-    override fun initState(): WeatherState = WeatherState.initial
 
     private var currentLocationString: String = ""
 

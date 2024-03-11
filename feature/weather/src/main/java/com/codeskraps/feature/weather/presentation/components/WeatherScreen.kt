@@ -42,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.codeskraps.feature.common.R
@@ -115,13 +116,15 @@ fun WeatherScreen(
                 ),
                 title = {
                     Text(
-                        if (state.error != null) {
+                        text = if (state.error != null) {
                             resources.getString(R.string.error)
                         } else if (state.isLoading) {
                             resources.getString(R.string.loading)
                         } else {
                             state.weatherInfo?.geoLocation ?: ""
-                        }
+                        },
+                        maxLines = 1,
+                        overflow = TextOverflow.Clip
                     )
                 },
                 actions = {

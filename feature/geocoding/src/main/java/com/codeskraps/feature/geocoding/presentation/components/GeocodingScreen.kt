@@ -7,15 +7,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -91,7 +94,7 @@ fun GeocodingScreen(
                 navigationIcon = {
                     IconButton(onClick = { navUp() }) {
                         Icon(
-                            Icons.Default.ArrowBack,
+                            Icons.AutoMirrored.Filled.ArrowBack,
                             tint = MaterialTheme.colorScheme.primary,
                             contentDescription = resources.getString(R.string.back)
                         )
@@ -200,7 +203,11 @@ fun GeocodingScreen(
                                     )
                                 }
                                 if (index < state.geoLocations.lastIndex)
-                                    Divider(color = Color.Black, thickness = 1.dp)
+                                    Spacer(
+                                        modifier = Modifier
+                                            .background(color = Color.Black)
+                                            .height(1.dp)
+                                    )
                             }
                         }
                     }

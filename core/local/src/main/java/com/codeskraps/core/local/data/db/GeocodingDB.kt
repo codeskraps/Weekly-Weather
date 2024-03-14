@@ -6,9 +6,10 @@ import com.codeskraps.core.local.data.model.GeoLocationEntity
 
 @Database(
     entities = [GeoLocationEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class GeocodingDB: RoomDatabase() {
 
-    abstract fun geocodingDao(): com.codeskraps.core.local.data.db.GeocodingDao
+    abstract fun geocodingDao(): GeocodingDao
 }

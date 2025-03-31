@@ -17,19 +17,15 @@ Weekly Weather provides a clean, intuitive interface for viewing weather forecas
 
 ## Screenshots
 
-<p align="center">
-  <img src="store_assets/Screenshot_20240109_145100.png" width="200" />
-  <img src="store_assets/Screenshot_20240109_145124.png" width="200" /> 
-  <img src="store_assets/Screenshot_20240109_145438.png" width="200" />
-  <img src="store_assets/Screenshot_20240109_145033.png" width="200" />
-  <img src="store_assets/Screenshot_20240109_145421.png" width="200" />
-</p>
+![Screenshot 1](store_assets/Screenshot_20240109_145100.png)
+![Screenshot 2](store_assets/Screenshot_20240109_145124.png)
+![Screenshot 3](store_assets/Screenshot_20240109_145438.png)
+![Screenshot 4](store_assets/Screenshot_20240109_145033.png)
+![Screenshot 5](store_assets/Screenshot_20240109_145421.png)
 
 ## Download
 
-<a href="https://play.google.com/store/apps/details?id=com.arklan.weather">
-  <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" width="200"/>
-</a>
+[![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.arklan.weather)
 
 ## Credits
 

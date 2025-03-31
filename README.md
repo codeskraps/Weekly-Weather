@@ -17,15 +17,10 @@ Weekly Weather provides a clean, intuitive interface for viewing weather forecas
 
 ## Screenshots
 
-<div align="center">
-  <img src="store_assets/Screenshot_20240109_145100.png" width="150" hspace="5" />
-  <img src="store_assets/Screenshot_20240109_145124.png" width="150" hspace="5" /> 
-  <img src="store_assets/Screenshot_20240109_145438.png" width="150" hspace="5" />
-</div>
-<div align="center">
-  <img src="store_assets/Screenshot_20240109_145033.png" width="150" hspace="5" />
-  <img src="store_assets/Screenshot_20240109_145421.png" width="150" hspace="5" />
-</div>
+| Screenshot 1 | Screenshot 2 | Screenshot 3 |
+|:---:|:---:|:---:|
+| ![](store_assets/Screenshot_20240109_145100.png) | ![](store_assets/Screenshot_20240109_145124.png) | ![](store_assets/Screenshot_20240109_145438.png) |
+| ![](store_assets/Screenshot_20240109_145033.png) | ![](store_assets/Screenshot_20240109_145421.png) |  |
 
 ## Download
 

@@ -1,27 +1,41 @@
 ![logo](app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp)
 
-# Weekly-Weather
+# Weekly Weather
 
-A quick view of your weekly weather
+## Overview
 
-A quick overview of you weekly weather of your current location or search and save your favourite locations for easy access.
+Weekly Weather provides a clean, intuitive interface for viewing weather forecasts for your current location and saved favorite places. The app is designed to be straightforward and user-friendly while providing accurate weather information.
 
-Save a GPS weather location with a custom name.
+## Features
 
-App translated into 37 languages.
+- View detailed weekly weather forecasts
+- Automatically detect current location
+- Search and save favorite locations for quick access
+- Custom naming for GPS locations
+- Available in 37 languages
+- Lightweight and battery-efficient
 
-![screenshot_one][screenshot_one]
-![screenshot_two][screenshot_two]
-![screenshot_three][screenshot_three]
-![screenshot_four][screenshot_four]
-![screenshot_five][screenshot_five]
+## Screenshots
 
-[screenshot_one]: store_assets/Screenshot_20240109_145100.png
-[screenshot_two]: store_assets/Screenshot_20240109_145124.png
-[screenshot_three]: store_assets/Screenshot_20240109_145438.png
-[screenshot_four]: store_assets/Screenshot_20240109_145033.png
-[screenshot_five]: store_assets/Screenshot_20240109_145421.png
+<p align="center">
+  <img src="store_assets/Screenshot_20240109_145100.png" width="200" />
+  <img src="store_assets/Screenshot_20240109_145124.png" width="200" /> 
+  <img src="store_assets/Screenshot_20240109_145438.png" width="200" />
+  <img src="store_assets/Screenshot_20240109_145033.png" width="200" />
+  <img src="store_assets/Screenshot_20240109_145421.png" width="200" />
+</p>
 
-Weather data API -> https://open-meteo.com/
-Open Sourced -> https://github.com/codeskraps/Weekly-Weather
-Assets -> https://github.com/Makin-Things/weather-icons
+## Download
+
+<a href="https://play.google.com/store/apps/details?id=com.arklan.weather">
+  <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" width="200"/>
+</a>
+
+## Credits
+
+- Weather data provided by [Open-Meteo](https://open-meteo.com/)
+- Weather icons from [Makin-Things/weather-icons](https://github.com/Makin-Things/weather-icons)
+
+## Source
+
+This application is open source and available on [GitHub](https://github.com/codeskraps/Weekly-Weather).

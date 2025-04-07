@@ -31,11 +31,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = ConfigData.javaVersion
-        targetCompatibility = ConfigData.javaVersion
+        sourceCompatibility = JavaVersion.VERSION_19
+        targetCompatibility = JavaVersion.VERSION_19
     }
     kotlinOptions {
-        jvmTarget = ConfigData.javaTarget
+        jvmTarget = JavaVersion.VERSION_19.toString()
     }
     buildFeatures {
         compose = true

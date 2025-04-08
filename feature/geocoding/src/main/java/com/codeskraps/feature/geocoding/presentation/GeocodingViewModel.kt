@@ -11,6 +11,7 @@ import com.codeskraps.feature.geocoding.repository.GeocodingRepository
 import com.codeskraps.feature.geocoding.presentation.mvi.GeoAction
 import com.codeskraps.feature.geocoding.presentation.mvi.GeoEvent
 import com.codeskraps.feature.geocoding.presentation.mvi.GeoState
+import com.codeskraps.umami.domain.AnalyticsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -19,13 +20,34 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GeocodingViewModel @Inject constructor(
-    private val localGeocodingRepository:LocalGeocodingRepository,
+    private val localGeocodingRepository: LocalGeocodingRepository,
     private val geocodingRepository: GeocodingRepository,
     private val localResources: LocalResourceRepository,
-    private val dispatcherProvider: DispatcherProvider
+    private val dispatcherProvider: DispatcherProvider,
+    private val analyticsRepository: AnalyticsRepository
 ) : StateReducerViewModel<GeoState, GeoEvent, GeoAction>(GeoState.initial) {
 
+    private companion object {
+        private const val ANALYTICS_GEO_SEARCH = "geocoding_search"
+        private const val ANALYTICS_GEO_SAVE = "geocoding_save"
+        private const val ANALYTICS_GEO_DELETE = "geocoding_delete"
+        private const val ANALYTICS_GEO_ERROR = "geocoding_error"
+        private const val ANALYTICS_GEO_CACHE_LOADED = "geocoding_cache_loaded"
+        
+        private const val PARAM_QUERY = "query"
+        private const val PARAM_RESULTS = "results_count"
+        private const val PARAM_LOCATION = "location"
+        private const val PARAM_ERROR = "error_message"
+        private const val PARAM_LOCATIONS_COUNT = "locations_count"
+    }
+
     private var searchJob: Job? = null
+
+    init {
+        viewModelScope.launch(dispatcherProvider.io) {
+            analyticsRepository.trackPageView("geocoding")
+        }
+    }
 
     override fun reduceState(
         currentState: GeoState,
@@ -48,7 +70,11 @@ class GeocodingViewModel @Inject constructor(
                     if (result.data.isNotEmpty()) {
                         val cachedGeoLocations = result.data.sortedBy { it.name }
                         state.handleEvent(GeoEvent.Loaded(cachedGeoLocations))
-
+                        
+                        analyticsRepository.trackEvent(
+                            ANALYTICS_GEO_CACHE_LOADED,
+                            mapOf(PARAM_LOCATIONS_COUNT to cachedGeoLocations.size.toString())
+                        )
                     } else {
                         state.handleEvent(GeoEvent.Error(localResources.getNoResultString()))
                     }
@@ -98,13 +124,23 @@ class GeocodingViewModel @Inject constructor(
             when (val result = geocodingRepository.getGeoLocation(query)) {
                 is Resource.Success -> {
                     if (result.data.isNotEmpty()) {
-                        state.handleEvent(GeoEvent.Loaded(result.data.map { mapped ->
+                        val mappedLocations = result.data.map { mapped ->
                             val cachedGeoLocations = loadCache()
                             val found = cachedGeoLocations.firstOrNull {
                                 it.longitude == mapped.longitude && it.latitude == mapped.latitude
                             }
                             mapped.copy(cached = found != null)
-                        }))
+                        }
+                        
+                        analyticsRepository.trackEvent(
+                            ANALYTICS_GEO_SEARCH,
+                            mapOf(
+                                PARAM_QUERY to query,
+                                PARAM_RESULTS to mappedLocations.size.toString()
+                            )
+                        )
+                        
+                        state.handleEvent(GeoEvent.Loaded(mappedLocations))
                     } else {
                         state.handleEvent(GeoEvent.Error(localResources.getNoResultString()))
                     }
@@ -126,6 +162,11 @@ class GeocodingViewModel @Inject constructor(
 
     private fun onSaveGeoLocation(currentState: GeoState, geoLocation: GeoLocation): GeoState {
         viewModelScope.launch(dispatcherProvider.io) {
+            analyticsRepository.trackEvent(
+                ANALYTICS_GEO_SAVE,
+                mapOf(PARAM_LOCATION to geoLocation.name)
+            )
+            
             val geoLocations = state.value.geoLocations
             when (localGeocodingRepository.saveCacheGeoLocation(geoLocation)) {
                 is Resource.Success -> {
@@ -146,6 +187,11 @@ class GeocodingViewModel @Inject constructor(
 
     private fun onDeleteGeoLocation(currentState: GeoState, geoLocation: GeoLocation): GeoState {
         viewModelScope.launch(dispatcherProvider.io) {
+            analyticsRepository.trackEvent(
+                ANALYTICS_GEO_DELETE,
+                mapOf(PARAM_LOCATION to geoLocation.name)
+            )
+            
             when (localGeocodingRepository.deleteCacheGeoLocation(geoLocation)) {
                 is Resource.Success -> {
                     val geoLocations = state.value.geoLocations
@@ -161,6 +207,12 @@ class GeocodingViewModel @Inject constructor(
     }
 
     private fun onHandleError(currentState: GeoState, message: String): GeoState {
+        viewModelScope.launch(dispatcherProvider.io) {
+            analyticsRepository.trackEvent(
+                ANALYTICS_GEO_ERROR,
+                mapOf(PARAM_ERROR to message)
+            )
+        }
         return currentState.copy(
             isLoading = false,
             error = message,

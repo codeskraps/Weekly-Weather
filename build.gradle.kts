@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.com.google.devtools.ksp) apply false
     alias(libs.plugins.dagger.hilt) apply false
     alias(libs.plugins.secrets.gradle.plugin) apply false
+    alias(libs.plugins.compose.compiler) apply false
 }
 
 tasks.register("clean", Delete::class) {

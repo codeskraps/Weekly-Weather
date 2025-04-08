@@ -1,6 +1,8 @@
 package com.codeskraps.feature.weather.di
 
 import com.codeskraps.feature.weather.data.remote.WeatherApi
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,9 +17,13 @@ object FeatureModule {
 
     @Provides
     fun providesWeatherApi(): WeatherApi {
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
         return Retrofit.Builder()
             .baseUrl("https://api.open-meteo.com/")
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create()
     }

@@ -4,6 +4,7 @@ import com.codeskraps.core.local.domain.repository.LocalResourceRepository
 import com.codeskraps.feature.common.util.Resource
 import com.codeskraps.feature.weather.data.mappers.toWeatherInfo
 import com.codeskraps.feature.weather.data.remote.WeatherApi
+import com.codeskraps.feature.weather.data.util.retryWithExponentialBackoff
 import com.codeskraps.feature.weather.domain.model.WeatherInfo
 import com.codeskraps.feature.weather.domain.repository.WeatherRepository
 import javax.inject.Inject
@@ -15,10 +16,12 @@ class WeatherRepositoryImpl @Inject constructor(
     override suspend fun getWeatherData(lat: Double, long: Double): Resource<WeatherInfo> {
         return try {
             Resource.Success(
-                data = api.getWeatherData(
-                    lat = lat,
-                    long = long
-                ).toWeatherInfo()
+                data = retryWithExponentialBackoff {
+                    api.getWeatherData(
+                        lat = lat,
+                        long = long
+                    ).toWeatherInfo()
+                }
             )
         } catch (e: Exception) {
             e.printStackTrace()

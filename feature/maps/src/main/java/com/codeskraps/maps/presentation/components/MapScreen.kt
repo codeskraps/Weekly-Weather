@@ -1,7 +1,7 @@
 package com.codeskraps.maps.presentation.components
 
 import android.content.res.Resources
-import android.graphics.Bitmap
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
@@ -28,47 +28,67 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.lifecycle.compose.LifecycleResumeEffect
-import com.codeskraps.feature.common.R
+import com.codeskraps.feature.common.components.ObserveAsEvents
 import com.codeskraps.feature.common.navigation.Screen
+import com.codeskraps.feature.common.R
+import com.codeskraps.maps.presentation.mvi.MapAction
 import com.codeskraps.maps.presentation.mvi.MapEvent
 import com.codeskraps.maps.presentation.mvi.MapState
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.CameraPositionState
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapScreen(
     state: MapState,
     handleEvent: (MapEvent) -> Unit,
+    action: Flow<MapAction>,
     navRoute: (String) -> Unit
 ) {
     val context = LocalContext.current
     val resources = context.resources
+    val tag = "WeatherApp:MapScreen"
 
-    var cameraPositionState: CameraPositionState? = null
-    if (state.location != null) {
-        val location = state.location
-        cameraPositionState = rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(location, 10f)
+    ObserveAsEvents(action) { mapAction ->
+        when (mapAction) {
+            is MapAction.ShowToast -> {
+                android.util.Log.i(tag, "Showing toast: ${mapAction.message}")
+                Toast.makeText(context, mapAction.message, Toast.LENGTH_SHORT).show()
+            }
+            MapAction.NavigateUp -> {
+                android.util.Log.i(tag, "Received NavigateUp action")
+                navRoute("nav_up")
+            }
         }
     }
 
+    val cameraPositionState = rememberCameraPositionState {
+        position = state.location?.let {
+            CameraPosition.fromLatLngZoom(it, 10f)
+        } ?: CameraPosition.fromLatLngZoom(LatLng(51.5074, -0.1278), 10f)
+    }
+
     LifecycleResumeEffect(Unit) {
+        android.util.Log.i(tag, "Screen resumed, sending Resume event")
         handleEvent(MapEvent.Resume)
-        onPauseOrDispose {}
+        onPauseOrDispose {
+            android.util.Log.i(tag, "Screen paused/disposed")
+        }
     }
 
     BackHandler {
-        navRoute(Screen.Weather.route)
+        android.util.Log.i(tag, "Back pressed, sending NavigateUp event")
+        handleEvent(MapEvent.NavigateUp)
     }
 
     Scaffold(
@@ -82,7 +102,12 @@ fun MapScreen(
                     Text(resources.getString(R.string.map_location))
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navRoute(Screen.Weather.route) }) {
+                    IconButton(
+                        onClick = {
+                            android.util.Log.i(tag, "Back button clicked, sending NavigateUp event")
+                            handleEvent(MapEvent.NavigateUp)
+                        }
+                    ) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
                             tint = MaterialTheme.colorScheme.primary,
@@ -91,20 +116,22 @@ fun MapScreen(
                     }
                 },
                 actions = {
-                    if (cameraPositionState == null) {
+                    if (state.isLoading) {
                         CircularProgressIndicator(
                             modifier = Modifier.padding(15.dp)
                         )
                     } else {
-                        IconButton(onClick = {
-                            navRoute(
-                                Screen.Weather.createRoute(
+                        IconButton(
+                            onClick = {
+                                val route = Screen.Weather.createRoute(
                                     resources.getString(R.string.map_location),
                                     cameraPositionState.position.target.latitude,
                                     cameraPositionState.position.target.longitude
                                 )
-                            )
-                        }) {
+                                android.util.Log.i(tag, "Add location clicked, navigating to route: $route")
+                                navRoute(route)
+                            }
+                        ) {
                             Icon(
                                 imageVector = Icons.Default.Add,
                                 tint = MaterialTheme.colorScheme.primary,
@@ -116,39 +143,36 @@ fun MapScreen(
             )
         }
     ) { paddingValues ->
-
-        if (cameraPositionState != null) {
-            Box(Modifier.fillMaxSize()) {
-                GoogleMap(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
-                    cameraPositionState = cameraPositionState
-                ) {
-                    state.geoLocations.forEach { geoLocation ->
-                        Marker(
-                            state = MarkerState(
-                                position = LatLng(
-                                    geoLocation.latitude,
-                                    geoLocation.longitude
-                                )
-                            ),
-                            title = geoLocation.name,
-                            icon = vectorToBitmap(
-                                resources = resources,
-                                id = R.drawable.ic_location,
-                                color = MaterialTheme.colorScheme.surface.toArgb()
+        Box(Modifier.fillMaxSize()) {
+            GoogleMap(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
+                cameraPositionState = cameraPositionState
+            ) {
+                state.geoLocations.forEach { geoLocation ->
+                    Marker(
+                        state = MarkerState(
+                            position = LatLng(
+                                geoLocation.latitude,
+                                geoLocation.longitude
                             )
+                        ),
+                        title = geoLocation.name,
+                        icon = vectorToBitmap(
+                            resources = resources,
+                            id = R.drawable.ic_location,
+                            color = MaterialTheme.colorScheme.surface.toArgb()
                         )
-                    }
+                    )
                 }
-                Icon(
-                    imageVector = Icons.Default.Place,
-                    tint = MaterialTheme.colorScheme.surface,
-                    contentDescription = resources.getString(R.string.map_location),
-                    modifier = Modifier.align(Alignment.Center)
-                )
             }
+            Icon(
+                imageVector = Icons.Default.Place,
+                tint = MaterialTheme.colorScheme.surface,
+                contentDescription = resources.getString(R.string.map_location),
+                modifier = Modifier.align(Alignment.Center)
+            )
         }
     }
 }
@@ -159,10 +183,7 @@ private fun vectorToBitmap(
     @ColorInt color: Int
 ): BitmapDescriptor {
     val vectorDrawable = ResourcesCompat.getDrawable(resources, id, null)
-    val bitmap = Bitmap.createBitmap(
-        vectorDrawable!!.intrinsicWidth,
-        vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888
-    )
+    val bitmap = createBitmap(vectorDrawable!!.intrinsicWidth, vectorDrawable.intrinsicHeight)
     val canvas = android.graphics.Canvas(bitmap)
     vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
     DrawableCompat.setTint(vectorDrawable, color)

@@ -1,11 +1,11 @@
 import com.codeskraps.weather.ConfigData
 
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
     alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -59,6 +59,7 @@ android {
 dependencies {
     implementation(project(mapOf("path" to ":feature:common")))
     implementation(project(mapOf("path" to ":core:local")))
+    implementation(project(mapOf("path" to ":core:umami")))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -76,9 +77,11 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
-    // Retrofit
+    // Retrofit & Moshi
     implementation(libs.retrofit.retrofit)
     implementation(libs.retrofit.converter.moshi)
+    implementation(libs.moshi.kotlin)
+    ksp(libs.moshi.kotlin.codegen)
 
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)

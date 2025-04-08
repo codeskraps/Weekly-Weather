@@ -1,8 +1,8 @@
 package com.codeskraps.feature.weather.data.mappers
 
 import com.codeskraps.core.local.domain.model.GeoLocation
+import com.codeskraps.feature.weather.data.remote.HourlyDto
 import com.codeskraps.feature.weather.data.remote.SunDataDto
-import com.codeskraps.feature.weather.data.remote.WeatherDataDto
 import com.codeskraps.feature.weather.data.remote.WeatherDto
 import com.codeskraps.feature.weather.domain.model.SunData
 import com.codeskraps.feature.weather.domain.model.WeatherData
@@ -21,14 +21,14 @@ private data class IndexWeatherData(
     val data: WeatherData
 )
 
-fun WeatherDataDto.toWeatherDataMap(sunData: SunData): ImmutableMap<Int, ImmutableList<WeatherData>> {
+fun HourlyDto.toWeatherDataMap(sunData: SunData): ImmutableMap<Int, ImmutableList<WeatherData>> {
     return time.mapIndexed { index, time ->
         val localDateTime = LocalDateTime.parse(time, DateTimeFormatter.ISO_DATE_TIME)
-        val weatherCode = weatherCodes[index]
+        val weatherCode = weathercode[index]
         val sunrise = sunData.sunrise.first { it.dayOfMonth == localDateTime.dayOfMonth }
         val sunset = sunData.sunset.first { it.dayOfMonth == localDateTime.dayOfMonth }
         val isDay = isDay(localDateTime, sunrise, sunset)
-        val temperature = temperatures[index]
+        val temperature = temperature_2m[index]
         val isFreezing = isFreezing(temperature)
 
         IndexWeatherData(
@@ -36,9 +36,9 @@ fun WeatherDataDto.toWeatherDataMap(sunData: SunData): ImmutableMap<Int, Immutab
             data = WeatherData(
                 time = localDateTime,
                 temperatureCelsius = temperature,
-                pressure = pressures[index],
-                windSpeed = windSpeeds[index],
-                humidity = humidities[index],
+                pressure = pressure_msl[index],
+                windSpeed = windspeed_10m[index],
+                humidity = relativehumidity_2m[index],
                 weatherType = WeatherType.fromWMO(
                     weatherCode,
                     isDay,
@@ -71,11 +71,11 @@ private fun SunDataDto.sunData(): SunData {
 }
 
 fun WeatherDto.toWeatherInfo(): WeatherInfo {
-    val weatherDataMap = weatherData.toWeatherDataMap(sunData.sunData())
+    val weatherDataMap = hourly.toWeatherDataMap(daily.sunData())
     val now = LocalDateTime.now()
-    val currentWeatherData = weatherDataMap[0]?.find {
-        val hour = if (now.minute < 30) now.hour else now.hour + 1
-        it.time.hour == hour
+    val currentWeatherData = weatherDataMap[0]?.minByOrNull { weatherData ->
+        val timeDiff = kotlin.math.abs(weatherData.time.hour - now.hour)
+        if (timeDiff > 12) 24 - timeDiff else timeDiff  // Handle cases around midnight
     }
     return WeatherInfo(
         geoLocation = "",

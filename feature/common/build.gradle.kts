@@ -1,11 +1,11 @@
 import com.codeskraps.weather.ConfigData
 
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
     alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {

@@ -85,7 +85,10 @@ fun WeatherForecast(
         LazyRow(
             state = listState
         ) {
-            items(perDay.filter { it.time.plusHours(1) > LocalDateTime.now() }) { weatherData ->
+            val filteredData = perDay.filter { it.time.plusHours(1) > LocalDateTime.now() }
+            // If all data points would be filtered out, keep the most recent one
+            val displayData = if (filteredData.isEmpty()) listOf(perDay.maxBy { it.time }) else filteredData
+            items(displayData) { weatherData ->
                 HourlyWeatherDisplay(
                     weatherData = weatherData,
                     modifier = Modifier

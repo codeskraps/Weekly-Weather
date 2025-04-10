@@ -19,3 +19,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Added to fix R8 warning for missing StringConcatFactory
+-dontwarn java.lang.invoke.StringConcatFactory

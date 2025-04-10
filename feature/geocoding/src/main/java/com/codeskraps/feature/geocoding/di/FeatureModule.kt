@@ -5,16 +5,18 @@ import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 object FeatureModule {
 
     @Provides
+    @Singleton
     fun providesGeocodingApi(): GeocodingApi {
         val moshi = Moshi.Builder()
             .build()

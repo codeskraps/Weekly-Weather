@@ -16,8 +16,8 @@ android {
         applicationId = "com.arklan.weather"
         minSdk = ConfigData.minSdk
         targetSdk = ConfigData.targetSdk
-        versionCode = 16
-        versionName = "2.6"
+        versionCode = 17
+        versionName = "2.6.1"
         setProperty("archivesBaseName", "weekly-weather-v$versionName.$versionCode")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -71,6 +71,8 @@ dependencies {
     implementation(project(mapOf("path" to ":feature:weather")))
     implementation(project(mapOf("path" to ":feature:maps")))
     implementation(project(mapOf("path" to ":core:umami")))
+    implementation(project(mapOf("path" to ":core:local")))
+    implementation(project(mapOf("path" to ":core:location")))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

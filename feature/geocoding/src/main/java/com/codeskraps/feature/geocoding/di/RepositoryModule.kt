@@ -5,13 +5,15 @@ import com.codeskraps.feature.geocoding.repository.GeocodingRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
 
     @Binds
+    @Singleton
     abstract fun bindsGeocodingRepository(
         geocodingRepositoryImpl: GeocodingRepositoryImpl
     ): GeocodingRepository

@@ -1,7 +1,6 @@
 package com.codeskraps.maps.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.codeskraps.core.local.domain.model.GeoLocation
 import com.codeskraps.core.local.domain.repository.LocalGeocodingRepository
 import com.codeskraps.core.local.domain.repository.LocalResourceRepository
 import com.codeskraps.core.location.domain.LocationTracker
@@ -105,13 +104,6 @@ class MapViewModel @Inject constructor(
                     error = event.message,
                     isLoading = false
                 )
-            }
-            MapEvent.NavigateUp -> {
-                android.util.Log.i(TAG, "Handling NavigateUp event")
-                viewModelScope.launch {
-                    actionChannel.send(MapAction.NavigateUp)
-                }
-                currentState
             }
         }
     }

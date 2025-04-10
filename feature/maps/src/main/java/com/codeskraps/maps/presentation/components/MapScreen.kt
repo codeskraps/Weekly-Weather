@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
@@ -31,9 +32,9 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.lifecycle.compose.LifecycleResumeEffect
+import com.codeskraps.feature.common.R
 import com.codeskraps.feature.common.components.ObserveAsEvents
 import com.codeskraps.feature.common.navigation.Screen
-import com.codeskraps.feature.common.R
 import com.codeskraps.maps.presentation.mvi.MapAction
 import com.codeskraps.maps.presentation.mvi.MapEvent
 import com.codeskraps.maps.presentation.mvi.MapState
@@ -65,17 +66,19 @@ fun MapScreen(
                 android.util.Log.i(tag, "Showing toast: ${mapAction.message}")
                 Toast.makeText(context, mapAction.message, Toast.LENGTH_SHORT).show()
             }
-            MapAction.NavigateUp -> {
-                android.util.Log.i(tag, "Received NavigateUp action")
-                navRoute("nav_up")
-            }
         }
     }
 
     val cameraPositionState = rememberCameraPositionState {
-        position = state.location?.let {
-            CameraPosition.fromLatLngZoom(it, 10f)
-        } ?: CameraPosition.fromLatLngZoom(LatLng(51.5074, -0.1278), 10f)
+        position = CameraPosition.fromLatLngZoom(LatLng(0.0, 0.0), 10f)
+    }
+
+    // Use LaunchedEffect to update camera position when location changes
+    LaunchedEffect(state.location) {
+        state.location?.let {
+            android.util.Log.i(tag, "Updating camera position to: $it")
+            cameraPositionState.position = CameraPosition.fromLatLngZoom(it, 10f)
+        }
     }
 
     LifecycleResumeEffect(Unit) {
@@ -88,7 +91,7 @@ fun MapScreen(
 
     BackHandler {
         android.util.Log.i(tag, "Back pressed, sending NavigateUp event")
-        handleEvent(MapEvent.NavigateUp)
+        navRoute("nav_up")
     }
 
     Scaffold(
@@ -105,7 +108,7 @@ fun MapScreen(
                     IconButton(
                         onClick = {
                             android.util.Log.i(tag, "Back button clicked, sending NavigateUp event")
-                            handleEvent(MapEvent.NavigateUp)
+                            navRoute("nav_up")
                         }
                     ) {
                         Icon(

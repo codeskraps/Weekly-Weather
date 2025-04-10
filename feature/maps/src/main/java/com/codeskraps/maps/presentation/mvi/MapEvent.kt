@@ -9,5 +9,4 @@ sealed interface MapEvent {
     data object LoadCache : MapEvent
     data class Loaded(val geoLocations: List<GeoLocation>) : MapEvent
     data class Error(val message: String) : MapEvent
-    data object NavigateUp : MapEvent
 }

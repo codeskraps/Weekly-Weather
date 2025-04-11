@@ -14,7 +14,7 @@
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+-keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
@@ -38,6 +38,40 @@
 -keep class com.codeskraps.core.local.domain.repository.** { *; }
 -keep class com.codeskraps.core.location.domain.** { *; }
 -keep class com.codeskraps.umami.domain.** { *; }
+
+# Keep Koin module classes
+-keep class com.codeskraps.maps.di.** { *; }
+-keep class com.codeskraps.maps.di.FeatureModuleKt { *; }
+
+# Keep Compose screen classes
+-keep class com.codeskraps.maps.presentation.components.** { *; }
+-keep class com.codeskraps.maps.presentation.components.MapScreenKt { *; }
+-keep class com.codeskraps.maps.presentation.components.MapScreenKt$* { *; }
+
+# Keep Compose-related classes
+-keep class androidx.compose.** { *; }
+-keep class androidx.compose.runtime.** { *; }
+-keep class androidx.compose.ui.** { *; }
+-keep class androidx.compose.foundation.** { *; }
+-keep class androidx.compose.material.** { *; }
+-keep class androidx.compose.material3.** { *; }
+
+# Less aggressive obfuscation
+-keepnames class com.codeskraps.maps.** { *; }
+-keepnames class com.codeskraps.maps.data.** { *; }
+-keepnames class com.codeskraps.maps.domain.** { *; }
+-keepnames class com.codeskraps.maps.presentation.** { *; }
+
+# Keep Kotlin metadata
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations, RuntimeVisibleTypeAnnotations
+-keepattributes *Annotation*
+-keepattributes Signature
+-keepattributes InnerClasses
+-keepattributes EnclosingMethod
+
+# Keep Kotlin coroutines
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
 
 # Dontwarn rules
 -dontwarn com.codeskraps.core.local.domain.model.GeoLocation

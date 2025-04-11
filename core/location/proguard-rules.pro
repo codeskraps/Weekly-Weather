@@ -14,7 +14,7 @@
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+-keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
@@ -28,6 +28,27 @@
 # Keep specifically problematic classes
 -keep class com.codeskraps.core.location.di.CoreLocationModule_ProvidesLocationTrackerFactory { *; }
 -keep class com.codeskraps.core.location.domain.LocationTracker { *; }
+
+# Keep Koin module classes
+-keep class com.codeskraps.core.location.di.** { *; }
+-keep class com.codeskraps.core.location.di.FeatureModuleKt { *; }
+
+# Less aggressive obfuscation
+-keepnames class com.codeskraps.core.location.** { *; }
+-keepnames class com.codeskraps.core.location.data.** { *; }
+-keepnames class com.codeskraps.core.location.domain.** { *; }
+-keepnames class com.codeskraps.core.location.di.** { *; }
+
+# Keep Kotlin metadata
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations, RuntimeVisibleTypeAnnotations
+-keepattributes *Annotation*
+-keepattributes Signature
+-keepattributes InnerClasses
+-keepattributes EnclosingMethod
+
+# Keep Kotlin coroutines
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
 
 # Java language APIs
 -dontwarn java.lang.invoke.StringConcatFactory

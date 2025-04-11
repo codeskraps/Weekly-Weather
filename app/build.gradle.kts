@@ -28,11 +28,14 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = ConfigData.isMinifyRelease
+            //applicationIdSuffix = ".release"
+            //versionNameSuffix = "-RELEASE"
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
             isShrinkResources = true
+            //signingConfig = signingConfigs.getByName("debug")
         }
         debug {
             isMinifyEnabled = ConfigData.isMinifyDebug

@@ -22,3 +22,16 @@
 
 # Added to fix R8 warning for missing StringConcatFactory
 -dontwarn java.lang.invoke.StringConcatFactory
+
+# Keep Hilt generated classes
+-keep class com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_HiltModules$* { *; }
+-keep class com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_Factory { *; }
+-keep class com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_MembersInjector { *; }
+
+# Keep specific Hilt ViewModel components
+-keep class com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_HiltModules$BindsModule { *; }
+-keep class com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_HiltModules$KeyModule { *; }
+
+# Keep Hilt ViewModel factory and members injector
+-keep class com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_Factory { *; }
+-keep class com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_MembersInjector { *; }

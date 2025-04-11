@@ -63,7 +63,6 @@ fun WeatherScreen(
     action: Flow<WeatherAction>,
     navRoute: (String) -> Unit
 ) {
-
     var showDialog by remember {
         mutableStateOf(false)
     }
@@ -91,10 +90,10 @@ fun WeatherScreen(
     }
 
     val isLoading = state.isLoading
-    val pullRefreshState = rememberPullRefreshState(isLoading, {
-        handleEvent(WeatherEvent.Refresh)
-    })
-
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = isLoading,
+        onRefresh = { handleEvent(WeatherEvent.Refresh) }
+    )
 
     LaunchedEffect(key1 = Unit) {
         permissionLauncher.launch(
@@ -178,7 +177,6 @@ fun WeatherScreen(
         ) {
             if (state.isLoading) {
                 Text(text = "")
-
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center)
                 )
@@ -190,12 +188,14 @@ fun WeatherScreen(
                     modifier = Modifier.align(Alignment.Center)
                 )
             } else {
-                Column(
+                Box(
                     modifier = Modifier
                         .fillMaxSize()
+                        .pullRefresh(pullRefreshState)
                 ) {
-                    Box(Modifier.pullRefresh(pullRefreshState)) {
-
+                    Column(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
                         state.weatherInfo.currentWeatherData?.let {
                             LazyColumn {
                                 item {
@@ -207,30 +207,30 @@ fun WeatherScreen(
                             }
                         }
 
-                        PullRefreshIndicator(
-                            refreshing = false,
-                            state = pullRefreshState,
-                            Modifier.align(Alignment.TopCenter)
-                        )
-                    }
-
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.background)
-                    ) {
-                        item {
-                            state.weatherInfo.weatherDataPerDay.forEach { perDay ->
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(MaterialTheme.colorScheme.background)
+                        ) {
+                            item {
+                                state.weatherInfo.weatherDataPerDay.forEach { perDay ->
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                    WeatherForecast(
+                                        state.weatherInfo,
+                                        perDay.value,
+                                        handleEvent
+                                    )
+                                }
                                 Spacer(modifier = Modifier.height(16.dp))
-                                WeatherForecast(
-                                    state.weatherInfo,
-                                    perDay.value,
-                                    handleEvent
-                                )
                             }
-                            Spacer(modifier = Modifier.height(16.dp))
                         }
                     }
+
+                    PullRefreshIndicator(
+                        refreshing = isLoading,
+                        state = pullRefreshState,
+                        modifier = Modifier.align(Alignment.TopCenter)
+                    )
                 }
             }
 

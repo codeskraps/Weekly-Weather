@@ -5,9 +5,8 @@ import com.codeskraps.feature.common.util.Resource
 import com.codeskraps.feature.geocoding.data.mappers.toGeocoding
 import com.codeskraps.feature.geocoding.data.remote.GeocodingApi
 import com.codeskraps.feature.geocoding.repository.GeocodingRepository
-import javax.inject.Inject
 
-class GeocodingRepositoryImpl @Inject constructor(
+class GeocodingRepositoryImpl(
     private val api: GeocodingApi,
 ) : GeocodingRepository {
 

@@ -12,14 +12,11 @@ import com.codeskraps.feature.geocoding.presentation.mvi.GeoAction
 import com.codeskraps.feature.geocoding.presentation.mvi.GeoEvent
 import com.codeskraps.feature.geocoding.presentation.mvi.GeoState
 import com.codeskraps.umami.domain.AnalyticsRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class GeocodingViewModel @Inject constructor(
+class GeocodingViewModel(
     private val localGeocodingRepository: LocalGeocodingRepository,
     private val geocodingRepository: GeocodingRepository,
     private val localResources: LocalResourceRepository,

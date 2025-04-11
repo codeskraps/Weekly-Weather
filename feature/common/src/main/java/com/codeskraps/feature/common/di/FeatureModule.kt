@@ -4,27 +4,14 @@ import android.app.Application
 import android.content.res.Resources
 import com.codeskraps.feature.common.dispatcher.DispatcherProvider
 import com.codeskraps.feature.common.dispatcher.StandardDispatcherProvider
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import org.koin.android.ext.koin.androidApplication
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object FeatureModule {
+val commonModule = module {
+    single<DispatcherProvider> { StandardDispatcherProvider() }
+    single { provideResources(androidApplication()) }
+}
 
-    @Provides
-    @Singleton
-    fun providesDispatcherProvider(): DispatcherProvider {
-        return StandardDispatcherProvider()
-    }
-
-    @Provides
-    @Singleton
-    fun providesResources(
-        application: Application
-    ): Resources {
-        return application.resources
-    }
+private fun provideResources(application: Application): Resources {
+    return application.resources
 }

@@ -17,12 +17,9 @@ import com.codeskraps.feature.weather.presentation.mvi.WeatherEvent
 import com.codeskraps.feature.weather.presentation.mvi.WeatherState
 import com.codeskraps.core.location.domain.LocationTracker
 import com.codeskraps.umami.domain.AnalyticsRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class WeatherViewModel @Inject constructor(
+class WeatherViewModel(
     private val localGeocodingRepository: LocalGeocodingRepository,
     private val weatherRepository: WeatherRepository,
     private val locationTracker: LocationTracker,

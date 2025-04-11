@@ -1,16 +1,17 @@
 package com.codeskraps.umami.data.repository
 
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import android.provider.Settings
 import com.codeskraps.umami.domain.DeviceIdRepository
 import java.util.UUID
-import javax.inject.Inject
 
-class DeviceIdRepositoryImpl @Inject constructor(
-    context: Context
+class DeviceIdRepositoryImpl(
+    private val application: Application
 ) : DeviceIdRepository {
 
-    private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private val prefs: SharedPreferences = application.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     override suspend fun getOrCreateDeviceId(): String {
         return prefs.getString(KEY_DEVICE_ID, null) ?: generateAndSaveDeviceId()

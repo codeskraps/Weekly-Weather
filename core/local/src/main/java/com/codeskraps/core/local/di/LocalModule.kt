@@ -1,26 +1,27 @@
 package com.codeskraps.core.local.di
 
-import android.app.Application
-import androidx.room.Room
+import android.content.Context
 import com.codeskraps.core.local.data.db.GeocodingDB
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import com.codeskraps.core.local.data.repository.LocalGeocodingRepositoryImpl
+import com.codeskraps.core.local.data.repository.LocalResourceRepositoryImpl
+import com.codeskraps.core.local.domain.repository.LocalGeocodingRepository
+import com.codeskraps.core.local.domain.repository.LocalResourceRepository
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object LocalModule {
-
-    @Provides
-    @Singleton
-    fun providesGeocodingDB(
-        application: Application
-    ): GeocodingDB {
-        return Room.databaseBuilder(
-            application,
-            GeocodingDB::class.java, "database-name"
-        ).build()
+val localModule = module {
+    single<LocalResourceRepository> { 
+        LocalResourceRepositoryImpl(androidContext())
+    }
+    
+    single { 
+        GeocodingDB.getInstance(androidContext())
+    }
+    
+    single<LocalGeocodingRepository> { 
+        LocalGeocodingRepositoryImpl(
+            geocodingDB = get(),
+            localResource = get()
+        )
     }
 }

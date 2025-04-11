@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
-    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -40,17 +39,17 @@ android {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":feature:common")))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
 
+    // Koin
+    implementation(libs.koin.android)
+
     // Location Services
     implementation(libs.android.play.services.location)
-
-    //Dagger - Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
 
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)

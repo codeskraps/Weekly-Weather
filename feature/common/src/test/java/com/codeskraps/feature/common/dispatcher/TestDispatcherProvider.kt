@@ -11,4 +11,4 @@ class TestDispatcherProvider(
     override val ui: CoroutineDispatcher get() = StandardTestDispatcher(scheduler)
     override val io: CoroutineDispatcher get() = StandardTestDispatcher(scheduler)
     override val default: CoroutineDispatcher get() = StandardTestDispatcher(scheduler)
-}
+} 

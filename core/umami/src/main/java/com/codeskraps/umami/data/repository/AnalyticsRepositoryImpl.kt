@@ -1,14 +1,23 @@
 package com.codeskraps.umami.data.repository
 
+import android.app.Application
 import com.codeskraps.umami.data.remote.UmamiAnalyticsDataSource
+import com.codeskraps.umami.data.remote.UmamiConfig
 import com.codeskraps.umami.domain.AnalyticsRepository
 import com.codeskraps.umami.domain.DeviceIdRepository
-import javax.inject.Inject
 
-internal class AnalyticsRepositoryImpl @Inject constructor(
-    private val analyticsDataSource: UmamiAnalyticsDataSource,
+internal class AnalyticsRepositoryImpl(
+    private val application: Application,
     private val deviceIdRepository: DeviceIdRepository
 ) : AnalyticsRepository {
+    private val analyticsDataSource = UmamiAnalyticsDataSource(
+        context = application,
+        config = UmamiConfig(
+            scriptUrl = "https://umami.codeskraps.com/script.js",
+            websiteId = "047c76b3-6f42-45f0-ba9b-772b056ccdc1",
+            baseUrl = "https://umami.codeskraps.com"
+        )
+    )
 
     override suspend fun initialize() {
         analyticsDataSource.initialize()

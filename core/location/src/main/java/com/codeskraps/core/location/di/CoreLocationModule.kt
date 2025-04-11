@@ -4,24 +4,16 @@ import android.app.Application
 import com.codeskraps.core.location.data.DefaultLocationTracker
 import com.codeskraps.core.location.domain.LocationTracker
 import com.google.android.gms.location.LocationServices
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import org.koin.android.ext.koin.androidApplication
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object CoreLocationModule {
+val locationModule = module {
+    single<LocationTracker> { provideLocationTracker(androidApplication()) }
+}
 
-    @Provides
-    @Singleton
-    fun providesLocationTracker(
-        app: Application
-    ): LocationTracker {
-        return DefaultLocationTracker(
-            locationClient = LocationServices.getFusedLocationProviderClient(app),
-            application = app
-        )
-    }
+private fun provideLocationTracker(app: Application): LocationTracker {
+    return DefaultLocationTracker(
+        locationClient = LocationServices.getFusedLocationProviderClient(app),
+        application = app
+    )
 }

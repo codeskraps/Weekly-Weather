@@ -12,12 +12,9 @@ import com.codeskraps.maps.presentation.mvi.MapEvent
 import com.codeskraps.maps.presentation.mvi.MapState
 import com.codeskraps.umami.domain.AnalyticsRepository
 import com.google.android.gms.maps.model.LatLng
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class MapViewModel @Inject constructor(
+class MapViewModel(
     private val locationTracker: LocationTracker,
     private val localGeocodingRepository: LocalGeocodingRepository,
     private val localResources: LocalResourceRepository,

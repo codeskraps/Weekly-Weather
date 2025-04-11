@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
-    alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -16,8 +15,8 @@ android {
         applicationId = "com.arklan.weather"
         minSdk = ConfigData.minSdk
         targetSdk = ConfigData.targetSdk
-        versionCode = 17
-        versionName = "2.6.1"
+        versionCode = 18
+        versionName = "2.6.2"
         setProperty("archivesBaseName", "weekly-weather-v$versionName.$versionCode")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -26,8 +25,6 @@ android {
         }
     }
 
-
-
     buildTypes {
         release {
             isMinifyEnabled = ConfigData.isMinifyRelease
@@ -35,6 +32,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            isShrinkResources = true
         }
         debug {
             isMinifyEnabled = ConfigData.isMinifyDebug
@@ -60,9 +58,6 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    hilt {
-        enableAggregatingTask = true
-    }
 }
 
 dependencies {
@@ -87,10 +82,10 @@ dependencies {
     implementation(libs.androidx.compose.graphics)
     implementation(libs.androidx.compose.tooling.preview)
 
-    //Dagger - Hilt
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation.compose)
-    ksp(libs.hilt.android.compiler)
+    // Koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.androidx.compose.navigation)
 
     implementation(libs.coroutines.test)
     testImplementation(libs.junit.junit)

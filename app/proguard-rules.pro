@@ -35,8 +35,80 @@
 -keep class com.codeskraps.maps.** { *; }
 -keep class com.codeskraps.umami.** { *; }
 
+# Additional dontwarn rules from missing_rules.txt
+-dontwarn com.codeskraps.feature.geocoding.di.FeatureModuleKt
+-dontwarn com.codeskraps.feature.weather.di.FeatureModuleKt
+
+# Koin
+-keepnames class android.arch.lifecycle.ViewModel
+-keepclassmembers public class * extends android.arch.lifecycle.ViewModel { public <init>(...); }
+-keepclassmembers class com.codeskraps.** { public <init>(...); }
+-keepclassmembers class * { @org.koin.core.annotation.KoinInternalApi *; }
+-keep class org.koin.** { *; }
+-keep class com.codeskraps.**.di.** { *; }
+-keep class * extends org.koin.core.module.Module { *; }
+
+# Keep Koin Modules
+-keep class com.codeskraps.feature.geocoding.di.FeatureModuleKt { *; }
+-keep class com.codeskraps.feature.maps.di.FeatureModuleKt { *; }
+-keep class com.codeskraps.feature.weather.di.FeatureModuleKt { *; }
+
 # Java language APIs
 -dontwarn java.lang.invoke.StringConcatFactory
+
+# Hilt ViewModel classes
+-keep class * extends androidx.lifecycle.ViewModel { *; }
+-keep class * extends dagger.hilt.android.lifecycle.HiltViewModel { *; }
+-keep,allowobfuscation @dagger.hilt.android.lifecycle.HiltViewModel class *
+-keepclasseswithmembers class * {
+    @javax.inject.Inject <init>(...);
+}
+
+# Explicitly keep Hilt generated ViewModel classes
+-keep class com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_HiltModules$* { *; }
+-keep class com.codeskraps.feature.weather.presentation.WeatherViewModel_HiltModules$* { *; }
+-keep class com.codeskraps.maps.presentation.MapViewModel_HiltModules$* { *; }
+
+# Keep all Hilt related classes
+-keep class com.codeskraps.weather.WeatherApp_HiltComponents$* { *; }
+-keep class dagger.hilt.** { *; }
+-keep class javax.inject.** { *; }
+-keep class * extends dagger.hilt.android.internal.managers.ViewComponentManager$FragmentContextWrapper { *; }
+
+# Keep Dagger components
+-keep,allowobfuscation,allowshrinking @dagger.** class *
+-keep,allowobfuscation,allowshrinking class dagger.** { *; }
+-keep,allowobfuscation,allowshrinking class javax.inject.** { *; }
+-keep,allowobfuscation,allowshrinking class * extends dagger.internal.Factory { *; }
+-keepclassmembers,allowobfuscation class * {
+    @javax.inject.* *;
+    @dagger.* *;
+    <init>();
+}
+
+# Keep all generated Hilt code
+-keep class **_HiltModules$* { *; }
+-keep class **_Impl { *; }
+-keep class **_Factory { *; }
+-keep class **_MembersInjector { *; }
+
+# Keep specific Hilt ViewModel components
+-keep class com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_HiltModules$BindsModule { *; }
+-keep class com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_HiltModules$KeyModule { *; }
+-keep class com.codeskraps.feature.weather.presentation.WeatherViewModel_HiltModules$BindsModule { *; }
+-keep class com.codeskraps.feature.weather.presentation.WeatherViewModel_HiltModules$KeyModule { *; }
+-keep class com.codeskraps.maps.presentation.MapViewModel_HiltModules$BindsModule { *; }
+-keep class com.codeskraps.maps.presentation.MapViewModel_HiltModules$KeyModule { *; }
+
+# Keep Hilt ViewModel factories
+-keep class com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_Factory { *; }
+-keep class com.codeskraps.feature.weather.presentation.WeatherViewModel_Factory { *; }
+-keep class com.codeskraps.maps.presentation.MapViewModel_Factory { *; }
+
+# Keep Hilt ViewModel members injectors
+-keep class com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_MembersInjector { *; }
+-keep class com.codeskraps.feature.weather.presentation.WeatherViewModel_MembersInjector { *; }
+-keep class com.codeskraps.maps.presentation.MapViewModel_MembersInjector { *; }
 
 # Additionally, adding specific rules from the missing_rules.txt
 -dontwarn com.codeskraps.core.local.data.repository.LocalGeocodingRepositoryImpl
@@ -57,7 +129,6 @@
 -dontwarn com.codeskraps.feature.geocoding.data.repository.GeocodingRepositoryImpl
 -dontwarn com.codeskraps.feature.geocoding.di.FeatureModule_ProvidesGeocodingApiFactory
 -dontwarn com.codeskraps.feature.geocoding.presentation.GeocodingViewModel
--dontwarn com.codeskraps.feature.geocoding.presentation.GeocodingViewModel_HiltModules$KeyModule
 -dontwarn com.codeskraps.feature.geocoding.presentation.components.GeocodingScreenKt
 -dontwarn com.codeskraps.feature.geocoding.presentation.mvi.GeoEvent
 -dontwarn com.codeskraps.feature.geocoding.presentation.mvi.GeoState
@@ -67,12 +138,10 @@
 -dontwarn com.codeskraps.feature.weather.di.FeatureModule_ProvidesWeatherApiFactory
 -dontwarn com.codeskraps.feature.weather.domain.repository.WeatherRepository
 -dontwarn com.codeskraps.feature.weather.presentation.WeatherViewModel
--dontwarn com.codeskraps.feature.weather.presentation.WeatherViewModel_HiltModules$KeyModule
 -dontwarn com.codeskraps.feature.weather.presentation.components.WeatherScreenKt
 -dontwarn com.codeskraps.feature.weather.presentation.mvi.WeatherEvent
 -dontwarn com.codeskraps.feature.weather.presentation.mvi.WeatherState
 -dontwarn com.codeskraps.maps.presentation.MapViewModel
--dontwarn com.codeskraps.maps.presentation.MapViewModel_HiltModules$KeyModule
 -dontwarn com.codeskraps.maps.presentation.components.MapScreenKt
 -dontwarn com.codeskraps.maps.presentation.mvi.MapEvent
 -dontwarn com.codeskraps.maps.presentation.mvi.MapState

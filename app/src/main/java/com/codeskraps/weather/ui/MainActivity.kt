@@ -9,7 +9,6 @@ import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavType
@@ -27,15 +26,13 @@ import com.codeskraps.maps.presentation.components.MapScreen
 import com.codeskraps.umami.domain.AnalyticsRepository
 import com.codeskraps.weather.ui.theme.ScreenTransitions
 import com.codeskraps.weather.ui.theme.WeatherTheme
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
+import org.koin.androidx.compose.koinViewModel
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var analyticsRepository: AnalyticsRepository
+    private val analyticsRepository: AnalyticsRepository by inject()
 
     private var isAnalyticsInitialized = false
 
@@ -94,7 +91,7 @@ class MainActivity : ComponentActivity() {
                         popEnterTransition = { ScreenTransitions.slideRightIntoContainer(this) },
                         popExitTransition = { ScreenTransitions.slideLeftOutOfContainer(this) }
                     ) {
-                        val viewModel = hiltViewModel<WeatherViewModel>()
+                        val viewModel = koinViewModel<WeatherViewModel>()
                         val state by viewModel.state.collectAsStateWithLifecycle()
 
                         WeatherScreen(
@@ -112,7 +109,7 @@ class MainActivity : ComponentActivity() {
                         popEnterTransition = { ScreenTransitions.slideLeftIntoContainer(this) },
                         popExitTransition = { ScreenTransitions.slideRightOutOfContainer(this) }
                     ) {
-                        val viewModel = hiltViewModel<GeocodingViewModel>()
+                        val viewModel = koinViewModel<GeocodingViewModel>()
                         val state by viewModel.state.collectAsStateWithLifecycle()
 
                         GeocodingScreen(
@@ -142,23 +139,17 @@ class MainActivity : ComponentActivity() {
                         }
                     ) {
                         Log.d("Navigation", "Attempting to navigate to Map screen")
-                        val viewModel = hiltViewModel<MapViewModel>()
+                        val viewModel = koinViewModel<MapViewModel>()
                         val state by viewModel.state.collectAsStateWithLifecycle()
                         MapScreen(
                             state = state,
                             handleEvent = viewModel.state::handleEvent,
                             action = viewModel.action,
                             navRoute = { route ->
-                                when (route) {
-                                    "nav_up" -> {
-                                        Log.d("Navigation", "Map screen navigation up")
-                                        navController.navigateUp()
-                                    }
-
-                                    else -> {
-                                        Log.d("Navigation", "Map screen navigation to $route")
-                                        navController.navigate(route)
-                                    }
+                                if (route == "nav_up") {
+                                    navController.navigateUp()
+                                } else {
+                                    navController.navigate(route)
                                 }
                             }
                         )

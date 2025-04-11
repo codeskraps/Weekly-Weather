@@ -1,14 +1,15 @@
 package com.codeskraps.core.local.data.repository
 
+import com.codeskraps.core.local.data.mappers.toGeoLocation
+import com.codeskraps.core.local.data.mappers.toGeoLocationEntity
 import com.codeskraps.core.local.domain.model.GeoLocation
 import com.codeskraps.core.local.domain.repository.LocalGeocodingRepository
-import com.codeskraps.core.local.data.mappers.toGeoLocationEntity
-import com.codeskraps.core.local.data.mappers.toGeocoding
 import com.codeskraps.core.local.domain.repository.LocalResourceRepository
 import com.codeskraps.feature.common.util.Resource
-import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class LocalGeocodingRepositoryImpl @Inject constructor(
+class LocalGeocodingRepositoryImpl(
     private val geocodingDB: com.codeskraps.core.local.data.db.GeocodingDB,
     private val localResource: LocalResourceRepository
 ) : LocalGeocodingRepository {
@@ -16,7 +17,7 @@ class LocalGeocodingRepositoryImpl @Inject constructor(
     override suspend fun getCachedGeoLocation(): Resource<List<GeoLocation>> {
         return try {
             Resource.Success(
-                data = geocodingDB.geocodingDao().getAll().map { it.toGeocoding() }
+                data = geocodingDB.geocodingDao().getAll().map { it.toGeoLocation() }
             )
         } catch (e: Exception) {
             e.printStackTrace()

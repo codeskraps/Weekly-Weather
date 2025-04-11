@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
-    alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -16,9 +15,7 @@ android {
         minSdk = ConfigData.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -51,15 +48,12 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    hilt {
-        enableAggregatingTask = true
-    }
 }
 
 dependencies {
     implementation(project(mapOf("path" to ":feature:common")))
-    implementation(project(mapOf("path" to ":core:location")))
     implementation(project(mapOf("path" to ":core:local")))
+    implementation(project(mapOf("path" to ":core:location")))
     implementation(project(mapOf("path" to ":core:umami")))
 
     implementation(libs.androidx.core.ktx)
@@ -67,33 +61,29 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.android.compose.material)
     implementation(libs.android.compose.material3)
-    implementation(libs.androidx.animation.graphics.android)
-
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.graphics)
     implementation(libs.androidx.compose.tooling.preview)
+    implementation(libs.androidx.animation.graphics.android)
+    implementation(libs.android.compose.material)
 
-    implementation(libs.kotlinx.collections.immutable)
+    // Koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
 
-    //Dagger - Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-
-    // Retrofit
+    // Retrofit & Moshi
     implementation(libs.retrofit.retrofit)
     implementation(libs.retrofit.converter.moshi)
     implementation(libs.moshi.kotlin)
+    ksp(libs.moshi.kotlin.codegen)
 
-    implementation(libs.coroutines.test)
+    // Immutable Collections
+    implementation(libs.kotlinx.collections.immutable)
+
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(composeBom)
-    androidTestImplementation(libs.androidx.compose.test.junit4)
-    debugImplementation(libs.androidx.compose.tooling)
-    debugImplementation(libs.androidx.compose.test.manifest)
 }

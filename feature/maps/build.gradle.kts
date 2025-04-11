@@ -4,9 +4,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
-    alias(libs.plugins.dagger.hilt)
-    alias(libs.plugins.secrets.gradle.plugin)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.secrets.gradle.plugin)
 }
 
 android {
@@ -41,10 +40,14 @@ android {
     }
     buildFeatures {
         compose = true
-        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = ConfigData.kotlinCompiler
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 }
 
@@ -65,6 +68,7 @@ secrets {
 
 dependencies {
     implementation(project(mapOf("path" to ":feature:common")))
+    implementation(project(mapOf("path" to ":feature:weather")))
     implementation(project(mapOf("path" to ":core:location")))
     implementation(project(mapOf("path" to ":core:local")))
     implementation(project(mapOf("path" to ":core:umami")))
@@ -81,9 +85,9 @@ dependencies {
     implementation(libs.androidx.compose.graphics)
     implementation(libs.androidx.compose.tooling.preview)
 
-    //Dagger - Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
+    // Koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
 
     implementation(libs.play.services.maps)
     implementation(libs.maps.compose)

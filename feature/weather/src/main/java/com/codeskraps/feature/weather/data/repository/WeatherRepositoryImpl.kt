@@ -7,9 +7,8 @@ import com.codeskraps.feature.weather.data.remote.WeatherApi
 import com.codeskraps.feature.weather.data.util.retryWithExponentialBackoff
 import com.codeskraps.feature.weather.domain.model.WeatherInfo
 import com.codeskraps.feature.weather.domain.repository.WeatherRepository
-import javax.inject.Inject
 
-class WeatherRepositoryImpl @Inject constructor(
+class WeatherRepositoryImpl(
     private val api: WeatherApi,
     private val localResource: LocalResourceRepository
 ) : WeatherRepository {

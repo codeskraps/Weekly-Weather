@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
-    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -46,14 +45,13 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
 
-    //Dagger - Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-
     // Room
     implementation(libs.room.runtime)
-    annotationProcessor(libs.room.compiler)
+    implementation(libs.androidx.room.ktx)
     ksp(libs.room.compiler)
+
+    // Koin
+    implementation(libs.koin.android)
 
     testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)

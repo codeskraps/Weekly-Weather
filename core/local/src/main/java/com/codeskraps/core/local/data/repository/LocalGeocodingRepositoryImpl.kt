@@ -6,8 +6,6 @@ import com.codeskraps.core.local.domain.model.GeoLocation
 import com.codeskraps.core.local.domain.repository.LocalGeocodingRepository
 import com.codeskraps.core.local.domain.repository.LocalResourceRepository
 import com.codeskraps.feature.common.util.Resource
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class LocalGeocodingRepositoryImpl(
     private val geocodingDB: com.codeskraps.core.local.data.db.GeocodingDB,

@@ -145,12 +145,9 @@ class MainActivity : ComponentActivity() {
                             state = state,
                             handleEvent = viewModel.state::handleEvent,
                             action = viewModel.action,
+                            navUp = { navController.navigateUp() },
                             navRoute = { route ->
-                                if (route == "nav_up") {
-                                    navController.navigateUp()
-                                } else {
-                                    navController.navigate(route)
-                                }
+                                navController.navigate(route)
                             }
                         )
                     }

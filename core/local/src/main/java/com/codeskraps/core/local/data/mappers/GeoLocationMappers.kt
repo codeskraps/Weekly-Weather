@@ -2,10 +2,11 @@ package com.codeskraps.core.local.data.mappers
 
 import com.codeskraps.core.local.data.model.GeoLocationEntity
 import com.codeskraps.core.local.domain.model.GeoLocation
+import kotlin.random.Random
 
 fun GeoLocation.toGeoLocationEntity(): GeoLocationEntity {
     return GeoLocationEntity(
-        uid = 0, // Room will auto-generate this
+        uid = Random.nextInt(),
         name = name,
         latitude = latitude,
         longitude = longitude,
@@ -20,6 +21,7 @@ fun GeoLocationEntity.toGeoLocation(): GeoLocation {
         latitude = latitude,
         longitude = longitude,
         country = country,
-        admin1 = admin1
+        admin1 = admin1,
+        cached = true
     )
 } 

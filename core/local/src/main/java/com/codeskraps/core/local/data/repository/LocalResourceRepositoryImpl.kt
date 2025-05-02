@@ -1,44 +1,45 @@
 package com.codeskraps.core.local.data.repository
 
-import android.content.Context
+import android.content.res.Resources
+import com.codeskraps.feature.common.R
 import com.codeskraps.core.local.domain.repository.LocalResourceRepository
 
 class LocalResourceRepositoryImpl(
-    private val context: Context
+    private val resources: Resources
 ) : LocalResourceRepository {
-    override fun getCurrentLocationString(): String {
-        return "Current Location"
+    override suspend fun getUnknownErrorString(): String {
+        return resources.getString(R.string.unknown_error)
     }
 
-    override fun getLocationCanNotBeBlankString(): String {
-        return "Location name cannot be blank"
+    override suspend fun getCurrentLocationString(): String {
+        return resources.getString(R.string.current_location)
     }
 
-    override fun getNoResultString(): String {
-        return "No results found"
+    override suspend fun getCheckInternetString(): String {
+        return resources.getString(R.string.check_internet_connection)
     }
 
-    override fun getIssueLoadingCache(): String {
-        return "Issue loading cache"
+    override suspend fun getCheckGPSString(): String {
+        return resources.getString(R.string.check_gps)
     }
 
-    override fun getIssueSaving(): String {
-        return "Issue saving location"
+    override suspend fun getLocationCanNotBeBlankString(): String {
+        return resources.getString(R.string.location_can_not_be_blank)
     }
 
-    override fun getIssueDeleting(): String {
-        return "Issue deleting location"
+    override suspend fun getNoResultString(): String {
+        return resources.getString(R.string.no_results)
     }
 
-    override fun getUnknownErrorString(): String {
-        return "An unknown error occurred"
+    override suspend fun getIssueLoadingCache(): String {
+        return resources.getString(R.string.issue_loading_cache)
     }
 
-    override fun getCheckInternetString(): String {
-        return "Please check your internet connection"
+    override suspend fun getIssueSaving(): String {
+        return resources.getString(R.string.issue_saving)
     }
 
-    override fun getCheckGPSString(): String {
-        return "Please enable GPS"
+    override suspend fun getIssueDeleting(): String {
+        return resources.getString(R.string.issue_deleting)
     }
 }

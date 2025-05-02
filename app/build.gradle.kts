@@ -15,8 +15,8 @@ android {
         applicationId = "com.arklan.weather"
         minSdk = ConfigData.minSdk
         targetSdk = ConfigData.targetSdk
-        versionCode = 19
-        versionName = "2.6.3"
+        versionCode = 20
+        versionName = "2.6.4"
         setProperty("archivesBaseName", "weekly-weather-v$versionName.$versionCode")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

@@ -1,6 +1,7 @@
 package com.codeskraps.maps.presentation.components
 
 import android.content.res.Resources
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.annotation.ColorInt
@@ -54,6 +55,7 @@ fun MapScreen(
     state: MapState,
     handleEvent: (MapEvent) -> Unit,
     action: Flow<MapAction>,
+    navUp: () -> Unit,
     navRoute: (String) -> Unit
 ) {
     val context = LocalContext.current
@@ -63,7 +65,7 @@ fun MapScreen(
     ObserveAsEvents(action) { mapAction ->
         when (mapAction) {
             is MapAction.ShowToast -> {
-                android.util.Log.i(tag, "Showing toast: ${mapAction.message}")
+                Log.i(tag, "Showing toast: ${mapAction.message}")
                 Toast.makeText(context, mapAction.message, Toast.LENGTH_SHORT).show()
             }
         }
@@ -76,22 +78,22 @@ fun MapScreen(
     // Use LaunchedEffect to update camera position when location changes
     LaunchedEffect(state.location) {
         state.location?.let {
-            android.util.Log.i(tag, "Updating camera position to: $it")
+            Log.i(tag, "Updating camera position to: $it")
             cameraPositionState.position = CameraPosition.fromLatLngZoom(it, 10f)
         }
     }
 
     LifecycleResumeEffect(Unit) {
-        android.util.Log.i(tag, "Screen resumed, sending Resume event")
+        Log.i(tag, "Screen resumed, sending Resume event")
         handleEvent(MapEvent.Resume)
         onPauseOrDispose {
-            android.util.Log.i(tag, "Screen paused/disposed")
+            Log.i(tag, "Screen paused/disposed")
         }
     }
 
     BackHandler {
-        android.util.Log.i(tag, "Back pressed, sending NavigateUp event")
-        navRoute("nav_up")
+        Log.i(tag, "Back pressed, sending NavigateUp event")
+        navUp()
     }
 
     Scaffold(
@@ -107,8 +109,8 @@ fun MapScreen(
                 navigationIcon = {
                     IconButton(
                         onClick = {
-                            android.util.Log.i(tag, "Back button clicked, sending NavigateUp event")
-                            navRoute("nav_up")
+                            Log.i(tag, "Back button clicked, sending NavigateUp event")
+                            navUp()
                         }
                     ) {
                         Icon(
@@ -131,7 +133,7 @@ fun MapScreen(
                                     cameraPositionState.position.target.latitude,
                                     cameraPositionState.position.target.longitude
                                 )
-                                android.util.Log.i(tag, "Add location clicked, navigating to route: $route")
+                                Log.i(tag, "Add location clicked, navigating to route: $route")
                                 navRoute(route)
                             }
                         ) {

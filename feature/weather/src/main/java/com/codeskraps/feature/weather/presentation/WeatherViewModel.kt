@@ -239,7 +239,7 @@ class WeatherViewModel(
 
                 when (val result =
                     localGeocodingRepository.saveCacheGeoLocation(
-                        weatherLocation.copy(name = name).toGeoLocation()
+                        weatherLocation.copy(name = name).toGeoLocation().copy(cached = true)
                     )) {
                     is Resource.Success -> {
                         savedStateHandle["name"] = name

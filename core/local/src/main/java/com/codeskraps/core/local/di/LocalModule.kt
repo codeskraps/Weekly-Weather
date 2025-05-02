@@ -1,6 +1,5 @@
 package com.codeskraps.core.local.di
 
-import android.content.Context
 import com.codeskraps.core.local.data.db.GeocodingDB
 import com.codeskraps.core.local.data.repository.LocalGeocodingRepositoryImpl
 import com.codeskraps.core.local.data.repository.LocalResourceRepositoryImpl
@@ -11,7 +10,7 @@ import org.koin.dsl.module
 
 val localModule = module {
     single<LocalResourceRepository> { 
-        LocalResourceRepositoryImpl(androidContext())
+        LocalResourceRepositoryImpl(androidContext().resources)
     }
     
     single { 

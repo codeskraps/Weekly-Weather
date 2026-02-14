@@ -41,8 +41,8 @@ import com.codeskraps.feature.weather.presentation.components.animations.SlightR
 import com.codeskraps.feature.weather.presentation.components.animations.SnowGrainsAnimation
 
 sealed class WeatherType(
-    @StringRes val weatherDescRes: Int,
-    @DrawableRes val iconRes: Int,
+    @param:StringRes val weatherDescRes: Int,
+    @param:DrawableRes val iconRes: Int,
     val animation: AnimationDrawable
 ) {
     data object ClearSkyDay : WeatherType(

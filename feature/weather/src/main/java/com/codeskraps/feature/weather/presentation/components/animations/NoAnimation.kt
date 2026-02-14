@@ -10,7 +10,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 class NoAnimation(
-    @DrawableRes val iconRes: Int
+    @param:DrawableRes val iconRes: Int
 ) : AnimationDrawable {
     override fun build(): @Composable (BoxScope.() -> Unit) {
         return {

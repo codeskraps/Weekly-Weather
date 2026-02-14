@@ -43,7 +43,8 @@ fun WeatherTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colors.primaryContainer.toArgb() // change color status bar here
+            @Suppress("DEPRECATION")
+            window.statusBarColor = colors.primaryContainer.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars =
                 !useDarkTheme
         }

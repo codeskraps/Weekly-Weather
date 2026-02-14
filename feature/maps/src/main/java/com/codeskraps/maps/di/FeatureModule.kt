@@ -1,7 +1,7 @@
 package com.codeskraps.maps.di
 
 import com.codeskraps.maps.presentation.MapViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 val mapsFeatureModule = module {

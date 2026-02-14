@@ -6,10 +6,16 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
+import android.os.Looper
 import androidx.core.content.ContextCompat
 import com.codeskraps.core.location.domain.LocationTracker
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.Priority
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.coroutines.resume
 
 class DefaultLocationTracker(
@@ -35,7 +41,7 @@ class DefaultLocationTracker(
             return null
         }
 
-        return suspendCancellableCoroutine { cont ->
+        val lastLocation = suspendCancellableCoroutine { cont ->
             locationClient.lastLocation.apply {
                 if (isComplete) {
                     if (isSuccessful) {
@@ -53,6 +59,32 @@ class DefaultLocationTracker(
                 }
                 addOnCanceledListener {
                     cont.cancel()
+                }
+            }
+        }
+
+        if (lastLocation != null) return lastLocation
+
+        // lastLocation can be null on fresh devices/emulators; request a single update
+        return withTimeoutOrNull(10_000L) {
+            suspendCancellableCoroutine { cont ->
+                val locationRequest = LocationRequest.Builder(
+                    Priority.PRIORITY_HIGH_ACCURACY, 1000L
+                ).setMaxUpdates(1).build()
+
+                val callback = object : LocationCallback() {
+                    override fun onLocationResult(result: LocationResult) {
+                        locationClient.removeLocationUpdates(this)
+                        cont.resume(result.lastLocation)
+                    }
+                }
+
+                locationClient.requestLocationUpdates(
+                    locationRequest, callback, Looper.getMainLooper()
+                )
+
+                cont.invokeOnCancellation {
+                    locationClient.removeLocationUpdates(callback)
                 }
             }
         }

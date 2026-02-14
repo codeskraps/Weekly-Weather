@@ -155,17 +155,15 @@ fun WeatherScreen(
             )
         },
         floatingActionButton = {
-            if (state.weatherInfo != null) {
-                FloatingActionButton(
-                    shape = CircleShape,
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    onClick = { navRoute(Screen.Geocoding.route) }) {
-                    Icon(
-                        Icons.Default.Search,
-                        tint = MaterialTheme.colorScheme.primary,
-                        contentDescription = resources.getString(R.string.search)
-                    )
-                }
+            FloatingActionButton(
+                shape = CircleShape,
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                onClick = { navRoute(Screen.Geocoding.route) }) {
+                Icon(
+                    Icons.Default.Search,
+                    tint = MaterialTheme.colorScheme.primary,
+                    contentDescription = resources.getString(R.string.search)
+                )
             }
         }
     ) { innerPadding ->

@@ -2,7 +2,6 @@ import com.codeskraps.weather.ConfigData
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.devtools.ksp)
     alias(libs.plugins.compose.compiler)
 }
@@ -17,7 +16,7 @@ android {
         targetSdk = ConfigData.targetSdk
         versionCode = 20
         versionName = "2.6.4"
-        setProperty("archivesBaseName", "weekly-weather-v$versionName.$versionCode")
+        base.archivesName.set("weekly-weather-v$versionName.$versionCode")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -47,19 +46,19 @@ android {
         sourceCompatibility = JavaVersion.VERSION_19
         targetCompatibility = JavaVersion.VERSION_19
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_19.toString()
-    }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = ConfigData.kotlinCompiler
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_19)
     }
 }
 

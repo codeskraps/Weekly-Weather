@@ -11,4 +11,6 @@ sealed class Screen(val route: String) {
 
     data object Geocoding : Screen("geocoding")
     data object Map : Screen("map")
+    data object Settings : Screen("settings")
+    data object Radar : Screen("radar")
 }

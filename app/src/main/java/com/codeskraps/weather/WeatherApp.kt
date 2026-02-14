@@ -7,6 +7,8 @@ import com.codeskraps.feature.common.di.commonModule
 import com.codeskraps.feature.geocoding.di.geocodingModule
 import com.codeskraps.feature.weather.di.weatherModule
 import com.codeskraps.maps.di.mapsFeatureModule
+import com.codeskraps.feature.settings.di.settingsModule
+import com.codeskraps.feature.radar.di.radarModule
 import com.codeskraps.umami.di.umamiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -26,6 +28,8 @@ class WeatherApp : Application() {
                 geocodingModule,
                 weatherModule,
                 mapsFeatureModule,
+                settingsModule,
+                radarModule,
                 umamiModule
             )
         }

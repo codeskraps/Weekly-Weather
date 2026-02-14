@@ -6,5 +6,10 @@ import com.codeskraps.feature.weather.domain.model.WeatherInfo
 
 interface WeatherRepository {
 
-    suspend fun getWeatherData(lat: Double, long: Double): Resource<WeatherInfo>
+    suspend fun getWeatherData(
+        lat: Double,
+        long: Double,
+        temperatureUnit: String = "celsius",
+        windSpeedUnit: String = "kmh"
+    ): Resource<WeatherInfo>
 }

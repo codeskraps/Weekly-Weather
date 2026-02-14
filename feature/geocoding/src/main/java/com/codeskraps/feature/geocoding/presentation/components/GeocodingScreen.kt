@@ -18,13 +18,11 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -39,7 +37,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -59,7 +56,6 @@ fun GeocodingScreen(
     state: GeoState,
     handleEvent: (GeoEvent) -> Unit,
     action: Flow<GeoAction>,
-    navUp: () -> Unit,
     navRoute: (String) -> Unit
 ) {
     val context = LocalContext.current
@@ -87,24 +83,6 @@ fun GeocodingScreen(
                 ),
                 title = {
                     Text(resources.getString(R.string.search))
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navUp() }) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            tint = MaterialTheme.colorScheme.primary,
-                            contentDescription = resources.getString(R.string.back)
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { navRoute(Screen.Map.route) }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_map),
-                            tint = MaterialTheme.colorScheme.primary,
-                            contentDescription = "TODO"
-                        )
-                    }
                 }
             )
         }

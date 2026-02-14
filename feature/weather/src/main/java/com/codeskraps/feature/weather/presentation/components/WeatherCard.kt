@@ -75,7 +75,9 @@ fun WeatherCardPreview() {
 fun WeatherCard(
     data: WeatherData,
     backgroundColor: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    temperatureUnit: String = "°C",
+    windSpeedUnit: String = "km/h",
 ) {
     val resources = LocalContext.current.resources
     Card(
@@ -107,7 +109,7 @@ fun WeatherCard(
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "${data.temperatureCelsius}°C",
+                text = "${data.temperatureCelsius}$temperatureUnit",
                 fontSize = 30.sp,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -160,7 +162,7 @@ fun WeatherCard(
                     textStyle = TextStyle(color = MaterialTheme.colorScheme.primary)
                 )
                 WeatherDataDisplay(
-                    value = "${data.windSpeed.roundToInt()}km/h",
+                    value = "${data.windSpeed.roundToInt()}$windSpeedUnit",
                     icon = ImageVector.vectorResource(id = R.drawable.ic_wind),
                     iconTint = MaterialTheme.colorScheme.primary,
                     textStyle = TextStyle(color = MaterialTheme.colorScheme.primary)

@@ -9,4 +9,6 @@ data class WeatherInfo(
     val longitude: Double = .0,
     val weatherDataPerDay: ImmutableMap<Int, ImmutableList<WeatherData>>,
     val currentWeatherData: WeatherData?,
+    val temperatureUnit: String = "°C",
+    val windSpeedUnit: String = "km/h",
 )

@@ -71,7 +71,7 @@ fun WeatherForecast(
             )
             Spacer(modifier = Modifier.width(10.dp))
             Text(
-                text = "${max.temperatureCelsius}°C - ${min.temperatureCelsius}°C",
+                text = "${max.temperatureCelsius}${weatherInfo.temperatureUnit} - ${min.temperatureCelsius}${weatherInfo.temperatureUnit}",
                 fontSize = 12.sp,
                 modifier = Modifier.align(Alignment.Bottom),
                 color = MaterialTheme.colorScheme.secondary
@@ -91,6 +91,7 @@ fun WeatherForecast(
             items(displayData) { weatherData ->
                 HourlyWeatherDisplay(
                     weatherData = weatherData,
+                    temperatureUnit = weatherInfo.temperatureUnit,
                     modifier = Modifier
                         .height(100.dp)
                         .padding(horizontal = 16.dp)
@@ -100,7 +101,9 @@ fun WeatherForecast(
                                     WeatherInfo(
                                         geoLocation = weatherInfo.geoLocation,
                                         weatherDataPerDay = weatherInfo.weatherDataPerDay,
-                                        currentWeatherData = weatherData
+                                        currentWeatherData = weatherData,
+                                        temperatureUnit = weatherInfo.temperatureUnit,
+                                        windSpeedUnit = weatherInfo.windSpeedUnit,
                                     )
                                 )
                             )

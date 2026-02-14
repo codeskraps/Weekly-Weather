@@ -21,6 +21,7 @@ import java.time.format.DateTimeFormatter
 fun HourlyWeatherDisplay(
     weatherData: WeatherData,
     modifier: Modifier = Modifier,
+    temperatureUnit: String = "°C",
     textColor: Color = MaterialTheme.colorScheme.primary
 ) {
     val formattedTime = remember(weatherData) {
@@ -43,7 +44,7 @@ fun HourlyWeatherDisplay(
             modifier = Modifier.width(40.dp)
         )
         Text(
-            text = "${weatherData.temperatureCelsius}°C",
+            text = "${weatherData.temperatureCelsius}$temperatureUnit",
             color = textColor,
             fontWeight = FontWeight.Bold
         )

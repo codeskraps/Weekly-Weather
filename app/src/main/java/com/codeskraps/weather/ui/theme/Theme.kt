@@ -10,6 +10,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.codeskraps.core.local.domain.model.ThemeMode
 
 private val lightColors = lightColorScheme(
     primary = md_theme_light_primary,
@@ -30,9 +31,14 @@ private val darkColors = darkColorScheme(
 
 @Composable
 fun WeatherTheme(
-    useDarkTheme: Boolean = isSystemInDarkTheme(),
+    themeMode: ThemeMode = ThemeMode.SYSTEM,
     content: @Composable () -> Unit
 ) {
+    val useDarkTheme = when (themeMode) {
+        ThemeMode.SYSTEM -> isSystemInDarkTheme()
+        ThemeMode.LIGHT -> false
+        ThemeMode.DARK -> true
+    }
     val colors = if (!useDarkTheme) {
         lightColors
     } else {

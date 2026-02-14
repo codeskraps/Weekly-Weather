@@ -3,24 +3,30 @@ package com.codeskraps.core.local.di
 import com.codeskraps.core.local.data.db.GeocodingDB
 import com.codeskraps.core.local.data.repository.LocalGeocodingRepositoryImpl
 import com.codeskraps.core.local.data.repository.LocalResourceRepositoryImpl
+import com.codeskraps.core.local.data.repository.SettingsRepositoryImpl
 import com.codeskraps.core.local.domain.repository.LocalGeocodingRepository
 import com.codeskraps.core.local.domain.repository.LocalResourceRepository
+import com.codeskraps.core.local.domain.repository.SettingsRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val localModule = module {
-    single<LocalResourceRepository> { 
+    single<LocalResourceRepository> {
         LocalResourceRepositoryImpl(androidContext().resources)
     }
-    
-    single { 
+
+    single {
         GeocodingDB.getInstance(androidContext())
     }
-    
-    single<LocalGeocodingRepository> { 
+
+    single<LocalGeocodingRepository> {
         LocalGeocodingRepositoryImpl(
             geocodingDB = get(),
             localResource = get()
         )
+    }
+
+    single<SettingsRepository> {
+        SettingsRepositoryImpl(androidContext())
     }
 }

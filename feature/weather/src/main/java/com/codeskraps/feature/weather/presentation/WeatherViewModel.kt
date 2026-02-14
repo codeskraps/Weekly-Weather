@@ -3,8 +3,10 @@ package com.codeskraps.feature.weather.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.codeskraps.feature.common.dispatcher.DispatcherProvider
+import com.codeskraps.core.local.domain.model.UnitSystem
 import com.codeskraps.core.local.domain.repository.LocalGeocodingRepository
 import com.codeskraps.core.local.domain.repository.LocalResourceRepository
+import com.codeskraps.core.local.domain.repository.SettingsRepository
 import com.codeskraps.feature.common.mvi.StateReducerViewModel
 import com.codeskraps.feature.common.util.Resource
 import com.codeskraps.feature.weather.data.mappers.toGeoLocation
@@ -17,6 +19,7 @@ import com.codeskraps.feature.weather.presentation.mvi.WeatherEvent
 import com.codeskraps.feature.weather.presentation.mvi.WeatherState
 import com.codeskraps.core.location.domain.LocationTracker
 import com.codeskraps.umami.domain.AnalyticsRepository
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class WeatherViewModel(
@@ -26,7 +29,8 @@ class WeatherViewModel(
     private val localResource: LocalResourceRepository,
     private val dispatcherProvider: DispatcherProvider,
     private val savedStateHandle: SavedStateHandle,
-    private val analyticsRepository: AnalyticsRepository
+    private val analyticsRepository: AnalyticsRepository,
+    private val settingsRepository: SettingsRepository
 ) : StateReducerViewModel<WeatherState, WeatherEvent, WeatherAction>(WeatherState.initial) {
 
     private companion object {
@@ -46,6 +50,14 @@ class WeatherViewModel(
     init {
         viewModelScope.launch(dispatcherProvider.io) {
             currentLocationString = localResource.getCurrentLocationString()
+        }
+    }
+
+    private suspend fun getUnitParams(): Triple<String, String, Pair<String, String>> {
+        val settings = settingsRepository.settings.first()
+        return when (settings.unitSystem) {
+            UnitSystem.METRIC -> Triple("celsius", "kmh", "°C" to "km/h")
+            UnitSystem.IMPERIAL -> Triple("fahrenheit", "mph", "°F" to "mph")
         }
     }
 
@@ -104,13 +116,21 @@ class WeatherViewModel(
             }
 
             location?.let { intLocation ->
+                val (tempUnit, windUnit, displayUnits) = getUnitParams()
                 when (val result =
-                    weatherRepository.getWeatherData(intLocation.lat, intLocation.long)) {
+                    weatherRepository.getWeatherData(
+                        intLocation.lat,
+                        intLocation.long,
+                        temperatureUnit = tempUnit,
+                        windSpeedUnit = windUnit
+                    )) {
                     is Resource.Success -> {
                         val weatherInfo = result.data.copy(
                             geoLocation = intLocation.name,
                             latitude = intLocation.lat,
-                            longitude = intLocation.long
+                            longitude = intLocation.long,
+                            temperatureUnit = displayUnits.first,
+                            windSpeedUnit = displayUnits.second
                         )
 
                         state.handleEvent(WeatherEvent.UpdateHourlyInfo(weatherInfo))
@@ -150,14 +170,22 @@ class WeatherViewModel(
                     ANALYTICS_WEATHER_REFRESH,
                     mapOf(PARAM_LOCATION to intLocation.geoLocation)
                 )
-                
+
+                val (tempUnit, windUnit, displayUnits) = getUnitParams()
                 when (val result =
-                    weatherRepository.getWeatherData(intLocation.latitude, intLocation.longitude)) {
+                    weatherRepository.getWeatherData(
+                        intLocation.latitude,
+                        intLocation.longitude,
+                        temperatureUnit = tempUnit,
+                        windSpeedUnit = windUnit
+                    )) {
                     is Resource.Success -> {
                         val weatherInfo = result.data.copy(
                             geoLocation = intLocation.geoLocation,
                             latitude = intLocation.latitude,
-                            longitude = intLocation.longitude
+                            longitude = intLocation.longitude,
+                            temperatureUnit = displayUnits.first,
+                            windSpeedUnit = displayUnits.second
                         )
 
                         state.handleEvent(WeatherEvent.UpdateHourlyInfo(weatherInfo))

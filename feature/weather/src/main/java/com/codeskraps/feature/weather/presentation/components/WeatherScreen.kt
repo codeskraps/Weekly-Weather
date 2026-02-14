@@ -12,19 +12,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -47,7 +44,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.codeskraps.feature.common.R
 import com.codeskraps.feature.common.components.ObserveAsEvents
-import com.codeskraps.feature.common.navigation.Screen
 import com.codeskraps.feature.weather.data.mappers.toWeatherLocation
 import com.codeskraps.feature.weather.domain.model.WeatherLocation
 import com.codeskraps.feature.weather.presentation.mvi.WeatherAction
@@ -61,7 +57,6 @@ fun WeatherScreen(
     state: WeatherState,
     handleEvent: (WeatherEvent) -> Unit,
     action: Flow<WeatherAction>,
-    navRoute: (String) -> Unit
 ) {
     var showDialog by remember {
         mutableStateOf(false)
@@ -154,18 +149,6 @@ fun WeatherScreen(
                 },
             )
         },
-        floatingActionButton = {
-            FloatingActionButton(
-                shape = CircleShape,
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                onClick = { navRoute(Screen.Geocoding.route) }) {
-                Icon(
-                    Icons.Default.Search,
-                    tint = MaterialTheme.colorScheme.primary,
-                    contentDescription = resources.getString(R.string.search)
-                )
-            }
-        }
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -199,7 +182,9 @@ fun WeatherScreen(
                                 item {
                                     WeatherCard(
                                         data = it,
-                                        backgroundColor = MaterialTheme.colorScheme.primaryContainer
+                                        backgroundColor = MaterialTheme.colorScheme.primaryContainer,
+                                        temperatureUnit = state.weatherInfo.temperatureUnit,
+                                        windSpeedUnit = state.weatherInfo.windSpeedUnit,
                                     )
                                 }
                             }

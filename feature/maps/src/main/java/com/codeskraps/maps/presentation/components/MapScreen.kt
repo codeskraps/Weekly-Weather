@@ -3,14 +3,12 @@ package com.codeskraps.maps.presentation.components
 import android.content.res.Resources
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.compose.BackHandler
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.CircularProgressIndicator
@@ -55,7 +53,6 @@ fun MapScreen(
     state: MapState,
     handleEvent: (MapEvent) -> Unit,
     action: Flow<MapAction>,
-    navUp: () -> Unit,
     navRoute: (String) -> Unit
 ) {
     val context = LocalContext.current
@@ -91,11 +88,6 @@ fun MapScreen(
         }
     }
 
-    BackHandler {
-        Log.i(tag, "Back pressed, sending NavigateUp event")
-        navUp()
-    }
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -105,20 +97,6 @@ fun MapScreen(
                 ),
                 title = {
                     Text(resources.getString(R.string.map_location))
-                },
-                navigationIcon = {
-                    IconButton(
-                        onClick = {
-                            Log.i(tag, "Back button clicked, sending NavigateUp event")
-                            navUp()
-                        }
-                    ) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            tint = MaterialTheme.colorScheme.primary,
-                            contentDescription = resources.getString(R.string.back)
-                        )
-                    }
                 },
                 actions = {
                     if (state.isLoading) {

@@ -17,9 +17,11 @@ retrofit = "3.0.0"
 junit = "4.13.2"
 junittest = "1.3.0"
 espresso = "3.7.0"
+datastore = "1.1.7"
 room = "2.8.4"
 material = "1.10.3"
 material3 = "1.4.0"
+material3-adaptive = "1.2.0"
 org-jetbrains-kotlin-android = "2.3.10"
 appcompat = "1.7.1"
 com-google-android-material-material = "1.13.0"
@@ -49,6 +51,8 @@ androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lif
 android-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "material" }
 android-compose-material-icons = { group = "androidx.compose.material", name = "material-icons-core" }
 android-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
+material3-adaptive = { group = "androidx.compose.material3.adaptive", name = "adaptive", version.ref = "material3-adaptive" }
+material3-adaptive-navigation-suite = { group = "androidx.compose.material3", name = "material3-adaptive-navigation-suite", version.ref = "material3" }
 
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "immutable" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
@@ -65,6 +69,9 @@ moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "mosh
 moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshiKotlinCodegen" }
 retrofit-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
+
+# DataStore
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 
 # Room
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }

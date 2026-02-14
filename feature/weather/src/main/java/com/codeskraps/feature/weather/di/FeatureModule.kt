@@ -20,7 +20,7 @@ val weatherModule = module {
             localResource = get()
         ) 
     }
-    viewModel { 
+    viewModel {
         WeatherViewModel(
             localGeocodingRepository = get(),
             weatherRepository = get(),
@@ -28,8 +28,9 @@ val weatherModule = module {
             localResource = get(),
             dispatcherProvider = get(),
             savedStateHandle = get(),
-            analyticsRepository = get()
-        ) 
+            analyticsRepository = get(),
+            settingsRepository = get()
+        )
     }
 }
 

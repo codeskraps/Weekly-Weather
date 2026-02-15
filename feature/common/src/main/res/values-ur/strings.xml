@@ -24,6 +24,24 @@
     <string name="no_results">کوئی نتائج نہیں ملے !!!</string>
     <string name="map_location">نقشہ مقام</string>
     <string name="add">شامل کریں</string>
+    <string name="menu">مینو</string>
+    <string name="settings">ترتیبات</string>
+    <string name="radar">ریڈار</string>
+    <string name="nav_weather">موسم</string>
+    <string name="nav_map">نقشہ</string>
+    <string name="units">اکائیاں</string>
+    <string name="theme">تھیم</string>
+    <string name="metric_units">میٹرک (°C, km/h)</string>
+    <string name="imperial_units">امپیریل (°F, mph)</string>
+    <string name="theme_system">سسٹم ڈیفالٹ</string>
+    <string name="theme_light">روشن</string>
+    <string name="theme_dark">تاریک</string>
+    <string name="previous">پچھلا</string>
+    <string name="next">اگلا</string>
+    <string name="pause">روکیں</string>
+    <string name="play">چلائیں</string>
+    <string name="zoom_in">زوم ان</string>
+    <string name="zoom_out">زوم آؤٹ</string>
 
 
     <string name="clear_sky">صاف آسمان</string>

@@ -24,6 +24,24 @@
     <string name="no_results">முடிவுகள் இல்லை!!!</string>
     <string name="map_location">வரைபடத்தில் இருப்போம்</string>
     <string name="add">சேர்க்க</string>
+    <string name="menu">மெனு</string>
+    <string name="settings">அமைப்புகள்</string>
+    <string name="radar">ரேடார்</string>
+    <string name="nav_weather">வானிலை</string>
+    <string name="nav_map">வரைபடம்</string>
+    <string name="units">அலகுகள்</string>
+    <string name="theme">தீம்</string>
+    <string name="metric_units">மெட்ரிக் (°C, km/h)</string>
+    <string name="imperial_units">இம்பீரியல் (°F, mph)</string>
+    <string name="theme_system">கணினி இயல்புநிலை</string>
+    <string name="theme_light">ஒளி</string>
+    <string name="theme_dark">இருள்</string>
+    <string name="previous">முந்தைய</string>
+    <string name="next">அடுத்த</string>
+    <string name="pause">இடைநிறுத்தம்</string>
+    <string name="play">இயக்கு</string>
+    <string name="zoom_in">பெரிதாக்கு</string>
+    <string name="zoom_out">சிறிதாக்கு</string>
 
 
     <string name="clear_sky">தோள்கள் இல்லாமல்</string>

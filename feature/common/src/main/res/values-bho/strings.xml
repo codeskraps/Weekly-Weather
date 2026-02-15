@@ -24,7 +24,25 @@
     <string name="no_results">कोई परिणाम नहीं मिला !!!</string>
     <string name="map_location">नक्शा स्थान</string>
     <string name="add">जोड़ें</string>
+    <string name="menu">मेनू</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="radar">रडार</string>
+    <string name="nav_weather">मौसम</string>
+    <string name="nav_map">नक्शा</string>
 
+    <string name="units">इकाई</string>
+    <string name="theme">थीम</string>
+    <string name="metric_units">मीट्रिक (°C, km/h)</string>
+    <string name="imperial_units">इम्पिरियल (°F, mph)</string>
+    <string name="theme_system">सिस्टम डिफ़ॉल्ट</string>
+    <string name="theme_light">उजियार</string>
+    <string name="theme_dark">अन्हार</string>
+    <string name="previous">पिछला</string>
+    <string name="next">अगला</string>
+    <string name="pause">रोकीं</string>
+    <string name="play">चलाईं</string>
+    <string name="zoom_in">बड़ा करीं</string>
+    <string name="zoom_out">छोट करीं</string>
 
     <string name="clear_sky">साफ आसमान</string>
     <string name="frost">मौसमी</string>

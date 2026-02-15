@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Multi-module Android app (Kotlin, Jetpack Compose) showing weather forecasts via the Open-Meteo API. App ID: `com.arklan.weather`, base package: `com.codeskraps`. Licensed MIT.
 
-**Modules:** `app` (entry point, nav host) | `feature:common` (MVI base, nav routes) | `feature:weather` | `feature:geocoding` | `feature:maps` | `core:local` (Room DB) | `core:location` (GPS) | `core:umami` (analytics)
+**Modules:** `app` (entry point, nav host) | `feature:common` (MVI base, nav routes) | `feature:weather` | `feature:maps` | `feature:settings` | `core:local` (Room DB) | `core:location` (GPS) | `core:umami` (analytics)
 
 **Stack:** Compose + Material3, Koin DI, Retrofit + Moshi, Room, Navigation Compose, Coroutines/Flow
 

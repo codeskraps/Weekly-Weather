@@ -1,8 +1,9 @@
 package com.codeskraps.feature.weather.presentation
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.codeskraps.feature.common.dispatcher.DispatcherProvider
+import com.codeskraps.feature.common.domain.model.ActiveLocation
+import com.codeskraps.feature.common.domain.repository.ActiveLocationRepository
 import com.codeskraps.core.local.domain.model.UnitSystem
 import com.codeskraps.core.local.domain.repository.LocalGeocodingRepository
 import com.codeskraps.core.local.domain.repository.LocalResourceRepository
@@ -19,6 +20,7 @@ import com.codeskraps.feature.weather.presentation.mvi.WeatherEvent
 import com.codeskraps.feature.weather.presentation.mvi.WeatherState
 import com.codeskraps.core.location.domain.LocationTracker
 import com.codeskraps.umami.domain.AnalyticsRepository
+import kotlin.math.abs
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -28,9 +30,9 @@ class WeatherViewModel(
     private val locationTracker: LocationTracker,
     private val localResource: LocalResourceRepository,
     private val dispatcherProvider: DispatcherProvider,
-    private val savedStateHandle: SavedStateHandle,
     private val analyticsRepository: AnalyticsRepository,
-    private val settingsRepository: SettingsRepository
+    private val settingsRepository: SettingsRepository,
+    private val activeLocationRepository: ActiveLocationRepository
 ) : StateReducerViewModel<WeatherState, WeatherEvent, WeatherAction>(WeatherState.initial) {
 
     private companion object {
@@ -43,14 +45,6 @@ class WeatherViewModel(
         private const val PARAM_LOCATION = "location"
         private const val PARAM_ERROR = "error_message"
         private const val PARAM_IS_CURRENT_LOCATION = "is_current_location"
-    }
-
-    private var currentLocationString: String = ""
-
-    init {
-        viewModelScope.launch(dispatcherProvider.io) {
-            currentLocationString = localResource.getCurrentLocationString()
-        }
     }
 
     private suspend fun getUnitParams(): Triple<String, String, Pair<String, String>> {
@@ -67,7 +61,7 @@ class WeatherViewModel(
     ): WeatherState {
         return when (event) {
             is WeatherEvent.LoadWeatherInfo -> onLoadWeatherInfo(currentState, event.geoLocation)
-            is WeatherEvent.UpdateHourlyInfo -> onUpdateHourlyInfo(currentState, event.weatherInfo)
+            is WeatherEvent.UpdateHourlyInfo -> onUpdateHourlyInfo(currentState, event.weatherInfo, event.isGpsLocation)
             is WeatherEvent.Refresh -> onRefresh(currentState)
             is WeatherEvent.Error -> handleError(currentState, event.message)
             is WeatherEvent.About -> currentState
@@ -99,12 +93,6 @@ class WeatherViewModel(
             
             val location = if (isCurrentLocation) {
                 locationTracker.getCurrentLocation()?.let {
-                    savedStateHandle.run {
-                        remove<String>("name")
-                        remove<String>("lat")
-                        remove<String>("long")
-                    }
-
                     WeatherLocation(
                         localResource.getCurrentLocationString(),
                         it.latitude,
@@ -133,7 +121,7 @@ class WeatherViewModel(
                             windSpeedUnit = displayUnits.second
                         )
 
-                        state.handleEvent(WeatherEvent.UpdateHourlyInfo(weatherInfo))
+                        state.handleEvent(WeatherEvent.UpdateHourlyInfo(weatherInfo, isCurrentLocation))
                         state.handleEvent(WeatherEvent.CheckCache(weatherInfo.toWeatherLocation()))
                     }
 
@@ -154,8 +142,17 @@ class WeatherViewModel(
 
     private fun onUpdateHourlyInfo(
         currentState: WeatherState,
-        weatherInfo: WeatherInfo
+        weatherInfo: WeatherInfo,
+        isGpsLocation: Boolean
     ): WeatherState {
+        activeLocationRepository.update(
+            ActiveLocation(
+                name = weatherInfo.geoLocation,
+                latitude = weatherInfo.latitude,
+                longitude = weatherInfo.longitude,
+                isGpsLocation = isGpsLocation
+            )
+        )
         return currentState.copy(
             isLoading = false,
             error = null,
@@ -166,6 +163,7 @@ class WeatherViewModel(
     private fun onRefresh(currentState: WeatherState): WeatherState {
         viewModelScope.launch(dispatcherProvider.io) {
             currentState.weatherInfo?.let { intLocation ->
+                val isGps = activeLocationRepository.location.value?.isGpsLocation ?: false
                 analyticsRepository.trackEvent(
                     ANALYTICS_WEATHER_REFRESH,
                     mapOf(PARAM_LOCATION to intLocation.geoLocation)
@@ -188,7 +186,7 @@ class WeatherViewModel(
                             windSpeedUnit = displayUnits.second
                         )
 
-                        state.handleEvent(WeatherEvent.UpdateHourlyInfo(weatherInfo))
+                        state.handleEvent(WeatherEvent.UpdateHourlyInfo(weatherInfo, isGps))
                         state.handleEvent(WeatherEvent.CheckCache(weatherInfo.toWeatherLocation()))
                     }
 
@@ -225,27 +223,36 @@ class WeatherViewModel(
     }
 
     private fun onResume(currentState: WeatherState): WeatherState {
-        try {
-            // Track initial page view when screen resumes
-            viewModelScope.launch(dispatcherProvider.io) {
-                analyticsRepository.trackPageView("weather")
-            }
-            
-            val name: String =
-                savedStateHandle.get<String>("name") ?: currentLocationString
-            val lat: String = savedStateHandle.get<String>("lat") ?: ".0"
-            val long: String = savedStateHandle.get<String>("long") ?: ".0"
-
-            val weatherLocation = WeatherLocation(
-                name = name,
-                lat = lat.toDouble(),
-                long = long.toDouble()
-            )
-
-            state.handleEvent(WeatherEvent.LoadWeatherInfo(weatherLocation))
-        } catch (e: Exception) {
-            state.handleEvent(WeatherEvent.LoadWeatherInfo(WeatherLocation()))
+        viewModelScope.launch(dispatcherProvider.io) {
+            analyticsRepository.trackPageView("weather")
         }
+
+        val sharedLocation = activeLocationRepository.location.value
+        val currentWeather = currentState.weatherInfo
+
+        // Skip re-fetch if we already have weather for the same location
+        if (currentWeather != null && sharedLocation != null &&
+            abs(currentWeather.latitude - sharedLocation.latitude) < 1e-6 &&
+            abs(currentWeather.longitude - sharedLocation.longitude) < 1e-6
+        ) {
+            // Still re-check cache and update name in case it changed (e.g. bookmark selected)
+            val updatedWeather = currentWeather.copy(geoLocation = sharedLocation.name)
+            state.handleEvent(WeatherEvent.CheckCache(updatedWeather.toWeatherLocation()))
+            return currentState.copy(weatherInfo = updatedWeather)
+        }
+
+        val weatherLocation = if (sharedLocation != null) {
+            WeatherLocation(
+                name = sharedLocation.name,
+                lat = sharedLocation.latitude,
+                long = sharedLocation.longitude
+            )
+        } else {
+            // First launch: use GPS
+            WeatherLocation()
+        }
+
+        state.handleEvent(WeatherEvent.LoadWeatherInfo(weatherLocation))
         return currentState
     }
 
@@ -270,7 +277,6 @@ class WeatherViewModel(
                         weatherLocation.copy(name = name).toGeoLocation().copy(cached = true)
                     )) {
                     is Resource.Success -> {
-                        savedStateHandle["name"] = name
                         state.handleEvent(WeatherEvent.LoadWeatherInfo(weatherLocation))
                         state.handleEvent(WeatherEvent.CheckCache(weatherLocation))
                     }

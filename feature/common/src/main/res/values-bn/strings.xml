@@ -24,7 +24,25 @@
     <string name="no_results">কোনো ফলাফল নেই !!!</string>
     <string name="map_location">মানচিত্রের অবস্থান</string>
     <string name="add">যোগ করুন</string>
+    <string name="menu">মেনু</string>
+    <string name="settings">সেটিংস</string>
+    <string name="radar">রাডার</string>
+    <string name="nav_weather">আবহাওয়া</string>
+    <string name="nav_map">মানচিত্র</string>
 
+    <string name="units">একক</string>
+    <string name="theme">থিম</string>
+    <string name="metric_units">মেট্রিক (°C, km/h)</string>
+    <string name="imperial_units">ইম্পেরিয়াল (°F, mph)</string>
+    <string name="theme_system">সিস্টেম ডিফল্ট</string>
+    <string name="theme_light">লাইট</string>
+    <string name="theme_dark">ডার্ক</string>
+    <string name="previous">আগের</string>
+    <string name="next">পরবর্তী</string>
+    <string name="pause">বিরতি</string>
+    <string name="play">চালান</string>
+    <string name="zoom_in">জুম ইন</string>
+    <string name="zoom_out">জুম আউট</string>
 
     <string name="clear_sky">পরিষ্কার আকাশ</string>
     <string name="frost">তুষার</string>

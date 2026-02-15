@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.android.compose.material3)
     implementation(libs.android.compose.material.icons)
+    implementation(libs.android.compose.material.icons.extended)
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     implementation(libs.androidx.compose.ui)

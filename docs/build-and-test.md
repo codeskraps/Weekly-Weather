@@ -36,7 +36,7 @@ Version code/name are set directly in `app/build.gradle.kts:18-19`. SDK targets 
 
 # Single module
 ./gradlew :feature:weather:testDebugUnitTest
-./gradlew :feature:geocoding:testDebugUnitTest
+./gradlew :feature:maps:testDebugUnitTest
 ./gradlew :core:local:testDebugUnitTest
 
 # Instrumented tests (requires emulator/device)

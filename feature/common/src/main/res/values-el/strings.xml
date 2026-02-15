@@ -24,6 +24,24 @@
     <string name="no_results">Χωρίς αποτελέσματα !!!</string>
     <string name="map_location">Τοποθεσία Χάρτη</string>
     <string name="add">Προσθήκη</string>
+    <string name="menu">Μενού</string>
+    <string name="settings">Ρυθμίσεις</string>
+    <string name="radar">Ραντάρ</string>
+    <string name="nav_weather">Καιρός</string>
+    <string name="nav_map">Χάρτης</string>
+    <string name="units">Μονάδες</string>
+    <string name="theme">Θέμα</string>
+    <string name="metric_units">Μετρικό (°C, km/h)</string>
+    <string name="imperial_units">Αγγλοσαξονικό (°F, mph)</string>
+    <string name="theme_system">Προεπιλογή συστήματος</string>
+    <string name="theme_light">Φωτεινό</string>
+    <string name="theme_dark">Σκοτεινό</string>
+    <string name="previous">Προηγούμενο</string>
+    <string name="next">Επόμενο</string>
+    <string name="pause">Παύση</string>
+    <string name="play">Αναπαραγωγή</string>
+    <string name="zoom_in">Μεγέθυνση</string>
+    <string name="zoom_out">Σμίκρυνση</string>
 
 
     <string name="clear_sky">Καθαρός ουρανός</string>

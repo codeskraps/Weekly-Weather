@@ -24,6 +24,24 @@
     <string name="no_results">Ora Ana Hasil !!!</string>
     <string name="map_location">Panggonan Peta</string>
     <string name="add">Tambah</string>
+    <string name="menu">Menu</string>
+    <string name="settings">Setelan</string>
+    <string name="radar">Radar</string>
+    <string name="nav_weather">Cuaca</string>
+    <string name="nav_map">Peta</string>
+    <string name="units">Unit</string>
+    <string name="theme">Tema</string>
+    <string name="metric_units">Metrik (°C, km/h)</string>
+    <string name="imperial_units">Imperial (°F, mph)</string>
+    <string name="theme_system">Bawaan sistem</string>
+    <string name="theme_light">Padhang</string>
+    <string name="theme_dark">Peteng</string>
+    <string name="previous">Sadurunge</string>
+    <string name="next">Sabanjure</string>
+    <string name="pause">Jeda</string>
+    <string name="play">Putar</string>
+    <string name="zoom_in">Gedhékaké</string>
+    <string name="zoom_out">Cilikna</string>
 
 
     <string name="clear_sky">Langit Saré</string>

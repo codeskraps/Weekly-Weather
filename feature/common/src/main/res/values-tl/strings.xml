@@ -24,6 +24,24 @@
     <string name="no_results">Walang Resulta !!!</string>
     <string name="map_location">Lokasyon sa Mapa</string>
     <string name="add">Idagdag</string>
+    <string name="menu">Menu</string>
+    <string name="settings">Mga Setting</string>
+    <string name="radar">Radar</string>
+    <string name="nav_weather">Panahon</string>
+    <string name="nav_map">Mapa</string>
+    <string name="units">Mga Yunit</string>
+    <string name="theme">Tema</string>
+    <string name="metric_units">Metriko (°C, km/h)</string>
+    <string name="imperial_units">Imperyal (°F, mph)</string>
+    <string name="theme_system">Default ng sistema</string>
+    <string name="theme_light">Maliwanag</string>
+    <string name="theme_dark">Madilim</string>
+    <string name="previous">Nakaraan</string>
+    <string name="next">Susunod</string>
+    <string name="pause">I-pause</string>
+    <string name="play">I-play</string>
+    <string name="zoom_in">Palakihin</string>
+    <string name="zoom_out">Paliitin</string>
 
 
     <string name="clear_sky">Malinaw na Langit</string>

@@ -37,8 +37,8 @@ Retrofit API  ──DTO──▶  mapper functions  ──▶  domain model  ─
 ```
 app
  ├── feature:weather   ─┐
- ├── feature:geocoding  ├──▶ feature:common
- ├── feature:maps      ─┘        │
+ ├── feature:maps       ├──▶ feature:common
+ ├── feature:settings  ─┘        │
  │                                ▼
  ├── core:local    (Room DB, LocalResourceRepository)
  ├── core:location (FusedLocationProviderClient wrapper)
@@ -51,18 +51,18 @@ Feature modules depend on `feature:common` and relevant `core:*` modules. Featur
 
 Routes defined as `sealed class Screen` in `feature:common/.../navigation/Screen.kt`:
 
-- `Weather` — `weather/{name}/{lat}/{long}` (start destination, defaults to current GPS)
-- `Geocoding` — `geocoding` (search by name, returns selection via nav)
-- `Map` — `map` (pick location on Google Maps)
+- `Weather` — `weather` (start destination, shows forecast for active location)
+- `Map` — `map` (Google Maps with search, radar overlay, and location picking)
+- `Settings` — `settings` (unit system and theme preferences)
 
-`MainActivity` hosts the `NavHost`. Each composable screen receives `state`, `handleEvent`, `action`, and a `navRoute` callback. Screens never hold a direct reference to `NavController`.
+`WeatherNavHost` in the `app` module hosts the `NavHost`. Each composable screen receives `state`, `handleEvent`, `action`, and navigation callbacks. Screens never hold a direct reference to `NavController`.
 
 ## Koin DI
 
 Each module declares a `val xxxModule = module { ... }` in its `di/` package. All registered in `WeatherApp.kt`:
 
 ```kotlin
-modules(commonModule, localModule, locationModule, geocodingModule, weatherModule, mapsFeatureModule, umamiModule)
+modules(commonModule, localModule, locationModule, weatherModule, mapsFeatureModule, settingsModule, umamiModule)
 ```
 
 Pattern inside a module:

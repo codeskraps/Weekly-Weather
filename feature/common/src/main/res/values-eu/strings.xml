@@ -24,6 +24,24 @@
     <string name="no_results">Emaitzarik ez !!!</string>
     <string name="map_location">Maparen Kokapena</string>
     <string name="add">Gehitu</string>
+    <string name="menu">Menua</string>
+    <string name="settings">Ezarpenak</string>
+    <string name="radar">Radarra</string>
+    <string name="nav_weather">Eguraldia</string>
+    <string name="nav_map">Mapa</string>
+    <string name="units">Unitateak</string>
+    <string name="theme">Gaia</string>
+    <string name="metric_units">Metrikoa (°C, km/h)</string>
+    <string name="imperial_units">Inperiala (°F, mph)</string>
+    <string name="theme_system">Sistemaren lehenetsia</string>
+    <string name="theme_light">Argia</string>
+    <string name="theme_dark">Iluna</string>
+    <string name="previous">Aurrekoa</string>
+    <string name="next">Hurrengoa</string>
+    <string name="pause">Pausatu</string>
+    <string name="play">Erreproduzitu</string>
+    <string name="zoom_in">Gerturatu</string>
+    <string name="zoom_out">Urrundu</string>
 
 
     <string name="clear_sky">Zeru garbia</string>

@@ -90,6 +90,12 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
 
+    // Retrofit & Moshi
+    implementation(libs.retrofit.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+    ksp(libs.moshi.kotlin.codegen)
+
+    // Google Maps
     implementation(libs.play.services.maps)
     implementation(libs.maps.compose)
 

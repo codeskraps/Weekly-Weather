@@ -24,6 +24,24 @@
     <string name="no_results">Fără rezultate !!!</string>
     <string name="map_location">Locație pe hartă</string>
     <string name="add">Adaugă</string>
+    <string name="menu">Meniu</string>
+    <string name="settings">Setări</string>
+    <string name="radar">Radar</string>
+    <string name="nav_weather">Vreme</string>
+    <string name="nav_map">Hartă</string>
+    <string name="units">Unități</string>
+    <string name="theme">Temă</string>
+    <string name="metric_units">Metric (°C, km/h)</string>
+    <string name="imperial_units">Imperial (°F, mph)</string>
+    <string name="theme_system">Implicit sistem</string>
+    <string name="theme_light">Luminos</string>
+    <string name="theme_dark">Întunecat</string>
+    <string name="previous">Anterior</string>
+    <string name="next">Următor</string>
+    <string name="pause">Pauză</string>
+    <string name="play">Redare</string>
+    <string name="zoom_in">Mărire</string>
+    <string name="zoom_out">Micșorare</string>
 
 
     <string name="clear_sky">Cer senin</string>

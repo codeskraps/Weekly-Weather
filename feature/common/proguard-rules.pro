@@ -32,9 +32,9 @@
 -keep class com.codeskraps.feature.common.di.FeatureModule_ProvidesResourcesFactory { *; }
 -keep class com.codeskraps.feature.common.dispatcher.DispatcherProvider { *; }
 -keep class com.codeskraps.feature.common.mvi.StateReducerFlow { *; }
--keep class com.codeskraps.feature.common.navigation.Screen$Geocoding { *; }
 -keep class com.codeskraps.feature.common.navigation.Screen$Map { *; }
 -keep class com.codeskraps.feature.common.navigation.Screen$Weather { *; }
+-keep class com.codeskraps.feature.common.navigation.Screen$Settings { *; }
 
 # Keep Koin module classes
 -keep class com.codeskraps.feature.common.di.** { *; }

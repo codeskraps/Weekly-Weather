@@ -27,9 +27,9 @@ val weatherModule = module {
             locationTracker = get(),
             localResource = get(),
             dispatcherProvider = get(),
-            savedStateHandle = get(),
             analyticsRepository = get(),
-            settingsRepository = get()
+            settingsRepository = get(),
+            activeLocationRepository = get()
         )
     }
 }

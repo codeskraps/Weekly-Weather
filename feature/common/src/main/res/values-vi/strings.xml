@@ -24,6 +24,24 @@
     <string name="no_results">Không có kết quả !!!</string>
     <string name="map_location">Vị trí trên bản đồ</string>
     <string name="add">Thêm</string>
+    <string name="menu">Menu</string>
+    <string name="settings">Cài đặt</string>
+    <string name="radar">Radar</string>
+    <string name="nav_weather">Thời tiết</string>
+    <string name="nav_map">Bản đồ</string>
+    <string name="units">Đơn vị</string>
+    <string name="theme">Giao diện</string>
+    <string name="metric_units">Hệ mét (°C, km/h)</string>
+    <string name="imperial_units">Hệ Anh (°F, mph)</string>
+    <string name="theme_system">Mặc định hệ thống</string>
+    <string name="theme_light">Sáng</string>
+    <string name="theme_dark">Tối</string>
+    <string name="previous">Trước</string>
+    <string name="next">Tiếp</string>
+    <string name="pause">Tạm dừng</string>
+    <string name="play">Phát</string>
+    <string name="zoom_in">Phóng to</string>
+    <string name="zoom_out">Thu nhỏ</string>
 
 
     <string name="clear_sky">Trời quang đãng</string>

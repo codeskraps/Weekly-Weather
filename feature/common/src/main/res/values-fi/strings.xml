@@ -24,6 +24,24 @@
     <string name="no_results">Ei tuloksia !!!</string>
     <string name="map_location">Karttalokero</string>
     <string name="add">Lisää</string>
+    <string name="menu">Valikko</string>
+    <string name="settings">Asetukset</string>
+    <string name="radar">Tutka</string>
+    <string name="nav_weather">Sää</string>
+    <string name="nav_map">Kartta</string>
+    <string name="units">Yksiköt</string>
+    <string name="theme">Teema</string>
+    <string name="metric_units">Metrinen (°C, km/h)</string>
+    <string name="imperial_units">Brittiläinen (°F, mph)</string>
+    <string name="theme_system">Järjestelmän oletus</string>
+    <string name="theme_light">Vaalea</string>
+    <string name="theme_dark">Tumma</string>
+    <string name="previous">Edellinen</string>
+    <string name="next">Seuraava</string>
+    <string name="pause">Tauko</string>
+    <string name="play">Toista</string>
+    <string name="zoom_in">Lähennä</string>
+    <string name="zoom_out">Loitonna</string>
 
 
     <string name="clear_sky">Selkeää taivasta</string>

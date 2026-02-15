@@ -35,9 +35,7 @@ fun SaveLocationDialog(
         if (weatherInfo.geoLocation == resources.getString(R.string.current_location)
             || weatherInfo.geoLocation == resources.getString(R.string.map_location)
         ) {
-            var nameLocation by remember {
-                mutableStateOf(weatherInfo.geoLocation)
-            }
+            var nameLocation by remember { mutableStateOf("") }
 
             AlertDialog(
                 onDismissRequest = onDismissRequest,
@@ -51,7 +49,11 @@ fun SaveLocationDialog(
                         Spacer(modifier = Modifier.height(10.dp))
                         OutlinedTextField(
                             value = nameLocation,
-                            onValueChange = { nameLocation = it })
+                            onValueChange = { nameLocation = it },
+                            placeholder = {
+                                Text(text = weatherInfo.geoLocation)
+                            }
+                        )
                     }
                 },
                 confirmButton = {
@@ -60,9 +62,10 @@ fun SaveLocationDialog(
                             containerColor = MaterialTheme.colorScheme.primary
                         ),
                         onClick = {
+                            val saveName = nameLocation.ifEmpty { weatherInfo.geoLocation }
                             handleEvent(
                                 WeatherEvent.Save(
-                                    weatherInfo.copy(geoLocation = nameLocation).toWeatherLocation()
+                                    weatherInfo.copy(geoLocation = saveName).toWeatherLocation()
                                 )
                             )
                             onDismissRequest()

@@ -24,6 +24,24 @@
     <string name="no_results">Žádné výsledky !!!</string>
     <string name="map_location">Poloha na mapě</string>
     <string name="add">Přidat</string>
+    <string name="menu">Menu</string>
+    <string name="settings">Nastavení</string>
+    <string name="radar">Radar</string>
+    <string name="nav_weather">Počasí</string>
+    <string name="nav_map">Mapa</string>
+    <string name="units">Jednotky</string>
+    <string name="theme">Motiv</string>
+    <string name="metric_units">Metrické (°C, km/h)</string>
+    <string name="imperial_units">Imperiální (°F, mph)</string>
+    <string name="theme_system">Výchozí systémový</string>
+    <string name="theme_light">Světlý</string>
+    <string name="theme_dark">Tmavý</string>
+    <string name="previous">Předchozí</string>
+    <string name="next">Další</string>
+    <string name="pause">Pozastavit</string>
+    <string name="play">Přehrát</string>
+    <string name="zoom_in">Přiblížit</string>
+    <string name="zoom_out">Oddálit</string>
 
     <string name="clear_sky">Jasno</string>
     <string name="frost">Mrazík</string>

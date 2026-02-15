@@ -24,6 +24,25 @@
     <string name="no_results">Sense resultats !!!</string>
     <string name="map_location">Ubicació al mapa</string>
     <string name="add">Afegir</string>
+    <string name="menu">Menú</string>
+    <string name="settings">Configuració</string>
+    <string name="radar">Radar</string>
+    <string name="nav_weather">Temps</string>
+    <string name="nav_map">Mapa</string>
+
+    <string name="units">Unitats</string>
+    <string name="theme">Tema</string>
+    <string name="metric_units">Mètric (°C, km/h)</string>
+    <string name="imperial_units">Imperial (°F, mph)</string>
+    <string name="theme_system">Predeterminat del sistema</string>
+    <string name="theme_light">Clar</string>
+    <string name="theme_dark">Fosc</string>
+    <string name="previous">Anterior</string>
+    <string name="next">Següent</string>
+    <string name="pause">Pausa</string>
+    <string name="play">Reproduir</string>
+    <string name="zoom_in">Ampliar</string>
+    <string name="zoom_out">Reduir</string>
 
     <string name="clear_sky">Cel clar</string>
     <string name="frost">Gelada</string>

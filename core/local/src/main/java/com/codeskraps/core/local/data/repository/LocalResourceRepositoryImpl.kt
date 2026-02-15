@@ -42,4 +42,8 @@ class LocalResourceRepositoryImpl(
     override suspend fun getIssueDeleting(): String {
         return resources.getString(R.string.issue_deleting)
     }
+
+    override suspend fun getMapLocationString(): String {
+        return resources.getString(R.string.map_location)
+    }
 }

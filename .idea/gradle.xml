@@ -29,9 +29,7 @@
             <option value="$PROJECT_DIR$/core/umami" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/common" />
-            <option value="$PROJECT_DIR$/feature/geocoding" />
             <option value="$PROJECT_DIR$/feature/maps" />
-            <option value="$PROJECT_DIR$/feature/radar" />
             <option value="$PROJECT_DIR$/feature/settings" />
             <option value="$PROJECT_DIR$/feature/weather" />
           </set>

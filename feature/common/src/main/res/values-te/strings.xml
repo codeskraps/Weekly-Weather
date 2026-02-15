@@ -24,6 +24,24 @@
     <string name="no_results">ఎటువంటి ఫలితం లేదు !!!</string>
     <string name="map_location">మ్యాప్ స్థానం</string>
     <string name="add">జోడించు</string>
+    <string name="menu">మెను</string>
+    <string name="settings">సెట్టింగ్‌లు</string>
+    <string name="radar">రాడార్</string>
+    <string name="nav_weather">వాతావరణం</string>
+    <string name="nav_map">మ్యాప్</string>
+    <string name="units">యూనిట్లు</string>
+    <string name="theme">థీమ్</string>
+    <string name="metric_units">మెట్రిక్ (°C, km/h)</string>
+    <string name="imperial_units">ఇంపీరియల్ (°F, mph)</string>
+    <string name="theme_system">సిస్టమ్ డిఫాల్ట్</string>
+    <string name="theme_light">లైట్</string>
+    <string name="theme_dark">డార్క్</string>
+    <string name="previous">మునుపటి</string>
+    <string name="next">తదుపరి</string>
+    <string name="pause">పాజ్</string>
+    <string name="play">ప్లే</string>
+    <string name="zoom_in">జూమ్ ఇన్</string>
+    <string name="zoom_out">జూమ్ అవుట్</string>
 
 
     <string name="clear_sky">స్పష్ట ఆకాశం</string>

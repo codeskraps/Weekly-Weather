@@ -64,11 +64,9 @@ kotlin {
 
 dependencies {
     implementation(project(mapOf("path" to ":feature:common")))
-    implementation(project(mapOf("path" to ":feature:geocoding")))
     implementation(project(mapOf("path" to ":feature:weather")))
     implementation(project(mapOf("path" to ":feature:maps")))
     implementation(project(mapOf("path" to ":feature:settings")))
-    implementation(project(mapOf("path" to ":feature:radar")))
     implementation(project(mapOf("path" to ":core:umami")))
     implementation(project(mapOf("path" to ":core:local")))
     implementation(project(mapOf("path" to ":core:location")))
@@ -80,8 +78,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.android.compose.material3)
     implementation(libs.android.compose.material.icons)
-    implementation(libs.material3.adaptive)
-    implementation(libs.material3.adaptive.navigation.suite)
     implementation(libs.androidx.core.splashscreen)
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)

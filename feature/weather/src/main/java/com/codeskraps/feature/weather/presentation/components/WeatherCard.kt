@@ -76,8 +76,10 @@ fun WeatherCard(
     data: WeatherData,
     backgroundColor: Color,
     modifier: Modifier = Modifier,
+    locationName: String = "",
     temperatureUnit: String = "°C",
     windSpeedUnit: String = "km/h",
+    topEndAction: @Composable () -> Unit = {},
 ) {
     val resources = LocalContext.current.resources
     Card(
@@ -87,21 +89,34 @@ fun WeatherCard(
         shape = RoundedCornerShape(10.dp),
         modifier = modifier.padding(16.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "${data.time.dayOfMonth} ${resources.getString(MonthString.parse(data.time.monthValue))} ${
-                    data.time.format(
-                        DateTimeFormatter.ofPattern("HH:mm")
+        Box(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                if (locationName.isNotEmpty()) {
+                    Text(
+                        text = locationName,
+                        fontSize = 24.sp,
+                        maxLines = 1,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier
+                            .align(Alignment.Start)
+                            .padding(end = 40.dp)
+                            .basicMarquee()
                     )
-                }",
-                modifier = Modifier.align(Alignment.End),
-                color = MaterialTheme.colorScheme.primary
-            )
+                }
+                Text(
+                    text = "${data.time.dayOfMonth} ${resources.getString(MonthString.parse(data.time.monthValue))} ${
+                        data.time.format(
+                            DateTimeFormatter.ofPattern("HH:mm")
+                        )
+                    }",
+                    modifier = Modifier.align(Alignment.Start),
+                    color = MaterialTheme.colorScheme.primary
+                )
             Spacer(modifier = Modifier.height(16.dp))
             Box(
                 modifier = Modifier.size(100.dp),
@@ -167,6 +182,14 @@ fun WeatherCard(
                     iconTint = MaterialTheme.colorScheme.primary,
                     textStyle = TextStyle(color = MaterialTheme.colorScheme.primary)
                 )
+            }
+            }
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(8.dp)
+            ) {
+                topEndAction()
             }
         }
     }

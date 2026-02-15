@@ -24,6 +24,24 @@
     <string name="no_results">Geen resultaten !!!</string>
     <string name="map_location">Kaartlocatie</string>
     <string name="add">Toevoegen</string>
+    <string name="menu">Menu</string>
+    <string name="settings">Instellingen</string>
+    <string name="radar">Radar</string>
+    <string name="nav_weather">Weer</string>
+    <string name="nav_map">Kaart</string>
+    <string name="units">Eenheden</string>
+    <string name="theme">Thema</string>
+    <string name="metric_units">Metrisch (°C, km/h)</string>
+    <string name="imperial_units">Imperiaal (°F, mph)</string>
+    <string name="theme_system">Systeemstandaard</string>
+    <string name="theme_light">Licht</string>
+    <string name="theme_dark">Donker</string>
+    <string name="previous">Vorige</string>
+    <string name="next">Volgende</string>
+    <string name="pause">Pauzeren</string>
+    <string name="play">Afspelen</string>
+    <string name="zoom_in">Inzoomen</string>
+    <string name="zoom_out">Uitzoomen</string>
 
 
     <string name="clear_sky">Heldere hemel</string>

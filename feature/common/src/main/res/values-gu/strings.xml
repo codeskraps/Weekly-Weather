@@ -24,6 +24,24 @@
     <string name="no_results">કોઈ પરિણામ મળ્યો નથી !!!</string>
     <string name="map_location">નकશા સ્થાન</string>
     <string name="add">ઉમેરો</string>
+    <string name="menu">મેનૂ</string>
+    <string name="settings">સેટિંગ્સ</string>
+    <string name="radar">રડાર</string>
+    <string name="nav_weather">હવામાન</string>
+    <string name="nav_map">નકશો</string>
+    <string name="units">એકમો</string>
+    <string name="theme">થીમ</string>
+    <string name="metric_units">મેટ્રિક (°C, km/h)</string>
+    <string name="imperial_units">ઇમ્પિરિયલ (°F, mph)</string>
+    <string name="theme_system">સિસ્ટમ ડિફોલ્ટ</string>
+    <string name="theme_light">લાઇટ</string>
+    <string name="theme_dark">ડાર્ક</string>
+    <string name="previous">પાછલું</string>
+    <string name="next">આગળનું</string>
+    <string name="pause">વિરામ</string>
+    <string name="play">ચલાવો</string>
+    <string name="zoom_in">ઝૂમ ઇન</string>
+    <string name="zoom_out">ઝૂમ આઉટ</string>
 
 
     <string name="clear_sky">સાફ આકાશ</string>

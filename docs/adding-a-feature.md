@@ -102,7 +102,7 @@ Add a route to `Screen` sealed class in `feature:common/.../navigation/Screen.kt
 data object YourScreen : Screen("yourscreen")
 ```
 
-Add a `composable(...)` block in `MainActivity.kt`'s `NavHost`, following the existing pattern:
+Add a `composable(...)` block in `WeatherNavHost.kt`'s `NavHost`, following the existing pattern:
 - Get ViewModel via `koinViewModel<YourViewModel>()`
 - Collect state via `collectAsStateWithLifecycle()`
 - Pass `state`, `handleEvent`, `action`, and nav callbacks to your Composable

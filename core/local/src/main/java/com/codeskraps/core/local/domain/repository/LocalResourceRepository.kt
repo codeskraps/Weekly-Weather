@@ -10,4 +10,5 @@ interface LocalResourceRepository {
     suspend fun getIssueLoadingCache(): String
     suspend fun getIssueSaving(): String
     suspend fun getIssueDeleting(): String
+    suspend fun getMapLocationString(): String
 }

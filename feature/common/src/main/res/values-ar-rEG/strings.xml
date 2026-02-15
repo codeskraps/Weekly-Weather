@@ -24,6 +24,25 @@
     <string name="no_results">لا توجد نتائج !!!</string>
     <string name="map_location">موقع الخريطة</string>
     <string name="add">إضافة</string>
+    <string name="menu">القائمة</string>
+    <string name="settings">الإعدادات</string>
+    <string name="radar">الرادار</string>
+    <string name="nav_weather">الطقس</string>
+    <string name="nav_map">الخريطة</string>
+
+    <string name="units">الوحدات</string>
+    <string name="theme">المظهر</string>
+    <string name="metric_units">متري (°م، كم/س)</string>
+    <string name="imperial_units">إمبراطوري (°ف، ميل/س)</string>
+    <string name="theme_system">النظام الافتراضي</string>
+    <string name="theme_light">فاتح</string>
+    <string name="theme_dark">داكن</string>
+    <string name="previous">السابق</string>
+    <string name="next">التالي</string>
+    <string name="pause">إيقاف مؤقت</string>
+    <string name="play">تشغيل</string>
+    <string name="zoom_in">تكبير</string>
+    <string name="zoom_out">تصغير</string>
 
     <string name="clear_sky">سماء صافية</string>
     <string name="frost">صقيع</string>

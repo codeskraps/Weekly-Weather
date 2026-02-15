@@ -24,6 +24,24 @@
     <string name="no_results">بدون نتیجه !!!</string>
     <string name="map_location">موقعیت نقشه</string>
     <string name="add">افزودن</string>
+    <string name="menu">منو</string>
+    <string name="settings">تنظیمات</string>
+    <string name="radar">رادار</string>
+    <string name="nav_weather">آب و هوا</string>
+    <string name="nav_map">نقشه</string>
+    <string name="units">واحدها</string>
+    <string name="theme">پوسته</string>
+    <string name="metric_units">متریک (°C, km/h)</string>
+    <string name="imperial_units">امپریال (°F, mph)</string>
+    <string name="theme_system">پیش‌فرض سیستم</string>
+    <string name="theme_light">روشن</string>
+    <string name="theme_dark">تاریک</string>
+    <string name="previous">قبلی</string>
+    <string name="next">بعدی</string>
+    <string name="pause">مکث</string>
+    <string name="play">پخش</string>
+    <string name="zoom_in">بزرگ‌نمایی</string>
+    <string name="zoom_out">کوچک‌نمایی</string>
 
 
     <string name="clear_sky">آسمان صاف</string>

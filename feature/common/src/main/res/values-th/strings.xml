@@ -24,6 +24,24 @@
     <string name="no_results">ไม่มีผลลัพธ์ !!!</string>
     <string name="map_location">ตำแหน่งบนแผนที่</string>
     <string name="add">เพิ่ม</string>
+    <string name="menu">เมนู</string>
+    <string name="settings">การตั้งค่า</string>
+    <string name="radar">เรดาร์</string>
+    <string name="nav_weather">สภาพอากาศ</string>
+    <string name="nav_map">แผนที่</string>
+    <string name="units">หน่วย</string>
+    <string name="theme">ธีม</string>
+    <string name="metric_units">เมตริก (°C, km/h)</string>
+    <string name="imperial_units">อิมพีเรียล (°F, mph)</string>
+    <string name="theme_system">ค่าเริ่มต้นระบบ</string>
+    <string name="theme_light">สว่าง</string>
+    <string name="theme_dark">มืด</string>
+    <string name="previous">ก่อนหน้า</string>
+    <string name="next">ถัดไป</string>
+    <string name="pause">หยุดชั่วคราว</string>
+    <string name="play">เล่น</string>
+    <string name="zoom_in">ซูมเข้า</string>
+    <string name="zoom_out">ซูมออก</string>
 
 
     <string name="clear_sky">ฟ้าใส</string>

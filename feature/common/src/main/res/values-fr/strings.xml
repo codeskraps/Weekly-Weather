@@ -24,6 +24,24 @@
     <string name="no_results">Aucun résultat !!!</string>
     <string name="map_location">Emplacement sur la carte</string>
     <string name="add">Ajouter</string>
+    <string name="menu">Menu</string>
+    <string name="settings">Paramètres</string>
+    <string name="radar">Radar</string>
+    <string name="nav_weather">Météo</string>
+    <string name="nav_map">Carte</string>
+    <string name="units">Unités</string>
+    <string name="theme">Thème</string>
+    <string name="metric_units">Métrique (°C, km/h)</string>
+    <string name="imperial_units">Impérial (°F, mph)</string>
+    <string name="theme_system">Par défaut du système</string>
+    <string name="theme_light">Clair</string>
+    <string name="theme_dark">Sombre</string>
+    <string name="previous">Précédent</string>
+    <string name="next">Suivant</string>
+    <string name="pause">Pause</string>
+    <string name="play">Lecture</string>
+    <string name="zoom_in">Zoom avant</string>
+    <string name="zoom_out">Zoom arrière</string>
 
 
     <string name="clear_sky">Ciel dégagé</string>

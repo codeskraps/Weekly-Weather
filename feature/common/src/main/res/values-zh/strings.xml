@@ -24,6 +24,24 @@
     <string name="no_results">无结果！</string>
     <string name="map_location">地图位置</string>
     <string name="add">添加</string>
+    <string name="menu">菜单</string>
+    <string name="settings">设置</string>
+    <string name="radar">雷达</string>
+    <string name="nav_weather">天气</string>
+    <string name="nav_map">地图</string>
+    <string name="units">单位</string>
+    <string name="theme">主题</string>
+    <string name="metric_units">公制 (°C, km/h)</string>
+    <string name="imperial_units">英制 (°F, mph)</string>
+    <string name="theme_system">系统默认</string>
+    <string name="theme_light">浅色</string>
+    <string name="theme_dark">深色</string>
+    <string name="previous">上一个</string>
+    <string name="next">下一个</string>
+    <string name="pause">暂停</string>
+    <string name="play">播放</string>
+    <string name="zoom_in">放大</string>
+    <string name="zoom_out">缩小</string>
 
 
     <string name="clear_sky">晴朗</string>

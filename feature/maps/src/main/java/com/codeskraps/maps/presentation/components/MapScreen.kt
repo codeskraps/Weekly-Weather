@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -59,9 +60,12 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -100,6 +104,7 @@ import com.google.maps.android.compose.TileOverlay
 import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.rememberCameraPositionState
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDateTime
@@ -194,8 +199,23 @@ fun MapScreen(
     }
 
     val statusBarPadding = WindowInsets.statusBars.asPaddingValues()
+    val navigationBarPadding = WindowInsets.navigationBars.asPaddingValues()
     val scope = rememberCoroutineScope()
     val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+    // Stagger radar overlay creation to avoid burst of tile requests
+    var radarOverlayCount by remember { mutableIntStateOf(0) }
+    LaunchedEffect(radarState.radarFrames) {
+        if (radarState.radarFrames.isNotEmpty()) {
+            radarOverlayCount = 1
+            for (i in 2..radarState.radarFrames.size) {
+                delay(200)
+                radarOverlayCount = i
+            }
+        } else {
+            radarOverlayCount = 0
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         // Layer 1: Google Map
@@ -213,15 +233,18 @@ fun MapScreen(
             }
         ) {
             // Radar tile overlay (only in radar mode)
+            // Overlays are created gradually to avoid a burst of tile requests
             if (mapState.isRadarMode) {
                 radarState.radarFrames.forEachIndexed { index, frame ->
-                    key(frame.tileUrl) {
-                        TileOverlay(
-                            tileProvider = remember(frame.tileUrl) { RadarTileProvider(frame.tileUrl) },
-                            transparency = 0.3f,
-                            visible = index == radarState.currentFrameIndex,
-                            fadeIn = true
-                        )
+                    if (index == radarState.currentFrameIndex || index < radarOverlayCount) {
+                        key(frame.tileUrl) {
+                            TileOverlay(
+                                tileProvider = remember(frame.tileUrl) { RadarTileProvider(frame.tileUrl) },
+                                transparency = 0.3f,
+                                visible = index == radarState.currentFrameIndex,
+                                fadeIn = false
+                            )
+                        }
                     }
                 }
             }
@@ -554,7 +577,12 @@ fun MapScreen(
         if (!mapState.isSearchFocused) Column(
             modifier = Modifier
                 .align(Alignment.BottomStart)
-                .padding(16.dp),
+                .padding(
+                    start = 16.dp,
+                    end = 16.dp,
+                    top = 16.dp,
+                    bottom = 16.dp + navigationBarPadding.calculateBottomPadding()
+                ),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             SmallFloatingActionButton(
@@ -584,7 +612,12 @@ fun MapScreen(
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(16.dp),
+                    .padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 16.dp,
+                        bottom = 16.dp + navigationBarPadding.calculateBottomPadding()
+                    ),
                 horizontalAlignment = Alignment.End,
             ) {
                 // GPS tracking toggle
@@ -638,7 +671,13 @@ fun MapScreen(
 
                 // Big FAB: navigate to Weather screen
                 LargeFloatingActionButton(
-                    onClick = navigateToWeather,
+                    onClick = {
+                        if (mapState.isRadarMode) {
+                            handleRadarEvent(RadarEvent.Pause)
+                            handleMapEvent(MapEvent.ToggleRadarMode)
+                        }
+                        navigateToWeather()
+                    },
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     contentColor = MaterialTheme.colorScheme.primary
                 ) {

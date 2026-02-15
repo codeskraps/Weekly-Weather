@@ -1,12 +1,14 @@
 package com.codeskraps.feature.weather.presentation.components
 
 import android.Manifest
+import android.content.res.Configuration
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -35,6 +37,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.material.icons.filled.Map
@@ -142,55 +145,92 @@ fun WeatherScreen(
                         .fillMaxSize()
                         .pullRefresh(pullRefreshState)
                 ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        state.weatherInfo.currentWeatherData?.let {
-                            LazyColumn {
+                    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+                    val topEndAction: @Composable () -> Unit = {
+                        IconButton(
+                            onClick = {
+                                if (state.cached && state.weatherInfo != null) {
+                                    handleEvent(WeatherEvent.Delete(state.weatherInfo.toWeatherLocation()))
+                                } else {
+                                    showDialog = true
+                                }
+                            }
+                        ) {
+                            Icon(
+                                imageVector = if (state.cached) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                                tint = if (state.cached) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
+                                contentDescription = resources.getString(R.string.cached)
+                            )
+                        }
+                    }
+
+                    if (isLandscape) {
+                        Row(modifier = Modifier.fillMaxSize()) {
+                            state.weatherInfo.currentWeatherData?.let {
+                                LazyColumn(modifier = Modifier.weight(1f)) {
+                                    item {
+                                        WeatherCard(
+                                            data = it,
+                                            backgroundColor = MaterialTheme.colorScheme.primaryContainer,
+                                            locationName = state.weatherInfo.geoLocation,
+                                            temperatureUnit = state.weatherInfo.temperatureUnit,
+                                            windSpeedUnit = state.weatherInfo.windSpeedUnit,
+                                            topEndAction = topEndAction
+                                        )
+                                    }
+                                }
+                            }
+                            LazyColumn(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .background(MaterialTheme.colorScheme.background)
+                            ) {
                                 item {
-                                    WeatherCard(
-                                        data = it,
-                                        backgroundColor = MaterialTheme.colorScheme.primaryContainer,
-                                        locationName = state.weatherInfo.geoLocation,
-                                        temperatureUnit = state.weatherInfo.temperatureUnit,
-                                        windSpeedUnit = state.weatherInfo.windSpeedUnit,
-                                        topEndAction = {
-                                            IconButton(
-                                                onClick = {
-                                                    if (state.cached && state.weatherInfo != null) {
-                                                        handleEvent(WeatherEvent.Delete(state.weatherInfo.toWeatherLocation()))
-                                                    } else {
-                                                        showDialog = true
-                                                    }
-                                                }
-                                            ) {
-                                                Icon(
-                                                    imageVector = if (state.cached) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                                                    tint = if (state.cached) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
-                                                    contentDescription = resources.getString(R.string.cached)
-                                                )
-                                            }
-                                        }
-                                    )
+                                    state.weatherInfo.weatherDataPerDay.forEach { perDay ->
+                                        Spacer(modifier = Modifier.height(16.dp))
+                                        WeatherForecast(
+                                            state.weatherInfo,
+                                            perDay.value,
+                                            handleEvent
+                                        )
+                                    }
+                                    Spacer(modifier = Modifier.height(16.dp))
                                 }
                             }
                         }
-
-                        LazyColumn(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .background(MaterialTheme.colorScheme.background)
-                        ) {
-                            item {
-                                state.weatherInfo.weatherDataPerDay.forEach { perDay ->
-                                    Spacer(modifier = Modifier.height(16.dp))
-                                    WeatherForecast(
-                                        state.weatherInfo,
-                                        perDay.value,
-                                        handleEvent
-                                    )
+                    } else {
+                        Column(modifier = Modifier.fillMaxSize()) {
+                            state.weatherInfo.currentWeatherData?.let {
+                                LazyColumn {
+                                    item {
+                                        WeatherCard(
+                                            data = it,
+                                            backgroundColor = MaterialTheme.colorScheme.primaryContainer,
+                                            locationName = state.weatherInfo.geoLocation,
+                                            temperatureUnit = state.weatherInfo.temperatureUnit,
+                                            windSpeedUnit = state.weatherInfo.windSpeedUnit,
+                                            topEndAction = topEndAction
+                                        )
+                                    }
                                 }
-                                Spacer(modifier = Modifier.height(16.dp))
+                            }
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(MaterialTheme.colorScheme.background)
+                            ) {
+                                item {
+                                    state.weatherInfo.weatherDataPerDay.forEach { perDay ->
+                                        Spacer(modifier = Modifier.height(16.dp))
+                                        WeatherForecast(
+                                            state.weatherInfo,
+                                            perDay.value,
+                                            handleEvent
+                                        )
+                                    }
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                }
                             }
                         }
                     }

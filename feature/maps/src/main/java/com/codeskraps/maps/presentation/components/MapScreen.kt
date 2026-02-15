@@ -1,5 +1,6 @@
 package com.codeskraps.maps.presentation.components
 
+import android.content.res.Configuration
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
@@ -21,6 +22,7 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -67,6 +69,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -192,6 +195,7 @@ fun MapScreen(
 
     val statusBarPadding = WindowInsets.statusBars.asPaddingValues()
     val scope = rememberCoroutineScope()
+    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     Box(modifier = Modifier.fillMaxSize()) {
         // Layer 1: Google Map
@@ -256,11 +260,11 @@ fun MapScreen(
             visible = mapState.isRadarMode && radarState.radarFrames.isNotEmpty(),
             enter = slideInVertically(initialOffsetY = { -it }),
             exit = slideOutVertically(targetOffsetY = { -it }),
-            modifier = Modifier.align(Alignment.TopCenter)
+            modifier = Modifier.align(if (isLandscape) Alignment.TopStart else Alignment.TopCenter)
         ) {
             Card(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .then(if (isLandscape) Modifier.widthIn(max = 480.dp) else Modifier.fillMaxWidth())
                     .padding(
                         top = statusBarPadding.calculateTopPadding() + 8.dp,
                         start = 16.dp,
@@ -468,13 +472,13 @@ fun MapScreen(
             visible = !mapState.isRadarMode,
             enter = slideInVertically(initialOffsetY = { -it }),
             exit = slideOutVertically(targetOffsetY = { -it }),
-            modifier = Modifier.align(Alignment.TopCenter)
+            modifier = Modifier.align(if (isLandscape) Alignment.TopStart else Alignment.TopCenter)
         ) {
             val focusRequester = remember { FocusRequester() }
 
             Card(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .then(if (isLandscape) Modifier.widthIn(max = 480.dp) else Modifier.fillMaxWidth())
                     .padding(
                         top = statusBarPadding.calculateTopPadding() + 8.dp,
                         start = 16.dp,

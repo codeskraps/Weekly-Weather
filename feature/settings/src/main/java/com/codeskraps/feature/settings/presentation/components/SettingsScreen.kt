@@ -1,13 +1,18 @@
 package com.codeskraps.feature.settings.presentation.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -68,67 +73,76 @@ fun SettingsScreen(
             )
         }
     ) { innerPadding ->
-        Column(
+        BoxWithConstraints(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(16.dp)
         ) {
-            Text(
-                text = stringResource(CommonR.string.units),
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.primary,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            UnitSystem.entries.forEach { unit ->
-                RadioRow(
-                    label = when (unit) {
-                        UnitSystem.METRIC -> stringResource(CommonR.string.metric_units)
-                        UnitSystem.IMPERIAL -> stringResource(CommonR.string.imperial_units)
-                    },
-                    selected = state.unitSystem == unit,
-                    onClick = { handleEvent(SettingsEvent.SetUnitSystem(unit)) }
-                )
-            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
+                    .heightIn(min = maxHeight)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column {
+                    Text(
+                        text = stringResource(CommonR.string.units),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    UnitSystem.entries.forEach { unit ->
+                        RadioRow(
+                            label = when (unit) {
+                                UnitSystem.METRIC -> stringResource(CommonR.string.metric_units)
+                                UnitSystem.IMPERIAL -> stringResource(CommonR.string.imperial_units)
+                            },
+                            selected = state.unitSystem == unit,
+                            onClick = { handleEvent(SettingsEvent.SetUnitSystem(unit)) }
+                        )
+                    }
 
-            Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
 
-            Text(
-                text = stringResource(CommonR.string.theme),
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.primary,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            ThemeMode.entries.forEach { mode ->
-                RadioRow(
-                    label = when (mode) {
-                        ThemeMode.SYSTEM -> stringResource(CommonR.string.theme_system)
-                        ThemeMode.LIGHT -> stringResource(CommonR.string.theme_light)
-                        ThemeMode.DARK -> stringResource(CommonR.string.theme_dark)
-                    },
-                    selected = state.themeMode == mode,
-                    onClick = { handleEvent(SettingsEvent.SetThemeMode(mode)) }
-                )
-            }
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            val context = LocalContext.current
-            val versionName = remember {
-                try {
-                    context.packageManager.getPackageInfo(context.packageName, 0).versionName
-                } catch (_: Exception) {
-                    ""
+                    Text(
+                        text = stringResource(CommonR.string.theme),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    ThemeMode.entries.forEach { mode ->
+                        RadioRow(
+                            label = when (mode) {
+                                ThemeMode.SYSTEM -> stringResource(CommonR.string.theme_system)
+                                ThemeMode.LIGHT -> stringResource(CommonR.string.theme_light)
+                                ThemeMode.DARK -> stringResource(CommonR.string.theme_dark)
+                            },
+                            selected = state.themeMode == mode,
+                            onClick = { handleEvent(SettingsEvent.SetThemeMode(mode)) }
+                        )
+                    }
                 }
-            }
-            if (!versionName.isNullOrEmpty()) {
-                Text(
-                    text = "v$versionName",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.outline,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
-                Spacer(modifier = Modifier.height(8.dp))
+
+                val context = LocalContext.current
+                val versionName = remember {
+                    try {
+                        context.packageManager.getPackageInfo(context.packageName, 0).versionName
+                    } catch (_: Exception) {
+                        ""
+                    }
+                }
+                if (!versionName.isNullOrEmpty()) {
+                    Text(
+                        text = "v$versionName",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.outline,
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .padding(top = 32.dp, bottom = 8.dp)
+                    )
+                }
             }
         }
     }

@@ -150,7 +150,8 @@ fun MapScreen(
     }
 
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(LatLng(0.0, 0.0), mapState.zoom)
+        val initial = mapState.location ?: LatLng(0.0, 0.0)
+        position = CameraPosition.fromLatLngZoom(initial, mapState.zoom)
     }
 
     LaunchedEffect(mapState.location) {
@@ -247,6 +248,19 @@ fun MapScreen(
                         }
                     }
                 }
+            }
+        }
+
+        // Loading overlay: covers the map while location is still null to
+        // prevent the user from seeing Null Island (0,0).
+        if (mapState.location == null) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
             }
         }
 

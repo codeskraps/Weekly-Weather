@@ -22,6 +22,7 @@ import kotlin.math.abs
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MapViewModel(
     private val locationTracker: LocationTracker,
@@ -60,10 +61,15 @@ class MapViewModel(
 
     init {
         Log.i(TAG, "Initializing MapViewModel")
-        viewModelScope.launch(dispatcherProvider.io) {
+        // Load strings and persisted zoom synchronously so they are available
+        // before any event (e.g. Resume) is processed. These are fast local
+        // lookups (Resources.getString + DataStore read) — no network involved.
+        runBlocking(dispatcherProvider.io) {
             mapLocationString = localResources.getMapLocationString()
             currentLocationString = localResources.getCurrentLocationString()
             persistedZoom = settingsRepository.getMapZoom()
+        }
+        viewModelScope.launch(dispatcherProvider.io) {
             analytics.trackPageView(SCREEN_NAME)
         }
     }
@@ -86,6 +92,9 @@ class MapViewModel(
                         isGpsTracking = isGps
                     )
                 } else {
+                    // Eagerly fetch current GPS location so the map doesn't
+                    // sit at (0,0) while waiting for the 3-second polling loop.
+                    fetchImmediateGpsLocation()
                     startGpsTracking()
                     currentState.copy(
                         zoom = persistedZoom,
@@ -335,6 +344,23 @@ class MapViewModel(
             }
         }
         return currentState
+    }
+
+    private fun fetchImmediateGpsLocation() {
+        viewModelScope.launch(dispatcherProvider.io) {
+            locationTracker.getCurrentLocation()?.let { location ->
+                val latLng = LatLng(location.latitude, location.longitude)
+                state.handleEvent(MapEvent.Location(latLng))
+                activeLocationRepository.update(
+                    ActiveLocation(
+                        name = currentLocationString,
+                        latitude = location.latitude,
+                        longitude = location.longitude,
+                        isGpsLocation = true
+                    )
+                )
+            }
+        }
     }
 
     private fun startGpsTracking() {

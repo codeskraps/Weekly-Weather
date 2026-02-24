@@ -36,6 +36,9 @@
     <string name="theme_system">سسٹم ڈیفالٹ</string>
     <string name="theme_light">روشن</string>
     <string name="theme_dark">تاریک</string>
+    <string name="radar_speed">ریڈار رفتار</string>
+    <string name="radar_speed_normal">عام (x1)</string>
+    <string name="radar_speed_fast">تیز (x2)</string>
     <string name="previous">پچھلا</string>
     <string name="next">اگلا</string>
     <string name="pause">روکیں</string>

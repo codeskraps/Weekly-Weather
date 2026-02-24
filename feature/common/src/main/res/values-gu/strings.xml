@@ -36,6 +36,9 @@
     <string name="theme_system">સિસ્ટમ ડિફોલ્ટ</string>
     <string name="theme_light">લાઇટ</string>
     <string name="theme_dark">ડાર્ક</string>
+    <string name="radar_speed">રડાર ગતિ</string>
+    <string name="radar_speed_normal">સામાન્ય (x1)</string>
+    <string name="radar_speed_fast">ઝડપી (x2)</string>
     <string name="previous">પાછલું</string>
     <string name="next">આગળનું</string>
     <string name="pause">વિરામ</string>

@@ -36,6 +36,9 @@
     <string name="theme_system">Sistemaren lehenetsia</string>
     <string name="theme_light">Argia</string>
     <string name="theme_dark">Iluna</string>
+    <string name="radar_speed">Radar abiadura</string>
+    <string name="radar_speed_normal">Normala (x1)</string>
+    <string name="radar_speed_fast">Azkarra (x2)</string>
     <string name="previous">Aurrekoa</string>
     <string name="next">Hurrengoa</string>
     <string name="pause">Pausatu</string>

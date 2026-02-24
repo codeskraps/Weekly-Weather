@@ -36,6 +36,9 @@
     <string name="theme_system">Implicit sistem</string>
     <string name="theme_light">Luminos</string>
     <string name="theme_dark">Întunecat</string>
+    <string name="radar_speed">Viteza radarului</string>
+    <string name="radar_speed_normal">Normală (x1)</string>
+    <string name="radar_speed_fast">Rapidă (x2)</string>
     <string name="previous">Anterior</string>
     <string name="next">Următor</string>
     <string name="pause">Pauză</string>

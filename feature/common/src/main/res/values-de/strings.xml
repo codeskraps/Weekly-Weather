@@ -36,6 +36,9 @@
     <string name="theme_system">Systemstandard</string>
     <string name="theme_light">Hell</string>
     <string name="theme_dark">Dunkel</string>
+    <string name="radar_speed">Radargeschwindigkeit</string>
+    <string name="radar_speed_normal">Normal (x1)</string>
+    <string name="radar_speed_fast">Schnell (x2)</string>
     <string name="previous">Zurück</string>
     <string name="next">Weiter</string>
     <string name="pause">Pause</string>

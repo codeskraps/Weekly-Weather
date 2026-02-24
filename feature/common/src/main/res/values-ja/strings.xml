@@ -36,6 +36,9 @@
     <string name="theme_system">システムのデフォルト</string>
     <string name="theme_light">ライト</string>
     <string name="theme_dark">ダーク</string>
+    <string name="radar_speed">レーダー速度</string>
+    <string name="radar_speed_normal">通常 (x1)</string>
+    <string name="radar_speed_fast">高速 (x2)</string>
     <string name="previous">前へ</string>
     <string name="next">次へ</string>
     <string name="pause">一時停止</string>

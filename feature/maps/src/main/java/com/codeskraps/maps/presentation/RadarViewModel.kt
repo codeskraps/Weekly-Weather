@@ -1,11 +1,14 @@
 package com.codeskraps.maps.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.codeskraps.core.local.domain.model.RadarSpeed
 import com.codeskraps.core.local.domain.repository.LocalResourceRepository
+import com.codeskraps.core.local.domain.repository.SettingsRepository
 import com.codeskraps.core.location.domain.LocationTracker
 import com.codeskraps.feature.common.dispatcher.DispatcherProvider
 import com.codeskraps.feature.common.mvi.StateReducerViewModel
 import com.codeskraps.feature.common.util.Resource
+import com.codeskraps.maps.data.remote.RadarTileProvider
 import com.codeskraps.maps.domain.model.RadarFrame
 import com.codeskraps.maps.domain.repository.RadarRepository
 import com.codeskraps.maps.presentation.mvi.RadarAction
@@ -15,6 +18,7 @@ import com.codeskraps.umami.domain.AnalyticsRepository
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class RadarViewModel(
@@ -23,15 +27,20 @@ class RadarViewModel(
     private val localResource: LocalResourceRepository,
     private val dispatcherProvider: DispatcherProvider,
     private val analyticsRepository: AnalyticsRepository,
+    private val settingsRepository: SettingsRepository,
 ) : StateReducerViewModel<RadarState, RadarEvent, RadarAction>(RadarState.initial) {
 
     private var animationJob: Job? = null
+    private var lastFetchTime: Long = 0
+    private companion object {
+        const val RADAR_CACHE_DURATION = 5 * 60 * 1000L // 5 minutes
+    }
 
     override fun reduceState(currentState: RadarState, event: RadarEvent): RadarState {
         return when (event) {
             is RadarEvent.Resume -> onResume(currentState)
             is RadarEvent.Pause -> onPause(currentState)
-            is RadarEvent.RadarDataLoaded -> onRadarDataLoaded(currentState, event.frames)
+            is RadarEvent.RadarDataLoaded -> onRadarDataLoaded(currentState, event.frames, event.isDoubleSpeed)
             is RadarEvent.Error -> onError(currentState, event.message)
             is RadarEvent.PlayPause -> onPlayPause(currentState)
             is RadarEvent.SeekToFrame -> onSeekToFrame(currentState, event.index)
@@ -47,8 +56,17 @@ class RadarViewModel(
     }
 
     private fun onResume(currentState: RadarState): RadarState {
+        val now = System.currentTimeMillis()
+        if (currentState.radarFrames.isNotEmpty() && now - lastFetchTime < RADAR_CACHE_DURATION) {
+            startAnimation(currentState.isDoubleSpeed)
+            return currentState.copy(isPlaying = true)
+        }
+
         viewModelScope.launch(dispatcherProvider.io) {
             analyticsRepository.trackPageView("radar")
+
+            val settings = settingsRepository.settings.first()
+            val isDoubleSpeed = settings.radarSpeed == RadarSpeed.FAST
 
             locationTracker.getCurrentLocation()?.let {
                 state.handleEvent(RadarEvent.LocationUpdated(LatLng(it.latitude, it.longitude)))
@@ -56,7 +74,7 @@ class RadarViewModel(
 
             when (val result = radarRepository.getRadarFrames()) {
                 is Resource.Success -> {
-                    state.handleEvent(RadarEvent.RadarDataLoaded(result.data.allFrames))
+                    state.handleEvent(RadarEvent.RadarDataLoaded(result.data.allFrames, isDoubleSpeed))
                 }
                 is Resource.Error -> {
                     state.handleEvent(RadarEvent.Error(result.message))
@@ -66,13 +84,15 @@ class RadarViewModel(
         return currentState.copy(isLoading = true, error = null)
     }
 
-    private fun onRadarDataLoaded(currentState: RadarState, frames: List<RadarFrame>): RadarState {
-        startAnimation(currentState.isDoubleSpeed)
+    private fun onRadarDataLoaded(currentState: RadarState, frames: List<RadarFrame>, isDoubleSpeed: Boolean): RadarState {
+        lastFetchTime = System.currentTimeMillis()
+        startAnimation(isDoubleSpeed)
         return currentState.copy(
             isLoading = false,
             radarFrames = frames,
             currentFrameIndex = 0,
             isPlaying = true,
+            isDoubleSpeed = isDoubleSpeed,
             error = null
         )
     }
@@ -138,5 +158,6 @@ class RadarViewModel(
     override fun onCleared() {
         super.onCleared()
         animationJob?.cancel()
+        RadarTileProvider.clearCache()
     }
 }

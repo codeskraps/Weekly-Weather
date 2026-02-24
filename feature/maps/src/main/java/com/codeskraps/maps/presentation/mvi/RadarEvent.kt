@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.LatLng
 sealed interface RadarEvent {
     data object Resume : RadarEvent
     data object Pause : RadarEvent
-    data class RadarDataLoaded(val frames: List<RadarFrame>) : RadarEvent
+    data class RadarDataLoaded(val frames: List<RadarFrame>, val isDoubleSpeed: Boolean) : RadarEvent
     data class Error(val message: String) : RadarEvent
     data object PlayPause : RadarEvent
     data class SeekToFrame(val index: Int) : RadarEvent

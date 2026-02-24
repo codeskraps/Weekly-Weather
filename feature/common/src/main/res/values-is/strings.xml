@@ -36,6 +36,9 @@
     <string name="theme_system">Sjálfgefið kerfis</string>
     <string name="theme_light">Ljóst</string>
     <string name="theme_dark">Dökkt</string>
+    <string name="radar_speed">Ratsjárhraði</string>
+    <string name="radar_speed_normal">Venjulegur (x1)</string>
+    <string name="radar_speed_fast">Hraður (x2)</string>
     <string name="previous">Fyrra</string>
     <string name="next">Næsta</string>
     <string name="pause">Hlé</string>

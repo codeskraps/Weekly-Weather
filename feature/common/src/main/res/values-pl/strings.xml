@@ -36,6 +36,9 @@
     <string name="theme_system">Domyślny systemowy</string>
     <string name="theme_light">Jasny</string>
     <string name="theme_dark">Ciemny</string>
+    <string name="radar_speed">Prędkość radaru</string>
+    <string name="radar_speed_normal">Normalna (x1)</string>
+    <string name="radar_speed_fast">Szybka (x2)</string>
     <string name="previous">Poprzedni</string>
     <string name="next">Następny</string>
     <string name="pause">Wstrzymaj</string>

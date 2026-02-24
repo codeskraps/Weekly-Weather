@@ -1,6 +1,7 @@
 package com.codeskraps.feature.settings.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.codeskraps.core.local.domain.model.RadarSpeed
 import com.codeskraps.core.local.domain.model.ThemeMode
 import com.codeskraps.core.local.domain.model.UnitSystem
 import com.codeskraps.core.local.domain.repository.SettingsRepository
@@ -25,9 +26,11 @@ class SettingsViewModel(
             is SettingsEvent.Resume -> onResume(currentState)
             is SettingsEvent.SetUnitSystem -> onSetUnitSystem(currentState, event.unitSystem)
             is SettingsEvent.SetThemeMode -> onSetThemeMode(currentState, event.themeMode)
+            is SettingsEvent.SetRadarSpeed -> onSetRadarSpeed(currentState, event.radarSpeed)
             is SettingsEvent.Loaded -> currentState.copy(
                 unitSystem = event.unitSystem,
                 themeMode = event.themeMode,
+                radarSpeed = event.radarSpeed,
             )
         }
     }
@@ -39,6 +42,7 @@ class SettingsViewModel(
                 SettingsEvent.Loaded(
                     unitSystem = settings.unitSystem,
                     themeMode = settings.themeMode,
+                    radarSpeed = settings.radarSpeed,
                 )
             )
         }
@@ -57,5 +61,12 @@ class SettingsViewModel(
             settingsRepository.setThemeMode(themeMode)
         }
         return currentState.copy(themeMode = themeMode)
+    }
+
+    private fun onSetRadarSpeed(currentState: SettingsState, radarSpeed: RadarSpeed): SettingsState {
+        viewModelScope.launch(dispatcherProvider.io) {
+            settingsRepository.setRadarSpeed(radarSpeed)
+        }
+        return currentState.copy(radarSpeed = radarSpeed)
     }
 }

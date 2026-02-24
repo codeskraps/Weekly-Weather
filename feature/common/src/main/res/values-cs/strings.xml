@@ -36,6 +36,9 @@
     <string name="theme_system">Výchozí systémový</string>
     <string name="theme_light">Světlý</string>
     <string name="theme_dark">Tmavý</string>
+    <string name="radar_speed">Rychlost radaru</string>
+    <string name="radar_speed_normal">Normální (x1)</string>
+    <string name="radar_speed_fast">Rychlá (x2)</string>
     <string name="previous">Předchozí</string>
     <string name="next">Další</string>
     <string name="pause">Pozastavit</string>

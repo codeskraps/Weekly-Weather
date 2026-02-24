@@ -36,6 +36,9 @@
     <string name="theme_system">Mặc định hệ thống</string>
     <string name="theme_light">Sáng</string>
     <string name="theme_dark">Tối</string>
+    <string name="radar_speed">Tốc độ radar</string>
+    <string name="radar_speed_normal">Bình thường (x1)</string>
+    <string name="radar_speed_fast">Nhanh (x2)</string>
     <string name="previous">Trước</string>
     <string name="next">Tiếp</string>
     <string name="pause">Tạm dừng</string>

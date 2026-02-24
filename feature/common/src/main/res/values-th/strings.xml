@@ -36,6 +36,9 @@
     <string name="theme_system">ค่าเริ่มต้นระบบ</string>
     <string name="theme_light">สว่าง</string>
     <string name="theme_dark">มืด</string>
+    <string name="radar_speed">ความเร็วเรดาร์</string>
+    <string name="radar_speed_normal">ปกติ (x1)</string>
+    <string name="radar_speed_fast">เร็ว (x2)</string>
     <string name="previous">ก่อนหน้า</string>
     <string name="next">ถัดไป</string>
     <string name="pause">หยุดชั่วคราว</string>

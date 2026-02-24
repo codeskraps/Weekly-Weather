@@ -37,6 +37,9 @@
     <string name="theme_system">النظام الافتراضي</string>
     <string name="theme_light">فاتح</string>
     <string name="theme_dark">داكن</string>
+    <string name="radar_speed">سرعة الرادار</string>
+    <string name="radar_speed_normal">عادي (x1)</string>
+    <string name="radar_speed_fast">سريع (x2)</string>
     <string name="previous">السابق</string>
     <string name="next">التالي</string>
     <string name="pause">إيقاف مؤقت</string>

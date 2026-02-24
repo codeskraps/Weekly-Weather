@@ -36,6 +36,9 @@
     <string name="theme_system">Tsarin na\'ura</string>
     <string name="theme_light">Haske</string>
     <string name="theme_dark">Duhu</string>
+    <string name="radar_speed">Saurin radar</string>
+    <string name="radar_speed_normal">Na al\'ada (x1)</string>
+    <string name="radar_speed_fast">Mai sauri (x2)</string>
     <string name="previous">Na baya</string>
     <string name="next">Na gaba</string>
     <string name="pause">Dakata</string>

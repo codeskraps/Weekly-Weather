@@ -36,6 +36,9 @@
     <string name="theme_system">系统默认</string>
     <string name="theme_light">浅色</string>
     <string name="theme_dark">深色</string>
+    <string name="radar_speed">雷达速度</string>
+    <string name="radar_speed_normal">正常 (x1)</string>
+    <string name="radar_speed_fast">快速 (x2)</string>
     <string name="previous">上一个</string>
     <string name="next">下一个</string>
     <string name="pause">暂停</string>

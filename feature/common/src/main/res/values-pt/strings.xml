@@ -35,6 +35,9 @@
     <string name="theme_system">Padrão do sistema</string>
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Escuro</string>
+    <string name="radar_speed">Velocidade do radar</string>
+    <string name="radar_speed_normal">Normal (x1)</string>
+    <string name="radar_speed_fast">Rápida (x2)</string>
     <string name="previous">Anterior</string>
     <string name="next">Próximo</string>
     <string name="pause">Pausar</string>

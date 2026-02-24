@@ -36,6 +36,9 @@
     <string name="theme_system">Järjestelmän oletus</string>
     <string name="theme_light">Vaalea</string>
     <string name="theme_dark">Tumma</string>
+    <string name="radar_speed">Tutkan nopeus</string>
+    <string name="radar_speed_normal">Normaali (x1)</string>
+    <string name="radar_speed_fast">Nopea (x2)</string>
     <string name="previous">Edellinen</string>
     <string name="next">Seuraava</string>
     <string name="pause">Tauko</string>

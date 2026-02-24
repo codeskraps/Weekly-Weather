@@ -36,6 +36,9 @@
     <string name="theme_system">Systeemstandaard</string>
     <string name="theme_light">Licht</string>
     <string name="theme_dark">Donker</string>
+    <string name="radar_speed">Radarsnelheid</string>
+    <string name="radar_speed_normal">Normaal (x1)</string>
+    <string name="radar_speed_fast">Snel (x2)</string>
     <string name="previous">Vorige</string>
     <string name="next">Volgende</string>
     <string name="pause">Pauzeren</string>

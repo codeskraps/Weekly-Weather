@@ -36,6 +36,9 @@
     <string name="theme_system">கணினி இயல்புநிலை</string>
     <string name="theme_light">ஒளி</string>
     <string name="theme_dark">இருள்</string>
+    <string name="radar_speed">ரேடார் வேகம்</string>
+    <string name="radar_speed_normal">சாதாரணம் (x1)</string>
+    <string name="radar_speed_fast">வேகமான (x2)</string>
     <string name="previous">முந்தைய</string>
     <string name="next">அடுத்த</string>
     <string name="pause">இடைநிறுத்தம்</string>

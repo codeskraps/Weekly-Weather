@@ -48,7 +48,8 @@ val mapsFeatureModule = module {
             locationTracker = get(),
             localResource = get(),
             dispatcherProvider = get(),
-            analyticsRepository = get()
+            analyticsRepository = get(),
+            settingsRepository = get()
         )
     }
 }

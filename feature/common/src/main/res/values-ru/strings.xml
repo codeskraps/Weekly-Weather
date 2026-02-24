@@ -36,6 +36,9 @@
     <string name="theme_system">По умолчанию</string>
     <string name="theme_light">Светлая</string>
     <string name="theme_dark">Тёмная</string>
+    <string name="radar_speed">Скорость радара</string>
+    <string name="radar_speed_normal">Обычная (x1)</string>
+    <string name="radar_speed_fast">Быстрая (x2)</string>
     <string name="previous">Назад</string>
     <string name="next">Вперёд</string>
     <string name="pause">Пауза</string>

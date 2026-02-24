@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.codeskraps.core.local.domain.model.AppSettings
+import com.codeskraps.core.local.domain.model.RadarSpeed
 import com.codeskraps.core.local.domain.model.ThemeMode
 import com.codeskraps.core.local.domain.model.UnitSystem
 import com.codeskraps.core.local.domain.repository.SettingsRepository
@@ -24,6 +25,7 @@ class SettingsRepositoryImpl(
     private object Keys {
         val UNIT_SYSTEM = stringPreferencesKey("unit_system")
         val THEME_MODE = stringPreferencesKey("theme_mode")
+        val RADAR_SPEED = stringPreferencesKey("radar_speed")
         val MAP_ZOOM = floatPreferencesKey("map_zoom")
     }
 
@@ -33,6 +35,8 @@ class SettingsRepositoryImpl(
                 ?: UnitSystem.METRIC,
             themeMode = prefs[Keys.THEME_MODE]?.let { ThemeMode.valueOf(it) }
                 ?: ThemeMode.SYSTEM,
+            radarSpeed = prefs[Keys.RADAR_SPEED]?.let { RadarSpeed.valueOf(it) }
+                ?: RadarSpeed.NORMAL,
         )
     }
 
@@ -45,6 +49,12 @@ class SettingsRepositoryImpl(
     override suspend fun setThemeMode(themeMode: ThemeMode) {
         context.dataStore.edit { prefs ->
             prefs[Keys.THEME_MODE] = themeMode.name
+        }
+    }
+
+    override suspend fun setRadarSpeed(radarSpeed: RadarSpeed) {
+        context.dataStore.edit { prefs ->
+            prefs[Keys.RADAR_SPEED] = radarSpeed.name
         }
     }
 

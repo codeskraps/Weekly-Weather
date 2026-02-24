@@ -36,6 +36,9 @@
     <string name="theme_system">Systemstandard</string>
     <string name="theme_light">Lys</string>
     <string name="theme_dark">Mørk</string>
+    <string name="radar_speed">Radarhastighet</string>
+    <string name="radar_speed_normal">Normal (x1)</string>
+    <string name="radar_speed_fast">Rask (x2)</string>
     <string name="previous">Forrige</string>
     <string name="next">Neste</string>
     <string name="pause">Pause</string>

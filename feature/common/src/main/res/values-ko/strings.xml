@@ -36,6 +36,9 @@
     <string name="theme_system">시스템 기본값</string>
     <string name="theme_light">밝은</string>
     <string name="theme_dark">어두운</string>
+    <string name="radar_speed">레이더 속도</string>
+    <string name="radar_speed_normal">보통 (x1)</string>
+    <string name="radar_speed_fast">빠름 (x2)</string>
     <string name="previous">이전</string>
     <string name="next">다음</string>
     <string name="pause">일시정지</string>

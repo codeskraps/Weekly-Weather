@@ -36,6 +36,9 @@
     <string name="theme_system">پیش‌فرض سیستم</string>
     <string name="theme_light">روشن</string>
     <string name="theme_dark">تاریک</string>
+    <string name="radar_speed">سرعت رادار</string>
+    <string name="radar_speed_normal">عادی (x1)</string>
+    <string name="radar_speed_fast">سریع (x2)</string>
     <string name="previous">قبلی</string>
     <string name="next">بعدی</string>
     <string name="pause">مکث</string>

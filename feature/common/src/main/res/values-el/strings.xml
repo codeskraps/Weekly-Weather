@@ -36,6 +36,9 @@
     <string name="theme_system">Προεπιλογή συστήματος</string>
     <string name="theme_light">Φωτεινό</string>
     <string name="theme_dark">Σκοτεινό</string>
+    <string name="radar_speed">Ταχύτητα ραντάρ</string>
+    <string name="radar_speed_normal">Κανονική (x1)</string>
+    <string name="radar_speed_fast">Γρήγορη (x2)</string>
     <string name="previous">Προηγούμενο</string>
     <string name="next">Επόμενο</string>
     <string name="pause">Παύση</string>

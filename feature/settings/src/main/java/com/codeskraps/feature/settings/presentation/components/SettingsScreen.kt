@@ -33,6 +33,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
+import com.codeskraps.core.local.domain.model.RadarSpeed
 import com.codeskraps.core.local.domain.model.ThemeMode
 import com.codeskraps.core.local.domain.model.UnitSystem
 import com.codeskraps.feature.common.R as CommonR
@@ -121,6 +122,25 @@ fun SettingsScreen(
                             },
                             selected = state.themeMode == mode,
                             onClick = { handleEvent(SettingsEvent.SetThemeMode(mode)) }
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    Text(
+                        text = stringResource(CommonR.string.radar_speed),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    RadarSpeed.entries.forEach { speed ->
+                        RadioRow(
+                            label = when (speed) {
+                                RadarSpeed.NORMAL -> stringResource(CommonR.string.radar_speed_normal)
+                                RadarSpeed.FAST -> stringResource(CommonR.string.radar_speed_fast)
+                            },
+                            selected = state.radarSpeed == speed,
+                            onClick = { handleEvent(SettingsEvent.SetRadarSpeed(speed)) }
                         )
                     }
                 }

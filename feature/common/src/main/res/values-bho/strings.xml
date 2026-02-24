@@ -37,6 +37,9 @@
     <string name="theme_system">सिस्टम डिफ़ॉल्ट</string>
     <string name="theme_light">उजियार</string>
     <string name="theme_dark">अन्हार</string>
+    <string name="radar_speed">रडार गति</string>
+    <string name="radar_speed_normal">सामान्य (x1)</string>
+    <string name="radar_speed_fast">तेज (x2)</string>
     <string name="previous">पिछला</string>
     <string name="next">अगला</string>
     <string name="pause">रोकीं</string>

@@ -37,6 +37,9 @@
     <string name="theme_system">সিস্টেম ডিফল্ট</string>
     <string name="theme_light">লাইট</string>
     <string name="theme_dark">ডার্ক</string>
+    <string name="radar_speed">রাডার গতি</string>
+    <string name="radar_speed_normal">সাধারণ (x1)</string>
+    <string name="radar_speed_fast">দ্রুত (x2)</string>
     <string name="previous">আগের</string>
     <string name="next">পরবর্তী</string>
     <string name="pause">বিরতি</string>

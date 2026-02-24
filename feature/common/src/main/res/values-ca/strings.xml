@@ -37,6 +37,9 @@
     <string name="theme_system">Predeterminat del sistema</string>
     <string name="theme_light">Clar</string>
     <string name="theme_dark">Fosc</string>
+    <string name="radar_speed">Velocitat del radar</string>
+    <string name="radar_speed_normal">Normal (x1)</string>
+    <string name="radar_speed_fast">Ràpid (x2)</string>
     <string name="previous">Anterior</string>
     <string name="next">Següent</string>
     <string name="pause">Pausa</string>

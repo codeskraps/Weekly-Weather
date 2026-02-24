@@ -58,6 +58,7 @@ class MapViewModel(
     private var searchJob: Job? = null
     private var gpsTrackingJob: Job? = null
     private var persistedZoom: Float = SettingsRepository.DEFAULT_MAP_ZOOM
+    private var preRadarZoom: Float? = null
 
     init {
         Log.i(TAG, "Initializing MapViewModel")
@@ -137,12 +138,16 @@ class MapViewModel(
                         isGpsLocation = !cameraMoved && currentState.isGpsTracking
                     )
                 )
-                persistedZoom = event.zoom
-                viewModelScope.launch(dispatcherProvider.io) {
-                    settingsRepository.setMapZoom(event.zoom)
+                if (!currentState.isRadarMode) {
+                    persistedZoom = event.zoom
+                    viewModelScope.launch(dispatcherProvider.io) {
+                        settingsRepository.setMapZoom(event.zoom)
+                    }
                 }
                 currentState.copy(
-                    zoom = event.zoom,
+                    // Don't overwrite state.zoom during radar mode — preserve the
+                    // user's pre-radar zoom so it survives the forced 7f cap
+                    zoom = if (currentState.isRadarMode) currentState.zoom else event.zoom,
                     locationName = if (cameraMoved) "" else currentState.locationName,
                     isGpsTracking = false
                 )
@@ -193,7 +198,21 @@ class MapViewModel(
             is MapEvent.SaveLocation -> onSaveLocation(currentState, event.geoLocation)
             is MapEvent.DeleteLocation -> onDeleteLocation(currentState, event.geoLocation)
             is MapEvent.SelectLocation -> onSelectLocation(currentState, event.geoLocation)
-            MapEvent.ToggleRadarMode -> currentState.copy(isRadarMode = !currentState.isRadarMode)
+            MapEvent.ToggleRadarMode -> {
+                if (!currentState.isRadarMode) {
+                    // Entering radar mode — save the user's current zoom
+                    preRadarZoom = currentState.zoom
+                    currentState.copy(isRadarMode = true)
+                } else {
+                    // Exiting radar mode — restore the pre-radar zoom
+                    val restored = preRadarZoom ?: persistedZoom
+                    preRadarZoom = null
+                    viewModelScope.launch {
+                        actionChannel.send(MapAction.RestoreZoom(restored))
+                    }
+                    currentState.copy(isRadarMode = false, zoom = restored)
+                }
+            }
         }
     }
 

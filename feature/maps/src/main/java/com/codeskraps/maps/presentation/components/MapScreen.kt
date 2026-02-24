@@ -127,6 +127,12 @@ fun MapScreen(
     val tag = "WeatherApp:MapScreen"
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
+    val scope = rememberCoroutineScope()
+
+    val cameraPositionState = rememberCameraPositionState {
+        val initial = mapState.location ?: LatLng(0.0, 0.0)
+        position = CameraPosition.fromLatLngZoom(initial, mapState.zoom)
+    }
 
     ObserveAsEvents(mapAction) { action ->
         when (action) {
@@ -138,6 +144,16 @@ fun MapScreen(
                 keyboardController?.hide()
                 focusManager.clearFocus()
             }
+            is MapAction.RestoreZoom -> {
+                scope.launch {
+                    // Small delay so Google Maps processes the removal of maxZoomPreference
+                    // before we animate beyond the old 7f radar cap
+                    delay(150)
+                    cameraPositionState.animate(
+                        CameraUpdateFactory.zoomTo(action.zoom)
+                    )
+                }
+            }
         }
     }
 
@@ -147,11 +163,6 @@ fun MapScreen(
                 Toast.makeText(context, action.message, Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    val cameraPositionState = rememberCameraPositionState {
-        val initial = mapState.location ?: LatLng(0.0, 0.0)
-        position = CameraPosition.fromLatLngZoom(initial, mapState.zoom)
     }
 
     LaunchedEffect(mapState.location) {
@@ -201,7 +212,6 @@ fun MapScreen(
 
     val statusBarPadding = WindowInsets.statusBars.asPaddingValues()
     val navigationBarPadding = WindowInsets.navigationBars.asPaddingValues()
-    val scope = rememberCoroutineScope()
     val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     // Stagger radar overlay creation to avoid burst of tile requests

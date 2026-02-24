@@ -12,15 +12,16 @@ Weekly Weather provides a clean, intuitive interface for viewing weather forecas
 - Automatically detect current location
 - Search and save favorite locations for quick access
 - Custom naming for GPS locations
+- Interactive radar map with animated precipitation overlay
+- Configurable units (metric/imperial), theme, and radar speed
 - Available in 37 languages
 - Lightweight and battery-efficient
 
 ## Screenshots
 
-| Screenshot 1 | Screenshot 2 | Screenshot 3 |
-|:---:|:---:|:---:|
-| ![](store_assets/Screenshot_20240109_145100.png) | ![](store_assets/Screenshot_20240109_145124.png) | ![](store_assets/Screenshot_20240109_145438.png) |
-| ![](store_assets/Screenshot_20240109_145033.png) | ![](store_assets/Screenshot_20240109_145421.png) |  |
+| Weather | Map | Radar | Settings |
+|:---:|:---:|:---:|:---:|
+| ![](store_assets/Screenshot_20260215_230809.png) | ![](store_assets/Screenshot_20260215_230847.png) | ![](store_assets/Screenshot_20260215_230923.png) | ![](store_assets/Screenshot_20260215_230945.png) |
 
 ## Download
 

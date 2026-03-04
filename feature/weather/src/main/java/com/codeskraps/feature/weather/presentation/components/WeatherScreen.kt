@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +23,7 @@ import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import com.codeskraps.feature.common.components.SunLoadingIndicator
 import com.codeskraps.feature.common.components.SunPullRefreshIndicator
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeFloatingActionButton
@@ -133,12 +135,32 @@ fun WeatherScreen(
                     modifier = Modifier.align(Alignment.Center)
                 )
             } else if (state.error != null || state.weatherInfo == null) {
-                Text(
-                    text = state.error ?: resources.getString(R.string.no_location_set),
-                    color = MaterialTheme.colorScheme.error,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.align(Alignment.Center)
-                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .pullRefresh(pullRefreshState)
+                ) {
+                    Column(
+                        modifier = Modifier.align(Alignment.Center),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        Text(
+                            text = state.error ?: resources.getString(R.string.no_location_set),
+                            color = MaterialTheme.colorScheme.error,
+                            textAlign = TextAlign.Center,
+                        )
+                        Button(onClick = { handleEvent(WeatherEvent.Refresh) }) {
+                            Text(text = "Retry")
+                        }
+                    }
+
+                    SunPullRefreshIndicator(
+                        refreshing = isLoading,
+                        state = pullRefreshState,
+                        modifier = Modifier.align(Alignment.TopCenter)
+                    )
+                }
             } else {
                 Box(
                     modifier = Modifier

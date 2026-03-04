@@ -19,5 +19,5 @@ sealed interface MapEvent {
     data class SaveLocation(val geoLocation: GeoLocation) : MapEvent
     data class DeleteLocation(val geoLocation: GeoLocation) : MapEvent
     data class SelectLocation(val geoLocation: GeoLocation) : MapEvent
-    data object ToggleRadarMode : MapEvent
+    data class ToggleRadarMode(val currentZoom: Float) : MapEvent
 }

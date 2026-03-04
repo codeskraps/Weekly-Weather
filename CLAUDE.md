@@ -34,3 +34,7 @@ For deeper context, read these as needed:
 - `docs/architecture.md` — MVI pattern, data flow, module boundaries
 - `docs/build-and-test.md` — build variants, signing, ProGuard, testing
 - `docs/adding-a-feature.md` — step-by-step guide for new feature modules
+
+## Git
+
+Do not add `Co-Authored-By` lines to commit messages.

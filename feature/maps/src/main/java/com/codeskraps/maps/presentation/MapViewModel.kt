@@ -20,6 +20,7 @@ import com.codeskraps.umami.domain.AnalyticsRepository
 import com.google.android.gms.maps.model.LatLng
 import kotlin.math.abs
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -59,6 +60,7 @@ class MapViewModel(
     private var gpsTrackingJob: Job? = null
     private var persistedZoom: Float = SettingsRepository.DEFAULT_MAP_ZOOM
     private var preRadarZoom: Float? = null
+    private var resumed = false
 
     init {
         Log.i(TAG, "Initializing MapViewModel")
@@ -70,6 +72,12 @@ class MapViewModel(
             currentLocationString = localResources.getCurrentLocationString()
             persistedZoom = settingsRepository.getMapZoom()
         }
+        // Eagerly seed state with the shared location so the very first
+        // composition already has the correct coordinates — avoids the
+        // Null-Island flash that occurs when Resume is processed async.
+        activeLocationRepository.location.value?.let { shared ->
+            state.handleEvent(MapEvent.Location(LatLng(shared.latitude, shared.longitude)))
+        }
         viewModelScope.launch(dispatcherProvider.io) {
             analytics.trackPageView(SCREEN_NAME)
         }
@@ -80,6 +88,7 @@ class MapViewModel(
 
         return when (event) {
             MapEvent.Resume -> {
+                resumed = true
                 Log.i(TAG, "Handling Resume event")
                 val sharedLocation = activeLocationRepository.location.value
                 if (sharedLocation != null) {
@@ -115,9 +124,13 @@ class MapViewModel(
                         )
                     )
                 }
-                currentState.copy(location = event.location)
+                currentState.copy(
+                    location = event.location,
+                    zoom = if (!resumed) persistedZoom else currentState.zoom
+                )
             }
             is MapEvent.CameraIdle -> {
+                if (!resumed) return currentState
                 Log.i(TAG, "Camera idle at: ${event.location}, zoom: ${event.zoom}")
                 stopGpsTracking()
                 val stateLocation = currentState.location
@@ -128,8 +141,8 @@ class MapViewModel(
                     else currentState.locationName.ifEmpty { mapLocationString }
                 // When camera hasn't meaningfully moved, preserve the original exact
                 // coordinates so isCached exact-match queries still work
-                val lat = if (!cameraMoved && stateLocation != null) stateLocation.latitude else event.location.latitude
-                val lng = if (!cameraMoved && stateLocation != null) stateLocation.longitude else event.location.longitude
+                val lat = if (!cameraMoved) stateLocation.latitude else event.location.latitude
+                val lng = if (!cameraMoved) stateLocation.longitude else event.location.longitude
                 activeLocationRepository.update(
                     ActiveLocation(
                         name = name,
@@ -140,13 +153,13 @@ class MapViewModel(
                 )
                 if (!currentState.isRadarMode) {
                     persistedZoom = event.zoom
-                    viewModelScope.launch(dispatcherProvider.io) {
+                    viewModelScope.launch(dispatcherProvider.io + NonCancellable) {
                         settingsRepository.setMapZoom(event.zoom)
                     }
                 }
                 currentState.copy(
                     // Don't overwrite state.zoom during radar mode — preserve the
-                    // user's pre-radar zoom so it survives the forced 7f cap
+                    // user's pre-radar zoom so it survives the forced 7.5f cap
                     zoom = if (currentState.isRadarMode) currentState.zoom else event.zoom,
                     locationName = if (cameraMoved) "" else currentState.locationName,
                     isGpsTracking = false
@@ -198,10 +211,11 @@ class MapViewModel(
             is MapEvent.SaveLocation -> onSaveLocation(currentState, event.geoLocation)
             is MapEvent.DeleteLocation -> onDeleteLocation(currentState, event.geoLocation)
             is MapEvent.SelectLocation -> onSelectLocation(currentState, event.geoLocation)
-            MapEvent.ToggleRadarMode -> {
+            is MapEvent.ToggleRadarMode -> {
                 if (!currentState.isRadarMode) {
-                    // Entering radar mode — save the user's current zoom
-                    preRadarZoom = currentState.zoom
+                    // Entering radar mode — save the actual camera zoom
+                    preRadarZoom = event.currentZoom
+                    persistedZoom = event.currentZoom
                     currentState.copy(isRadarMode = true)
                 } else {
                     // Exiting radar mode — restore the pre-radar zoom

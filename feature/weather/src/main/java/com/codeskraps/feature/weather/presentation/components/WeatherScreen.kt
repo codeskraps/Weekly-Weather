@@ -18,10 +18,10 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.material3.CircularProgressIndicator
+import com.codeskraps.feature.common.components.SunLoadingIndicator
+import com.codeskraps.feature.common.components.SunPullRefreshIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeFloatingActionButton
@@ -129,7 +129,7 @@ fun WeatherScreen(
         ) {
             if (state.isLoading) {
                 Text(text = "")
-                CircularProgressIndicator(
+                SunLoadingIndicator(
                     modifier = Modifier.align(Alignment.Center)
                 )
             } else if (state.error != null || state.weatherInfo == null) {
@@ -235,7 +235,7 @@ fun WeatherScreen(
                         }
                     }
 
-                    PullRefreshIndicator(
+                    SunPullRefreshIndicator(
                         refreshing = isLoading,
                         state = pullRefreshState,
                         modifier = Modifier.align(Alignment.TopCenter)

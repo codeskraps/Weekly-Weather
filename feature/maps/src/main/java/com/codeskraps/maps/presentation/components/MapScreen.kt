@@ -41,7 +41,7 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
+import com.codeskraps.feature.common.components.SunLoadingIndicator
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -147,7 +147,7 @@ fun MapScreen(
             is MapAction.RestoreZoom -> {
                 scope.launch {
                     // Small delay so Google Maps processes the removal of maxZoomPreference
-                    // before we animate beyond the old 7f radar cap
+                    // before we animate beyond the old 7.5f radar cap
                     delay(150)
                     cameraPositionState.animate(
                         CameraUpdateFactory.zoomTo(action.zoom)
@@ -172,15 +172,12 @@ fun MapScreen(
         }
     }
 
-    // Detect user pan and clear location name
+    // Sync state whenever camera stops moving (pan, zoom, or animation)
     LaunchedEffect(cameraPositionState.isMoving) {
-        if (!cameraPositionState.isMoving && mapState.locationName.isNotEmpty()) {
+        if (!cameraPositionState.isMoving) {
             val target = cameraPositionState.position.target
-            mapState.location?.let { loc ->
-                if (kotlin.math.abs(loc.latitude - target.latitude) > 1e-4 ||
-                    kotlin.math.abs(loc.longitude - target.longitude) > 1e-4) {
-                    handleMapEvent(MapEvent.CameraMoved)
-                }
+            if (target.latitude != 0.0 || target.longitude != 0.0) {
+                handleMapEvent(MapEvent.CameraIdle(target, cameraPositionState.position.zoom))
             }
         }
     }
@@ -203,9 +200,9 @@ fun MapScreen(
 
     // Zoom out to max radar zoom level when entering radar mode
     LaunchedEffect(mapState.isRadarMode) {
-        if (mapState.isRadarMode && cameraPositionState.position.zoom > 7f) {
+        if (mapState.isRadarMode && cameraPositionState.position.zoom > 7.5f) {
             cameraPositionState.animate(
-                CameraUpdateFactory.zoomTo(7f)
+                CameraUpdateFactory.zoomTo(7.5f)
             )
         }
     }
@@ -238,7 +235,7 @@ fun MapScreen(
                 zoomGesturesEnabled = true
             ),
             properties = if (mapState.isRadarMode) {
-                MapProperties(maxZoomPreference = 7f)
+                MapProperties(maxZoomPreference = 7.5f)
             } else {
                 MapProperties()
             }
@@ -270,7 +267,7 @@ fun MapScreen(
                     .background(MaterialTheme.colorScheme.background),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator()
+                SunLoadingIndicator()
             }
         }
 
@@ -286,7 +283,7 @@ fun MapScreen(
 
         // Layer 3: Radar loading indicator (only in radar mode)
         if (mapState.isRadarMode && radarState.isLoading) {
-            CircularProgressIndicator(
+            SunLoadingIndicator(
                 modifier = Modifier.align(Alignment.Center)
             )
         }
@@ -436,7 +433,7 @@ fun MapScreen(
                 ) {
                 when {
                     mapState.isSearchLoading -> {
-                        CircularProgressIndicator(
+                        SunLoadingIndicator(
                             modifier = Modifier.align(Alignment.Center)
                         )
                     }
@@ -673,7 +670,7 @@ fun MapScreen(
                         } else {
                             handleRadarEvent(RadarEvent.Resume)
                         }
-                        handleMapEvent(MapEvent.ToggleRadarMode)
+                        handleMapEvent(MapEvent.ToggleRadarMode(cameraPositionState.position.zoom))
                     },
                     shape = RoundedCornerShape(18.dp),
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -698,7 +695,7 @@ fun MapScreen(
                     onClick = {
                         if (mapState.isRadarMode) {
                             handleRadarEvent(RadarEvent.Pause)
-                            handleMapEvent(MapEvent.ToggleRadarMode)
+                            handleMapEvent(MapEvent.ToggleRadarMode(cameraPositionState.position.zoom))
                         }
                         navigateToWeather()
                     },

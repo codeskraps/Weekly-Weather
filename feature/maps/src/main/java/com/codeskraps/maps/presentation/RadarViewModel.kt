@@ -2,7 +2,6 @@ package com.codeskraps.maps.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.codeskraps.core.local.domain.model.RadarSpeed
-import com.codeskraps.core.local.domain.repository.LocalResourceRepository
 import com.codeskraps.core.local.domain.repository.SettingsRepository
 import com.codeskraps.core.location.domain.LocationTracker
 import com.codeskraps.feature.common.dispatcher.DispatcherProvider
@@ -24,7 +23,6 @@ import kotlinx.coroutines.launch
 class RadarViewModel(
     private val radarRepository: RadarRepository,
     private val locationTracker: LocationTracker,
-    private val localResource: LocalResourceRepository,
     private val dispatcherProvider: DispatcherProvider,
     private val analyticsRepository: AnalyticsRepository,
     private val settingsRepository: SettingsRepository,

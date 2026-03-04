@@ -46,7 +46,6 @@ val mapsFeatureModule = module {
         RadarViewModel(
             radarRepository = get(),
             locationTracker = get(),
-            localResource = get(),
             dispatcherProvider = get(),
             analyticsRepository = get(),
             settingsRepository = get()

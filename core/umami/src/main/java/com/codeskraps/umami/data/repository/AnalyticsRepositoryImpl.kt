@@ -14,7 +14,7 @@ internal class AnalyticsRepositoryImpl(
         context = application,
         config = UmamiConfig(
             scriptUrl = "https://umami.codeskraps.com/script.js",
-            websiteId = "047c76b3-6f42-45f0-ba9b-772b056ccdc1",
+            websiteId = "333912f3-52e9-4841-a798-a20fe324e07a",
             baseUrl = "https://umami.codeskraps.com"
         )
     )

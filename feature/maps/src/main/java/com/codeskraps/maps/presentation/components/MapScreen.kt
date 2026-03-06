@@ -76,6 +76,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.ImeAction
@@ -123,7 +124,7 @@ fun MapScreen(
     navigateToWeather: () -> Unit = {},
 ) {
     val context = LocalContext.current
-    val resources = context.resources
+    val resources = LocalResources.current
     val tag = "WeatherApp:MapScreen"
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current

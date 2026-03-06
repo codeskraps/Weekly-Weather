@@ -3,7 +3,7 @@ package com.codeskraps.feature.common.util
 import androidx.annotation.StringRes
 import com.codeskraps.feature.common.R
 
-enum class MonthString(@StringRes val stringResource: Int) {
+enum class MonthString(@param:StringRes val stringResource: Int) {
     January(R.string.january),
     February(R.string.february),
     March(R.string.march),

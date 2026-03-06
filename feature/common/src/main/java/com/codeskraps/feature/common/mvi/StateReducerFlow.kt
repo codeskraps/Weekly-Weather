@@ -3,11 +3,14 @@ package com.codeskraps.feature.common.mvi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalForInheritanceCoroutinesApi
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.flow.SharingStarted.Companion.Eagerly
 
+@OptIn(InternalCoroutinesApi::class, ExperimentalForInheritanceCoroutinesApi::class)
 interface StateReducerFlow<STATE, EVENT> : StateFlow<STATE> {
     fun handleEvent(event: EVENT)
 }

@@ -3,7 +3,7 @@ package com.codeskraps.feature.common.util
 import androidx.annotation.StringRes
 import com.codeskraps.feature.common.R
 
-enum class WeekString(@StringRes val stringResource: Int) {
+enum class WeekString(@param:StringRes val stringResource: Int) {
     Monday(R.string.monday),
     Tuesday(R.string.tuesday),
     Wednesday(R.string.wednesday),

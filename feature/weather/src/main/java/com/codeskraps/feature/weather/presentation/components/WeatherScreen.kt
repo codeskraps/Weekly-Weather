@@ -52,6 +52,7 @@ import com.codeskraps.feature.weather.presentation.mvi.WeatherAction
 import com.codeskraps.feature.weather.presentation.mvi.WeatherEvent
 import com.codeskraps.feature.weather.presentation.mvi.WeatherState
 import kotlinx.coroutines.flow.Flow
+import androidx.compose.ui.platform.LocalResources
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -107,7 +108,7 @@ fun WeatherScreen(
         }
     }
 
-    val resources = LocalContext.current.resources
+    val resources = LocalResources.current
 
     Scaffold(
         floatingActionButton = {
@@ -162,6 +163,7 @@ fun WeatherScreen(
                     )
                 }
             } else {
+                val weatherInfo = state.weatherInfo
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -172,8 +174,8 @@ fun WeatherScreen(
                     val topEndAction: @Composable () -> Unit = {
                         IconButton(
                             onClick = {
-                                if (state.cached && state.weatherInfo != null) {
-                                    handleEvent(WeatherEvent.Delete(state.weatherInfo.toWeatherLocation()))
+                                if (state.cached) {
+                                    handleEvent(WeatherEvent.Delete(weatherInfo.toWeatherLocation()))
                                 } else {
                                     showDialog = true
                                 }

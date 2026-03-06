@@ -62,7 +62,7 @@ internal class UmamiAnalyticsDataSource(
                         })();
                         """.trimIndent()
                     ) { result ->
-                        continuation.resume(result.toBooleanStrictOrNull() ?: false, null)
+                        continuation.resume(result.toBooleanStrictOrNull() ?: false) { _, _, _ -> }
                     }
                 }
 
@@ -70,7 +70,7 @@ internal class UmamiAnalyticsDataSource(
                     isInitialized = true
                     break
                 }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 // Log error if needed
             }
 

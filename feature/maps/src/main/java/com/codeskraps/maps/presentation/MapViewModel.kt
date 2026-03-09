@@ -160,6 +160,7 @@ class MapViewModel(
                 }
                 skipNextZoomPersist = false
                 currentState.copy(
+                    location = LatLng(lat, lng),
                     // Don't overwrite state.zoom during radar mode — preserve the
                     // user's pre-radar zoom so it survives the forced 7.5f cap
                     zoom = if (currentState.isRadarMode) currentState.zoom else event.zoom,
@@ -176,10 +177,9 @@ class MapViewModel(
                     stopGpsTracking()
                     currentState.copy(isGpsTracking = false)
                 } else {
+                    fetchImmediateGpsLocation()
                     startGpsTracking()
-                    // Clear location so the next GPS update triggers LaunchedEffect
                     currentState.copy(
-                        location = null,
                         isGpsTracking = true,
                         locationName = currentLocationString
                     )

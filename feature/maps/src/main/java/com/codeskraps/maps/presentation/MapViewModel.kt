@@ -61,6 +61,7 @@ class MapViewModel(
     private var persistedZoom: Float = SettingsRepository.DEFAULT_MAP_ZOOM
     private var preRadarZoom: Float? = null
     private var resumed = false
+    private var skipNextZoomPersist = false
 
     init {
         Log.i(TAG, "Initializing MapViewModel")
@@ -151,12 +152,13 @@ class MapViewModel(
                         isGpsLocation = !cameraMoved && currentState.isGpsTracking
                     )
                 )
-                if (!currentState.isRadarMode) {
+                if (!currentState.isRadarMode && !skipNextZoomPersist) {
                     persistedZoom = event.zoom
                     viewModelScope.launch(dispatcherProvider.io + NonCancellable) {
                         settingsRepository.setMapZoom(event.zoom)
                     }
                 }
+                skipNextZoomPersist = false
                 currentState.copy(
                     // Don't overwrite state.zoom during radar mode — preserve the
                     // user's pre-radar zoom so it survives the forced 7.5f cap
@@ -218,9 +220,16 @@ class MapViewModel(
                     persistedZoom = event.currentZoom
                     currentState.copy(isRadarMode = true)
                 } else {
-                    // Exiting radar mode — restore the pre-radar zoom
+                    // Exiting radar mode — restore the pre-radar zoom.
+                    // Update persistedZoom immediately so that if the screen
+                    // pauses before the RestoreZoom animation runs (e.g.
+                    // navigating to weather), the CameraIdle from
+                    // onPauseOrDispose won't overwrite DataStore with the
+                    // radar-capped 7.5f value.
                     val restored = preRadarZoom ?: persistedZoom
                     preRadarZoom = null
+                    persistedZoom = restored
+                    skipNextZoomPersist = true
                     viewModelScope.launch {
                         actionChannel.send(MapAction.RestoreZoom(restored))
                     }

@@ -1,7 +1,6 @@
 [versions]
 androidxComposeBom = "2026.02.01"
 androidGradlePlugin = "9.1.0"
-coreSplashscreen = "1.2.0"
 kotlinxCoroutinesAndroid = "1.10.2"
 ktx = "1.17.0"
 compose = "1.12.4"
@@ -42,7 +41,6 @@ androidx-compose-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-
 androidx-compose-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
-androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lyfecyleCompose" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "compose" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }

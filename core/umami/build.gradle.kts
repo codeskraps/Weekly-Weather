@@ -48,9 +48,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
     
-    // WebView
-    implementation(libs.androidx.webkit)
-
     // Koin
     implementation(libs.koin.android)
 

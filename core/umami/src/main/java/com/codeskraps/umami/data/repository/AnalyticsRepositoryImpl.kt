@@ -13,7 +13,6 @@ internal class AnalyticsRepositoryImpl(
     private val analyticsDataSource = UmamiAnalyticsDataSource(
         context = application,
         config = UmamiConfig(
-            scriptUrl = "https://umami.codeskraps.com/script.js",
             websiteId = "333912f3-52e9-4841-a798-a20fe324e07a",
             baseUrl = "https://umami.codeskraps.com"
         )

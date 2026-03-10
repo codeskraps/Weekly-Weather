@@ -185,8 +185,15 @@ fun MapScreen(
 
     LaunchedEffect(mapState.location) {
         mapState.location?.let {
-            Log.i(tag, "Updating camera position to: $it, zoom: ${mapState.zoom}")
-            cameraPositionState.position = CameraPosition.fromLatLngZoom(it, mapState.zoom)
+            // In overlay modes, state.zoom holds the pre-overlay zoom (not the current
+            // camera zoom), so use the camera's actual zoom to avoid snapping back.
+            val zoom = if (mapState.isRadarMode || mapState.isWindMode) {
+                cameraPositionState.position.zoom
+            } else {
+                mapState.zoom
+            }
+            Log.i(tag, "Updating camera position to: $it, zoom: $zoom")
+            cameraPositionState.position = CameraPosition.fromLatLngZoom(it, zoom)
         }
     }
 

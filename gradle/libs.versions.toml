@@ -1,5 +1,5 @@
 [versions]
-umamilib = "0.3.0"
+umamilib = "0.4.0"
 androidxComposeBom = "2026.02.01"
 androidGradlePlugin = "9.1.0"
 kotlinxCoroutinesAndroid = "1.10.2"

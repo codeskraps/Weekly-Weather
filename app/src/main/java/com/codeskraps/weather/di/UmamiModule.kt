@@ -2,6 +2,7 @@ package com.codeskraps.weather.di
 
 import com.codeskraps.umamilib.Umami
 import com.codeskraps.umamilib.UmamiConfig
+import com.codeskraps.umamilib.create
 import com.codeskraps.umamilib.domain.UmamiAnalytics
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module

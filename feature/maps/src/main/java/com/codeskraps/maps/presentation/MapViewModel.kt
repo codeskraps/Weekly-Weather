@@ -21,7 +21,6 @@ import com.codeskraps.umamilib.domain.UmamiAnalytics
 import com.google.android.gms.maps.model.LatLng
 import kotlin.math.abs
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -156,7 +155,7 @@ class MapViewModel(
                 val isOverlayMode = currentState.isRadarMode || currentState.isWindMode
                 if (!isOverlayMode && !skipNextZoomPersist) {
                     persistedZoom = event.zoom
-                    viewModelScope.launch(dispatcherProvider.io + NonCancellable) {
+                    viewModelScope.launch(dispatcherProvider.io) {
                         settingsRepository.setMapZoom(event.zoom)
                     }
                 }

@@ -25,6 +25,8 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.random.Random
+import androidx.core.graphics.createBitmap
+import androidx.core.graphics.set
 
 private const val TAG = "WeatherApp:WindOverlay"
 private const val PARTICLE_COUNT = 400
@@ -63,6 +65,7 @@ fun WindParticleOverlay(
     )
 }
 
+@Suppress("ViewConstructor")
 private class WindSurfaceView(
     context: Context,
     private val state: ParticleState
@@ -119,7 +122,7 @@ private class WindSurfaceView(
         val canvas: Canvas
         try {
             canvas = holder.lockCanvas() ?: return
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             return
         }
 
@@ -192,7 +195,7 @@ private class WindSurfaceView(
         } finally {
             try {
                 holder.unlockCanvasAndPost(canvas)
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 // Surface may have been destroyed
             }
         }
@@ -214,7 +217,7 @@ private class WindSurfaceView(
         val bw = w / scale
         val bh = h / scale
         if (bw <= 0 || bh <= 0) return
-        val heatmap = Bitmap.createBitmap(bw, bh, Bitmap.Config.ARGB_8888)
+        val heatmap = createBitmap(bw, bh)
 
         for (y in 0 until bh) {
             for (x in 0 until bw) {
@@ -232,7 +235,7 @@ private class WindSurfaceView(
                     weightedSpeed += gp.speedMs * weight
                 }
                 val speed = if (totalWeight > 0) weightedSpeed / totalWeight else 0f
-                heatmap.setPixel(x, y, windSpeedColor(speed))
+                heatmap[x, y] = windSpeedColor(speed)
             }
         }
 

@@ -67,7 +67,7 @@ dependencies {
     implementation(project(mapOf("path" to ":feature:weather")))
     implementation(project(mapOf("path" to ":feature:maps")))
     implementation(project(mapOf("path" to ":feature:settings")))
-    implementation(project(mapOf("path" to ":core:umami")))
+    implementation(libs.umamilib)
     implementation(project(mapOf("path" to ":core:local")))
     implementation(project(mapOf("path" to ":core:location")))
 

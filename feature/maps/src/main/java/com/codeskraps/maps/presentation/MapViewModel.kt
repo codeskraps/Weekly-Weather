@@ -16,7 +16,7 @@ import com.codeskraps.maps.domain.repository.GeocodingRepository
 import com.codeskraps.maps.presentation.mvi.MapAction
 import com.codeskraps.maps.presentation.mvi.MapEvent
 import com.codeskraps.maps.presentation.mvi.MapState
-import com.codeskraps.umami.domain.AnalyticsRepository
+import com.codeskraps.umamilib.domain.UmamiAnalytics
 import com.google.android.gms.maps.model.LatLng
 import kotlin.math.abs
 import kotlinx.coroutines.Job
@@ -31,7 +31,7 @@ class MapViewModel(
     private val geocodingRepository: GeocodingRepository,
     private val localResources: LocalResourceRepository,
     private val dispatcherProvider: DispatcherProvider,
-    private val analytics: AnalyticsRepository,
+    private val analytics: UmamiAnalytics,
     private val activeLocationRepository: ActiveLocationRepository,
     private val settingsRepository: SettingsRepository
 ) : StateReducerViewModel<MapState, MapEvent, MapAction>(MapState.initial) {

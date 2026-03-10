@@ -78,5 +78,5 @@
 -dontwarn com.codeskraps.core.local.domain.repository.LocalGeocodingRepository
 -dontwarn com.codeskraps.core.local.domain.repository.LocalResourceRepository
 -dontwarn com.codeskraps.core.location.domain.LocationTracker
--dontwarn com.codeskraps.umami.domain.AnalyticsRepository
+-dontwarn com.codeskraps.umami.domain.UmamiAnalytics
 -dontwarn java.lang.invoke.StringConcatFactory

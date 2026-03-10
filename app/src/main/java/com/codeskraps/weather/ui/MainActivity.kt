@@ -9,14 +9,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.codeskraps.core.local.domain.model.AppSettings
 import com.codeskraps.core.local.domain.repository.SettingsRepository
-import com.codeskraps.umami.domain.AnalyticsRepository
+import com.codeskraps.umamilib.domain.UmamiAnalytics
 import com.codeskraps.weather.ui.theme.WeatherTheme
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
-    private val analyticsRepository: AnalyticsRepository by inject()
+    private val analyticsRepository: UmamiAnalytics by inject()
     private val settingsRepository: SettingsRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {

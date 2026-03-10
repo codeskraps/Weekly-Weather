@@ -71,7 +71,7 @@ dependencies {
     implementation(project(mapOf("path" to ":feature:weather")))
     implementation(project(mapOf("path" to ":core:location")))
     implementation(project(mapOf("path" to ":core:local")))
-    implementation(project(mapOf("path" to ":core:umami")))
+    implementation(libs.umamilib)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

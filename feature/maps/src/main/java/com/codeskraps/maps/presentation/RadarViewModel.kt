@@ -13,7 +13,7 @@ import com.codeskraps.maps.domain.repository.RadarRepository
 import com.codeskraps.maps.presentation.mvi.RadarAction
 import com.codeskraps.maps.presentation.mvi.RadarEvent
 import com.codeskraps.maps.presentation.mvi.RadarState
-import com.codeskraps.umami.domain.AnalyticsRepository
+import com.codeskraps.umamilib.domain.UmamiAnalytics
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -24,7 +24,7 @@ class RadarViewModel(
     private val radarRepository: RadarRepository,
     private val locationTracker: LocationTracker,
     private val dispatcherProvider: DispatcherProvider,
-    private val analyticsRepository: AnalyticsRepository,
+    private val analyticsRepository: UmamiAnalytics,
     private val settingsRepository: SettingsRepository,
 ) : StateReducerViewModel<RadarState, RadarEvent, RadarAction>(RadarState.initial) {
 

@@ -19,7 +19,7 @@ import com.codeskraps.feature.weather.presentation.mvi.WeatherAction
 import com.codeskraps.feature.weather.presentation.mvi.WeatherEvent
 import com.codeskraps.feature.weather.presentation.mvi.WeatherState
 import com.codeskraps.core.location.domain.LocationTracker
-import com.codeskraps.umami.domain.AnalyticsRepository
+import com.codeskraps.umamilib.domain.UmamiAnalytics
 import kotlin.math.abs
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -30,7 +30,7 @@ class WeatherViewModel(
     private val locationTracker: LocationTracker,
     private val localResource: LocalResourceRepository,
     private val dispatcherProvider: DispatcherProvider,
-    private val analyticsRepository: AnalyticsRepository,
+    private val analyticsRepository: UmamiAnalytics,
     private val settingsRepository: SettingsRepository,
     private val activeLocationRepository: ActiveLocationRepository
 ) : StateReducerViewModel<WeatherState, WeatherEvent, WeatherAction>(WeatherState.initial) {

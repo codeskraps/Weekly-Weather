@@ -1,4 +1,5 @@
 [versions]
+umamilib = "0.3.0"
 androidxComposeBom = "2026.02.01"
 androidGradlePlugin = "9.1.0"
 kotlinxCoroutinesAndroid = "1.10.2"
@@ -32,6 +33,7 @@ webkit = "1.15.0"
 
 
 [libraries]
+umamilib = { module = "com.codeskraps.umamilib:umamilib", version.ref = "umamilib" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }

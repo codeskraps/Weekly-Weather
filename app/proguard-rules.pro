@@ -79,7 +79,7 @@
 -dontwarn com.codeskraps.maps.presentation.components.MapScreenKt
 -dontwarn com.codeskraps.maps.presentation.mvi.MapEvent
 -dontwarn com.codeskraps.maps.presentation.mvi.MapState
--dontwarn com.codeskraps.umami.di.CoreUmamiModule_ProvidesAnalyticsRepositoryFactory
+-dontwarn com.codeskraps.umami.di.CoreUmamiModule_ProvidesUmamiAnalyticsFactory
 -dontwarn com.codeskraps.umami.di.CoreUmamiModule_ProvidesDeviceIdRepositoryFactory
--dontwarn com.codeskraps.umami.domain.AnalyticsRepository
+-dontwarn com.codeskraps.umami.domain.UmamiAnalytics
 -dontwarn com.codeskraps.umami.domain.DeviceIdRepository

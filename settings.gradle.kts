@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://git.codeskraps.com/codeskraps/MavenRepo/raw/main") }
     }
 }
 
@@ -21,4 +22,3 @@ include(":feature:maps")
 include(":feature:settings")
 include(":core:location")
 include(":core:local")
-include(":core:umami")

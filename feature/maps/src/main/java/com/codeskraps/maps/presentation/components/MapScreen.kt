@@ -84,6 +84,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupProperties
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.codeskraps.feature.common.R
 import com.codeskraps.feature.common.components.ObserveAsEvents
@@ -92,10 +94,14 @@ import com.codeskraps.maps.R as MapsR
 import com.codeskraps.maps.data.remote.RadarTileProvider
 import com.codeskraps.maps.presentation.mvi.MapAction
 import com.codeskraps.maps.presentation.mvi.MapEvent
+import com.codeskraps.maps.presentation.mvi.MapMode
 import com.codeskraps.maps.presentation.mvi.MapState
 import com.codeskraps.maps.presentation.mvi.RadarAction
 import com.codeskraps.maps.presentation.mvi.RadarEvent
 import com.codeskraps.maps.presentation.mvi.RadarState
+import com.codeskraps.maps.presentation.mvi.WindAction
+import com.codeskraps.maps.presentation.mvi.WindEvent
+import com.codeskraps.maps.presentation.mvi.WindState
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -120,6 +126,9 @@ fun MapScreen(
     radarState: RadarState,
     handleRadarEvent: (RadarEvent) -> Unit,
     radarAction: Flow<RadarAction>,
+    windState: WindState,
+    handleWindEvent: (WindEvent) -> Unit,
+    windAction: Flow<WindAction>,
     navigateToSettings: () -> Unit = {},
     navigateToWeather: () -> Unit = {},
 ) {
@@ -166,6 +175,14 @@ fun MapScreen(
         }
     }
 
+    ObserveAsEvents(windAction) { action ->
+        when (action) {
+            is WindAction.ShowToast -> {
+                Toast.makeText(context, action.message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     LaunchedEffect(mapState.location) {
         mapState.location?.let {
             Log.i(tag, "Updating camera position to: $it, zoom: ${mapState.zoom}")
@@ -189,6 +206,16 @@ fun MapScreen(
         if (mapState.isRadarMode) {
             handleRadarEvent(RadarEvent.Resume)
         }
+        if (mapState.isWindMode) {
+            cameraPositionState.projection?.visibleRegion?.latLngBounds?.let { bounds ->
+                handleWindEvent(WindEvent.LoadWind(
+                    latMin = bounds.southwest.latitude,
+                    latMax = bounds.northeast.latitude,
+                    lngMin = bounds.southwest.longitude,
+                    lngMax = bounds.northeast.longitude
+                ))
+            }
+        }
         onPauseOrDispose {
             val target = cameraPositionState.position.target
             if (target.latitude != 0.0 || target.longitude != 0.0) {
@@ -200,11 +227,29 @@ fun MapScreen(
     }
 
     // Zoom out to max radar zoom level when entering radar mode
-    LaunchedEffect(mapState.isRadarMode) {
-        if (mapState.isRadarMode && cameraPositionState.position.zoom > 7.5f) {
+    // Zoom out to max level when entering radar or wind mode
+    val isOverlayMode = mapState.isRadarMode || mapState.isWindMode
+    LaunchedEffect(isOverlayMode) {
+        if (isOverlayMode && cameraPositionState.position.zoom > 7.5f) {
             cameraPositionState.animate(
                 CameraUpdateFactory.zoomTo(7.5f)
             )
+        }
+    }
+
+    // Fetch wind data when entering wind mode or when camera settles in wind mode
+    LaunchedEffect(mapState.isWindMode, cameraPositionState.isMoving) {
+        if (mapState.isWindMode && !cameraPositionState.isMoving) {
+            // Small delay to let zoom restoration complete
+            delay(300)
+            cameraPositionState.projection?.visibleRegion?.latLngBounds?.let { bounds ->
+                handleWindEvent(WindEvent.LoadWind(
+                    latMin = bounds.southwest.latitude,
+                    latMax = bounds.northeast.latitude,
+                    lngMin = bounds.southwest.longitude,
+                    lngMax = bounds.northeast.longitude
+                ))
+            }
         }
     }
 
@@ -235,7 +280,7 @@ fun MapScreen(
                 zoomControlsEnabled = false,
                 zoomGesturesEnabled = true
             ),
-            properties = if (mapState.isRadarMode) {
+            properties = if (mapState.isRadarMode || mapState.isWindMode) {
                 MapProperties(maxZoomPreference = 7.5f)
             } else {
                 MapProperties()
@@ -272,8 +317,18 @@ fun MapScreen(
             }
         }
 
+        // Wind particle overlay (only in wind mode)
+        // Uses TextureView to render above Google Map's SurfaceView
+        if (mapState.isWindMode && windState.windData != null) {
+            WindParticleOverlay(
+                windData = windState.windData,
+                cameraPositionState = cameraPositionState,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
         // Layer 2: Center place icon (only in search mode)
-        if (!mapState.isRadarMode) {
+        if (mapState.mapMode == MapMode.Search) {
             Icon(
                 imageVector = Icons.Default.Place,
                 tint = MaterialTheme.colorScheme.surface,
@@ -292,6 +347,24 @@ fun MapScreen(
         // Radar error (only in radar mode)
         if (mapState.isRadarMode) {
             radarState.error?.let { error ->
+                Text(
+                    text = error,
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.align(Alignment.Center)
+                )
+            }
+        }
+
+        // Wind loading indicator
+        if (mapState.isWindMode && windState.isLoading) {
+            SunLoadingIndicator(
+                modifier = Modifier.align(Alignment.Center)
+            )
+        }
+
+        // Wind error
+        if (mapState.isWindMode) {
+            windState.error?.let { error ->
                 Text(
                     text = error,
                     color = MaterialTheme.colorScheme.error,
@@ -413,7 +486,7 @@ fun MapScreen(
 
         // Layer 5: Search overlay (only in search mode)
         AnimatedVisibility(
-            visible = !mapState.isRadarMode && mapState.isSearchFocused,
+            visible = mapState.mapMode == MapMode.Search && mapState.isSearchFocused,
             enter = fadeIn(),
             exit = fadeOut()
         ) {
@@ -512,9 +585,9 @@ fun MapScreen(
             }
         }
 
-        // Layer 6: Search bar (slides up when entering radar mode)
+        // Layer 6: Search bar (slides up when entering radar/wind mode)
         AnimatedVisibility(
-            visible = !mapState.isRadarMode,
+            visible = mapState.mapMode == MapMode.Search,
             enter = slideInVertically(initialOffsetY = { -it }),
             exit = slideOutVertically(targetOffsetY = { -it }),
             modifier = Modifier.align(if (isLandscape) Alignment.TopStart else Alignment.TopCenter)
@@ -595,53 +668,59 @@ fun MapScreen(
             }
         }
 
-        // Layer 7: Zoom controls at bottom-left
-        if (!mapState.isSearchFocused) Column(
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(
-                    start = 16.dp,
-                    end = 16.dp,
-                    top = 16.dp,
-                    bottom = 16.dp + navigationBarPadding.calculateBottomPadding()
-                ),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            SmallFloatingActionButton(
-                onClick = { scope.launch { cameraPositionState.animate(CameraUpdateFactory.zoomIn()) } },
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.primary
-            ) {
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowUp,
-                    contentDescription = resources.getString(R.string.zoom_in)
-                )
-            }
-            SmallFloatingActionButton(
-                onClick = { scope.launch { cameraPositionState.animate(CameraUpdateFactory.zoomOut()) } },
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                contentColor = MaterialTheme.colorScheme.primary
-            ) {
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = resources.getString(R.string.zoom_out)
-                )
-            }
-        }
+        // Layers 7 & 8: Zoom controls and FABs
+        // When in wind mode the SurfaceView (setZOrderOnTop) renders above normal
+        // Compose layers, so we wrap the controls in a Popup (separate window) to
+        // keep them above the wind overlay.
+        val bottomPadding = 16.dp + navigationBarPadding.calculateBottomPadding()
+        val controlsContent: @Composable () -> Unit = {
+            Box(modifier = Modifier.fillMaxSize()) {
+                // Zoom controls at bottom-left
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(
+                            start = 16.dp,
+                            end = 16.dp,
+                            top = 16.dp,
+                            bottom = bottomPadding
+                        ),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    SmallFloatingActionButton(
+                        onClick = { scope.launch { cameraPositionState.animate(CameraUpdateFactory.zoomIn()) } },
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.primary
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowUp,
+                            contentDescription = resources.getString(R.string.zoom_in)
+                        )
+                    }
+                    SmallFloatingActionButton(
+                        onClick = { scope.launch { cameraPositionState.animate(CameraUpdateFactory.zoomOut()) } },
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.primary
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowDown,
+                            contentDescription = resources.getString(R.string.zoom_out)
+                        )
+                    }
+                }
 
-        // Layer 8: FABs – small toggle on top, big navigation below
-        if (!mapState.isSearchFocused) {
-            Column(
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(
-                        start = 16.dp,
-                        end = 16.dp,
-                        top = 16.dp,
-                        bottom = 16.dp + navigationBarPadding.calculateBottomPadding()
-                    ),
-                horizontalAlignment = Alignment.End,
-            ) {
+                // FABs at bottom-right
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(
+                            start = 16.dp,
+                            end = 16.dp,
+                            top = 16.dp,
+                            bottom = bottomPadding
+                        ),
+                    horizontalAlignment = Alignment.End,
+                ) {
                 // GPS tracking toggle
                 FloatingActionButton(
                     onClick = { handleMapEvent(MapEvent.ToggleGps) },
@@ -663,40 +742,59 @@ fun MapScreen(
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                // Radar mode toggle
-                FloatingActionButton(
+                // Map mode buttons: Search, Radar, Wind — only one active at a time
+                MapModeButton(
+                    active = mapState.mapMode == MapMode.Search,
+                    icon = Icons.Default.Search,
+                    contentDescription = resources.getString(R.string.search),
                     onClick = {
-                        if (mapState.isRadarMode) {
-                            handleRadarEvent(RadarEvent.Pause)
-                        } else {
-                            handleRadarEvent(RadarEvent.Resume)
-                        }
-                        handleMapEvent(MapEvent.ToggleRadarMode(cameraPositionState.position.zoom))
-                    },
-                    shape = RoundedCornerShape(18.dp),
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.primary
-                ) {
-                    Icon(
-                        imageVector = if (mapState.isRadarMode)
-                            Icons.Default.Search
-                        else
-                            Icons.Default.PlayArrow,
-                        contentDescription = if (mapState.isRadarMode)
-                            resources.getString(R.string.map_location)
-                        else
-                            resources.getString(R.string.radar)
-                    )
-                }
+                        val currentZoom = cameraPositionState.position.zoom
+                        if (mapState.isRadarMode) handleRadarEvent(RadarEvent.Pause)
+                        handleMapEvent(MapEvent.SetMapMode(MapMode.Search, currentZoom))
+                    }
+                )
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                MapModeButton(
+                    active = mapState.mapMode == MapMode.Radar,
+                    icon = ImageVector.vectorResource(id = MapsR.drawable.ic_rain),
+                    contentDescription = resources.getString(R.string.radar),
+                    onClick = {
+                        val currentZoom = cameraPositionState.position.zoom
+                        handleRadarEvent(RadarEvent.Resume)
+                        handleMapEvent(MapEvent.SetMapMode(MapMode.Radar, currentZoom))
+                    }
+                )
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                MapModeButton(
+                    active = mapState.mapMode == MapMode.Wind,
+                    icon = ImageVector.vectorResource(id = MapsR.drawable.ic_wind),
+                    contentDescription = resources.getString(R.string.wind),
+                    onClick = {
+                        val currentZoom = cameraPositionState.position.zoom
+                        if (mapState.isRadarMode) handleRadarEvent(RadarEvent.Pause)
+                        handleMapEvent(MapEvent.SetMapMode(MapMode.Wind, currentZoom))
+                    }
+                )
 
                 Spacer(modifier = Modifier.height(12.dp))
 
                 // Big FAB: navigate to Weather screen
                 LargeFloatingActionButton(
                     onClick = {
-                        if (mapState.isRadarMode) {
-                            handleRadarEvent(RadarEvent.Pause)
-                            handleMapEvent(MapEvent.ToggleRadarMode(cameraPositionState.position.zoom))
+                        val currentZoom = cameraPositionState.position.zoom
+                        when (mapState.mapMode) {
+                            MapMode.Radar -> {
+                                handleRadarEvent(RadarEvent.Pause)
+                                handleMapEvent(MapEvent.SetMapMode(MapMode.Search, currentZoom))
+                            }
+                            MapMode.Wind -> {
+                                handleMapEvent(MapEvent.SetMapMode(MapMode.Search, currentZoom))
+                            }
+                            MapMode.Search -> {}
                         }
                         navigateToWeather()
                     },
@@ -708,7 +806,154 @@ fun MapScreen(
                         contentDescription = resources.getString(R.string.nav_weather)
                     )
                 }
+                }
             }
         }
+
+        if (!mapState.isSearchFocused) {
+            if (mapState.isWindMode) {
+                // Wind overlay uses SurfaceView with setZOrderOnTop which renders
+                // above all normal Views. Wrap controls in Popups (separate windows)
+                // so they render above the SurfaceView.
+                Popup(
+                    alignment = Alignment.BottomStart,
+                    properties = PopupProperties(clippingEnabled = false)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .padding(
+                                start = 16.dp,
+                                bottom = bottomPadding
+                            ),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        SmallFloatingActionButton(
+                            onClick = { scope.launch { cameraPositionState.animate(CameraUpdateFactory.zoomIn()) } },
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            contentColor = MaterialTheme.colorScheme.primary
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.KeyboardArrowUp,
+                                contentDescription = resources.getString(R.string.zoom_in)
+                            )
+                        }
+                        SmallFloatingActionButton(
+                            onClick = { scope.launch { cameraPositionState.animate(CameraUpdateFactory.zoomOut()) } },
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            contentColor = MaterialTheme.colorScheme.primary
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.KeyboardArrowDown,
+                                contentDescription = resources.getString(R.string.zoom_out)
+                            )
+                        }
+                    }
+                }
+                Popup(
+                    alignment = Alignment.BottomEnd,
+                    properties = PopupProperties(clippingEnabled = false)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .padding(
+                                end = 16.dp,
+                                bottom = bottomPadding
+                            ),
+                        horizontalAlignment = Alignment.End,
+                    ) {
+                        FloatingActionButton(
+                            onClick = { handleMapEvent(MapEvent.ToggleGps) },
+                            shape = RoundedCornerShape(18.dp),
+                            containerColor = if (mapState.isGpsTracking)
+                                MaterialTheme.colorScheme.primaryContainer
+                            else
+                                MaterialTheme.colorScheme.background,
+                            contentColor = if (mapState.isGpsTracking)
+                                MaterialTheme.colorScheme.primary
+                            else
+                                MaterialTheme.colorScheme.onBackground
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.LocationOn,
+                                contentDescription = resources.getString(R.string.current_location)
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        MapModeButton(
+                            active = false,
+                            icon = Icons.Default.Search,
+                            contentDescription = resources.getString(R.string.search),
+                            onClick = {
+                                val currentZoom = cameraPositionState.position.zoom
+                                handleMapEvent(MapEvent.SetMapMode(MapMode.Search, currentZoom))
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        MapModeButton(
+                            active = false,
+                            icon = ImageVector.vectorResource(id = MapsR.drawable.ic_rain),
+                            contentDescription = resources.getString(R.string.radar),
+                            onClick = {
+                                val currentZoom = cameraPositionState.position.zoom
+                                handleRadarEvent(RadarEvent.Resume)
+                                handleMapEvent(MapEvent.SetMapMode(MapMode.Radar, currentZoom))
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        MapModeButton(
+                            active = true,
+                            icon = ImageVector.vectorResource(id = MapsR.drawable.ic_wind),
+                            contentDescription = resources.getString(R.string.wind),
+                            onClick = { /* Already in wind mode */ }
+                        )
+
+                        Spacer(modifier = Modifier.height(12.dp))
+                        LargeFloatingActionButton(
+                            onClick = {
+                                val currentZoom = cameraPositionState.position.zoom
+                                handleMapEvent(MapEvent.SetMapMode(MapMode.Search, currentZoom))
+                                navigateToWeather()
+                            },
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            contentColor = MaterialTheme.colorScheme.primary
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Home,
+                                contentDescription = resources.getString(R.string.nav_weather)
+                            )
+                        }
+                    }
+                }
+            } else {
+                controlsContent()
+            }
+        }
+    }
+}
+
+@Composable
+private fun MapModeButton(
+    active: Boolean,
+    icon: ImageVector,
+    contentDescription: String,
+    onClick: () -> Unit
+) {
+    FloatingActionButton(
+        onClick = onClick,
+        shape = RoundedCornerShape(18.dp),
+        containerColor = if (active)
+            MaterialTheme.colorScheme.primaryContainer
+        else
+            MaterialTheme.colorScheme.background,
+        contentColor = if (active)
+            MaterialTheme.colorScheme.primary
+        else
+            MaterialTheme.colorScheme.onBackground
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = contentDescription
+        )
     }
 }

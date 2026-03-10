@@ -15,6 +15,7 @@ import com.codeskraps.feature.common.util.Resource
 import com.codeskraps.maps.domain.repository.GeocodingRepository
 import com.codeskraps.maps.presentation.mvi.MapAction
 import com.codeskraps.maps.presentation.mvi.MapEvent
+import com.codeskraps.maps.presentation.mvi.MapMode
 import com.codeskraps.maps.presentation.mvi.MapState
 import com.codeskraps.umamilib.domain.UmamiAnalytics
 import com.google.android.gms.maps.model.LatLng
@@ -152,7 +153,8 @@ class MapViewModel(
                         isGpsLocation = !cameraMoved && currentState.isGpsTracking
                     )
                 )
-                if (!currentState.isRadarMode && !skipNextZoomPersist) {
+                val isOverlayMode = currentState.isRadarMode || currentState.isWindMode
+                if (!isOverlayMode && !skipNextZoomPersist) {
                     persistedZoom = event.zoom
                     viewModelScope.launch(dispatcherProvider.io + NonCancellable) {
                         settingsRepository.setMapZoom(event.zoom)
@@ -161,9 +163,9 @@ class MapViewModel(
                 skipNextZoomPersist = false
                 currentState.copy(
                     location = LatLng(lat, lng),
-                    // Don't overwrite state.zoom during radar mode — preserve the
-                    // user's pre-radar zoom so it survives the forced 7.5f cap
-                    zoom = if (currentState.isRadarMode) currentState.zoom else event.zoom,
+                    // Don't overwrite state.zoom during overlay modes — preserve the
+                    // user's pre-overlay zoom so it survives the forced 7.5f cap
+                    zoom = if (isOverlayMode) currentState.zoom else event.zoom,
                     locationName = if (cameraMoved) "" else currentState.locationName,
                     isGpsTracking = false
                 )
@@ -213,19 +215,17 @@ class MapViewModel(
             is MapEvent.SaveLocation -> onSaveLocation(currentState, event.geoLocation)
             is MapEvent.DeleteLocation -> onDeleteLocation(currentState, event.geoLocation)
             is MapEvent.SelectLocation -> onSelectLocation(currentState, event.geoLocation)
-            is MapEvent.ToggleRadarMode -> {
-                if (!currentState.isRadarMode) {
-                    // Entering radar mode — save the actual camera zoom
+            is MapEvent.SetMapMode -> {
+                val wasOverlay = currentState.isRadarMode || currentState.isWindMode
+                val enteringOverlay = event.mode == MapMode.Radar || event.mode == MapMode.Wind
+                val returningToSearch = event.mode == MapMode.Search
+
+                if (enteringOverlay && !wasOverlay) {
+                    // Entering overlay mode from search — save the actual camera zoom
                     preRadarZoom = event.currentZoom
                     persistedZoom = event.currentZoom
-                    currentState.copy(isRadarMode = true)
-                } else {
-                    // Exiting radar mode — restore the pre-radar zoom.
-                    // Update persistedZoom immediately so that if the screen
-                    // pauses before the RestoreZoom animation runs (e.g.
-                    // navigating to weather), the CameraIdle from
-                    // onPauseOrDispose won't overwrite DataStore with the
-                    // radar-capped 7.5f value.
+                } else if (returningToSearch && wasOverlay) {
+                    // Returning to search from any overlay — restore zoom
                     val restored = preRadarZoom ?: persistedZoom
                     preRadarZoom = null
                     persistedZoom = restored
@@ -233,8 +233,11 @@ class MapViewModel(
                     viewModelScope.launch {
                         actionChannel.send(MapAction.RestoreZoom(restored))
                     }
-                    currentState.copy(isRadarMode = false, zoom = restored)
+                    return currentState.copy(mapMode = event.mode, zoom = restored)
                 }
+                // Switching between overlay modes (Radar <-> Wind) — keep capped zoom
+
+                currentState.copy(mapMode = event.mode)
             }
         }
     }

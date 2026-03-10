@@ -13,8 +13,9 @@ import com.codeskraps.feature.common.navigation.Screen
 import com.codeskraps.feature.weather.presentation.WeatherViewModel
 import com.codeskraps.feature.weather.presentation.components.WeatherScreen
 import com.codeskraps.maps.presentation.MapViewModel
-import com.codeskraps.maps.presentation.components.MapScreen
 import com.codeskraps.maps.presentation.RadarViewModel
+import com.codeskraps.maps.presentation.WindViewModel
+import com.codeskraps.maps.presentation.components.MapScreen
 import com.codeskraps.feature.settings.presentation.SettingsViewModel
 import com.codeskraps.feature.settings.presentation.components.SettingsScreen
 import com.codeskraps.weather.ui.theme.ScreenTransitions
@@ -90,6 +91,9 @@ fun WeatherNavHost() {
             val radarViewModel = koinViewModel<RadarViewModel>()
             val radarState by radarViewModel.state.collectAsStateWithLifecycle()
 
+            val windViewModel = koinViewModel<WindViewModel>()
+            val windState by windViewModel.state.collectAsStateWithLifecycle()
+
             MapScreen(
                 mapState = mapState,
                 handleMapEvent = mapViewModel.state::handleEvent,
@@ -97,6 +101,9 @@ fun WeatherNavHost() {
                 radarState = radarState,
                 handleRadarEvent = radarViewModel.state::handleEvent,
                 radarAction = radarViewModel.action,
+                windState = windState,
+                handleWindEvent = windViewModel.state::handleEvent,
+                windAction = windViewModel.action,
                 navigateToSettings = navigateToSettings,
                 navigateToWeather = navigateToWeather,
             )

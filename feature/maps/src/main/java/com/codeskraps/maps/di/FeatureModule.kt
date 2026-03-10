@@ -2,12 +2,16 @@ package com.codeskraps.maps.di
 
 import com.codeskraps.maps.data.remote.RainViewerApi
 import com.codeskraps.maps.data.remote.geocoding.GeocodingApi
+import com.codeskraps.maps.data.remote.wind.OpenMeteoWindApi
 import com.codeskraps.maps.data.repository.GeocodingRepositoryImpl
 import com.codeskraps.maps.data.repository.RadarRepositoryImpl
+import com.codeskraps.maps.data.repository.WindRepositoryImpl
 import com.codeskraps.maps.domain.repository.GeocodingRepository
 import com.codeskraps.maps.domain.repository.RadarRepository
+import com.codeskraps.maps.domain.repository.WindRepository
 import com.codeskraps.maps.presentation.MapViewModel
 import com.codeskraps.maps.presentation.RadarViewModel
+import com.codeskraps.maps.presentation.WindViewModel
 import com.squareup.moshi.Moshi
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -51,6 +55,16 @@ val mapsFeatureModule = module {
             settingsRepository = get()
         )
     }
+
+    // Wind
+    single { provideOpenMeteoWindApi() }
+    single<WindRepository> { WindRepositoryImpl(api = get()) }
+    viewModel {
+        WindViewModel(
+            windRepository = get(),
+            dispatcherProvider = get()
+        )
+    }
 }
 
 private fun provideGeocodingApi(): GeocodingApi {
@@ -58,6 +72,16 @@ private fun provideGeocodingApi(): GeocodingApi {
 
     return Retrofit.Builder()
         .baseUrl("https://geocoding-api.open-meteo.com/")
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .build()
+        .create()
+}
+
+private fun provideOpenMeteoWindApi(): OpenMeteoWindApi {
+    val moshi = Moshi.Builder().build()
+
+    return Retrofit.Builder()
+        .baseUrl("https://api.open-meteo.com/")
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
         .create()

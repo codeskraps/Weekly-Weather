@@ -29,8 +29,6 @@ animationGraphicsAndroid = "1.10.4"
 play-services-maps = "20.0.0"
 maps-compose = "8.2.0"
 secretsGradlePlugin = "2.0.1"
-webkit = "1.15.0"
-
 
 [libraries]
 umamilib = { module = "com.codeskraps.umamilib:umamilib", version.ref = "umamilib" }
@@ -87,8 +85,6 @@ coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ve
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "com-google-android-material-material" }
 androidx-animation-graphics-android = { group = "androidx.compose.animation", name = "animation-graphics-android", version.ref = "animationGraphicsAndroid" }
-
-androidx-webkit = { group = "androidx.webkit", name = "webkit", version.ref = "webkit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

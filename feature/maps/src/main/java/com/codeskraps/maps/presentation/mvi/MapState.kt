@@ -15,9 +15,12 @@ data class MapState(
     val isSearchFocused: Boolean,
     val isSearchLoading: Boolean,
     val searchError: String?,
-    val isRadarMode: Boolean,
+    val mapMode: MapMode,
     val isGpsTracking: Boolean,
 ) {
+    val isRadarMode: Boolean get() = mapMode == MapMode.Radar
+    val isWindMode: Boolean get() = mapMode == MapMode.Wind
+
     companion object {
         val initial = MapState(
             isLoading = false,
@@ -30,7 +33,7 @@ data class MapState(
             isSearchFocused = false,
             isSearchLoading = false,
             searchError = null,
-            isRadarMode = false,
+            mapMode = MapMode.Search,
             isGpsTracking = false,
         )
     }

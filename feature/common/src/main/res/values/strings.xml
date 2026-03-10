@@ -26,6 +26,7 @@
     <string name="no_results">No Results !!!</string>
     <string name="map_location">Map Location</string>
     <string name="radar">Radar</string>
+    <string name="wind">Wind</string>
     <string name="add">Add</string>
     <string name="nav_weather">Weather</string>
     <string name="nav_map">Map</string>
